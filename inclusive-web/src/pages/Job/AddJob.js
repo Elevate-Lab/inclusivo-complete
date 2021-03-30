@@ -76,8 +76,10 @@ function AddJob() {
         })
         if ("vacancies" in fieldValues)
             error.vacancies = fieldValues.vacancies ? parseInt(fieldValues.vacancies)>0 ? "" : "*Should be greater than 0" : "*Required"
-        if ("apply_url" in fieldValues)
-            error.apply_url = fieldValues.apply_url ? "" : "*Apply URL should not be empty"
+        if ("apply_url" in fieldValues){
+            if(!fieldValues.is_apply_here)
+                error.apply_url = fieldValues.apply_url ? "" : "*Apply URL should not be empty"
+        }
         setErrors({
             ...error
         })
@@ -163,6 +165,7 @@ function AddJob() {
     /*------------------ handle form submit ------------------*/
     const handleSubmit = (status) => async (e) => {
         e.preventDefault();
+        console.log("Hey I m in submit func")
         if(validate()){
             setProcessing({
                 ...processing,
@@ -212,6 +215,11 @@ function AddJob() {
             }
         }
     }
+
+    /* ---------- detect changes after submit to enable button -----------*/
+    React.useEffect(() => {
+        setDisable(false)
+    }, [values])
 
     const basic_overview = [
         {

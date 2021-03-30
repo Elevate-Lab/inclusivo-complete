@@ -123,5 +123,27 @@ export const useStyles = makeStyles(theme => ({
     buttonContainer : {
         marginLeft: theme.spacing(2),
         marginTop: theme.spacing(2)
+    },
+    companyBox: {
+        background: "#fff",
+        borderRadius: "5px",
+        padding: "1.5rem",
+        margin: "0.5rem auto",
+        '&:hover': {
+            boxShadow: "0px 0px 10px -2px rgba(0, 0, 0, 0.15)"
+        },
+        '& a': {
+            textDecoration: "none",
+            color: "black"
+        },
+        [theme.breakpoints.up('xs')]: {
+            flexBasis: "95%"
+        },
+        [theme.breakpoints.between('sm', 'md')]: {
+            flexBasis: "45%"
+        },
+        [theme.breakpoints.up('md')]: {
+            flexBasis: "32%"
+        }
     }
 }));

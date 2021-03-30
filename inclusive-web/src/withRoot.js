@@ -128,15 +128,15 @@ const lightTheme = createMuiTheme({
 });
 
   const darkTheme = createMuiTheme({
-    breakpoints: {
-        values: {
-          xs: 0,
-          sm: 600,
-          md: 900,
-          lg: 1200,
-          xl: 1800,
-        },
-      },
+    // breakpoints: {
+    //     values: {
+    //       xs: 0,
+    //       sm: 600,
+    //       md: 900,
+    //       lg: 1200,
+    //       xl: 1800,
+    //     },
+    //   },
       typography: {
         
         fontSize: 16,
@@ -146,18 +146,26 @@ const lightTheme = createMuiTheme({
         fontWeightBold: "bolder",
         fontWeightRegular: "normal",
       },
-      palette: {
-        type:'dark',
-        primary: {
-          main: "#FF3750",
-          contrastText: "#fff",
-        },
-        secondary: {
-          main: "#3668CC",
-          contrastText: "#fff",
-        },
-      },
+      // palette: {
+      //   type:'dark',
+      //   primary: {
+      //     main: "#FF3750",
+      //     contrastText: "#fff",
+      //   },
+      //   secondary: {
+      //     main: "#3668CC",
+      //     contrastText: "#fff",
+      //   },
+      // },
       overrides: {
+        MuiCssBaseline: {
+          "@global": {
+              body: {
+                //FOr variable in body
+                backgroundColor: "#fff"
+              }
+            }
+          },
       MuiInputBase: {
         input: {
           fontSize: 16,

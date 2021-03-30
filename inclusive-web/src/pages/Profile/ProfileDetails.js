@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getUserDetails } from "../../actions/userDetails/user.actions";
+import profilePlaceholder from '../../assets/blank_image.png'
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: (pc) => ({
@@ -32,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
 
     //background: 'gray',
     position: "relative",
-    borderRadius: "10px",
     marginBottom: "1rem",
     overflow: "hidden",
   },
@@ -108,7 +108,7 @@ export const ProfileDetails = () => {
                       <Box className={classes.profileContainer}>
                         <img
                           style={{ width: "100%" }}
-                          src={candidate.user.photo_url ? candidate.user.photo_url :"https://image.flaticon.com/icons/png/512/20/20863.png"}
+                          src={candidate.user.photo_url ? candidate.user.photo_url : profilePlaceholder}
                         ></img>
                       </Box>
                       <Typography
@@ -368,7 +368,7 @@ export const ProfileDetails = () => {
                       <Box className={classes.profileContainer}>
                         <img
                           style={{ width: "100%" }}
-                          src={employer.user.photo_url ? employer.user.photo_url : "https://image.flaticon.com/icons/png/512/20/20863.png"}
+                          src={employer.user.photo_url ? employer.user.photo_url : profilePlaceholder}
                         ></img>
                       </Box>
                       <Typography

@@ -9,7 +9,6 @@ import Loader from '../../assets/loader/loader';
 function JobDescription(props) {
 
     const [loading, setLoading] = React.useState(true)
-    const [isUserEmployer, setIsUserEmployer] = React.useState(false)
     const [jobData, setJobData] = React.useState({})
     const [error, setError] = React.useState('')
     const [currEmployerCompany, setCurrentEmployerCompany] = React.useState(-1)
@@ -35,14 +34,6 @@ function JobDescription(props) {
         })
     }
 
-    const checkUserEmployer = async () => {
-        const response = await fetch(`${baseUrl}/user/get/0`, requestOptions);
-        const data = await response.json();
-        setIsUserEmployer(prevState => {
-            return !data.data ? prevState : data.data.employer ? true : false;
-        })
-    }
-
     const getJobData = async () => {
         const response = await fetch(`${baseUrl}/job/get/${props.match.params.id}`, requestOptions);
         const data = await response.json();
@@ -57,7 +48,6 @@ function JobDescription(props) {
     }
 
     React.useEffect(() => {
-        checkUserEmployer()
         setEmployerId()
         getJobData()
     },[])
@@ -76,7 +66,6 @@ function JobDescription(props) {
                         data={jobData}
                         type="job"
                         id={props.match.params.id}
-                        isUserEmployer={isUserEmployer}
                         buttonVisibility={currEmployerCompany===currentJobCompany}
                     />           
             } 

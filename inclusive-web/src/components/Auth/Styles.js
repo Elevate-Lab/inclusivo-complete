@@ -8,7 +8,7 @@ export const useStyles = makeStyles(theme => ({
         margin: "5px 0px 30px 0px",
         color: "red",
         fontSize: "2rem",
-        textAlign: "center"
+        textAlign: "center",
     },
     formContainer: {
         marginTop: "30px",
@@ -45,7 +45,9 @@ export const useStyles = makeStyles(theme => ({
     formButton: {
         width: "90%",
         maxWidth: "100%",
-        margin: "5% auto"
+        margin: "5% auto",
+        background: "#ff3750",
+        color: "#fff"
     },
     link: {
         textDecoration: "none",
@@ -55,6 +57,9 @@ export const useStyles = makeStyles(theme => ({
         width: "95%",
         margin: "20px auto",
         textAlign: "center",
+        '& .MuiButton-root:hover':{
+            background: "#ff3750",
+        }
     },
     logo: {
         marginBottom: "5%",
@@ -72,6 +77,9 @@ export const useStyles = makeStyles(theme => ({
         maxWidth: "95%",
         margin: "5% auto",
         textAlign: "center",
+        '& .MuiButton-root:hover':{
+            background: "#ff3750",
+        }
     },
     loginImage: {
         margin: "auto",
@@ -82,6 +90,9 @@ export const useStyles = makeStyles(theme => ({
     landingPage: {
         maxWidth: "95%",
         textAlign: "center",
+        '& .MuiButton-root:hover':{
+            background: "#ff3750",
+        }
     },
     landingImageContainer: {
         margin: "auto",

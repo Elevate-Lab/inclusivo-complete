@@ -8,20 +8,26 @@ import {
   Icon,
 } from "@material-ui/core";
 import clsx from "clsx";
-import { LocationOn, ShareOutlined,BookmarkBorderOutlined,BookmarkBorder} from "@material-ui/icons";
+import {
+  LocationOn,
+  ShareOutlined,
+  BookmarkBorderOutlined,
+  BookmarkBorder,
+} from "@material-ui/icons";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import Tags from "./Tags";
-import companyImage from "../../assets/Frame43.png";
 import { CheckCircleOutline } from "@material-ui/icons";
 import toBeReviewed from "../../assets/Icons/ToBeReviewed.png";
 import inProcess from "../../assets/Icons/InProcess.png";
 import shortlisted from "../../assets/Icons/ShortListed.png";
 import rejected from "../../assets/Icons/Rejected.png";
+import companyPlaceholder from "../../assets/company_placeholder.png";
+import scholarshipPlaceholder from '../../assets/scholarship_placeholder.jpg';
 
-const Card = ({ data, type, status }) => {
+const Card = ({ data, type, status, tagsToShow }) => {
   const classes = useStyles();
-  const [isLiked,setIsLiked] = React.useState(false);
+  const [isLiked, setIsLiked] = React.useState(false);
   const toFilter = (d) => {
     let date = "";
     if (d[0] === "a") {
@@ -31,7 +37,7 @@ const Card = ({ data, type, status }) => {
   };
   React.useEffect(() => {
     setIsLiked(data.is_liked);
-  },[isLiked,data.is_liked]);
+  }, [isLiked, data.is_liked]);
 
   const getStatus = (statusType) => {
     var statusData = {};
@@ -135,22 +141,34 @@ const Card = ({ data, type, status }) => {
       >
         <Grid item container direction="row">
           <Grid xs={10} item container wrap="nowrap" alignItems="center">
-            
-              <Grid item style={{ marginLeft: "4px" }}>
-                <ButtonBase>
+            <Grid item style={{ marginLeft: "4px" }}>
+              <ButtonBase>
+                {data.company && (
                   <img
                     src={
-                      data.company
-                        ? data.company.logo_url
-                        : companyImage
+                      data.company.logo_url.length > 0 ? data.company.logo_url : companyPlaceholder
                     }
-                    alt="company logo"
+                    alt="Company logo"
                     className={
                       type === "jobs" ? classes.image2 : classes.image1
                     }
                   />
-                </ButtonBase>
-              </Grid>
+                )}
+                {
+                  type==="scholarships" && !data.company && (
+                    <img
+                      src={
+                        scholarshipPlaceholder
+                      }
+                      alt="Scholarship Logo"
+                      className={
+                        type === "jobs" ? classes.image2 : classes.image1
+                      }
+                    />
+                  )
+                }
+              </ButtonBase>
+            </Grid>
             <Grid
               item
               container
@@ -184,52 +202,61 @@ const Card = ({ data, type, status }) => {
                   </Typography>
                 )}
               </Grid>
-              {type === "jobs" && (
-                <Grid item>
+              <Grid item>
+                {type === "jobs" && (
                   <Typography variant="caption">
                     {data.job_type} • Vacancy - {data.vacancies} •{" "}
                     <Moment filter={toFilter} fromNow>
                       {data.posted_on}
                     </Moment>
                   </Typography>
-                </Grid>
-              )}
-              {type === "scholarships" && (
-                <Grid>
-                  <Typography variant="subtitle2">
+                )}
+              </Grid>
+              <Grid item>
+                {type === "scholarships" && (
+                  <Typography variant="caption">
                     <Moment filter={toFilter} fromNow>
                       {data.posted_on}
                     </Moment>
                   </Typography>
-                </Grid>
-              )}
+                )}
+              </Grid>
             </Grid>
           </Grid>
-          <Grid xs={2} item alignItems="flex-end" container direction="column">   
-            {isLiked ?
-              <IconButton disableRipple className={classes.btn} style={{ marginBottom: "6px" }} >
+          <Grid xs={2} item alignItems="flex-end" container direction="column">
+            {isLiked ? (
+              <IconButton
+                disableRipple
+                className={classes.btn}
+                style={{ marginBottom: "6px" }}
+              >
                 <BookmarkBorder style={{ color: "red" }} fontSize="small" />
               </IconButton>
-              :
-              <IconButton disableRipple className={classes.btn} style={{ marginBottom: "6px" }} >
+            ) : (
+              <IconButton
+                disableRipple
+                className={classes.btn}
+                style={{ marginBottom: "6px" }}
+              >
                 <BookmarkBorderOutlined fontSize="small" />
               </IconButton>
-            }
+            )}
             <IconButton disableRipple className={classes.btn}>
-              <ShareOutlined fontSize='small' />
+              <ShareOutlined fontSize="small" />
             </IconButton>
           </Grid>
         </Grid>
         <Grid item xs={12} className={classes.description}>
-        <Typography varaint="subtitle2" className={clsx(classes.jobRole, classes.ellipsis)}>
+          <Typography
+            varaint="subtitle2"
+            className={clsx(classes.jobRole, classes.ellipsis)}
+          >
             {type === "jobs" ? data.job_role : data.description}
           </Typography>
         </Grid>
-        {status && getStatus(status)}
+        {status === "applied_jobs" && getStatus(status)}
         <Grid className={classes.tag} item container xs={12}>
-          {!status && data.tags.length > 0 && (
-            <Tags data={data} />
-          )}
+          {data.tags.length > 0 && status === null && <Tags data={data} />}
         </Grid>
       </Grid>
     </Link>

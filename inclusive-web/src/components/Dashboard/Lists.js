@@ -4,7 +4,8 @@ import { baseUrl }  from '../../urlConstants';
 import {useStyles} from './Styles';
 import { Grid,Button,Box } from '@material-ui/core';
 import {Link} from 'react-router-dom';
-import CommonCardSkeleton from '../Loaders/CommonCardSkeleton';
+import DashboardJobsSkeleton from '../Loaders/DashboardJobsSkeleton';
+import CompanyListingSkeleton from '../Loaders/CompanyListingSkeleton';
 import loadable from '@loadable/component';
 const CardComponent = loadable(() => import('../Listing/Card'));
 const CompanyComponent = loadable(() => import('../Company/Company'));
@@ -53,43 +54,25 @@ const Lists = ({type}) => {
     },[type])
     return(
         <>
-        {isLoading ? <CommonCardSkeleton type="job" /> : (!isLoading &&  data.length > 0) ? data.slice(0,3).map((data,idx) => (
+            {(isLoading && (type === "applied_jobs" || type === "preferred_cities")) ? <DashboardJobsSkeleton type={type} /> : (isLoading && type==="subscribed_companies") ? <CompanyListingSkeleton /> : (!isLoading &&  data.length > 0) ? data.slice(0,3).map((data,idx) => (
             <>{(type === "applied_jobs" || type === "preferred_city") && <Grid key={idx} item container className={noOfItems >= 3 ? classes.jobCard : noOfItems===2 ? classes.jobCard2 : classes.jobCard3}>
-                <CardComponent type="jobs" data={type === "applied_jobs" ? data.job : data} status = { type==="applied_jobs" ? data.status : null}/>
+                <CardComponent type="jobs" data={type === "applied_jobs" ? data.job : data} status = { type==="applied_jobs" ? data.status : null} />
             </Grid>}
-            {type === "subscribed_companies" && <Grid item sm={6} xs={12} md={4} lg={3} key={idx}>
+            {type === "subscribed_companies" && <Grid item className={classes.companyBox} key={idx}>
                 <Link to={`/home/company/${data.subscribed_company.company.id}`}>
-                    <Box
-                        style={{
-                            background: "#fff",
-                            margin: "0 1rem 1rem 1rem",
-                            borderRadius: "5px",
-                            padding: "1.5rem",
-                        }}
-                    >
-                        <CompanyComponent company={data.subscribed_company.company} />
-                    </Box>
+                    <CompanyComponent company={data.subscribed_company.company} />
                 </Link>
             </Grid>}</>
-        )) : (!isLoading && data.length === 0) ? (<div>
+        )) : (!isLoading && data.length === 0) && (<div>
             Nothing to Show
-        </div>):(<></>)}
+        </div>)}
         {isMoreClicked && data.length > 0 && data.slice(3,data.length).map((data,idx) => (
             <>{(type === "applied_jobs" || type === "preferred_city") && <Grid key={idx} item className={classes.jobCard}>
                 <CardComponent type="jobs" data={type === "applied_jobs" ? data.job : data} />
             </Grid>}
-            {type === "subscribed_companies" && <Grid item sm={6} xs={12} md={4} lg={3} key={idx}>
+            {type === "subscribed_companies" && <Grid item className={classes.companyBox} key={idx}>
                 <Link to={`/home/company/${data.subscribed_company.company.id}`}>
-                    <Box
-                        style={{
-                            background: "#fff",
-                            margin: "0 1rem 1rem 1rem",
-                            borderRadius: "5px",
-                            padding: "1.5rem",
-                        }}
-                    >
-                        <CompanyComponent company={data.subscribed_company.company} />
-                    </Box>
+                    <CompanyComponent company={data.subscribed_company.company} />
                 </Link>
             </Grid>}</>
         ))}

@@ -3,7 +3,7 @@ import axios from "axios";
 import { Grid, Button } from "@material-ui/core";
 import Card from "../Listing/Card";
 import { baseUrl } from "../../urlConstants";
-import CommonCardSkeleton from "../Loaders/CommonCardSkeleton";
+import DashboardJobsSkeleton from '../Loaders/DashboardJobsSkeleton';
 import { useStyles } from "./Styles";
 
 const CompanyJobs = () => {
@@ -67,7 +67,7 @@ const CompanyJobs = () => {
   return (
     <>
       {loading && (
-        <CommonCardSkeleton type="job" />
+        <DashboardJobsSkeleton type="jobs" />
       )} {(!loading && !error && data.length === 0) && (
         <div>No Jobs Found</div>
       ) }{ (!loading && error) && (
@@ -85,7 +85,7 @@ const CompanyJobs = () => {
         isMoreClicked &&
         data.slice(3, data.length).map((data, idx) => (
           <Grid key={idx} item className={classes.jobCard}>
-            <Card type="jobs" data={data} />
+            <Card type="jobs" data={data} status="company_jobs" />
           </Grid>
         ))}
       {hasMore && (

@@ -159,9 +159,9 @@ const Landing = (props) => {
                       helperText: formErrors.email
                     })}
                   />
-                  <Button className={classes.formButton} variant="contained" color="secondary" onClick={handleSubmit}>
+                  <Button className={classes.formButton} variant="contained" onClick={handleSubmit}>
                     Continue
-                </Button>
+                  </Button>
                 </form>
               </Grid>
             </Grid>

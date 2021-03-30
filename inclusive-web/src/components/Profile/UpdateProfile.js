@@ -23,7 +23,10 @@ import { useHistory } from 'react-router-dom';
 const useStyles = makeStyles(theme => ({
     container: {
         width: "90%",
-        margin: "10px auto"
+        margin: "10px auto",
+        '& .MuiButton-root:hover':{
+            background: "#ff3750",
+        }
     },
     formName: {
         margin: "5px 0px 30px 0px",
@@ -53,7 +56,9 @@ const useStyles = makeStyles(theme => ({
     formButton: {
         width: "90%",
         maxWidth: "100%",
-        margin: "20px auto"
+        margin: "20px auto",
+        background: "#ff3750",
+        color: "#fff"
     },
     profileAvatar: {
         width: theme.spacing(12),
@@ -398,7 +403,7 @@ const UpdateProfile = (props) => {
                         </TextField>
                         {
                             (
-                                <Button className={classes.formButton} variant="contained" color="secondary" type="submit">
+                                <Button className={classes.formButton} variant="contained" type="submit">
                                     Update
                                 </Button>
                             ) 

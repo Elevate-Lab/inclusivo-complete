@@ -183,6 +183,12 @@ function AddJob() {
         }
     }
 
+    /* ---------- detect changes after submit to enable button -----------*/
+    React.useEffect(() => {
+        setDisable(false)
+    }, [values])
+    
+
     const basic_overview = [
         {
             name: "title",

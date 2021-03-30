@@ -6,3 +6,7 @@ Inclusivo is an online platform that makes it easier for people from underprivil
 ### Figma Design
 
 https://www.figma.com/file/HM6gDn00Ivq9yhK2WCQptU/Inclusivo?node-id=2%3A243
+
+
+### Get it on Google Play Store
+https://play.google.com/store/apps/details?id=com.dsciiita.inclusivo

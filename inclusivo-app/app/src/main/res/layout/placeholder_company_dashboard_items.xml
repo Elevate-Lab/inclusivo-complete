@@ -1,0 +1,130 @@
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:strokeColor="@color/ms_material_grey_400"
+        app:strokeWidth="1dp"
+        android:layout_weight="1"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/display_img1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:padding="3dp"
+                android:layout_marginTop="7dp"
+                app:layout_constraintDimensionRatio="2:1"
+                android:src="@color/placeholder_back"
+                app:layout_constraintBottom_toTopOf="@+id/title1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/title1"
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="16dp"
+                app:cardCornerRadius="5dp"
+                android:backgroundTint="@color/placeholder_back"
+                app:layout_constraintTop_toBottomOf="@id/display_img1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:drawableStartCompat="@drawable/ic_jobs" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/job_count1"
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:layout_marginVertical="12dp"
+                app:cardCornerRadius="5dp"
+                android:layout_marginHorizontal="50dp"
+                android:backgroundTint="@color/placeholder_back"
+                android:layout_marginBottom="3dp"
+                app:layout_constraintTop_toBottomOf="@id/title1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:drawableStartCompat="@drawable/ic_jobs" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:strokeColor="@color/ms_material_grey_400"
+        app:strokeWidth="1dp"
+        android:layout_weight="1"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/display_img2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:padding="3dp"
+                android:layout_marginTop="7dp"
+                app:layout_constraintDimensionRatio="2:1"
+                android:src="@color/placeholder_back"
+                app:layout_constraintBottom_toTopOf="@+id/title2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/title2"
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="16dp"
+                app:cardCornerRadius="5dp"
+                android:backgroundTint="@color/placeholder_back"
+                android:layout_marginBottom="3dp"
+                app:layout_constraintTop_toBottomOf="@id/display_img2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:drawableStartCompat="@drawable/ic_jobs" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/job_count2"
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:layout_marginVertical="12dp"
+                app:cardCornerRadius="5dp"
+                android:layout_marginHorizontal="50dp"
+                android:backgroundTint="@color/placeholder_back"
+                android:layout_marginBottom="3dp"
+                app:layout_constraintTop_toBottomOf="@id/title2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:drawableStartCompat="@drawable/ic_jobs" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

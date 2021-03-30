@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.dsciiita.inclusivo">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Inclusivo">
+
+        <activity android:name=".activities.OpenLinks">
+            <intent-filter
+                android:autoVerify="true"
+                tools:targetApi="m">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="inclusivo.netlify.app"
+                    android:scheme="https" />
+
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activities.TestActivity" />
+        <activity android:name=".activities.EvaluationResults" />
+        <activity android:name=".activities.CompanyListingActivity" />
+        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".activities.EmployerProfileActivity" />
+        <activity android:name=".activities.ScholarshipDescriptionActivity" />
+        <activity android:name=".activities.AddScholarshipActivity" />
+        <activity android:name=".activities.SavedScholarshipActivity" />
+        <activity android:name=".activities.ScholarshipListing" />
+        <activity android:name=".activities.PDFViewerActivity" />
+        <activity
+            android:name=".activities.SplashActivity"
+            android:noHistory="true"
+            android:theme="@style/splash_style">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activities.OnBoardingActivity" />
+        <activity android:name=".activities.AppliedJobsActivity" />
+        <activity android:name=".activities.FilterJobActivity" />
+        <activity android:name=".activities.FilterScholarshipActivity" />
+        <activity android:name=".activities.FilterCompanyActivity" />
+        <activity android:name=".activities.FollowedCompaniesActivity" />
+        <activity android:name=".activities.SavedJobsActivity" />
+        <activity android:name=".activities.NavigationActivity" />
+        <activity android:name=".activities.JobDescriptionActivity" />
+        <activity android:name=".activities.JobApplicationsActivity" />
+        <activity android:name=".activities.JobListingActivity" />
+        <activity android:name=".activities.ViewJobApplicationActivity" />
+        <activity android:name=".activities.StoryInfoActivity" />
+        <activity android:name=".activities.StoryListing" />
+        <activity android:name=".activities.AddStoryActivity" />
+        <activity android:name=".activities.InitiativeInfoActivity" />
+        <activity android:name=".activities.AddInitiativeActivity" />
+        <activity android:name=".activities.CompanyProfileActivity" />
+        <activity android:name=".activities.AddCompanyActivity" />
+        <activity android:name=".activities.CreateAccountActivity" />
+        <activity android:name=".activities.EmailActivity" />
+        <activity android:name=".activities.AddEditJobActivity" />
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.RegistrationActivity" />
+    </application>
+
+</manifest>

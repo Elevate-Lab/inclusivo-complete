@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.chip.Chip
+    style="@style/chip_theme"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="40dp"
+    android:text="Hello chip"
+    android:clickable="false"
+    android:fontFamily="@font/roboto_regular"
+    android:textSize="14sp"
+    android:ellipsize="end">
+</com.google.android.material.chip.Chip>

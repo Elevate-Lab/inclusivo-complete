@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.chip.Chip
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:text="Applied: Rejected"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:chipCornerRadius="10dp"
+    android:textAppearance="@style/statusChipStyle"
+    android:backgroundTint="#FFDDD9"
+    android:textAlignment="center"
+    android:clickable="false"
+    android:textColor="#BB4E3F"
+    android:fontFamily="@font/roboto_regular"
+    android:textSize="16sp"
+    android:ellipsize="end">
+</com.google.android.material.chip.Chip>

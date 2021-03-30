@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/my_account_menu"
+        android:title="My account" />
+    <item
+        android:id="@+id/my_company"
+        android:title="My company" />
+    <item
+        android:id="@+id/applied_jobs"
+        android:title="Applied jobs" />
+    <item
+        android:id="@+id/saved_jobs_menu"
+        android:title="Saved jobs" />
+    <item
+        android:id="@+id/saved_scholarships_menu"
+        android:title="Saved scholarships" />
+    <item
+        android:id="@+id/subs_companies_menu"
+        android:title="Subscribed companies" />
+    <item
+        android:id="@+id/logout_menu"
+        android:title="Logout" />
+</menu>

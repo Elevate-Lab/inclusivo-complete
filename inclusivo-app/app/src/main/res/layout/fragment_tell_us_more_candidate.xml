@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Tell us more about you"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="64dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="* - Required fields"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilJobRole"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="32dp"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/job_role_tie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:hint="Job Role"
+            android:inputType="textCapWords"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/profile_description_til"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
+            android:hint="Profile Description"
+            app:boxStrokeColor="@color/primary_color"
+            app:boxStrokeWidth="1dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/profile_description_tie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:inputType="textMultiLine|textCapSentences"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Diversity *"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/divChipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            app:singleLine="false"
+            app:singleSelection="false">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/lgbtqi_chip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="LGBTQI"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:chipBackgroundColor="@color/chip_bg_color_selector"
+                app:chipCornerRadius="5dp"
+                app:chipStrokeColor="@color/primary_color"
+                app:chipStrokeWidth="1dp"
+                app:textEndPadding="16dp"
+                app:textStartPadding="16dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/working_mother_chip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Working Mother"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:chipBackgroundColor="@color/chip_bg_color_selector"
+                app:chipCornerRadius="5dp"
+                app:chipStrokeColor="@color/primary_color"
+                app:chipStrokeWidth="1dp"
+                app:textEndPadding="16dp"
+                app:textStartPadding="16dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/female_chip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Female"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:chipBackgroundColor="@color/chip_bg_color_selector"
+                app:chipCornerRadius="5dp"
+                app:chipStrokeColor="@color/primary_color"
+                app:chipStrokeWidth="1dp"
+                app:textEndPadding="16dp"
+                app:textStartPadding="16dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/specially_abled_chip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Specially Abled"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:chipBackgroundColor="@color/chip_bg_color_selector"
+                app:chipCornerRadius="5dp"
+                app:chipStrokeColor="@color/primary_color"
+                app:chipStrokeWidth="1dp"
+                app:textEndPadding="16dp"
+                app:textStartPadding="16dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/veteran_chip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Veteran"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:chipBackgroundColor="@color/chip_bg_color_selector"
+                app:chipCornerRadius="5dp"
+                app:chipStrokeColor="@color/primary_color"
+                app:chipStrokeWidth="1dp"
+                app:textEndPadding="16dp"
+                app:textStartPadding="16dp" />
+
+
+        </com.google.android.material.chip.ChipGroup>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilNationality"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nationality_til"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:hint="Nationality"
+                android:inputType="textCapWords"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <include
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="32dp"
+            android:layout_marginHorizontal="16dp"
+            layout="@layout/upload_resume"/>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilContactNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/contact_num_tie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:hint="Contact Number *"
+                android:inputType="phone"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilAlternateContactNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/alternate_contact_num_tie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:hint="Alternate Contact Number *"
+                android:inputType="phone"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="How soon can you start?"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/year_act"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="Year"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/month_act"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="Month"
+                    android:entries="@array/months"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/cbIsRelocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I am ready to relocate"
+            android:backgroundTint="@color/primary_color"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="16sp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Region"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCountry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false">
+
+            <AutoCompleteTextView
+                android:id="@+id/location_act"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:hint="Search cities"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:id="@+id/tilState"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginHorizontal="16dp"-->
+<!--            android:layout_marginTop="32dp"-->
+<!--            app:hintAnimationEnabled="false"-->
+<!--            app:hintEnabled="false">-->
+
+<!--            <AutoCompleteTextView-->
+<!--                android:id="@+id/state_act"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/roboto_medium"-->
+<!--                android:hint="State"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="16sp" />-->
+
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:id="@+id/tilCity"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginHorizontal="16dp"-->
+<!--            android:layout_marginTop="32dp"-->
+<!--            app:hintAnimationEnabled="false"-->
+<!--            app:hintEnabled="false">-->
+
+<!--            <AutoCompleteTextView-->
+<!--                android:id="@+id/city_act"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/roboto_medium"-->
+<!--                android:hint="City"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="16sp" />-->
+
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Which cities would you prefer?"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/prefCities_chip_grp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:singleSelection="false" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPreferredCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false">
+
+
+            <AutoCompleteTextView
+                android:id="@+id/preferred_city_act"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:fontFamily="@font/roboto_medium"
+                android:hint="Search cities"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="How did you get to know about this app?"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+            <Spinner
+                android:id="@+id/spinnerRefVia"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="start"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                android:fontFamily="@font/roboto_medium"
+                android:hint="Referred Via"
+                android:inputType="phone"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="32dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            app:cornerRadius="5dp" />
+
+    </LinearLayout>
+
+</ScrollView>

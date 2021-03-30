@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.chip.Chip
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:text="Applied: Pending"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:chipCornerRadius="10dp"
+    android:textAppearance="@style/statusChipStyle"
+    android:backgroundTint="#D8D4D4"
+    android:textAlignment="center"
+    android:clickable="false"
+    android:fontFamily="@font/roboto_regular"
+    android:textSize="16sp"
+    android:ellipsize="end">
+</com.google.android.material.chip.Chip>

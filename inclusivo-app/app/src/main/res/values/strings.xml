@@ -1,0 +1,100 @@
+<resources>
+    <string name="app_name">Inclusivo</string>
+    <string-array name="registered_via_spinner">
+        <item>Email</item>
+        <item>Social</item>
+        <item>Careers</item>
+        <item>Friend</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+        <item>Prefer not to say</item>
+    </string-array>
+
+    <string-array name="company_size_spinner">
+        <item>1-10</item>
+        <item>11-20</item>
+        <item>21-50</item>
+        <item>51-200</item>
+        <item>200+</item>
+    </string-array>
+
+    <string-array name="job_search_categories">
+        <item>Job Title</item>
+        <item>Company</item>
+        <item>Job Type</item>
+        <item>Location</item>
+        <item>Community</item>
+    </string-array>
+
+    <string-array name="company_search_categories">
+        <item>Company Title</item>
+        <item>Company Name</item>
+        <item>Company Description</item>
+    </string-array>
+
+    <string-array name="scholarship_search_categories">
+        <item>Title</item>
+        <item>Company Name</item>
+        <item>Tags</item>
+    </string-array>
+
+    <string-array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+
+    <string-array name="job_type_spinner">
+        <item>Full Time</item>
+        <item>Internship</item>
+        <item>Student</item>
+        <item>Contract</item>
+    </string-array>
+
+    <string-array name="job_status_spinner">
+        <item>Draft</item>
+        <item>Expired</item>
+        <item>Disabled</item>
+        <item>Published</item>
+        <item>Hired</item>
+    </string-array>
+
+    <string-array name="application_status_spinner">
+        <item>Draft</item>
+        <item>Pending</item>
+        <item>Process</item>
+        <item>Shortlisted</item>
+        <item>Selected</item>
+        <item>Rejected</item>
+    </string-array>
+
+    <string-array name="work_exp_range_array">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+</resources>

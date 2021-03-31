@@ -9,7 +9,6 @@ import Loader from '../../assets/loader/loader';
 function ScholarshipDescription(props) {
 
     const [loading, setLoading] = React.useState(true)
-    const [isUserEmployer, setIsUserEmployer] = React.useState(false)
     const [scholarshipData, setScholarshipData] = React.useState({})
     const [error, setError] = React.useState('')
 
@@ -25,14 +24,6 @@ function ScholarshipDescription(props) {
         },
     };
 
-    const checkUserEmployer = async () => {
-        const response = await fetch(`${baseUrl}/user/get/0`, requestOptions);
-        const data = await response.json();
-        setIsUserEmployer(prevState => {
-            return !data.data ? prevState : data.data.employer ? true : false;
-        })
-    }
-
     const getScholarshipData = async () => {
         const response = await fetch(`${baseUrl}/job/scholarship/get/${props.match.params.id}`, requestOptions);
         const data = await response.json();
@@ -45,7 +36,6 @@ function ScholarshipDescription(props) {
     }
 
     React.useEffect(() => {
-        checkUserEmployer()
         getScholarshipData()
     },[])
 
@@ -63,7 +53,6 @@ function ScholarshipDescription(props) {
                         data={scholarshipData}
                         type="scholarship"
                         id={props.match.params.id}
-                        isUserEmployer={isUserEmployer}
                     />           
             } 
         </>

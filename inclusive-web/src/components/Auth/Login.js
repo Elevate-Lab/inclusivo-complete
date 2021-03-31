@@ -148,7 +148,7 @@ const Login = (props) => {
                     helperText: formErrors.password
                   })
                   } />
-                <Button className={classes.formButton} variant="contained" color="secondary" onClick={handleSubmit}>
+                <Button className={classes.formButton} variant="contained" onClick={handleSubmit}>
                   Login
                 </Button>
               </form>

@@ -7,6 +7,7 @@ import {
     Typography
 } from '@material-ui/core'
 import { toFilter } from '../../helpers/methods'
+import companyPlaceholder from '../../assets/company_placeholder.png'
 
 const useStyles = makeStyles(() => ({
     image1: {
@@ -23,7 +24,12 @@ function DescriptionHeader({data, type}) {
         <Grid item container xs={11} wrap="nowrap" alignItems="center">
             <Grid item>
                 <ButtonBase disableRipple disableTouchRipple>
-                    <img src="/images/gojek.png" className={classes.image1} />
+                    {data.company &&
+                        <img 
+                            src={data.company.logo_url ? data.company.logo_url : companyPlaceholder} 
+                            className={classes.image1} 
+                        />
+                    }
                 </ButtonBase>
             </Grid>
             <Grid item container direction="column">
@@ -38,7 +44,7 @@ function DescriptionHeader({data, type}) {
                     null
                 :
                     <Typography variant="subtitle2">
-                        {data.company.name}
+                        {data.company ? data.company.name : null}
                         <span style={{margin: "0 4px"}}>•</span>  
                         {data.job_type}
                     </Typography>
@@ -47,7 +53,7 @@ function DescriptionHeader({data, type}) {
                     null
                 :
                     <Typography variant="subtitle2">
-                        {data.company.name}
+                        {data.company ? data.company.name : null}
                     </Typography>
                 }
                 {type!=="company" ?

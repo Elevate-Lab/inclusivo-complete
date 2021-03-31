@@ -6,7 +6,7 @@ export const getUserDetails = () => {
   return async (dispatch) => {
     try {
       dispatch({ type: UserDetailsConstants.GET_USER_DETAILS_REQUEST });
-      const res = await axios.get(`/user/get/0`);
+      const res = await axios.get(`/user/get/0/`);
       console.log(res);
 
       if (res.status === 200) {

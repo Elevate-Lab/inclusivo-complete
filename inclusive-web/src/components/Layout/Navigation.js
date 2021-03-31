@@ -27,6 +27,7 @@ import {
     ArrowForwardIosRounded,
     MenuRounded,
     ClearRounded,
+    ExitToAppRounded,
     Brightness1,
     Brightness4,
     Brightness7
@@ -343,7 +344,7 @@ function Layout(props) {
                     
                     <List className={classes.drawerBottom} style={{ paddingTop: '0px'}}>
                         <ListItem button className={classes.drawerItem} onClick={handleLogout}>
-                            <ListItemIcon style={{minWidth: '36px'}}><DashboardOutlined className={classes.drawerIcon} /></ListItemIcon>
+                            <ListItemIcon style={{minWidth: '36px'}}><ExitToAppRounded className={classes.drawerIcon} /></ListItemIcon>
                             <ListItemText className={clsx({
                                 [classes.hide]: isOpen
                             })}>
@@ -382,9 +383,6 @@ function Layout(props) {
                             <AccountCircleTwoTone />
                         </IconButton>
                         </Link>
-                        <IconButton onClick={changeDarkMode}>
-                            {darkMode ? <Brightness4/> : <Brightness7 /> }
-                        </IconButton>
                     </div>
                 </Toolbar>
             </AppBar>

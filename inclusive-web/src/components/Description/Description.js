@@ -24,11 +24,17 @@ import {
 import ApplicantsComponent from '../Applicants/ApplicantsComponent'
 import '../../style.css';
 import DescriptionHeader from './DescriptionHeader';
+import Accordian from './Accordian'
+import {useDispatch, useSelector} from 'react-redux'
 
 const useStyles = makeStyles(theme => ({
     mainContainer : {
         maxWidth: "1100px",
-        margin : "0px auto"
+        margin : "0px auto",
+        '& .MuiButton-root:hover':{
+            background: "#ff3750",
+            color: "#fff"
+        }
     },
     subContainer: {
         maxWidth: '1100px',
@@ -42,6 +48,12 @@ const useStyles = makeStyles(theme => ({
         borderRadius: "3px",
         width: '100%'
     },
+    descriptionContainer: {
+        marginTop: "16px",
+        padding: "4px 8px 8px 8px",
+        background: "#FAFAFA",
+        borderRadius: "5px",
+    },
     applicationViewContainer: {
         paddingTop : "20px",
         margin: "10px 0px",
@@ -50,21 +62,6 @@ const useStyles = makeStyles(theme => ({
     },
     paddingClass: {
         padding: "0px 20px",
-    },
-    buttonContainer: {
-        marginTop: "4px",
-        padding: "10px 20px",
-        boxShadow: "0px -1px 10px -4px rgba(0, 0, 0, 0.25)",
-        borderRadius: "0px 0px 5px 5px",
-    },
-    btn: {
-        background: "#fff",
-        border: "none",
-        '&:focus' : {
-            outline : "none"
-        },
-        display: "flex",
-        alignItems: "center"
     },
     bodyKey: {
         fontWeight: theme.typography.fontWeightMedium,
@@ -86,7 +83,7 @@ const useStyles = makeStyles(theme => ({
     tabButton: {
         border: "1px solid #ff3750",
         color: "#ff3750",
-        margin: "0 10px"
+        margin: "0 10px",
     },
     tabSelected: {
         background: "#ff3750",
@@ -94,69 +91,18 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const Description = ({type, data, id, isUserEmployer, buttonVisibility}) => {
+const Description = ({type, data, id, buttonVisibility}) => {
     const classes = useStyles();
-    const [descButtonStatus, setDescButtonStatus] = React.useState({
-        text: 'Read More',
-        expanded : false 
-    })
-    const [companyButtonStatus, setCompanyButtonStatus] = React.useState({
-        text: 'Read More',
-        expanded: false
-    }) 
-    const [selectionButtonStatus,setSelectionButtonStatus] = React.useState({
-        text: 'Read More',
-        expanded: false
-    })
     const [isLiked,setIsLiked] = React.useState(data.is_liked);
     const [isApplied, setIsApplied] = React.useState(type==="job" ? data.is_applied : null);
     const [tab, setTab] = React.useState(0)
+    const userStatus = useSelector(state => state.userStatus)
 
     let authToken=1;
     if (localStorage.getItem('key')) {
         authToken = localStorage.getItem('key');
     }
 
-    // Handlers
-    const handleReadMoreAbout = () => {
-        if(!descButtonStatus.expanded){
-            setDescButtonStatus({
-                text: "Read Less",
-                expanded: true
-            })
-        } else {
-            setDescButtonStatus({
-                text: "Read More",
-                expanded: false
-            })
-        }
-    }
-    const handleReadMoreSelection = () => {
-        if (!selectionButtonStatus.expanded) {
-            setSelectionButtonStatus({
-                text: "Read Less",
-                expanded: true
-            })
-        } else {
-            setSelectionButtonStatus({
-                text: "Read More",
-                expanded: false
-            })
-        }
-    }
-    const handleReadMoreCompany = () => {
-        if (!companyButtonStatus.expanded) {
-            setCompanyButtonStatus({
-                text: "Read Less",
-                expanded: true
-            })
-        } else {
-            setCompanyButtonStatus({
-                text: "Read More",
-                expanded: false
-            })
-        }
-    }
     const handleApply = async (e) => {
         e.preventDefault()
         const body = { 
@@ -234,7 +180,7 @@ const Description = ({type, data, id, isUserEmployer, buttonVisibility}) => {
             </Grid>
 
             {/* Apply */}
-            {isUserEmployer ?
+            {userStatus.isEmployer ?
                 type!=="job" ?
                 null
                 :
@@ -298,54 +244,11 @@ const Description = ({type, data, id, isUserEmployer, buttonVisibility}) => {
                     <ApplicantsComponent id={id}/>
                 </Grid>
             :
-                <>
-                    <Grid item container direction="column" className={classes.aboutContainer}>
-                        <Grid item container>
-                            <Typography variant="h6" className={classes.paddingClass}>
-                                {type==="job" ?
-                                    "Job Description"
-                                :
-                                    "Description"
-                                }
-                            </Typography>
-                        </Grid>
-                        <Grid item container direction="column">
-                            {
-                                data.description.length > 200 ? ( 
-                                    <>
-                                    <Grid xs={12} item className={classes.paddingClass}>
-                                        <Typography variant="body2">
-                                            {data.description.substring(0, 200)}<span id="dots" style={
-                                                descButtonStatus.expanded ? { display: "inline" } : { display: "none" }
-                                            } >...</span><span style={
-                                                descButtonStatus.expanded ? { display: "inline" } : { display: "none" }
-                                            } > {data.description.substring(201,data.description.length-1)} </span>
-                                        </Typography>
-                                    </Grid>
-                                    <Grid xs={12} item className={classes.buttonContainer}>
-                                        <button className={classes.btn} onClick={handleReadMoreAbout}>
-                                                <span>{descButtonStatus.text}</span>  { 
-                                                    descButtonStatus.expanded ? (
-                                                        <ExpandLess />
-                                                    ) : (
-                                                        <ExpandMore />
-                                                    )
-                                                }
-                                        </button>
-                                    </Grid>    
-                                    </>
-                                ) : (
-                                    <>
-                                        <Grid xs={12} item className={classes.paddingClass}>
-                                            <Typography variant="body2">
-                                                {data.description}  
-                                            </Typography>
-                                        </Grid>
-                                    </>
-                                )
-                            }
-                        </Grid>
-                    </Grid>
+                <Grid className={classes.descriptionContainer}>
+                    <Accordian 
+                        title={type==="job" ? "Job Description" : "Description"}
+                        data={data.description}
+                    />
 
                     <Grid item container className={classes.secondContainer}>
                         <Grid item container className="requirements recruitmentTabs">
@@ -484,107 +387,23 @@ const Description = ({type, data, id, isUserEmployer, buttonVisibility}) => {
                             </Grid>
                         </Grid>
                         <Grid container item className="selection">
-                            <div className={classes.aboutContainer}>
-                                <Grid item container>
-                                    <Typography variant="h6" className={classes.paddingClass}>
-                                        Selection Process
-                                    </Typography>
-                                </Grid>
-                                <Grid item container direction="column">
-                                    {
-                                        data.selection_process.length > 200 ? (
-                                            <>
-                                                <Grid xs={12} item className={classes.paddingClass}>
-                                                    <Typography variant="body2">
-                                                        {data.selection_process.substring(0, 200)}<span id="dots" style={
-                                                            selectionButtonStatus.expanded ? { display: "inline" } : { display: "none" }
-                                                        } >...</span><span style={
-                                                            selectionButtonStatus.expanded ? { display: "inline" } : { display: "none" }
-                                                        } > {data.selection_process.substring(201, data.description.length - 1)} </span>
-                                                    </Typography>
-                                                </Grid>
-                                                <Grid xs={12} item className={classes.buttonContainer}>
-                                                    <button className={classes.btn} onClick={handleReadMoreSelection}>
-                                                        <span>{selectionButtonStatus.text}</span>  {
-                                                            selectionButtonStatus.expanded ? (
-                                                                <ExpandLess />
-                                                            ) : (
-                                                                    <ExpandMore />
-                                                                )
-                                                        }
-                                                    </button>
-                                                </Grid>
-                                            </>
-                                        ) : (
-                                                <>
-                                                <Grid xs={12} item className={classes.paddingClass}>
-                                                    <Typography variant="body2">
-                                                        {data.selection_process}  
-                                                    </Typography>
-                                                </Grid>
-                                                </>
-                                            )
-                                    }
-                                </Grid>
-                            </div>
+                            <Accordian 
+                                title="Selectio Process"
+                                data={data.selection_process}
+                            />
                             
                         </Grid>
                     </Grid>
-
-                    <Grid item container direction="column" className={classes.aboutContainer}>
-                        <Grid item container>
-                            <Typography variant="h6" className={classes.paddingClass}>
-                                About Company
-                            </Typography>
-                        </Grid>
-                        <Grid item container direction="column">
-                            {
-                                data.company.description.length > 200 ? (
-                                    <>
-                                        <Grid xs={12} item className={classes.paddingClass}>
-                                            <Typography variant="body2">
-                                                {data.company.description.substring(0, 200)}<span id="dots" style={
-                                                    companyButtonStatus.expanded ? { display: "inline" } : { display: "none" }
-                                                } >...</span><span style={
-                                                    companyButtonStatus.expanded ? { display: "inline" } : { display: "none" }
-                                                } > {data.company.description.substring(201, data.description.length - 1)} </span>
-                                            </Typography>
-                                            {companyButtonStatus.expand ?
-                                                <Link to={`/company/${data.company.id}`}>
-                                                    <Button>Go to Descripton</Button>
-                                                </Link>
-                                            :
-                                                null
-                                            }
-                                        </Grid>
-                                        <Grid xs={12} item className={classes.buttonContainer}>
-                                            <button className={classes.btn} onClick={handleReadMoreCompany}>
-                                                <span>{companyButtonStatus.text}</span>  {
-                                                    companyButtonStatus.expanded ? (
-                                                        <ExpandLess />
-                                                    ) : (
-                                                            <ExpandMore />
-                                                        )
-                                                }
-                                            </button>
-                                        </Grid>
-                                    </>
-                                ) : (
-                                        <>
-                                            <Grid xs={12} item className={classes.paddingClass}>
-                                                <Typography variant="body2">
-                                                    {data.company.description}  
-                                                </Typography>
-                                                <Link to={`/home/company/${data.company.id}`}>
-                                                    <Button>Go to Descripton</Button>
-                                                </Link>
-                                            </Grid>
-                                        </>
-                                    )
-                            }
-                        </Grid>
-                    </Grid>
-                </>
+                    {data.company &&
+                        <Accordian
+                            title="About Company"
+                            data={data.company.description}
+                            button={true}
+                            to={`/home/company/${data.company.id}`}
+                            buttonName={"Company Link"}
+                        />
+                    }
+                </Grid>
             }
         </Grid>
     )

@@ -70,13 +70,6 @@ export const useStyles = makeStyles(theme => ({
             width: "calc(100% - 20px)"
         }
     },
-    root3: {
-        width: "47%",
-        marginLeft: "2%",
-        [theme.breakpoints.up('md')]: {
-            width: "30%",
-        }
-    },
     input: {
         '& .MuiSelect-outlined': {
             color: "#9F9F9F",
@@ -183,8 +176,54 @@ export const useStyles = makeStyles(theme => ({
     },
     dataContainer : {
         background: "#FAFAFA",
-        padding: "10px",
-        marginTop: "12px",
+        padding: "10px 10px 20px 10px",
+        margin: "12px 10px 0px 10px",
         borderRadius: "5px"
+    },
+    labelContainer: {
+        width: "95%",
+        maxWidth: "95% !important",
+        margin: "0px auto",
+        textAlign: "center",
+        '& .MuiFormControlLabel-label': {
+            fontWeight: "700",
+            color: "#6A6A6A"
+        }
+    },
+    formFieldContainer: {
+        width: "80%",
+        maxWidth: "90% !important",
+        margin: "0px auto",
+        '& div:first-child' : {
+            margin: "0px auto",
+            maxWidth: "100% !important",
+        }
+    },
+    controlsformFieldContainer: {
+        width: "72%",
+        maxWidth: "80% !important",
+        margin: "0px auto"
+    },
+    companyBox: {
+        background: "#fff",
+        borderRadius: "5px",
+        padding: "1.5rem",
+        margin: "0.5rem auto",
+        '&:hover': {
+            boxShadow: "0px 0px 10px -2px rgba(0, 0, 0, 0.15)"
+        },
+        '& a': {
+            textDecoration: "none",
+            color: "black"
+        },
+        [theme.breakpoints.up('xs')]: {
+            flexBasis: "95%"
+        },
+        [theme.breakpoints.between('sm','md')]: {
+            flexBasis: "45%"
+        },
+        [theme.breakpoints.up('md')]: {
+            flexBasis: "32%"
+        }
     }
 }))

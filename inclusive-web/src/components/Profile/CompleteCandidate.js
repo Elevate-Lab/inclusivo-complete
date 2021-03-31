@@ -27,6 +27,11 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 
 const useStyles = makeStyles(theme => ({
+    container: {
+        '& .MuiButton-root:hover':{
+            background: "#ff3750",
+        }
+    },
     formName: {
         color: "red",
         fontSize: "25px"
@@ -56,7 +61,9 @@ const useStyles = makeStyles(theme => ({
     formButton: {
         width: "15rem",
         maxWidth: "90vw",
-        margin: "15% auto"
+        margin: "15% auto",
+        background: "#ff3750",
+        color: "#fff"
     },
     PhoneForm: {
         marginTop: "50px",
@@ -229,7 +236,7 @@ const CompleteCandidate = () => {
     }
 
     return (
-        <Grid container direction="column" justify="center" spacing={5} alignItems="center">
+        <Grid container direction="column" justify="center" spacing={5} alignItems="center" className={classes.container}>
             <Grid item>
                 <Typography className={classes.formName}>
                     Complete Profile - Candidate

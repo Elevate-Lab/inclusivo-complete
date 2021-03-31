@@ -18,7 +18,7 @@ import {
     ListItemText,
     Button,
     Typography,
-    useTheme
+    Icon
 } from '@material-ui/core'
 import {
     AccountCircleTwoTone,
@@ -27,10 +27,6 @@ import {
     ArrowForwardIosRounded,
     MenuRounded,
     ClearRounded,
-    ExitToAppRounded,
-    Brightness1,
-    Brightness4,
-    Brightness7
 } from '@material-ui/icons'
 import { 
     desktopViewOpen, 
@@ -45,7 +41,7 @@ import {
     candidateItems,
     employerItems
 } from './sidebarItems'
-
+import Logout from '../../assets/Icons/LogoutIcon.svg';
 
 const useStyles = makeStyles(theme => ({
     appbar: property => ({
@@ -61,10 +57,17 @@ const useStyles = makeStyles(theme => ({
         color: '#000000',
         justifyContent: 'flex-end'
     },
+    bg: {
+        zIndex: 1,
+        position: "absolute",
+        width: "100vw",
+        height: "100vh"
+    },
     drawer: property => ({
         width: property.sidebarWidth,
         flexShrink: 0,
         color: '#ffffff',
+        zIndex: 2
     }),
     drawerPaper: property => ({
         width: property.sidebarWidth,
@@ -198,11 +201,11 @@ function Layout(props) {
 
     // Effects
     useEffect (() => {
-        console.log(darkMode)
+        // console.log(darkMode)
     },[marginDetails])
 
     useLayoutEffect(() => {
-        console.log(darkMode)
+        // console.log(darkMode)
         getUser()
         setIsMobileView(checkWidthChange())
         let timeoutId = null;
@@ -238,6 +241,13 @@ function Layout(props) {
         dispatch(handleDarkMode(darkMode));
     }
 
+    const handleTouchItem = () => {
+        if(isMobileView){
+            //console.log("Hey!")
+            setIsMobileSidebarOpen(false)
+        }
+    }
+
     const handleLogout = async () => {
         await localStorage.removeItem('key')
         await localStorage.removeItem('userEmail')
@@ -245,10 +255,10 @@ function Layout(props) {
     }
 
     // display functions
-    const list = (data) => {
+    const list = (data,key) => {
         return(
-            <Link to={data.route} >
-                <ListItem button className={classes.drawerItem} key={data.name}>
+            <Link to={data.route} key={key}>
+                <ListItem button className={classes.drawerItem} key={data.name} onClick={handleTouchItem}>
                     <ListItemIcon style={{minWidth: '36px'}}>{data.icon}</ListItemIcon>
                     <ListItemText className={clsx({
                         [classes.hide]: isOpen
@@ -265,6 +275,7 @@ function Layout(props) {
     return (
         <>
             {/* Sidebar */}
+            <div className={(isMobileView && isMobileSidebarOpen) ? classes.bg : ""} onClick={handleTouchItem}></div>
             <Drawer
                 anchor='left'
                 className={classes.drawer}
@@ -274,7 +285,7 @@ function Layout(props) {
                     {
                         open: isMobileSidebarOpen
                     }
-                     : 
+                    : 
                     {
                         open: true
                     })
@@ -310,8 +321,8 @@ function Layout(props) {
                 </div>
                 <div style={{overflowY: "auto", overflowX: "hidden", marginBottom: '52px'}}>
                     <List>
-                        {commonItems.map(data => {
-                            return list(data)
+                        {commonItems.map((data,key) => {
+                            return list(data,key)
                         })}
                     </List>
                     <Divider className={classes.divider} />
@@ -344,7 +355,7 @@ function Layout(props) {
                     
                     <List className={classes.drawerBottom} style={{ paddingTop: '0px'}}>
                         <ListItem button className={classes.drawerItem} onClick={handleLogout}>
-                            <ListItemIcon style={{minWidth: '36px'}}><ExitToAppRounded className={classes.drawerIcon} /></ListItemIcon>
+                            <ListItemIcon style={{minWidth: '36px'}}><Icon className={classes.drawerIcon}><img src={Logout} alt="logout"/></Icon></ListItemIcon>
                             <ListItemText className={clsx({
                                 [classes.hide]: isOpen
                             })}>

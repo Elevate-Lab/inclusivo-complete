@@ -372,26 +372,28 @@ const Listing = ({ type }) => {
 
   return (
     <Grid container className={classes.mainContainer}>
-      <Grid item xs={12} className={classes.innerContainer}>
-        <TextField
-          value={defaultSearchFilters.searchText}
-          onChange={handleDefaultSearchField}
-          variant="outlined"
-          placeholder="Type here..."
-          className={clsx(classes.root, classes.input, classes.singleLineInput)}
-          InputProps={{
-            endAdornment: (
-              <Button
-                type="submit"
-                onClick={handleDefaultSubmit}
-                variant="outlined"
-              >
-                <Search />
-              </Button>
-            ),
-          }}
-        />
-      </Grid>
+      <form onSumit={handleDefaultSubmit} className={classes.innerContainer}>
+        <Grid item xs={12}>
+          <TextField
+            value={defaultSearchFilters.searchText}
+            onChange={handleDefaultSearchField}
+            variant="outlined"
+            placeholder="Type here..."
+            className={clsx(classes.root, classes.input, classes.singleLineInput)}
+            InputProps={{
+              endAdornment: (
+                <Button
+                  type="submit"
+                  onClick={handleDefaultSubmit}
+                  variant="outlined"
+                >
+                  <Search />
+                </Button>
+              ),
+            }}
+          />
+        </Grid>
+      </form>
       <Grid
         item
         container
@@ -423,24 +425,22 @@ const Listing = ({ type }) => {
                 </IconButton>
               )}
             </Grid>
-            <Grid item xs={12} container>{
-              (type ==="jobs" || type==="scholarships") && <Grid item container xs={12} md={6}>
+            <Grid item xs={12} container >
+              {(type ==="jobs" || type==="scholarships") && <Grid item direction="column" container xs={12} md={6} style={{height: "fit-content"}}>
                 {(type === "jobs" || type === "scholarships") && (
                   <Grid item xs={12} container direction="column">
-                    <Grid item container className={classes.labelContainer}>
-                      <FormGroup className={classes.checkBoxContainer} row>
-                        <FormControlLabel
-                          control={
-                            <GreenCheckbox
-                              checked={filtersSelected.tags}
-                              onChange={handleChangeSelectedFilters}
-                              name="tags"
-                            />
-                          }
-                          label="Diversity Tags"
-                        />
-                      </FormGroup>
-                    </Grid>
+                    <FormGroup className={clsx(classes.checkBoxContainer, classes.labelContainer)} row>
+                      <FormControlLabel
+                        control={
+                          <GreenCheckbox
+                            checked={filtersSelected.tags}
+                            onChange={handleChangeSelectedFilters}
+                            name="tags"
+                          />
+                        }
+                        label="Diversity Tags"
+                      />
+                    </FormGroup>
                     <Grid item xs={12} className={classes.formFieldContainer}>
                       {filtersSelected.tags && (
                         <Autocomplete
@@ -465,8 +465,7 @@ const Listing = ({ type }) => {
                 )}
                 {type === "jobs" && (
                   <Grid item container direction="column" xs={12}>
-                    <Grid item xs={12} className={classes.labelContainer}>
-                      <FormGroup row className={classes.checkBoxContainer}>
+                    <FormGroup row className={clsx(classes.checkBoxContainer, classes.labelContainer)}>
                         <FormControlLabel
                           label="Select salary range"
                           control={
@@ -478,7 +477,6 @@ const Listing = ({ type }) => {
                           }
                         />
                       </FormGroup>
-                    </Grid>
                     <Grid item xs={12} className={classes.formFieldContainer}>
                       {filtersSelected.salary && (
                         <>
@@ -504,21 +502,19 @@ const Listing = ({ type }) => {
                 )}
                 {type === "jobs" && (
                   <Grid item xs={12} container direction="column">
-                    <Grid item xs={12} className={classes.labelContainer}>
-                      <FormGroup row className={classes.checkBoxContainer}>
-                        <FormControlLabel
-                          control={
-                            <GreenCheckbox
-                              checked={filtersSelected.experience}
-                              onChange={handleChangeSelectedFilters}
-                              name="experience"
-                            />
-                          }
-                          label="Select experience range"
-                        />
-                      </FormGroup>
-                    </Grid>
-                    <Grid className={classes.formFieldContainer}>
+                    <FormGroup row className={clsx(classes.checkBoxContainer, classes.labelContainer)}>
+                      <FormControlLabel
+                        control={
+                          <GreenCheckbox
+                            checked={filtersSelected.experience}
+                            onChange={handleChangeSelectedFilters}
+                            name="experience"
+                          />
+                        }
+                        label="Select experience range"
+                      />
+                    </FormGroup>
+                    <Grid item xs={12} className={classes.formFieldContainer}>
                       {filtersSelected.experience && (
                         <>
                           <Slider
@@ -542,13 +538,12 @@ const Listing = ({ type }) => {
                     </Grid>
                   </Grid>
                 )}
-              </Grid>
-      }
-              <Grid item container xs={12} md={6}>
+              </Grid>}
+
+              <Grid item container direction="column" xs={12} md={6} style={{ height: "fit-content" }}>
                 {(type === "jobs" || type === "scholarships") && (
-                  <Grid container xs={12} direction="column">
-                    <Grid item xs={12} className={classes.labelContainer}>
-                      <FormGroup row className={classes.checkBoxContainer}>
+                  <Grid item container xs={12} direction="column">
+                    <FormGroup row className={clsx(classes.checkBoxContainer, classes.labelContainer)}>
                         <FormControlLabel
                           label="Job Type"
                           control={
@@ -560,7 +555,6 @@ const Listing = ({ type }) => {
                           }
                         />
                       </FormGroup>
-                    </Grid>
                     {filtersSelected.jobType && (
                       <Grid
                         item
@@ -582,8 +576,7 @@ const Listing = ({ type }) => {
                 )}
                 {(type === "jobs" || type === "scholarships") && (
                   <Grid container item xs={12} direction="column">
-                    <Grid item xs={12} className={classes.labelContainer}>
-                      <FormGroup row className={classes.checkBoxContainer}>
+                    <FormGroup row className={clsx(classes.checkBoxContainer, classes.labelContainer)}>
                         <FormControlLabel
                           label="Filter by locations"
                           control={
@@ -595,9 +588,8 @@ const Listing = ({ type }) => {
                           }
                         />
                       </FormGroup>
-                    </Grid>
                     {filtersSelected.locations && (
-                      <Grid item xs={12} className={classes.formFieldContainer}>
+                      <Grid item xs={12} className={classes.controlsformFieldContainer}>
                         <Controls.AddChip
                           label=""
                           values={values}
@@ -610,8 +602,7 @@ const Listing = ({ type }) => {
                   </Grid>
                 )}
                 <Grid item container direction="column" xs={12}>
-                  <Grid item xs={12} className={classes.labelContainer}>
-                    <FormGroup row className={classes.checkBoxContainer}>
+                  <FormGroup row className={clsx(classes.checkBoxContainer, classes.labelContainer)}>
                       <FormControlLabel
                         label="Filter by Company Name"
                         control={
@@ -623,7 +614,6 @@ const Listing = ({ type }) => {
                         }
                       />
                     </FormGroup>
-                  </Grid>
                   <Grid item xs={12} className={classes.formFieldContainer}>
                     {filtersSelected.companyName && (
                       <Autocomplete

@@ -135,7 +135,7 @@ const Landing = (props) => {
             alt="logo"
           />
           {
-            checkUserDetails.loading ? <div style={{ top: "40%", left: "45%", position: "absolute"}}>
+            checkUserDetails.loading ? <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "150px" }}>
               <Loader loading={checkUserDetails.loading} />
             </div> : <Grid className={classes.container} container direction="column" justify="center">
               <Grid item xs={12}>

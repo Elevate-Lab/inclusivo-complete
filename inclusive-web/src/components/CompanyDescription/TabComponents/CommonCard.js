@@ -10,7 +10,7 @@ import {
     ShareOutlined,
     LocationOn
 } from '@material-ui/icons'
-import companyImage from '../../../assets/Frame43.png'
+import companyPlaceholder from '../../../assets/company_placeholder.png'
 import clsx from 'clsx'
 import {toFilter} from '../../../helpers/methods'
 import Moment from 'react-moment'
@@ -75,7 +75,7 @@ function CommonCard({data, type}) {
                 <Grid xs={10} item container wrap="nowrap" alignItems="center">
                     <Grid item style={{marginLeft: "4px"}}>
                         <img 
-                            src={data.company.logo_url ? data.company.logo_url!=="" ? data.company.logo_url : companyImage : companyImage} 
+                            src={data.company.logo_url ? data.company.logo_url!=="" ? data.company.logo_url : companyPlaceholder : companyPlaceholder} 
                             alt="company logo" 
                             className={classes.logo}
                             {

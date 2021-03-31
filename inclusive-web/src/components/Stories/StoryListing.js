@@ -36,7 +36,16 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     tile: {
-        margin: "10px 40px",
+        // margin: "10px 40px",
+        [theme.breakpoints.up('xs')]: {
+            width: "100% !important"
+        },
+        [theme.breakpoints.between('sm', 'md')]: {
+            width: "48% !important"
+        },
+        [theme.breakpoints.up('md')]: {
+            width: "33.33% !important"
+        },
         height: "auto"
     },
     icon: {
@@ -90,14 +99,15 @@ function StoryListing(props) {
                 <Grid>{error}</Grid>
             : 
             <div className={classes.root}>
-                <GridList className={classes.mainContainer} cols={4} cellHeight={300} justify="space-evenly">
+                <GridList className={classes.mainContainer} cols={3} cellHeight={300} justify="space-evenly">
                     {storyData.map((story) => {
                         return (
                             <GridListTile key={story.id}  cols={1} className={classes.tile}>    
-                                <img className={classes.image} src={story.photo_url} />
+                                <img className={classes.image} src={story.photo_url} style={{width: "100%"}} />
                                 <GridListTileBar
                                     title={story.name}
                                     subtitle={<span>{story.company.name}</span>}
+                                    style={{width: "100%"}}
                                     actionIcon={
                                         <Link to={`/home/company/${story.company.id}/story/${story.id}`} key={story.id}>
                                             <IconButton className={classes.icon}>

@@ -7,19 +7,20 @@ import Skeleton from "react-loading-skeleton";
 const useStyles = makeStyles((theme) => ({
     loaderCard: {
         background: "#fff",
-        padding: "10px",
-        margin: "10px auto",
+        margin: "0.5rem auto",
+        padding: "5px",
         '&:hover': {
             boxShadow: "0px 0px 10px -2px rgba(0, 0, 0, 0.15)"
         },
-        [theme.breakpoints.up('xs')]: {
+        [theme.breakpoints.between('xs','sm')]: {
             flexBasis: "95%"
         },
         [theme.breakpoints.between('sm', 'md')]: {
-            flexBasis: "45%"
+            flexBasis: "40%"
         },
         [theme.breakpoints.up('md')]: {
-            flexBasis: "32%"
+            // width: "30%",
+            flexBasis: "30%"
         }
     }
 }))
@@ -41,10 +42,10 @@ const CompanyListingSkeleton = () => {
                             </Grid>
                         </Grid>
                         <Grid item xs={12} style={{marginTop: "10px"}}>
-                            <Skeleton height={20} width={250} />
+                            <Skeleton height={20} width={200} />
                         </Grid>
                         <Grid item xs={12} style={{ marginTop: "10px" }}>
-                            <Skeleton height={40} width={350}/>
+                            <Skeleton height={40} width={250}/>
                         </Grid>
                         <Grid item xs={12} container direction="column" style={{margin: "10px 0px"}}>
                             <Grid item xs={4} style={{ margin: "5px 0px" }}>

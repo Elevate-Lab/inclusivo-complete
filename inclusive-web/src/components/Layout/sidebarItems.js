@@ -5,7 +5,12 @@ import {
     SchoolOutlined,
     BusinessOutlined,
     LibraryBooksOutlined,
-} from '@material-ui/icons'
+} from '@material-ui/icons';
+import {
+    Icon
+} from '@material-ui/core';
+import SavedScholarship from '../../assets/Icons/SavedScholarshipIcon.svg';
+import LikedJobs from '../../assets/Icons/LikedJobsIcon.svg';
 
 const drawerIcon = {
     color: '#ffffff',
@@ -43,7 +48,7 @@ export const commonItems = [
 export const candidateItems = [
     {
         name: 'Liked Jobs',
-        icon: <WorkOutlineOutlined style={drawerIcon} />,
+        icon: <Icon style={drawerIcon}> <img src={LikedJobs} alt="liked jobs"/></Icon>,
         route: '/home/job/liked'
     },
     {
@@ -53,7 +58,7 @@ export const candidateItems = [
     },
     {
         name: 'Liked Scholarships',
-        icon: <SchoolOutlined style={drawerIcon} />,
+        icon: <Icon style={drawerIcon}><img src={SavedScholarship} alt="saved scholarship"/></Icon>,
         route: '/home/scholarship/liked'
     }
 ]

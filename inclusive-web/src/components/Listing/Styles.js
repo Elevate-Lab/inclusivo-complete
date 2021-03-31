@@ -202,7 +202,10 @@ export const useStyles = makeStyles(theme => ({
     controlsformFieldContainer: {
         width: "72%",
         maxWidth: "80% !important",
-        margin: "0px auto"
+        margin: "0px auto",
+        '& h6': {
+            margin: "0px !important"
+        }
     },
     companyBox: {
         background: "#fff",

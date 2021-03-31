@@ -102,7 +102,7 @@ const Login = (props) => {
       <Grid item xs={12} md={5}>
         <img className={classes.logo} src="/images/inclusivo.svg" alt="logo" />
         {
-          userLoginDetails.loading ? <div style={{top: "40%",position: "absolute",left: "45%"}}>
+          userLoginDetails.loading ? <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "150px" }}>
             <Loader loading={userLoginDetails.loading} />
           </div> : <Grid className={classes.container} container direction="column" justify="center">
             <Grid item xs={12}>

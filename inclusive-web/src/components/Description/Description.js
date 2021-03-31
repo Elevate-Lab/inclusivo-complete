@@ -163,7 +163,7 @@ const Description = ({type, data, id, buttonVisibility}) => {
         <Grid container className={classes.mainContainer}>
             <Grid item container direction="row">
                 <DescriptionHeader data={data} type={type}/>
-                <Grid item container xs={1} alignItems="flex-end" justify="space-evenly" direction="column">
+                <Grid item container alignItems="flex-end" direction="column" style={{flex: "0 1"}}>
                     {isLiked ?   
                         <IconButton onClick={handleLikefunc("unlike", false)} >
                             <Favorite style={{color: "red"}} fontSize="small" />
@@ -388,7 +388,7 @@ const Description = ({type, data, id, buttonVisibility}) => {
                         </Grid>
                         <Grid container item className="selection">
                             <Accordian 
-                                title="Selectio Process"
+                                title="Selection Process"
                                 data={data.selection_process}
                             />
                             

@@ -19,6 +19,9 @@ import { storage } from '../../firebase/index';
 import { baseUrl } from '../../urlConstants';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import useForm from '../../customHooks/useForm';
+import { format } from "date-fns";
+import Controls from "../Form/Controls/Controls";
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -29,7 +32,7 @@ const useStyles = makeStyles(theme => ({
         }
     },
     formName: {
-        margin: "5px 0px 30px 0px",
+        margin: "30px 0px 10px 0px",
         color: "red",
         fontSize: "2rem",
         textAlign: "center"
@@ -39,26 +42,20 @@ const useStyles = makeStyles(theme => ({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        width: "60%",
-        border: "1px solid #B0B0B0",
-        padding: "2%",
-        borderRadius: "15px",
-        margin: "30px auto",
-        [theme.breakpoints.down('xs')]: {
-            width: "95%"
-        }
+        width: "90vw",
+        maxWidth: "30rem",
     },
     formInputs: {
-        width: "90%",
-        margin: "12px auto",
-        maxWidth: "100%"
+        width: "100%",
+        padding: "10px"
     },
     formButton: {
-        width: "90%",
-        maxWidth: "100%",
+        width: "15rem",
+        maxWidth: "90vw",
         margin: "20px auto",
         background: "#ff3750",
-        color: "#fff"
+        color: "#fff",
+        height: "36px"
     },
     profileAvatar: {
         width: theme.spacing(12),
@@ -76,7 +73,37 @@ const useStyles = makeStyles(theme => ({
     },
     profileInputField: {
         display: "none"
-    }
+    },
+    phoneFormInput : {
+        background: "#fafafa",
+        borderRadius: "5px",
+        fontSize: "10px",
+        '& .MuiOutlinedInput-adornedStart': {
+            paddingLeft: "5px",
+            marginRight: "0px"
+        },
+        '& .MuiInputAdornment-positionStart': {
+            marginRight: "0px"
+        },
+        '&:hover .MuiButtonBase-root': {
+            background: "#fafafa !important",
+        },
+        "& .MuiInputAdornment-root": {
+            background: "white"
+        },
+        '& .MuiOutlinedInput-input': {
+            padding: "10px !important"
+        },
+        "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            border: "1px solid #e6e6e6 !important",
+        },
+        "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#76B7F3 !important"
+        },
+        "&:focus-within .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            border: "2px solid #76B7F3 !important"
+        },
+      },
 }));
 const StyledBadge = withStyles((theme) => ({
     badge: {
@@ -89,55 +116,33 @@ const StyledBadge = withStyles((theme) => ({
     }
 }))(Badge);
 
+const initialValues = {
+    first_name: "",
+    last_name: "",
+    email: "",
+    dob: format(Date.now(), 'yyyy-MM-dd'),
+    gender: "",
+    is_employer: false,
+    photo_url: ""
+};
+
 const UpdateProfile = (props) => {
     const classes = useStyles();
     
-    const [IsEmployerValues,setIsEmployerValues] = React.useState('');
-    const [GenderValues,setGenderValues] = React.useState('');
-    const [DateValues,setDateValues] = React.useState('');
-    const [EmailAddressValues,setEmailAddressValues] = React.useState('');
-    const [LastNameValues,setLastNameValues] = React.useState('');
-    const [FirstNameValues,setFirstNameValues] = React.useState('');
+    const [gender, setGender] = React.useState("");
+    const [userType, setUserType] = React.useState("");
+
     const [profileImageValues, setprofileImageValues] = React.useState(null);
     const [profilePreview, setProfilePreview] = React.useState({
         profileImg: blankImage
     })
     const [profileImageSelected,setprofileImageSelected] = React.useState(false);
-    const [profileImageUrl,setProfileImageUrl] = React.useState('');
     const [progress,setProgress] = React.useState(0);
     const [imageUploading,setImageUploading] = React.useState(false);
+    const [isError, setIsError] = React.useState(false)
     const history = useHistory();
-    const [formErrors, setFormErrors] = React.useState({});
-    const [isError, setIsError] = React.useState(false);
 
-    const validateForm = () => {
-        let temp = {}
-        temp.firstName = FirstNameValues ? "" : "First Name is required."
-        temp.lastName =  LastNameValues ? "" : "Last Name is required"
-        temp.gender = GenderValues ? "" : "Gender is Required"
-        temp.dob = DateValues ? "" : "Date of Birth is Required"
-        temp.isEmployer = IsEmployerValues ? "" : "Required Field"
-
-        setFormErrors({
-            ...temp
-        })
-
-        return Object.values(temp).every(value => value === "")
-    }
-
-    const handleChange = (event) => {
-        if(event.target.name === "firstName"){
-            setFirstNameValues(event.target.value);
-        }else if(event.target.name === "lastName"){
-            setLastNameValues(event.target.value);
-        }else if(event.target.name === "gender"){
-            setGenderValues(event.target.value);
-        }else if(event.target.name === "dob"){
-            setDateValues(event.target.value);
-        }else if(event.target.name === "isEmployer"){
-            setIsEmployerValues(event.target.value);
-        }
-    };
+    const [values, setValues, errors, setErrors, handleChange] = useForm(initialValues, false , ()=>{})
 
     const handleProfileImage = (e) => {
         if(e.target.files[0]){
@@ -186,35 +191,41 @@ const UpdateProfile = (props) => {
                         setProfilePreview({
                             profileImg: url
                         })
-                        setProfileImageUrl(url);
+                        setValues({
+                            ...values,
+                            photo_url: url
+                        });
                         setprofileImageSelected(false);
                         setImageUploading(false);
                     })
             }
         )
     }
+    
+    const handleChangeGender = (e) => {
+        setGender(e.target.value);
+    }
+
+    const handleChangeUserType = (e) => {
+        setUserType(e.target.value);
+    }
 
     const submitFunction = async (e) => {
         e.preventDefault();
-        if(validateForm()){
-            let employerBool;
-            if (IsEmployerValues === 'Employer') {
-                employerBool = true;
-            } else if(IsEmployerValues === "Candidate") {
-                employerBool = false;
-            }
+        // if(validate()){
+            // let employerBool;
+            // if (IsEmployerValues === 'Employer') {
+            //     employerBool = true;
+            // } else if(IsEmployerValues === "Candidate") {
+            //     employerBool = false;
+            // }
 
             const key = localStorage.getItem('key');
 
-            const body = {
-                first_name: FirstNameValues,
-                last_name: LastNameValues,
-                email: EmailAddressValues,
-                dob: DateValues,
-                gender: GenderValues,
-                is_employer: employerBool,
-                photo_url: profileImageUrl
-            }
+            const body = values
+            body.gender = gender
+            body.is_employer = userType === "Employer" ? true : false
+            console.log(body)
 
             const requestOptions = {
                 method: 'POST',
@@ -247,14 +258,17 @@ const UpdateProfile = (props) => {
                 } 
             }).catch(err => {
                 console.log(err);
-                setIsError(true);
+                // setIsError(true);
             });
-        }   
+        // }   
     }
 
     React.useLayoutEffect(() => {
         if(localStorage.getItem('userEmail')){
-            setEmailAddressValues(localStorage.getItem('userEmail'));
+            setValues({
+                ...values,
+                email: localStorage.getItem('userEmail')
+            })
         }
     },[]);
 
@@ -269,8 +283,8 @@ const UpdateProfile = (props) => {
                     Update Profile
                 </Typography>
             </Grid>
-                <Grid item xs={12} className={classes.formContainer}>
-                <form onSubmit={submitFunction}>
+                <Grid item xs={12} >
+                <form onSubmit={submitFunction} className={classes.formContainer}>
                     <Grid container item direction="column" alignItems="center" justify="center" className={classes.formInputs}>
                         <StyledBadge badgeContent={
                             <>
@@ -311,115 +325,108 @@ const UpdateProfile = (props) => {
                                 </Button>
                             </div> : (<></>)
                     }
-                    <Grid container justify="center" alignItems="center">
-                        <TextField
-                            id="firstName"
-                            name="firstName"
+                    <div className={classes.formInputs}>
+                        <Controls.FormInput 
+                            value={values.first_name}
+                            name="first_name"
+                            handleChange={handleChange}
                             label="First Name"
-                            onChange={handleChange}
-                            value={FirstNameValues} 
-                            className={classes.formInputs}
-                            {...(formErrors.firstName && {
-                                error: true,
-                                helperText: formErrors.firstName
-                            })}
                         />
-                        <TextField
-                            id="lastName"
-                            name="lastName"
+                    </div>
+                    <div className={classes.formInputs}>
+                        <Controls.FormInput 
+                            value={values.last_name}
+                            name="last_name"
+                            handleChange={handleChange}
                             label="Last Name"
-                            onChange={handleChange}
-                            value={LastNameValues} 
-                            className={classes.formInputs}
-                            {...(formErrors.lastName && {
-                                error: true,
-                                helperText: formErrors.lastName
-                            })}
                         />
-                        <TextField
-                            id="emailAddress"
-                            value={EmailAddressValues}
-                            disabled
-                            name="emailAddress"
+                    </div>
+                    <div className={classes.formInputs}>
+                        <Controls.FormInput 
+                            value={values.email}
+                            name="email"
+                            handleChange={() => {}}
                             label="Email Address"
-                            onChange={handleChange}
-                            className={classes.formInputs}
-                        />   
-                        <TextField
-                            className={classes.formInputs}
-                            id="gender"
-                            name="gender"
-                            select
-                            label="Gender"
-                            value={GenderValues}
-                            onChange={handleChange}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            {...(formErrors.gender && {
-                                error: true,
-                                helperText: formErrors.gender.length > 0 ? formErrors.lastName : "Please Select Your Gender"
-                            })}
-                        >
-                            {["Male","Female","Other"].map((option) => (
-                                <MenuItem key={option} value={option}>
-                                    {option}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                        <TextField
-                            className={classes.formInputs}
-                            id="dob"
-                            name="dob"
-                            label="Date of Birth"
-                            type="date"
-                            value={DateValues}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            onChange={handleChange}
-                            {...(formErrors.dob && {
-                                error: true,
-                                helperText: formErrors.dob
-                            })}
                         />
-                        <TextField
-                            className={classes.formInputs}
-                            id="isEmployer"
-                            value={IsEmployerValues}
-                            onChange={handleChange}
-                            name="isEmployer"
-                            select
-                            {...(formErrors.isEmployer && {
-                                error: true,
-                                helperText: formErrors.isEmployer
-                            })}
-                        >
-                            {[{label: "Employer",value:true},{label: "Candidate",value:false}].map((option) => (
-                                <MenuItem key={option.label} value={option.label}>
-                                    {option.label}
+                    </div>
+                    <div className={classes.formInputs}>
+                        <Grid container direction="column">
+                            <Typography variant="h6" style={{ fontSize: "14px",margin: "10px 0px", letterSpacing: "0.4px" }}>
+                                Gender
+                            </Typography>
+                            <TextField 
+                                value={gender}
+                                variant="outlined"
+                                style={{width: "100%"}}
+                                className={classes.phoneFormInput}
+                                id="gender"
+                                name="gender"
+                                onChange={handleChangeGender}
+                                select
+                            >
+                                <MenuItem key="Male" value="Male">
+                                    Male
                                 </MenuItem>
-                            ))}
-                        </TextField>
-                        {
-                            (
-                                <Button className={classes.formButton} variant="contained" type="submit">
-                                    Update
-                                </Button>
-                            ) 
-                        }
-                        {
-                            isError ? (
-                                <Snackbar open={isError} autoHideDuration={6000} onClose={() => setIsError(false)}>
-                                    <Alert onClose={() => setIsError(false)} severity="error">
-                                        Please Try Again
-                                    </Alert>
-                                </Snackbar>
-                            ) : (
-                                <></>
-                            )
-                        }
-                    </Grid>
+                                <MenuItem key="Female" value="Female">
+                                    Female
+                                </MenuItem>
+                                <MenuItem key="Other" value="Other">
+                                    Other
+                                </MenuItem>
+                            </TextField>
+                        </Grid>
+                    </div>
+                    <div className={classes.formInputs}>
+                        <Controls.DatePicker
+                            values={values}
+                            setValues={setValues}
+                            label="Date of Birth"
+                            name="dob"
+                            onlyFuture={false}
+                        />
+                    </div>
+                    <div className={classes.formInputs}>
+                        <Grid container direction="column">
+                            <Typography variant="h6" style={{ fontSize: "14px",margin: "10px 0px", letterSpacing: "0.4px" }}>
+                                Who are you ?
+                            </Typography>
+                            <TextField 
+                                value={userType}
+                                variant="outlined"
+                                style={{width: "100%"}}
+                                className={classes.phoneFormInput}
+                                id="userType"
+                                name="userType"
+                                onChange={handleChangeUserType}
+                                select
+                            >
+                                <MenuItem key="Candidate" value="Candidate">
+                                    Candidate
+                                </MenuItem>
+                                <MenuItem key="Employer" value="Employer">
+                                    Employer
+                                </MenuItem>
+                            </TextField>
+                        </Grid>
+                    </div>
+                    {
+                        (
+                            <Button className={classes.formButton} variant="contained" type="submit">
+                                Update
+                            </Button>
+                        ) 
+                    }
+                    {
+                        isError ? (
+                            <Snackbar open={isError} autoHideDuration={6000} onClose={() => setIsError(false)}>
+                                <Alert onClose={() => setIsError(false)} severity="error">
+                                    Please Try Again
+                                </Alert>
+                            </Snackbar>
+                        ) : (
+                            <></>
+                        )
+                    }
                 </form>
             </Grid>
         </Grid>

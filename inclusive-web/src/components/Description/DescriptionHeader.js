@@ -21,7 +21,7 @@ function DescriptionHeader({data, type}) {
     const classes = useStyles()
 
     return (
-        <Grid item container xs={11} wrap="nowrap" alignItems="center">
+        <Grid item container wrap="nowrap" alignItems="center" style={{flex: "1 1"}}>
             <Grid item>
                 <ButtonBase disableRipple disableTouchRipple>
                     {data.company &&

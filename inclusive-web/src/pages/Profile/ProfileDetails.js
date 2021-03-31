@@ -7,7 +7,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@material-ui/core";
-import { Facebook, GitHub, Language, LinkedIn, Twitter } from "@material-ui/icons";
+import { GitHub, Language, LinkedIn, Twitter } from "@material-ui/icons";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -66,7 +66,7 @@ export const ProfileDetails = () => {
     dispatch(getUserDetails());
   }, []);
   useEffect(() => {
-    console.log(user);
+    //console.log(user);
     if(user.data.candidate){
         //setIsCandidate(true);
         setCandidate(user.data.candidate)
@@ -76,7 +76,7 @@ export const ProfileDetails = () => {
         setEmployer(user.data.employer)
     }
     
-    console.log(employer)
+    //console.log(employer)
   }, [user]);
 
   const KeyValue = (props) => {
@@ -126,9 +126,10 @@ export const ProfileDetails = () => {
                       >
                         Diversity Tags
                       </Typography>
-                      {candidate.diversity_tags ? candidate.diversity_tags.map((tag) => {
+                      {candidate.diversity_tags ? candidate.diversity_tags.map((tag,idx) => {
                           return(
                             <Box
+                            key={idx}
                             className="container-row"
                             justifyContent="center"
                             style={{

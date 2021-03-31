@@ -116,6 +116,8 @@ function AddChip({data, values, setValues, name, label}) {
                 return data.name + ", " + data.state_name + ", " + data.country_name
             case "degrees":
                 return data.degree_name + ", " + data.degree_type
+            case "preferred_city":
+                return data.name + ", " + data.state_name + ", " + data.country_name
             default:
                 return data.name
         }

@@ -123,7 +123,7 @@ const Register = (props) => {
       <Grid item xs={12} md={6}>
         <img className={classes.logo} src="/images/inclusivo.svg" alt="logo" />
         {
-          userRegisterDetails.loading ? <div style={{ top: "40%", position: "absolute", left: "45%" }}>
+          userRegisterDetails.loading ? <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "150px" }}>
             <Loader loading={userRegisterDetails.loading} />
           </div> : <Grid
             className={classes.container}

@@ -143,7 +143,7 @@ function AddJob() {
 
     /*----------------- Effects to get company id of employer ---------------*/
     React.useLayoutEffect(() => {
-        if(user.pageRequest){
+        if(Object.keys(user.data).length){
             setValues({
                 ...values,
                 company_id: user.data.employer ? user.data.employer.company.id : user.data.candidate.company.id
@@ -154,13 +154,13 @@ function AddJob() {
     }, [])
 
     React.useEffect(() => {
-        if(user.pageRequest){
+        if(Object.keys(user.data).length){
             setValues({
                 ...values,
                 company_id: user.data.employer ? user.data.employer.company.id : user.data.candidate.company.id
             })
         }
-    }, [user.pageRequest])
+    }, [user.data])
 
     /*------------------ handle form submit ------------------*/
     const handleSubmit = (status) => async (e) => {

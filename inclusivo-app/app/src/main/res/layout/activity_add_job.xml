@@ -71,6 +71,15 @@
             android:orientation="vertical"
             android:paddingBottom="32dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="* All fields are compulsory"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -117,7 +126,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="32dp"
                 android:fontFamily="@font/roboto_regular"
-                android:text="Job Role"
+                android:text="Job Role (50 characters max)"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 
@@ -722,7 +731,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
-                android:checked="false"
+                android:checked="true"
                 android:fontFamily="@font/roboto_regular"
                 android:text="Make this public"
                 android:textSize="16sp" />

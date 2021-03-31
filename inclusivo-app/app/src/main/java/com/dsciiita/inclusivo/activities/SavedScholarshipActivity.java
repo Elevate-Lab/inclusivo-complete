@@ -94,7 +94,7 @@ public class SavedScholarshipActivity extends AppCompatActivity implements Schol
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK) {
-            getSavedScholarships();
+            getData();
         }
     }
 
@@ -109,7 +109,8 @@ public class SavedScholarshipActivity extends AppCompatActivity implements Schol
 
     @Override
     public void onClick(int position, View v) {
-        startActivity(new Intent(SavedScholarshipActivity.this, ScholarshipDescriptionActivity.class).putExtra("id", scholarshipList.get(position).getId()));
+        startActivityForResult(new Intent(SavedScholarshipActivity.this, ScholarshipDescriptionActivity.class)
+                .putExtra("id", scholarshipList.get(position).getId()), 1);
     }
 
     @Override

@@ -26,7 +26,9 @@ public class OpenLinks extends AppCompatActivity {
         if(url.charAt(url.length()-1)=='/')
             url = url.substring(0, url.length()-2);
 
-        if(url.contains("list")) {
+        if(url.equals("https://inclusivo.netlify.app"))
+            Toast.makeText(this, "This is the Inclusivo!", Toast.LENGTH_LONG).show();
+        else if(url.contains("list")) {
             if (url.contains("home/job/"))
                 startActivity(new Intent(OpenLinks.this, JobListingActivity.class).putExtra("no_filter", ""));
             else if (url.contains("home/company/"))

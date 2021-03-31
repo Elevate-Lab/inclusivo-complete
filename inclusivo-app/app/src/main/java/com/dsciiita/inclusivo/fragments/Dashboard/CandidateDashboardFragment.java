@@ -232,6 +232,8 @@ public class CandidateDashboardFragment extends Fragment {
                         if (appliedJobs.size() >= 2)
                             appliedJobs = appliedJobs.subList(0, 2);
                         appliedJobsAdapter.updateAdapter(appliedJobs);
+
+                        binding.priorityCategory.setVisibility(View.VISIBLE);
                     }
                     binding.prent.setVisibility(View.VISIBLE);
                     binding.prent.animate().alpha(1).setDuration(300);
@@ -277,6 +279,8 @@ public class CandidateDashboardFragment extends Fragment {
                         if (companyJobs.size() >= 2)
                             reducedJobs = companyJobs.subList(0, 2);
                         companyJobAdapter.updateAdapter(reducedJobs);
+
+                        binding.priorityCategory.setVisibility(View.VISIBLE);
                     }
                     binding.prent.setVisibility(View.VISIBLE);
                     binding.prent.animate().alpha(1).setDuration(300);

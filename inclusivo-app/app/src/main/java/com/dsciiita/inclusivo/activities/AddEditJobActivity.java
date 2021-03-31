@@ -47,7 +47,7 @@ public class AddEditJobActivity extends AppCompatActivity {
     ActivityAddJobBinding addJobBinding;
 
     private String title, shortCode, jobRole, desc, applyUrl, jobType, lastDate, selectionProcess, minSal, maxSal, status="Draft";
-    private int companyId, minExp, maxExp, vacancies;
+    private int companyId, minExp = 0, maxExp = 0, vacancies;
     private boolean isApplyHere = true, displaySalary = false;
 
     private List<City> cities, selectedCities;
@@ -362,7 +362,69 @@ public class AddEditJobActivity extends AppCompatActivity {
 
     private void addJob() {
         addJobBinding.btnAdd.setEnabled(false);
+
+        addJobBinding.tilJobTitle.setError(null);
+        addJobBinding.tilJobDescription.setError(null);
+        addJobBinding.tilJobRole.setError(null);
+        addJobBinding.tilLastDate.setError(null);
+        addJobBinding.tilJobCode.setError(null);
+        addJobBinding.tilSelectionProcess.setError(null);
+
         getValues();
+
+        if(title.isEmpty()){
+            addJobBinding.tilJobTitle.setError("Title required");
+            addJobBinding.btnAdd.setEnabled(true);
+            return;
+        }
+
+        if(jobRole.isEmpty()){
+            addJobBinding.tilJobRole.setError("Job role required");
+            addJobBinding.btnAdd.setEnabled(true);
+            return;
+        }
+
+        if(jobRole.length()>50){
+            addJobBinding.tilJobRole.setError("Maximum 50 characters are allowed.");
+            addJobBinding.btnAdd.setEnabled(true);
+            return;
+        }
+
+        if(desc.isEmpty()){
+            addJobBinding.tilJobDescription.setError("Description required");
+            addJobBinding.btnAdd.setEnabled(true);
+            return;
+        }
+
+        if(selectionProcess.isEmpty()){
+            addJobBinding.tilSelectionProcess.setError("Selection process required");
+            addJobBinding.btnAdd.setEnabled(true);
+            return;
+        }
+
+        if(tags.isEmpty()){
+            Toast.makeText(this, "Add tags", Toast.LENGTH_SHORT).show();
+            addJobBinding.btnAdd.setEnabled(true);
+            return;
+        }
+
+        if(locations.isEmpty()){
+            Toast.makeText(this, "Add locations", Toast.LENGTH_SHORT).show();
+            addJobBinding.btnAdd.setEnabled(true);
+            return;
+        }
+
+        if(shortCode.isEmpty()){
+            addJobBinding.tilJobCode.setError("Short code required");
+            addJobBinding.btnAdd.setEnabled(true);
+            return;
+        }
+
+        if(lastDate.isEmpty()){
+            addJobBinding.tilLastDate.setError("Last date required");
+            addJobBinding.btnAdd.setEnabled(true);
+            return;
+        }
 
         if(!isApplyHere && applyUrl.isEmpty()){
             Toast.makeText(this, "Provide external apply URL", Toast.LENGTH_SHORT).show();

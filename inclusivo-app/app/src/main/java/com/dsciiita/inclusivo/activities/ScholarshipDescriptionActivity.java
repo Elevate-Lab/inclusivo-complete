@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.dsciiita.inclusivo.R;
 import com.dsciiita.inclusivo.adapters.ScholarshipDescriptionViewPagerAdapter;
 import com.dsciiita.inclusivo.api.ApiClient;
@@ -174,6 +176,7 @@ public class ScholarshipDescriptionActivity extends AppCompatActivity {
             Glide.with(getApplicationContext()).load(scholarship.getCompany().getLogoUrl())
                     .timeout(10000)
                     .placeholder(Constants.PLACEHOLDER_IMAGE)
+                    .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
                     .into(binding.companyLogoImg);
         }
 

@@ -37,6 +37,7 @@
 
     <style name="chipFont">
         <item name="fontFamily">@font/varela_round</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="statusChipStyle">

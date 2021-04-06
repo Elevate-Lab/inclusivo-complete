@@ -22,6 +22,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.dsciiita.inclusivo.R;
 import com.dsciiita.inclusivo.adapters.JobDescriptionViewPagerAdapter;
 import com.dsciiita.inclusivo.api.ApiClient;
@@ -342,25 +344,18 @@ public class JobDescriptionActivity extends AppCompatActivity {
         binding.jobTitleTxt.setText(job.getTitle());
         binding.jobTypeTxt.setText(job.getJobType());
         binding.companyNameTxt.setText(job.getCompany().getName());
+
         Glide.with(getApplicationContext()).load(job.getCompany().getLogoUrl())
                 .timeout(10000)
                 .placeholder(Constants.PLACEHOLDER_IMAGE)
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
                 .into(binding.companyLogoImg);
-
-        if(SharedPrefManager.getInstance(this).isEmployer())
-            binding.saveImg.setVisibility(View.GONE);
-        else{
-            if(isLiked)
-                binding.saveImg.setFrame(50);
-            else
-                binding.saveImg.setFrame(0);
-        }
 
         binding.shimmerViewContainer.setVisibility(View.GONE);
         binding.parentLayout.animate().alpha(1).setDuration(300);
 
         if(SharedPrefManager.getInstance(this).isEmployer()){
-            setViewsGone(binding.btnApply, binding.btnEvaluate);
+            setViewsGone(binding.btnApply, binding.btnEvaluate, binding.saveImg);
             status = job.getStatus();
 
             if(SharedPrefManager.getInstance(this).getCompanyID()==job.getCompany().getId())
@@ -368,15 +363,27 @@ public class JobDescriptionActivity extends AppCompatActivity {
 
             if(status.equals("Hired") || status.equals("Expired"))
                 binding.btnEdit.setVisibility(View.GONE);
-        } else{
+        } else {
+            if(isLiked)
+                binding.saveImg.setFrame(50);
+            else
+                binding.saveImg.setFrame(0);
+
             if(job.getStatus().equals("Expired")){
                 setViewsVisible(binding.applicationStatus);
-                setViewsGone(binding.btnApply);
+                setViewsGone(binding.btnApply, binding.saveImg);
                 Chip chip = (Chip) LayoutInflater.from(JobDescriptionActivity.this)
-                        .inflate(R.layout.rejected_application_chip_layout, binding.applicationStatus, false);
+                        .inflate(R.layout.job_status_chip_layout, binding.applicationStatus, false);
                 chip.setId(ViewCompat.generateViewId());
                 chip.setText("This job is expired");
-                chip.setCloseIconVisible(false);
+                binding.applicationStatus.addView(chip);
+            } else if(job.getStatus().equals("Hired")) {
+                setViewsVisible(binding.applicationStatus);
+                setViewsGone(binding.btnApply, binding.saveImg);
+                Chip chip = (Chip) LayoutInflater.from(JobDescriptionActivity.this)
+                        .inflate(R.layout.job_status_chip_layout, binding.applicationStatus, false);
+                chip.setId(ViewCompat.generateViewId());
+                chip.setText("Hiring is closed for this job");
                 binding.applicationStatus.addView(chip);
             }
             else if(isApplied){

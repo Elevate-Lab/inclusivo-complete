@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.dsciiita.inclusivo.R;
 import com.dsciiita.inclusivo.models.Company;
 import com.dsciiita.inclusivo.models.Job;
@@ -48,6 +50,7 @@ public class DashboardCompanyInfoRVAdapter extends RecyclerView.Adapter<Dashboar
         if(companyList.get(position).getLogoUrl()!=null)
             Glide.with(context).load(companyList.get(position).getLogoUrl())
                 .placeholder(R.drawable.ic_companies)
+                    .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
                 .into(holder.image);
         else
             holder.image.setBackgroundResource(R.drawable.ic_companies);

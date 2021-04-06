@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.dsciiita.inclusivo.R;
 import com.dsciiita.inclusivo.api.ApiClient;
@@ -76,6 +78,7 @@ public class ScholarshipRVAdapter extends RecyclerView.Adapter<ScholarshipRVAdap
             if(objectList.get(position).getCompany().getLogoUrl()!=null)
                 Glide.with(context).load(objectList.get(position).getCompany().getLogoUrl())
                     .placeholder(R.drawable.ic_companies)
+                        .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
                     .into(holder.profile);
             else
                 holder.profile.setBackgroundResource(R.drawable.ic_companies);

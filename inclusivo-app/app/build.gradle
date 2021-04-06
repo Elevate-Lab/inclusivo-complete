@@ -17,8 +17,8 @@ android {
         applicationId "com.dsciiita.inclusivo"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 7
-        versionName "2.4"
+        versionCode 8
+        versionName "3.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

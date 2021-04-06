@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.dsciiita.inclusivo.R;
 import com.dsciiita.inclusivo.activities.JobDescriptionActivity;
 import com.dsciiita.inclusivo.api.ApiClient;
@@ -100,6 +102,7 @@ public class JobRVAdapter extends RecyclerView.Adapter<JobRVAdapter.ViewHolder>{
         if(jobList.get(position).getCompany().getLogoUrl()!=null)
             Glide.with(context).load(jobList.get(position).getCompany().getLogoUrl())
                 .placeholder(R.drawable.ic_companies)
+                    .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
                 .into(holder.companyImg);
         else
             holder.companyImg.setBackgroundResource(R.drawable.ic_companies);
@@ -142,6 +145,8 @@ public class JobRVAdapter extends RecyclerView.Adapter<JobRVAdapter.ViewHolder>{
         holder.timeDiff.setText(diff);
 
         if(SharedPrefManager.getInstance(context).isEmployer())
+            holder.saveAnim.setVisibility(View.GONE);
+        else if(jobList.get(position).getStatus().equals("Hired") || jobList.get(position).getStatus().equals("Expired"))
             holder.saveAnim.setVisibility(View.GONE);
         else {
             if (jobList.get(position).isLiked()) {

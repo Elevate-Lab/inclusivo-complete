@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.dsciiita.inclusivo.R;
 import com.dsciiita.inclusivo.adapters.CompanyProfileViewPagerAdapter;
 import com.dsciiita.inclusivo.animations.ViewAnimations;
@@ -270,8 +272,10 @@ public class CompanyProfileActivity extends AppCompatActivity {
     private void setValues() {
         binding.companyTitleTxt.setText(company.getName());
         binding.companyProfileTxt.setText(company.getProfile());
+
         Glide.with(getApplicationContext()).load(company.getLogoUrl())
                 .placeholder(Constants.PLACEHOLDER_IMAGE)
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
                 .into(binding.companyLogoImg);
 
         binding.shimmerViewContainer.setVisibility(View.GONE);

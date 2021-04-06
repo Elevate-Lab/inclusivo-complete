@@ -1,10 +1,13 @@
 package com.dsciiita.inclusivo.activities;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -28,6 +31,8 @@ import com.dsciiita.inclusivo.storage.SharedPrefManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
+
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -65,6 +70,15 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         toggle.syncState();
 
         mainBinding.mainNavView.setNavigationItemSelectedListener(this);
+
+        try {
+            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            String version = "Version "+pInfo.versionName;
+            mainBinding.versionCode.setText(version);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            mainBinding.versionCode.setVisibility(View.GONE);
+        }
     }
 
 

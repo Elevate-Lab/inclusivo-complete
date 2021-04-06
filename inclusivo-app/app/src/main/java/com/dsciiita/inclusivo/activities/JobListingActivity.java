@@ -87,6 +87,8 @@ public class JobListingActivity extends AppCompatActivity implements JobRVAdapte
             }
             return false;
         });
+
+
         binding.category.setOnItemSelectedListener(myListener);
         binding.cancelSearch.setOnClickListener(view-> {
             binding.searchBar.setVisibility(View.GONE);

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.chip.Chip
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:text="Unavailable"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:chipCornerRadius="15dp"
+    android:textAppearance="@style/statusChipStyle"
+    app:chipBackgroundColor="#FFC9C3"
+    android:textAlignment="center"
+    android:clickable="false"
+    android:textColor="#BB4E3F"
+    android:ellipsize="end">
+</com.google.android.material.chip.Chip>

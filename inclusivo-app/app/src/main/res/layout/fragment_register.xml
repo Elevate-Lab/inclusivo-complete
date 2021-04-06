@@ -12,7 +12,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_regular"
+        android:fontFamily="@font/varela_round"
         android:layout_marginTop="32dp"
         android:text="Register"
         android:textAllCaps="true"

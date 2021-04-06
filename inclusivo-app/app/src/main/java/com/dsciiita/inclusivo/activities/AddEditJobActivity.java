@@ -446,8 +446,6 @@ public class AddEditJobActivity extends AppCompatActivity {
                 addJobBinding.progressBar.setVisibility(View.GONE);
                 if (response.isSuccessful()) {
                     Toast.makeText(AddEditJobActivity.this, "Job created successfully", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(AddEditJobActivity.this, CompanyProfileActivity.class)
-                            .putExtra("companyID", SharedPrefManager.getInstance(AddEditJobActivity.this).getCompanyID()));
                     finish();
                 } else
                     Snackbar.make(addJobBinding.parent, "Something went wrong", Snackbar.LENGTH_SHORT).show();
@@ -537,6 +535,7 @@ public class AddEditJobActivity extends AppCompatActivity {
         if (view.getId() == R.id.last_date_tie) {
             showDatePicker();
         } else if (view.getId()==R.id.btnAdd) {
+            setResult(RESULT_OK, new Intent());
             addJob();
         } else if (view.getId()==R.id.btnSaveJob) {
             updateJobStatus();
@@ -610,12 +609,5 @@ public class AddEditJobActivity extends AppCompatActivity {
 
         }
     };
-
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(AddEditJobActivity.this, CompanyProfileActivity.class)
-                .putExtra("companyID", SharedPrefManager.getInstance(AddEditJobActivity.this).getCompanyID()));
-        finish();
-    }
 
 }

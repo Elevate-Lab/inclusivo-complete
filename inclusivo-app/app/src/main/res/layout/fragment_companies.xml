@@ -87,10 +87,10 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="24dp"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/varela_round"
             android:text="Browse companies"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="18sp"
             />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -98,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:orientation="vertical"
             android:nestedScrollingEnabled="false"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
@@ -118,7 +118,7 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     app:strokeColor="@color/primary_color"
                     app:strokeWidth="2dp"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
                     android:text="View all"
                     android:textAllCaps="false"
                     android:textSize="16sp"

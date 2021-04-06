@@ -5,7 +5,7 @@
     android:autoSizeMaxTextSize="14sp"
     android:autoSizeMinTextSize="12sp"
     android:autoSizeTextType="uniform"
-    android:fontFamily="@font/roboto_regular"
+    android:fontFamily="@font/varela_round"
     android:maxLines="1"
     android:padding="12dp"
     android:text="Type 1"

@@ -18,7 +18,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_back">
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Story Info"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
     </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.card.MaterialCardView
@@ -46,7 +53,7 @@
         android:id="@+id/parent_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -80,14 +87,14 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginHorizontal="16dp"
             android:ellipsize="end"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/varela_round"
             android:maxLines="2"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
-            app:layout_constraintEnd_toStartOf="@+id/share_story"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/materialCardView"
-            app:layout_constraintTop_toTopOf="@+id/materialCardView" />
+            app:layout_constraintTop_toBottomOf="@id/share_story" />
 
         <ImageView
             android:id="@+id/share_story"
@@ -140,7 +147,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:fontFamily="@font/roboto_regular"
+                    android:fontFamily="@font/varela_round"
+                    android:lineSpacingExtra="1dp"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 

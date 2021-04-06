@@ -166,17 +166,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="14dp"
-                            android:fontFamily="@font/roboto_medium"
+                            android:fontFamily="@font/varela_round"
                             android:text="Recent Stories"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="18sp" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recent_stories_rv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="8dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="12dp"
                             android:nestedScrollingEnabled="false"
                             android:orientation="vertical"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -193,7 +193,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginBottom="12dp"
-                        android:fontFamily="@font/roboto_medium"
+                        android:fontFamily="@font/varela_round"
                         android:lineSpacingExtra="5dp"
                         android:paddingVertical="5dp"
                         android:text="View all"

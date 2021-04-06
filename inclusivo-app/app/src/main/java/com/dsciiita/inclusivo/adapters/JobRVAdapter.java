@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.dsciiita.inclusivo.R;
 import com.dsciiita.inclusivo.activities.JobDescriptionActivity;
@@ -96,9 +97,12 @@ public class JobRVAdapter extends RecyclerView.Adapter<JobRVAdapter.ViewHolder>{
         holder.jobRole.setText(jobList.get(position).getJobRole());
         holder.jobType.setText(jobList.get(position).getJobType());
 
-        Glide.with(context).load(jobList.get(position).getCompany().getLogoUrl())
+        if(jobList.get(position).getCompany().getLogoUrl()!=null)
+            Glide.with(context).load(jobList.get(position).getCompany().getLogoUrl())
                 .placeholder(R.drawable.ic_companies)
                 .into(holder.companyImg);
+        else
+            holder.companyImg.setBackgroundResource(R.drawable.ic_companies);
 
         String location = "";
         for(Job job: jobList)
@@ -138,26 +142,26 @@ public class JobRVAdapter extends RecyclerView.Adapter<JobRVAdapter.ViewHolder>{
         holder.timeDiff.setText(diff);
 
         if(SharedPrefManager.getInstance(context).isEmployer())
-            holder.saveImg.setVisibility(View.GONE);
+            holder.saveAnim.setVisibility(View.GONE);
         else {
             if (jobList.get(position).isLiked()) {
-                holder.saveImg.setBackgroundResource(R.drawable.ic_save_red_filled);
-                holder.saveImg.setTag(R.drawable.ic_save_red_filled);
+                holder.saveAnim.setFrame(50);
+                holder.saveAnim.setTag(R.drawable.ic_save_red_filled);
             } else {
-                holder.saveImg.setBackgroundResource(R.drawable.ic_save_red);
-                holder.saveImg.setTag(R.drawable.ic_save_red);
+                holder.saveAnim.setFrame(0);
+                holder.saveAnim.setTag(R.drawable.ic_save_red);
             }
         }
 
-        holder.saveImg.setOnClickListener(view->{
-            if(holder.saveImg.getTag().equals(R.drawable.ic_save_red_filled)) {
+        holder.saveAnim.setOnClickListener(view->{
+            if(holder.saveAnim.getTag().equals(R.drawable.ic_save_red_filled)) {
                 unlikeJob(jobList.get(position).getJobId(), holder, position);
             }
             else {
                 likeJob(jobList.get(position).getJobId(), holder);
             }
+            holder.saveAnim.setEnabled(false);
             holder.saveProgress.setVisibility(View.VISIBLE);
-            holder.saveImg.setEnabled(false);
         });
     }
 
@@ -207,7 +211,8 @@ public class JobRVAdapter extends RecyclerView.Adapter<JobRVAdapter.ViewHolder>{
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         TextView jobTitle, jobRole, jobType, jobLocations, jobVacancy, remainChip, timeDiff;
-        ImageView companyImg, saveImg;
+        ImageView companyImg;
+        LottieAnimationView saveAnim;
         ProgressBar saveProgress;
         ChipGroup chipGroup;
         onJobListener noteListener;
@@ -224,7 +229,7 @@ public class JobRVAdapter extends RecyclerView.Adapter<JobRVAdapter.ViewHolder>{
              this.chipGroup = itemView.findViewById(R.id.job_tags_chip_grp);
              this.remainChip = itemView.findViewById(R.id.chip_remain);
              this.timeDiff = itemView.findViewById(R.id.published_time_txt);
-             this.saveImg = itemView.findViewById(R.id.save_img);
+             this.saveAnim = itemView.findViewById(R.id.save_anim);
              this.noteListener = onJobListener;
              itemView.setOnClickListener(this);
              itemView.setOnLongClickListener(this);
@@ -255,6 +260,8 @@ public class JobRVAdapter extends RecyclerView.Adapter<JobRVAdapter.ViewHolder>{
         void onJobLongClick(int position);
     }
 
+
+
     private void likeJob(int jobId, ViewHolder holder) {
         String token = "token "+ SharedPrefManager.getInstance(context).getToken();
         Call<DefaultResponse> userRequestCall = ApiClient.getUserService().likeJob(jobId, token);
@@ -262,18 +269,19 @@ public class JobRVAdapter extends RecyclerView.Adapter<JobRVAdapter.ViewHolder>{
             @Override
             public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
                 if(response.isSuccessful()) {
-                    holder.saveImg.setBackgroundResource(R.drawable.ic_save_red_filled);
-                    holder.saveImg.setTag(R.drawable.ic_save_red_filled);
+                    holder.saveAnim.setSpeed(1);
+                    holder.saveAnim.playAnimation();
+                    holder.saveAnim.setTag(R.drawable.ic_save_red_filled);
                     Snackbar.make(recyclerView, "Added to saved jobs", Snackbar.LENGTH_SHORT).show();
                 }
-                holder.saveImg.setEnabled(true);
                 holder.saveProgress.setVisibility(View.GONE);
+                holder.saveAnim.setEnabled(true);
             }
             @Override
             public void onFailure(Call<DefaultResponse> call, Throwable t) {
                 holder.saveProgress.setVisibility(View.GONE);
+                holder.saveAnim.setEnabled(true);
                 Toast.makeText(context, "Request failed", Toast.LENGTH_SHORT).show();
-                holder.saveImg.setEnabled(true);
             }
         });
     }
@@ -288,17 +296,19 @@ public class JobRVAdapter extends RecyclerView.Adapter<JobRVAdapter.ViewHolder>{
                 if(recyclerView.getId()==R.id.saved_jobs_rv_removable){
                     removeAt(position);
                 }
-                holder.saveImg.setEnabled(true);
-                holder.saveImg.setBackgroundResource(R.drawable.ic_save_red);
-                holder.saveImg.setTag(R.drawable.ic_save_red);
+                holder.saveAnim.setSpeed(-2);
+                holder.saveAnim.setFrame(25);
+                holder.saveAnim.playAnimation();
+                holder.saveAnim.setTag(R.drawable.ic_save_red);
                 holder.saveProgress.setVisibility(View.GONE);
                 Snackbar.make(recyclerView, "Removed from saved jobs", Snackbar.LENGTH_SHORT).show();
+                holder.saveAnim.setEnabled(true);
             }
             @Override
             public void onFailure(Call<DefaultResponse> call, Throwable t) {
                 holder.saveProgress.setVisibility(View.GONE);
+                holder.saveAnim.setEnabled(true);
                 Toast.makeText(context, "Request failed", Toast.LENGTH_SHORT).show();
-                holder.saveImg.setEnabled(true);
             }
         });
     }

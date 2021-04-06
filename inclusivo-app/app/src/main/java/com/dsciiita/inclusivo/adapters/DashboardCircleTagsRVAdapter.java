@@ -43,10 +43,16 @@ public class DashboardCircleTagsRVAdapter extends RecyclerView.Adapter<Dashboard
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.title.setText(companyList.get(position).getTitle());
-        Glide.with(context).load(companyList.get(position).getLink())
+
+        if(companyList.get(position).getLink()!=null)
+            Glide.with(context).load(companyList.get(position).getLink())
                 .placeholder(R.drawable.placeholder_circle)
                 .circleCrop()
                 .into(holder.image);
+        else
+            Glide.with(context).load(R.drawable.placeholder_circle)
+                    .circleCrop()
+                    .into(holder.image);
     }
 
     @Override

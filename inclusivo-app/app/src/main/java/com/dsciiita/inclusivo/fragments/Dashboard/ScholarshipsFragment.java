@@ -2,6 +2,7 @@ package com.dsciiita.inclusivo.fragments.Dashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,7 +67,6 @@ public class ScholarshipsFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentScholarshipsBinding.inflate(inflater);
         setupAdapters();
-        getData();
         return binding.getRoot();
     }
 
@@ -128,7 +128,9 @@ public class ScholarshipsFragment extends Fragment {
     }
 
     private void getLikedScholarships() {
+        savedList = new ArrayList<>();
         savedList.clear();
+        binding.progress.setVisibility(View.VISIBLE);
 
         Call<LikedScholarshipResponse> userRequestCall = ApiClient.getUserService().getLikedScholarships(token);
         userRequestCall.enqueue(new Callback<LikedScholarshipResponse>() {
@@ -142,7 +144,7 @@ public class ScholarshipsFragment extends Fragment {
                     if(savedList.isEmpty())
                         binding.savedScholarshipsLayout.setVisibility(View.GONE);
                     else {
-                        binding.savedScholarshipsLayout.setVisibility(View.VISIBLE);
+                        binding.progress.setVisibility(View.GONE);
                         Collections.sort(savedList, (obj1, obj2) -> obj2.getPostedOn().compareToIgnoreCase(obj1.getPostedOn()));
                         savedScholarshipAdapter.updateAdapter(savedList);
                     }

@@ -4,6 +4,7 @@
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:textColor="@color/black"
     android:textSize="14sp"
+    android:fontFamily="@font/varela_round"
     android:gravity="center_vertical"
     android:drawableStart="?android:attr/listChoiceIndicatorMultiple"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"

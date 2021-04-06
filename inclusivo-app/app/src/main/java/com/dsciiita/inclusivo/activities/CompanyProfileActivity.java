@@ -1,5 +1,6 @@
 package com.dsciiita.inclusivo.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,7 @@ import com.dsciiita.inclusivo.databinding.ActivityCompanyProfileBinding;
 import com.dsciiita.inclusivo.models.Company;
 import com.dsciiita.inclusivo.models.Initiative;
 import com.dsciiita.inclusivo.models.Job;
+import com.dsciiita.inclusivo.models.JobFilterSearch;
 import com.dsciiita.inclusivo.models.Scholarship;
 import com.dsciiita.inclusivo.models.Story;
 import com.dsciiita.inclusivo.responses.CompanyInitiativesResponse;
@@ -37,6 +39,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,7 +52,7 @@ public class CompanyProfileActivity extends AppCompatActivity {
     private Company company;
     private int companyId;
     private boolean isFollowing, isRotate = false;
-
+    private Intent resultIntent;
     private ArrayList<Job> jobsList;
     private ArrayList<Initiative> initiativeList;
     private ArrayList<Story> storyList;
@@ -68,6 +71,7 @@ public class CompanyProfileActivity extends AppCompatActivity {
 
         binding.toolbar.setNavigationOnClickListener(view -> finish());
 
+        resultIntent = new Intent();
 
         Intent intent = getIntent();
         if(intent.hasExtra("companyID"))
@@ -96,41 +100,43 @@ public class CompanyProfileActivity extends AppCompatActivity {
 
         binding.fabAddJob.setOnClickListener(v -> {
             binding.addFab.callOnClick();
-            startActivity(new Intent(getApplicationContext(), AddEditJobActivity.class));
-            finish();
+            startActivityForResult(new Intent(getApplicationContext(), AddEditJobActivity.class), 1);
         });
 
         binding.fabAddStory.setOnClickListener(v -> {
             binding.addFab.callOnClick();
-            startActivity(new Intent(getApplicationContext(), AddStoryActivity.class));
-            finish();
+            startActivityForResult(new Intent(getApplicationContext(), AddStoryActivity.class), 1);
         });
 
         binding.fabAddScholarship.setOnClickListener(v -> {
             binding.addFab.callOnClick();
-            startActivity(new Intent(getApplicationContext(), AddScholarshipActivity.class));
-            finish();
+            startActivityForResult(new Intent(getApplicationContext(), AddScholarshipActivity.class), 1);
         });
 
         binding.fabAddInitiative.setOnClickListener(v -> {
             binding.addFab.callOnClick();
-            startActivity(new Intent(getApplicationContext(), AddInitiativeActivity.class));
-            finish();
+            startActivityForResult(new Intent(getApplicationContext(), AddInitiativeActivity.class), 1);
         });
 
         binding.shareStory.setOnClickListener(view->shareCompany(companyId));
 
-        //getData();
+        getData();
 
     }
+
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        getData();
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case 1 :
+                if (resultCode == Activity.RESULT_OK) {
+                    getData();
+                }
+        }
     }
 
-    private void getData() {
+    public void getData() {
         binding.shimmerViewContainer.setVisibility(View.VISIBLE);
         binding.parentLayout.setAlpha(0);
         getJobs();
@@ -327,6 +333,7 @@ public class CompanyProfileActivity extends AppCompatActivity {
                 unsubscribeCompany(snackbar2);
                 break;
         }
+        setResult(RESULT_OK, resultIntent);
     }
 
 

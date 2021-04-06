@@ -76,6 +76,7 @@ public class PDFViewerActivity extends AppCompatActivity implements OnLoadComple
             Toast.makeText(this, "Invalid", Toast.LENGTH_SHORT).show();
         }
 
+        binding.errorAnim.setOnClickListener(view -> binding.errorAnim.playAnimation());
 
     }
 
@@ -89,6 +90,7 @@ public class PDFViewerActivity extends AppCompatActivity implements OnLoadComple
     @Override
     public void loadComplete(int nbPages) {
         binding.progressBar.setVisibility(View.GONE);
+        binding.downloadResume.setVisibility(View.VISIBLE);
     }
 
 
@@ -104,6 +106,9 @@ public class PDFViewerActivity extends AppCompatActivity implements OnLoadComple
                 }
 
             } catch (IOException e) {
+                binding.errorView.setVisibility(View.VISIBLE);
+                binding.errorAnim.playAnimation();
+                binding.progressBar.setVisibility(View.GONE);
                 e.printStackTrace();
                 return null;
             }
@@ -112,7 +117,6 @@ public class PDFViewerActivity extends AppCompatActivity implements OnLoadComple
 
         @Override
         protected void onPostExecute(InputStream inputStream) {
-            binding.downloadResume.setVisibility(View.VISIBLE);
             binding.pdfView.fromStream(inputStream).enableSwipe(true)
                     .swipeHorizontal(false)
                     .spacing(5)
@@ -137,7 +141,6 @@ public class PDFViewerActivity extends AppCompatActivity implements OnLoadComple
         progressDialog.setMessage("Downloading...");
         progressDialog.show();
 
-
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(link));
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE | DownloadManager.Request.NETWORK_WIFI);
         request.setTitle("Inclusivo");
@@ -148,7 +151,6 @@ public class PDFViewerActivity extends AppCompatActivity implements OnLoadComple
 
         DownloadManager manager = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
         manager.enqueue(request);
-
 
     }
 

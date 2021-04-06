@@ -1,5 +1,6 @@
 package com.dsciiita.inclusivo.fragments.CompanyProfileFragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.dsciiita.inclusivo.activities.CompanyProfileActivity;
 import com.dsciiita.inclusivo.activities.InitiativeInfoActivity;
 import com.dsciiita.inclusivo.adapters.CompanyInitiativeRVAdapter;
 import com.dsciiita.inclusivo.api.ApiClient;
@@ -76,8 +78,20 @@ public class CompanyInitiativesFragment extends Fragment implements CompanyIniti
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case 1 :
+                if (resultCode == Activity.RESULT_OK) {
+                    ((CompanyProfileActivity) getActivity()).getData();
+                }
+        }
+    }
+
+    @Override
     public void onInitiativeClick(int position, View v) {
-        startActivity(new Intent(getActivity(), InitiativeInfoActivity.class).putExtra("id", initiativeList.get(position).getId()));
+        startActivityForResult(new Intent(getActivity(), InitiativeInfoActivity.class)
+                .putExtra("id", initiativeList.get(position).getId()), 1);
     }
 
     @Override

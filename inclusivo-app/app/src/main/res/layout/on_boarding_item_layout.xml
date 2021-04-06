@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"
-        android:fontFamily="@font/roboto_regular"
+        android:fontFamily="@font/varela_round"
         android:gravity="center_horizontal"
         android:text="Get number of opportunities and find your dream job.."
         android:textColor="@color/black"

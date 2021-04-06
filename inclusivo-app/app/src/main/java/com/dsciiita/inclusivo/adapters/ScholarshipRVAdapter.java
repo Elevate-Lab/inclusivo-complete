@@ -15,6 +15,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
 import com.dsciiita.inclusivo.R;
@@ -54,11 +55,8 @@ public class ScholarshipRVAdapter extends RecyclerView.Adapter<ScholarshipRVAdap
         inflater = LayoutInflater.from(context);
         this.clickListener = clickListener;
         this.res = res;
-        setTagList();
     }
 
-    private void setTagList() {
-    }
 
     @NonNull
     @Override
@@ -70,12 +68,17 @@ public class ScholarshipRVAdapter extends RecyclerView.Adapter<ScholarshipRVAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.title.setText(objectList.get(position).getTitle());
+
         if(objectList.get(position).getCompany()!=null) {
             holder.company.setText(objectList.get(position).getCompany().getName());
             holder.separator.setVisibility(View.VISIBLE);
-            Glide.with(context).load(objectList.get(position).getCompany().getLogoUrl())
+
+            if(objectList.get(position).getCompany().getLogoUrl()!=null)
+                Glide.with(context).load(objectList.get(position).getCompany().getLogoUrl())
                     .placeholder(R.drawable.ic_companies)
                     .into(holder.profile);
+            else
+                holder.profile.setBackgroundResource(R.drawable.ic_companies);
         }
 
         List<Diversity> tags = objectList.get(position).getTags();
@@ -105,26 +108,29 @@ public class ScholarshipRVAdapter extends RecyclerView.Adapter<ScholarshipRVAdap
         }
         holder.expiry.setText(diff);
 
+
         if(SharedPrefManager.getInstance(context).isEmployer())
-            holder.saveImg.setVisibility(View.GONE);
+            holder.saveAnim.setVisibility(View.GONE);
         else {
-            if (objectList.get(position).getIsLiked()) {
-                holder.saveImg.setBackgroundResource(R.drawable.ic_save_red_filled);
-                holder.saveImg.setTag(R.drawable.ic_save_red_filled);
+            if (objectList.get(position).isLiked()) {
+                holder.saveAnim.setSpeed(-2);
+                holder.saveAnim.setFrame(25);
+                holder.saveAnim.setTag(R.drawable.ic_save_red_filled);
             } else {
-                holder.saveImg.setBackgroundResource(R.drawable.ic_save_red);
-                holder.saveImg.setTag(R.drawable.ic_save_red);
+                holder.saveAnim.setFrame(0);
+                holder.saveAnim.setSpeed(1);
+                holder.saveAnim.setTag(R.drawable.ic_save_red);
             }
         }
 
-        holder.saveImg.setOnClickListener(view->{
-            if(holder.saveImg.getTag().equals(R.drawable.ic_save_red_filled)) {
+        holder.saveAnim.setOnClickListener(view->{
+            if(holder.saveAnim.getTag().equals(R.drawable.ic_save_red_filled)) {
                 unlikeScholarship(objectList.get(position).getId(), holder, position);
             }
             else {
                 likeScholarship(objectList.get(position).getId(), holder);
             }
-            holder.saveImg.setEnabled(false);
+            holder.saveAnim.setEnabled(false);
             holder.progressBar.setVisibility(View.VISIBLE);
         });
     }
@@ -148,8 +154,9 @@ public class ScholarshipRVAdapter extends RecyclerView.Adapter<ScholarshipRVAdap
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        TextView title, desc, expiry, size, remainChip, company;
-        ImageView profile, saveImg;
+        TextView title, desc, expiry, remainChip, company;
+        ImageView profile;
+        LottieAnimationView saveAnim;
         ChipGroup chipGroup;
         ProgressBar progressBar;
         CardView separator;
@@ -159,17 +166,17 @@ public class ScholarshipRVAdapter extends RecyclerView.Adapter<ScholarshipRVAdap
             super(itemView);
             this.title = itemView.findViewById(R.id.job_title);
             this.desc = itemView.findViewById(R.id.aa);
-            this.saveImg = itemView.findViewById(R.id.save_img);
+            this.saveAnim = itemView.findViewById(R.id.save_anim);
             this.progressBar = itemView.findViewById(R.id.saveProgress);
             this.profile = itemView.findViewById(R.id.job_company_img);
-             this.expiry = itemView.findViewById(R.id.published_time_txt);
-             this.remainChip = itemView.findViewById(R.id.chip_remain);
+            this.expiry = itemView.findViewById(R.id.published_time_txt);
+            this.remainChip = itemView.findViewById(R.id.chip_remain);
             this.chipGroup = itemView.findViewById(R.id.job_tags_chip_grp);
             this.company = itemView.findViewById(R.id.company_name);
             this.separator = itemView.findViewById(R.id.company_separator);
             this.clickListener = clickListener;
-             itemView.setOnClickListener(this);
-             itemView.setOnLongClickListener(this);
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
          }
 
         @Override
@@ -242,17 +249,18 @@ public class ScholarshipRVAdapter extends RecyclerView.Adapter<ScholarshipRVAdap
             @Override
             public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
                 if(response.isSuccessful()) {
-                    holder.saveImg.setBackgroundResource(R.drawable.ic_save_red_filled);
-                    holder.saveImg.setTag(R.drawable.ic_save_red_filled);
+                    holder.saveAnim.setSpeed(1);
+                    holder.saveAnim.playAnimation();
+                    holder.saveAnim.setTag(R.drawable.ic_save_red_filled);
                     Snackbar.make(recyclerView, "Added to saved scholarships", Snackbar.LENGTH_SHORT).show();
                 }
                 holder.progressBar.setVisibility(View.GONE);
-                holder.saveImg.setEnabled(true);
+                holder.saveAnim.setEnabled(true);
             }
             @Override
             public void onFailure(Call<DefaultResponse> call, Throwable t) {
                 Toast.makeText(context, "Request failed", Toast.LENGTH_SHORT).show();
-                holder.saveImg.setEnabled(true);
+                holder.saveAnim.setEnabled(true);
                 holder.progressBar.setVisibility(View.GONE);
             }
         });
@@ -274,15 +282,17 @@ public class ScholarshipRVAdapter extends RecyclerView.Adapter<ScholarshipRVAdap
                     removeAt(position);
                 }
                 holder.progressBar.setVisibility(View.GONE);
-                holder.saveImg.setBackgroundResource(R.drawable.ic_save_red);
-                holder.saveImg.setTag(R.drawable.ic_save_red);
+                holder.saveAnim.setSpeed(-2);
+                holder.saveAnim.setFrame(25);
+                holder.saveAnim.playAnimation();
+                holder.saveAnim.setTag(R.drawable.ic_save_red);
                 Snackbar.make(recyclerView, "Removed from saved scholarships", Snackbar.LENGTH_SHORT).show();
-                holder.saveImg.setEnabled(true);
+                holder.saveAnim.setEnabled(true);
             }
             @Override
             public void onFailure(Call<DefaultResponse> call, Throwable t) {
                 Toast.makeText(context, "Request failed", Toast.LENGTH_SHORT).show();
-                holder.saveImg.setEnabled(true);
+                holder.saveAnim.setEnabled(true);
                 holder.progressBar.setVisibility(View.GONE);
             }
         });

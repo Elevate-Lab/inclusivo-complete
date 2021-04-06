@@ -67,7 +67,7 @@ public class AddStoryActivity extends AppCompatActivity {
 
 
     private void addStory() {
-
+        setResult(RESULT_OK, new Intent());
         binding.btnAdd.setEnabled(false);
         String token = "token "+ SharedPrefManager.getInstance(this).getToken();
 
@@ -95,8 +95,6 @@ public class AddStoryActivity extends AppCompatActivity {
             public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(AddStoryActivity.this, "Story created successfully", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(AddStoryActivity.this, CompanyProfileActivity.class)
-                            .putExtra("companyID", SharedPrefManager.getInstance(AddStoryActivity.this).getCompanyID()));
                     finish();
                 } else {
                     Snackbar.make(binding.prent, "Something went wrong", Snackbar.LENGTH_SHORT).show();
@@ -183,13 +181,6 @@ public class AddStoryActivity extends AppCompatActivity {
             isImageSelected = false;
             bottomSheetDialog.cancel();
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(AddStoryActivity.this, CompanyProfileActivity.class)
-                .putExtra("companyID", SharedPrefManager.getInstance(AddStoryActivity.this).getCompanyID()));
-        finish();
     }
 
 }

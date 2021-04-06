@@ -53,18 +53,24 @@ public class DashboardCompanyRVAdapter extends RecyclerView.Adapter<DashboardCom
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        holder.title.setText(objectList.get(position).getTitle());
-        holder.size.setText(objectList.get(position).getSize()+" employees");
+        holder.title.setText(objectList.get(position).getName());
+        holder.size.setText(objectList.get(position).getSize());
         int jobs = objectList.get(position).getJobCount();
         if(jobs==1)
-            holder.jobCount.setText("1 job");
+            holder.jobCount.setText("1 live job");
         else
-            holder.jobCount.setText(jobs+" jobs");
+            holder.jobCount.setText(jobs+" live jobs");
 
 
-        Glide.with(context).load(objectList.get(position).getLogoUrl())
+        if(objectList.get(position).getLogoUrl()!=null)
+            Glide.with(context).load(objectList.get(position).getLogoUrl())
                 .placeholder(R.drawable.ic_companies)
+                .circleCrop()
                 .into(holder.profile);
+        else
+            Glide.with(context).load(R.drawable.ic_companies)
+                    .circleCrop()
+                    .into(holder.profile);
     }
 
     @Override

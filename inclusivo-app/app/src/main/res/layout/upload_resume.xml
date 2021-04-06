@@ -10,17 +10,17 @@
     <ImageView
         android:id="@+id/pdf_icon"
         android:layout_width="0dp"
-        android:layout_height="70dp"
+        android:layout_height="40dp"
         android:layout_weight="1"
-        android:src="@drawable/pdf_icon"
-        android:layout_marginEnd="10dp"/>
+        android:src="@drawable/ic_pdf"
+        android:layout_marginEnd="7dp"/>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_vertical"
-        android:layout_marginHorizontal="5dp"
+        android:layout_marginEnd="5dp"
         android:layout_weight="4">
         <TextView
             android:id="@+id/file_name"
@@ -29,8 +29,8 @@
             android:text="Upload resume *"
             android:ellipsize="end"
             android:maxLines="1"
-            android:layout_marginVertical="10dp"
-            android:fontFamily="@font/roboto_regular"
+            android:layout_marginVertical="5dp"
+            android:fontFamily="@font/varela_round"
             android:textColor="@color/black"
             android:textSize="16sp"/>
 
@@ -44,23 +44,22 @@
 
     </LinearLayout>
 
-    <ImageButton
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/upload_button"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="35dp"
         android:layout_weight="1"
         android:visibility="gone"
-        android:background="@android:color/transparent"
-        app:tint="@color/primary_color"
-        android:src="@drawable/ic_round_cloud_upload_24"/>
+        app:lottie_autoPlay="false"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/upload"/>
 
     <ImageButton
         android:id="@+id/cancel_button"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="35dp"
         android:layout_weight="1"
         android:background="@android:color/transparent"
-        app:tint="@color/primary_color"
-        android:src="@drawable/ic_round_add_24"/>
+        android:src="@drawable/ic_plus"/>
 
 </LinearLayout>

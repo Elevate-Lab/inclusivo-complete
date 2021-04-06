@@ -1,6 +1,7 @@
 package com.dsciiita.inclusivo.activities;
 
 import android.animation.Animator;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -58,6 +59,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@SuppressLint("ClickableViewAccessibility")
 public class JobDescriptionActivity extends AppCompatActivity {
     private ActivityJobDescriptionBinding binding;
 
@@ -66,9 +68,10 @@ public class JobDescriptionActivity extends AppCompatActivity {
     private String applicationStatus;
     private Job job;
     private boolean isApplied = false, isLiked;
-
+    private Intent resultIntent;
     private JobViewModel viewModel;
-    private BottomSheetDialog bottomSheetDialog;
+    private BottomSheetDialog bottomSheetDialog, helpDialog;
+    private MaterialButton understoodBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +84,10 @@ public class JobDescriptionActivity extends AppCompatActivity {
         token  = "token "+ SharedPrefManager.getInstance(this).getToken();
         jobId = getIntent().getIntExtra("id", 0);
 
+        helpDialog = new BottomSheetDialog(JobDescriptionActivity.this);
+        helpDialog.setContentView(R.layout.status_help_bottomsheet);
+        understoodBtn = helpDialog.findViewById(R.id.understood);
+
         binding.btnApply.setOnClickListener(this::onClick);
         binding.btnEdit.setOnClickListener(this::onClick);
         binding.saveImg.setOnClickListener(this::onClick);
@@ -88,6 +95,8 @@ public class JobDescriptionActivity extends AppCompatActivity {
         binding.btnViewApplication.setOnClickListener(this::onClick);
         binding.btnEvaluate.setOnClickListener(this::onClick);
         viewModel = new ViewModelProvider(this).get(JobViewModel.class);
+
+        resultIntent = new Intent();
 
         getJob();
 
@@ -145,6 +154,14 @@ public class JobDescriptionActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    private void showStatusInfo() {
+        helpDialog.show();
+        understoodBtn.setOnClickListener(view->{
+            helpDialog.cancel();
+        });
     }
 
     private void getConfirmation() {
@@ -285,7 +302,8 @@ public class JobDescriptionActivity extends AppCompatActivity {
             public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
                 if(response.isSuccessful()) {
                     isLiked = true;
-                    binding.saveImg.setBackgroundResource(R.drawable.ic_save_red_filled);
+                    binding.saveImg.setSpeed(1);
+                    binding.saveImg.playAnimation();
                     Snackbar.make(binding.parentLayout, "Added to saved jobs", Snackbar.LENGTH_SHORT).show();
                 } else {
                     Snackbar.make(binding.parentLayout, "Something went wrong", Snackbar.LENGTH_SHORT).show();
@@ -306,10 +324,11 @@ public class JobDescriptionActivity extends AppCompatActivity {
         userRequestCall.enqueue(new Callback<DefaultResponse>() {
             @Override
             public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
-                    isLiked = false;
-                    binding.saveProgress.setVisibility(View.GONE);
-                    binding.saveImg.setBackgroundResource(R.drawable.ic_save_red);
-                    Snackbar.make(binding.parentLayout, "Removed from saved jobs", Snackbar.LENGTH_SHORT).show();
+                isLiked = false;
+                binding.saveImg.setSpeed(-2);
+                binding.saveImg.playAnimation();
+                binding.saveProgress.setVisibility(View.GONE);
+                Snackbar.make(binding.parentLayout, "Removed from saved jobs", Snackbar.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(Call<DefaultResponse> call, Throwable t) {
@@ -332,9 +351,9 @@ public class JobDescriptionActivity extends AppCompatActivity {
             binding.saveImg.setVisibility(View.GONE);
         else{
             if(isLiked)
-                binding.saveImg.setBackgroundResource(R.drawable.ic_save_red_filled);
+                binding.saveImg.setFrame(50);
             else
-                binding.saveImg.setBackgroundResource(R.drawable.ic_save_red);
+                binding.saveImg.setFrame(0);
         }
 
         binding.shimmerViewContainer.setVisibility(View.GONE);
@@ -382,6 +401,15 @@ public class JobDescriptionActivity extends AppCompatActivity {
                         .inflate(layout, binding.applicationStatus, false);
                 chip.setId(ViewCompat.generateViewId());
                 chip.setCloseIconVisible(false);
+                chip.setOnTouchListener((v, event) -> {
+                    if (v==chip) {
+                        if (event.getX() <= v.getPaddingLeft()) {
+                            showStatusInfo();
+                        }
+                        return true;
+                    }
+                    return false;
+                });
                 binding.applicationStatus.addView(chip);
             } else
                 setViewsVisible(binding.btnApply, binding.btnEvaluate);
@@ -485,6 +513,8 @@ public class JobDescriptionActivity extends AppCompatActivity {
                 unlikeJob();
             } else
                 likeJob();
+
+            setResult(RESULT_OK, resultIntent);
             binding.saveProgress.setVisibility(View.VISIBLE);
         } else if(id==R.id.share_img)
             shareJob();
@@ -552,11 +582,4 @@ public class JobDescriptionActivity extends AppCompatActivity {
         binding.jobDescriptionVp2.setCurrentItem(fragment);
     }
 
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent();
-        setResult(RESULT_OK, intent);
-        finish();
-    }
 }

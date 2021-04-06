@@ -276,7 +276,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:drawablePadding="32dp"
+            android:drawablePadding="28dp"
             android:fontFamily="@font/roboto_regular"
             android:autoLink="email"
             android:textColor="#085CFF"

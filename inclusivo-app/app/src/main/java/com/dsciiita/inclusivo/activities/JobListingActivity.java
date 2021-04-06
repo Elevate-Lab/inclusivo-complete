@@ -41,11 +41,11 @@ public class JobListingActivity extends AppCompatActivity implements JobRVAdapte
     private JobRVAdapter jobAdapter;
     private List<Job> jobsList;
     private String token;
-    private int id;
+    private Intent intent;
     private String filter;
     private ArrayList<JobFilterSearch> filterSearches;
     private int total_count, curr_page = 0;
-    private final int FILTER_CODE = 1;
+    private final int FILTER_CODE = 1, LIKE_CODE = 2;
     private String[] searchFields;
     private String category = "title";
 
@@ -75,6 +75,8 @@ public class JobListingActivity extends AppCompatActivity implements JobRVAdapte
             binding.searchBar.setVisibility(View.VISIBLE);
             binding.searchText.requestFocus();
         });
+
+
         binding.searchText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH && !binding.searchText.getText().toString().isEmpty()) {
                 filterSearches.clear();
@@ -92,7 +94,7 @@ public class JobListingActivity extends AppCompatActivity implements JobRVAdapte
         });
 
 
-        Intent intent = getIntent();
+        intent = getIntent();
         getData(intent);
 
         if(intent.hasExtra("tags"))
@@ -146,7 +148,7 @@ public class JobListingActivity extends AppCompatActivity implements JobRVAdapte
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch(requestCode) {
-            case (FILTER_CODE) : {
+            case (FILTER_CODE) :
                 if (resultCode == Activity.RESULT_OK) {
                     Set<String> keys =  data.getExtras().keySet();
                     filterSearches.clear();
@@ -161,7 +163,10 @@ public class JobListingActivity extends AppCompatActivity implements JobRVAdapte
                     getFilteredJobs();
                 }
                 break;
-            }
+            case LIKE_CODE :
+                if (resultCode == Activity.RESULT_OK) {
+                    getData(intent);
+                }
         }
     }
 
@@ -261,7 +266,8 @@ public class JobListingActivity extends AppCompatActivity implements JobRVAdapte
 
     @Override
     public void onJobClick(int position, View v) {
-        startActivity(new Intent(this, JobDescriptionActivity.class).putExtra("id", jobsList.get(position).getJobId()));
+        startActivityForResult(new Intent(this, JobDescriptionActivity.class)
+                .putExtra("id", jobsList.get(position).getJobId()), LIKE_CODE);
     }
 
     @Override

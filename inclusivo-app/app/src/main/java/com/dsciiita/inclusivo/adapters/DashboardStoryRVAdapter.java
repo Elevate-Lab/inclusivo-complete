@@ -45,10 +45,12 @@ public class DashboardStoryRVAdapter extends RecyclerView.Adapter<DashboardStory
         holder.companyName.setText(objectList.get(position).getCompany().getName());
         holder.description.setText(objectList.get(position).getDescription());
 
-        Glide.with(context).load(objectList.get(position).getPhotoUrl())
+        if(objectList.get(position).getPhotoUrl()!=null)
+            Glide.with(context).load(objectList.get(position).getPhotoUrl())
                 .placeholder(R.drawable.ic_stories)
-                .optionalCenterInside()
                 .into(holder.storyImage);
+        else
+            holder.storyImage.setBackgroundResource(R.drawable.ic_stories);
 
     }
 

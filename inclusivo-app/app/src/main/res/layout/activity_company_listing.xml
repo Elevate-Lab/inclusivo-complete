@@ -131,7 +131,7 @@
         android:layout_marginEnd="16dp"
         android:drawablePadding="16dp"
         android:paddingVertical="10dp"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/varela_round"
         android:text="FILTERS"
         android:textColor="@color/primary_color"
         android:textSize="16sp"

@@ -2,6 +2,7 @@ package com.dsciiita.inclusivo.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import com.dsciiita.inclusivo.adapters.AppliedJobsRV;
 import com.dsciiita.inclusivo.api.ApiClient;
 import com.dsciiita.inclusivo.databinding.ActivityAppliedJobsBinding;
 import com.dsciiita.inclusivo.models.JobApplicationByCandidateData;
+import com.dsciiita.inclusivo.models.JobFilterSearch;
 import com.dsciiita.inclusivo.responses.ApplicationByCandidate;
 import com.dsciiita.inclusivo.responses.LikedJobsResponse;
 import com.dsciiita.inclusivo.storage.SharedPrefManager;
@@ -20,6 +22,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -88,11 +91,23 @@ public class AppliedJobsActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case 2 :
+                if (resultCode == Activity.RESULT_OK) {
+                    getData();
+                }
+        }
+    }
+
 
     AppliedJobsRV.onJobListener appliedJobListener = new AppliedJobsRV.onJobListener() {
         @Override
         public void onJobClick(int position, View v) {
-            startActivity(new Intent(getApplicationContext(), JobDescriptionActivity.class).putExtra("id", appliedJobs.get(position).getJob().getJobId()));
+            startActivityForResult(new Intent(getApplicationContext(), JobDescriptionActivity.class)
+                    .putExtra("id", appliedJobs.get(position).getJob().getJobId()), 2);
         }
 
         @Override
@@ -106,7 +121,7 @@ public class AppliedJobsActivity extends AppCompatActivity {
             binding.emptyResult.setVisibility(View.VISIBLE);
             binding.animationView.playAnimation();
         }
-        Collections.sort(appliedJobs, (obj1, obj2) -> obj2.getJob().getPostedOn().compareToIgnoreCase(obj1.getJob().getPostedOn()));
+        Collections.sort(appliedJobs, (obj1, obj2) -> obj2.getApplicationDate().compareToIgnoreCase(obj1.getApplicationDate()));
         appliedJobsAdapter.updateAdapter(appliedJobs);
     }
 }

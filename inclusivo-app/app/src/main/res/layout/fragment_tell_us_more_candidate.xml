@@ -19,7 +19,7 @@
             android:textSize="20sp"
             android:gravity="center"
             android:textAllCaps="true"
-            android:fontFamily="@font/roboto_regular"
+            android:fontFamily="@font/varela_round"
             android:text="Tell us more about you"
             android:textColor="@color/black" />
 

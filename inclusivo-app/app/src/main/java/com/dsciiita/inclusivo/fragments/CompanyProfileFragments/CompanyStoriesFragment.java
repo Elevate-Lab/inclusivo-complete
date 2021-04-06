@@ -1,5 +1,6 @@
 package com.dsciiita.inclusivo.fragments.CompanyProfileFragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.dsciiita.inclusivo.activities.CompanyProfileActivity;
 import com.dsciiita.inclusivo.activities.StoryInfoActivity;
 import com.dsciiita.inclusivo.adapters.CompanyStoryRVAdapter;
 import com.dsciiita.inclusivo.api.ApiClient;
@@ -75,10 +77,21 @@ public class CompanyStoriesFragment extends Fragment implements CompanyStoryRVAd
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case 1 :
+                if (resultCode == Activity.RESULT_OK) {
+                    ((CompanyProfileActivity) getActivity()).getData();
+                }
+        }
+    }
 
     @Override
     public void onStoryClick(int position, View v) {
-        startActivity(new Intent(getActivity(), StoryInfoActivity.class).putExtra("id", storyList.get(position).getId()));
+        startActivityForResult(new Intent(getActivity(), StoryInfoActivity.class)
+                .putExtra("id", storyList.get(position).getId()), 1);
     }
 
     @Override

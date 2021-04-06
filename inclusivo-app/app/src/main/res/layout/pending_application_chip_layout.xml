@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.chip.Chip
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
     android:layout_height="50dp"
     android:text="Applied: Pending"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:chipCornerRadius="10dp"
+    app:chipCornerRadius="15dp"
     android:textAppearance="@style/statusChipStyle"
-    android:backgroundTint="#D8D4D4"
     android:textAlignment="center"
     android:clickable="false"
-    android:fontFamily="@font/roboto_regular"
-    android:textSize="16sp"
+    app:chipIcon="@drawable/ic_round_help_outline_24"
+    app:chipIconTint="@color/black"
+    app:chipIconVisible="true"
+    app:chipIconSize="20dp"
+    app:iconEndPadding="5dp"
+    app:iconStartPadding="5dp"
     android:ellipsize="end">
 </com.google.android.material.chip.Chip>

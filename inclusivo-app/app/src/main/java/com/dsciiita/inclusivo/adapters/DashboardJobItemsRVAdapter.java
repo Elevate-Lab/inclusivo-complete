@@ -45,9 +45,13 @@ public class DashboardJobItemsRVAdapter extends RecyclerView.Adapter<DashboardJo
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.title.setText(companyList.get(position).getTitle());
 
-        Glide.with(context).load(companyList.get(position).getLink())
+        if(companyList.get(position).getLink()!=null)
+            Glide.with(context).load(companyList.get(position).getLink())
                 .placeholder(R.drawable.placeholder_square)
                 .into(holder.image);
+        else
+            holder.image.setBackgroundResource(R.drawable.placeholder_square);
+
     }
 
     @Override

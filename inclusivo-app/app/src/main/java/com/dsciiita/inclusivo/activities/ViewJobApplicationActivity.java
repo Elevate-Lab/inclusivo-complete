@@ -113,13 +113,20 @@ public class ViewJobApplicationActivity extends AppCompatActivity {
 
     private void setValues(JobApplication application) {
         UserCandidate candidate = application.getCandidate();
-        if(candidate.getUser() != null) {
+        if(candidate!=null && candidate.getUser() != null) {
             binding.firstNameTxt.setText(candidate.getUser().getFirstName());
             binding.lastNameTxt.setText(candidate.getUser().getLastName());
             binding.emailTxt.setText(candidate.getUser().getEmail());
             binding.dobTxt.setText(candidate.getUser().getDob());
             binding.genderTxt.setText(candidate.getUser().getGender());
 
+            if(candidate.getResumeLink()==null || candidate.getResumeLink().isEmpty()) {
+                binding.resumeLinkTxt.setVisibility(View.GONE);
+                binding.resumeTxt.setVisibility(View.GONE);
+            } else {
+                binding.resumeLinkTxt.setVisibility(View.VISIBLE);
+                binding.resumeTxt.setVisibility(View.VISIBLE);
+            }
         }
 
         binding.answer.setText(application.getMessage());
@@ -150,6 +157,7 @@ public class ViewJobApplicationActivity extends AppCompatActivity {
 
        setTags(application);
        setLocations(application);
+
 
 
        binding.resumeLinkTxt.setOnClickListener(view->{

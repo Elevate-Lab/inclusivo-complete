@@ -6,19 +6,19 @@
     app:strokeColor="@color/ms_material_grey_400"
     app:strokeWidth="1dp"
     android:layout_marginHorizontal="8dp"
-    app:cardCornerRadius="5dp">
+    app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/display_img"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             android:layout_marginBottom="5dp"
-            android:padding="3dp"
+            android:scaleType="fitXY"
+            android:padding="8dp"
             android:src="@drawable/placeholder_square"
             app:layout_constraintBottom_toTopOf="@+id/title"
             app:layout_constraintEnd_toEndOf="parent"
@@ -29,12 +29,15 @@
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
-            android:gravity="center"
+            android:fontFamily="@font/varela_round"
             android:maxLines="1"
+            android:paddingBottom="8dp"
+            android:paddingHorizontal="8dp"
             android:ellipsize="end"
+            android:text="Google"
+            android:layout_marginBottom="5dp"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

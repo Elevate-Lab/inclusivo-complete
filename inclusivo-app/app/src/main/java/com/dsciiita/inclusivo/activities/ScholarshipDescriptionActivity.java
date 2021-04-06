@@ -93,7 +93,8 @@ public class ScholarshipDescriptionActivity extends AppCompatActivity {
             public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
                 if (response.isSuccessful()) {
                     isLiked = true;
-                    binding.saveImg.setBackgroundResource(R.drawable.ic_save_red_filled);
+                    binding.saveImg.setSpeed(1);
+                    binding.saveImg.playAnimation();
                     Snackbar.make(binding.parentLayout, "Added to saved scholarships", Snackbar.LENGTH_SHORT).show();
                 } else {
                     Snackbar.make(binding.parentLayout, "Something went wrong", Snackbar.LENGTH_SHORT).show();
@@ -116,8 +117,9 @@ public class ScholarshipDescriptionActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
                 isLiked = false;
+                binding.saveImg.setSpeed(-2);
+                binding.saveImg.playAnimation();
                 binding.saveProgress.setVisibility(View.GONE);
-                binding.saveImg.setBackgroundResource(R.drawable.ic_save_red);
                 Snackbar.make(binding.parentLayout, "Removed from saved scholarships", Snackbar.LENGTH_SHORT).show();
             }
 
@@ -179,10 +181,10 @@ public class ScholarshipDescriptionActivity extends AppCompatActivity {
             binding.saveImg.setVisibility(View.GONE);
         else {
             binding.btnApply.setVisibility(View.VISIBLE);
-            if (isLiked)
-                binding.saveImg.setBackgroundResource(R.drawable.ic_save_red_filled);
+            if(isLiked)
+                binding.saveImg.setFrame(50);
             else
-                binding.saveImg.setBackgroundResource(R.drawable.ic_save_red);
+                binding.saveImg.setFrame(0);
         }
 
         binding.shimmerViewContainer.setVisibility(View.GONE);

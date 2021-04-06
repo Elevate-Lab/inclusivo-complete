@@ -78,7 +78,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
+            android:fontFamily="@font/varela_round"
             android:lineSpacingExtra="5dp"
             android:text="Server error :(\nSwipe down to retry"
             android:gravity="center"
@@ -100,7 +100,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/parent" >
 
             <LinearLayout
@@ -124,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="@font/roboto_regular"
+                    android:fontFamily="@font/varela_round"
                     android:text="First Name"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
@@ -135,7 +135,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
+                    android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -144,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="@font/roboto_regular"
+                    android:fontFamily="@font/varela_round"
                     android:text="Last Name"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
@@ -155,7 +156,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
+                    android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -164,7 +166,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="@font/roboto_regular"
+                    android:fontFamily="@font/varela_round"
                     android:text="E-mail"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
@@ -175,7 +177,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
+                    android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -185,7 +188,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="@font/roboto_regular"
+                    android:fontFamily="@font/varela_round"
                     android:text="Date of birth"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
@@ -197,7 +200,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
+                    android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -207,7 +211,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="@font/roboto_regular"
+                    android:fontFamily="@font/varela_round"
                     android:text="Gender"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
@@ -218,7 +222,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
+                    android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -228,7 +233,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="@font/roboto_regular"
+                    android:fontFamily="@font/varela_round"
                     android:text="Contact Number "
                     android:textColor="@color/black"
                     android:textSize="12sp" />
@@ -239,7 +244,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
+                    android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -248,7 +254,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="@font/roboto_regular"
+                    android:fontFamily="@font/varela_round"
                     android:text="Alternate Contact Number *"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
@@ -259,7 +265,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
+                    android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 

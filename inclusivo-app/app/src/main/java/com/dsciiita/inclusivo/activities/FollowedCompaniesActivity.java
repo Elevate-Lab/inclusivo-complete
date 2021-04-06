@@ -1,33 +1,22 @@
 package com.dsciiita.inclusivo.activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.dsciiita.inclusivo.R;
-import com.dsciiita.inclusivo.adapters.CompanyRVAdapter;
-import com.dsciiita.inclusivo.adapters.CompanyRVAdapter;
 import com.dsciiita.inclusivo.adapters.DashboardCompanyRVAdapter;
 import com.dsciiita.inclusivo.api.ApiClient;
 import com.dsciiita.inclusivo.databinding.ActivityFollowedCompaniesBinding;
 import com.dsciiita.inclusivo.models.Company;
 import com.dsciiita.inclusivo.models.FollowedCompanyData;
-import com.dsciiita.inclusivo.responses.CompanyJobsResponse;
 import com.dsciiita.inclusivo.responses.FollowedCompaniesResponse;
-import com.dsciiita.inclusivo.responses.LikedJobsResponse;
 import com.dsciiita.inclusivo.storage.SharedPrefManager;
-import com.google.android.material.snackbar.Snackbar;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -110,8 +99,17 @@ public class FollowedCompaniesActivity extends AppCompatActivity implements Dash
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            getData();
+        }
+    }
+
+    @Override
     public void onClick(int position, View v) {
-        startActivity(new Intent(this, CompanyProfileActivity.class).putExtra("companyID", companyList.get(position).getId()));
+        startActivityForResult(new Intent(this, CompanyProfileActivity.class)
+                .putExtra("companyID", companyList.get(position).getId()), 1);
     }
 
     @Override

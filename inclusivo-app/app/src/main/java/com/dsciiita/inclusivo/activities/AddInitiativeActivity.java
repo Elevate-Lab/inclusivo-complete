@@ -40,6 +40,7 @@ public class AddInitiativeActivity extends AppCompatActivity {
 
         binding.btnAdd.setOnClickListener(view->{
             addInitiative();
+            setResult(RESULT_OK, new Intent());
         });
     }
 
@@ -73,8 +74,6 @@ public class AddInitiativeActivity extends AppCompatActivity {
             public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(AddInitiativeActivity.this, "Initiative created successfully", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(AddInitiativeActivity.this, CompanyProfileActivity.class)
-                            .putExtra("companyID", SharedPrefManager.getInstance(AddInitiativeActivity.this).getCompanyID()));
                     finish();
                 } else {
                     Snackbar.make(binding.parent, "Something went wrong", Snackbar.LENGTH_SHORT).show();
@@ -92,10 +91,4 @@ public class AddInitiativeActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(AddInitiativeActivity.this, CompanyProfileActivity.class)
-                .putExtra("companyID", SharedPrefManager.getInstance(AddInitiativeActivity.this).getCompanyID()));
-        finish();
-    }
 }

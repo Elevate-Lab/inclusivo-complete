@@ -74,7 +74,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="20dp"
         android:clickable="true"
-        android:visibility="visible"
+        android:visibility="gone"
         android:elevation="1dp"
         android:background="@color/white"
         android:gravity="center_vertical"
@@ -95,7 +95,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
+            android:fontFamily="@font/varela_round"
             android:lineSpacingExtra="5dp"
             android:text="Something went wrong:("
             android:gravity="center"

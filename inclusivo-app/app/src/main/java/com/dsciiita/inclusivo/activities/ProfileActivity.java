@@ -139,6 +139,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void setTags(UserCandidate candidate){
+        binding.TagChipGroup.removeAllViews();
         List<Diversity> tags = candidate.getDiversity();
         for(Diversity tag: tags){
             String text = tag.getName();
@@ -176,6 +177,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void setLocations(UserCandidate candidate){
+        binding.prefCitiesChipGrp.removeAllViews();
         ArrayList<CityResponse> cities = candidate.getPrefCities();
         for(CityResponse cityResponse: cities){
             String text = cityResponse.getName() + ", " + cityResponse.getState().getName() + ", " + cityResponse.getState().getCounty().getName();

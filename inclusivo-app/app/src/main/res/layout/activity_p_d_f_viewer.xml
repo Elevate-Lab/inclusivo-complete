@@ -22,11 +22,47 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/roboto_medium"
-            android:text="Candidate Resume"
+            android:text="Resume"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
     </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/error_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="20dp"
+        android:visibility="gone"
+        android:elevation="1dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:orientation="vertical">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/error_anim"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:paddingHorizontal="10dp"
+            android:maxHeight="400dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/error_cone" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/varela_round"
+            android:lineSpacingExtra="5dp"
+            android:text="Could not load the file :("
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+    </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
@@ -65,7 +101,7 @@
         android:layout_margin="24dp"
         android:visibility="gone"
         android:id="@+id/downloadResume"
-        android:src="@drawable/ic_round_cloud_download_24"
+        android:src="@drawable/ic_download"
         android:tint="@color/white"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

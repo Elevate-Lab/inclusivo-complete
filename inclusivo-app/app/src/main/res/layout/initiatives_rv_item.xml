@@ -19,7 +19,10 @@
             android:id="@+id/initiative_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/varela_round"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:textColor="@color/black"
             android:textSize="14sp" />
 
@@ -28,6 +31,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:maxLines="3"
+            android:minLines="3"
+            android:ellipsize="end"
             android:fontFamily="@font/roboto_regular"
             android:textSize="13sp" />
 

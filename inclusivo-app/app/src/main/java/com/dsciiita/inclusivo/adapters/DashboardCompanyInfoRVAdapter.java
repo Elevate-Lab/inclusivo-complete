@@ -44,9 +44,13 @@ public class DashboardCompanyInfoRVAdapter extends RecyclerView.Adapter<Dashboar
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.title.setText(companyList.get(position).getName());
-        Glide.with(context).load(companyList.get(position).getLogoUrl())
+
+        if(companyList.get(position).getLogoUrl()!=null)
+            Glide.with(context).load(companyList.get(position).getLogoUrl())
                 .placeholder(R.drawable.ic_companies)
                 .into(holder.image);
+        else
+            holder.image.setBackgroundResource(R.drawable.ic_companies);
     }
 
     @Override

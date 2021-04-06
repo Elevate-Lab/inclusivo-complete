@@ -68,22 +68,28 @@ public class StoryInfoActivity extends AppCompatActivity {
 
 
     private void deleteStory(int id) {
-
+        binding.progressBar.setVisibility(View.VISIBLE);
+        binding.btnDelete.setEnabled(false);
         String token = "token "+SharedPrefManager.getInstance(this).getToken();
 
         Call<Void> userRequestCall = ApiClient.getUserService().deleteStory(id, token);
         userRequestCall.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                    setResult(RESULT_OK, new Intent());
+                    binding.progressBar.setVisibility(View.GONE);
+                    Toast.makeText(StoryInfoActivity.this, "Deleted successfully", Toast.LENGTH_SHORT).show();
+                    finish();
+                binding.btnDelete.setEnabled(true);
+
             }
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Log.i("ERROR FAILURE", t.getMessage());
+                binding.btnDelete.setEnabled(true);
+                binding.progressBar.setVisibility(View.GONE);
+                Toast.makeText(StoryInfoActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         });
-
-        Toast.makeText(StoryInfoActivity.this, "Deleted successfully", Toast.LENGTH_SHORT).show();
-        finish();
     }
 
 

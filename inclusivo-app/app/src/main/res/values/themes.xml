@@ -35,8 +35,14 @@
         <item name="chipStrokeWidth">1dp</item>
     </style>
 
+    <style name="chipFont">
+        <item name="fontFamily">@font/varela_round</item>
+    </style>
+
     <style name="statusChipStyle">
         <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/varela_round</item>
     </style>
 
     <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">

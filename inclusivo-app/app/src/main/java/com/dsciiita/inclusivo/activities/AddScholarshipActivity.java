@@ -251,8 +251,6 @@ public class AddScholarshipActivity extends AppCompatActivity {
                 binding.progressBar.setVisibility(View.GONE);
                 if (response.isSuccessful()) {
                     Toast.makeText(AddScholarshipActivity.this, "Scholarship added successfully", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(AddScholarshipActivity.this, CompanyProfileActivity.class)
-                            .putExtra("companyID", SharedPrefManager.getInstance(AddScholarshipActivity.this).getCompanyID()));
                     finish();
                 } else
                     Snackbar.make(binding.parent, "Something went wrong", Snackbar.LENGTH_SHORT).show();
@@ -273,15 +271,9 @@ public class AddScholarshipActivity extends AppCompatActivity {
         if (view.getId() == R.id.last_date_tie) {
             showDatePicker();
         } else if (view.getId()==R.id.btnAdd) {
+            setResult(RESULT_OK, new Intent());
             addScholarship();
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(AddScholarshipActivity.this, CompanyProfileActivity.class)
-                .putExtra("companyID", SharedPrefManager.getInstance(AddScholarshipActivity.this).getCompanyID()));
-        finish();
     }
 
 }

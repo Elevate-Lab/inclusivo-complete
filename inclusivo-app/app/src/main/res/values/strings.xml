@@ -97,4 +97,9 @@
 
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+    <string name="reject_msg"><b><font color='#BB4E3F'>Rejected</font></b>: You are not selected for the role. Try applying for other jobs.</string>
+    <string name="selected_msg"><b><font color='#388E3C'>Selected</font></b>: You are selected for the role. Congratulations!</string>
+    <string name="shortlisted_msg"><b><font color='#2259B8'>Shortlisted</font></b>: The employer has shortlisted your application for further review.</string>
+    <string name="process_msg"><b><font color='#C66400'>Process</font></b>: The employer has viewed your application and is under review.</string>
+    <string name="pending_msg"><b>Pending</b>: The employer hasn\'t viewed your application yet.</string>
 </resources>

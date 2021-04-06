@@ -21,6 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.dsciiita.inclusivo.R;
 import com.dsciiita.inclusivo.activities.CreateAccountActivity;
 import com.dsciiita.inclusivo.activities.NavigationActivity;
@@ -56,6 +57,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
+import static android.view.View.GONE;
 
 
 public class TellUsMoreCandidateFragment extends Fragment implements Step {
@@ -81,7 +83,8 @@ public class TellUsMoreCandidateFragment extends Fragment implements Step {
     private String displayName;
     private int currYear;
     private LinearProgressIndicator uploadIndicator;
-    private ImageButton btnClose, btnUpload;
+    private ImageButton btnClose;
+    private LottieAnimationView btnUpload;
     private Uri resumeDownloadUrl, resumeFilepath;
     private boolean isAddVisible;
 
@@ -361,7 +364,7 @@ public class TellUsMoreCandidateFragment extends Fragment implements Step {
                 displayName = myFile.getName();
             }
             tvFileName.setText(displayName);
-            btnClose.setImageResource(R.drawable.ic_round_close_24);
+            btnClose.setImageResource(R.drawable.ic_cancel);
             btnUpload.setVisibility(View.VISIBLE);
             isAddVisible = false;
         }
@@ -378,9 +381,11 @@ public class TellUsMoreCandidateFragment extends Fragment implements Step {
                             task -> {
                                 resumeDownloadUrl = task.getResult();
                                 resumeLink = resumeDownloadUrl.toString();
-                                uploadIndicator.setVisibility(View.GONE);
+                                uploadIndicator.setVisibility(GONE);
+                                btnUpload.setVisibility(GONE);
+                                btnUpload.cancelAnimation();
                                 tvFileName.setText(displayName);
-                                btnClose.setImageResource(R.drawable.ic_round_close_24);
+                                btnClose.setImageResource(R.drawable.ic_cancel);
                             })).addOnFailureListener(e -> Log.i("FAILURE", e.toString()))
             .addOnProgressListener(snapshot -> {
                 int progress =(int) (100.0 * snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
@@ -402,15 +407,18 @@ public class TellUsMoreCandidateFragment extends Fragment implements Step {
                 choseFile();
             else {
                 tvFileName.setText("Upload resume");
-                uploadIndicator.setVisibility(View.GONE);
+                uploadIndicator.setVisibility(GONE);
                 resumeLink = "";
-                btnUpload.setVisibility(View.GONE);
-                btnClose.setImageResource(R.drawable.ic_round_add_24);
+                btnUpload.setVisibility(GONE);
+                btnClose.setImageResource(R.drawable.ic_plus);
                 isAddVisible = true;
             }
+
+            btnUpload.setOnClickListener(this::onClick);
         } else if (view.getId() == R.id.upload_button) {
             uploadFile();
-            btnUpload.setVisibility(View.GONE);
+            btnUpload.playAnimation();
+            btnUpload.setOnClickListener(null);
             uploadIndicator.setVisibility(View.VISIBLE);
             uploadIndicator.setProgress(0);
         }

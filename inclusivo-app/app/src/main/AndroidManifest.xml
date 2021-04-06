@@ -29,7 +29,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.TestActivity" />
         <activity android:name=".activities.EvaluationResults" />
         <activity android:name=".activities.CompanyListingActivity" />
         <activity android:name=".activities.ProfileActivity" />
@@ -72,7 +71,10 @@
         <activity android:name=".activities.EmailActivity" />
         <activity android:name=".activities.AddEditJobActivity" />
         <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.RegistrationActivity" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

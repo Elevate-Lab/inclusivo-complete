@@ -320,6 +320,7 @@
             android:drawablePadding="32dp"
             android:fontFamily="@font/roboto_regular"
             android:textColor="#085CFF"
+            android:text="adadomaodmoamd"
             android:textSize="14sp"
             app:drawableStartCompat="@drawable/ic_contact_14" />
 
@@ -330,7 +331,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="32dp"
             android:autoLink="email"
-            android:drawablePadding="32dp"
+            android:text="aodnnad"
+            android:drawablePadding="28dp"
             android:fontFamily="@font/roboto_regular"
             android:textColor="#085CFF"
             android:textSize="14sp"

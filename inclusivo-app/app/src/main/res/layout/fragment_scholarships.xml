@@ -55,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="20dp"
         android:clickable="true"
-        android:visibility="visible"
+        android:visibility="gone"
         android:elevation="1dp"
         android:background="@color/white"
         android:gravity="center_vertical"
@@ -76,7 +76,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
+            android:fontFamily="@font/varela_round"
             android:lineSpacingExtra="5dp"
             android:text="Something went wrong :(\nSwipe down to retry"
             android:gravity="center"
@@ -101,7 +101,7 @@
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:alpha="0"
+            android:alpha="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -121,23 +121,31 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="14dp"
-                        android:fontFamily="@font/roboto_medium"
+                        android:layout_marginHorizontal="8dp"
+                        android:fontFamily="@font/varela_round"
                         android:text="Saved scholarships"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="18sp" />
+
+                    <ProgressBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:visibility="visible"
+                        android:progressTint="@color/primary_color"
+                        android:id="@+id/progress"/>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp">
+                        android:layout_marginTop="20dp">
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/saved_scholarships_rv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:nestedScrollingEnabled="false"
                         android:orientation="vertical"
-                        app:layout_constraintHeight_max="250dp"
+                        app:layout_constraintHeight_max="240dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:itemCount="2"
                         tools:listitem="@layout/scholarship_rv_item" />
@@ -151,10 +159,10 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
                         android:drawablePadding="4dp"
-                        android:fontFamily="@font/roboto_regular"
+                        android:fontFamily="@font/varela_round"
                         android:text="View all"
                         android:textColor="@color/primary_color"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_12" />
 
                 </LinearLayout>
@@ -162,12 +170,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="14dp"
-                    android:layout_marginTop="24dp"
-                    android:fontFamily="@font/roboto_medium"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="@font/varela_round"
                     android:text="Browse by community"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="18sp" />
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/dashboard_tags_rv"
@@ -192,18 +201,18 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="14dp"
-                        android:fontFamily="@font/roboto_medium"
+                        android:layout_marginHorizontal="8dp"
+                        android:fontFamily="@font/varela_round"
                         android:text="Recent scholarships"
                         android:id="@+id/priority_heading"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="18sp" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/priority_sclp_rv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="20dp"
                         android:orientation="vertical"
                         android:nestedScrollingEnabled="false"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -216,15 +225,15 @@
                     android:id="@+id/btnScholarships"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginBottom="24dp"
                     android:paddingVertical="5dp"
                     android:lineSpacingExtra="5dp"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     app:strokeColor="@color/primary_color"
                     app:strokeWidth="2dp"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
                     android:text="View all"
                     android:textAllCaps="false"
                     android:textSize="16sp"

@@ -137,7 +137,7 @@
                 android:id="@+id/story_name_til"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
+                android:fontFamily="@font/varela_round"
                 android:inputType="textCapWords"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -169,7 +169,7 @@
                 android:id="@+id/story_description_tie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
+                android:fontFamily="@font/varela_round"
                 android:inputType="textMultiLine|textCapSentences"
                 android:textColor="@color/black"
                 android:textSize="16sp" />

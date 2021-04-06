@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Matching Rate:"
-        android:fontFamily="@font/roboto_regular"
+        android:fontFamily="@font/varela_round"
         android:textSize="20sp"
         android:textStyle="bold"
         android:id="@+id/rate"
@@ -44,7 +44,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/varela_round"
         android:text="Matching skills"
         android:layout_marginTop="4dp"
         android:layout_marginHorizontal="16dp"

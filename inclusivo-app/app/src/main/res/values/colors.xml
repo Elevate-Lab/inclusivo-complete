@@ -13,6 +13,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="primary_color">#FF3750</color>
     <color name="faint_primary">#3dff3750</color>
-    <color name="progres_color">#72CCFF</color>
+    <color name="progres_color">#5CBBF1</color>
     <color name="placeholder_back">#B1B1B1</color>
 </resources>

@@ -86,7 +86,7 @@
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
                 android:layout_marginHorizontal="10dp"
-                android:fontFamily="@font/roboto_regular"
+                android:fontFamily="@font/varela_round"
                 android:hint="Search"
                 android:singleLine="true"
                 android:imeOptions="actionSearch"
@@ -111,6 +111,7 @@
 
                     <TextView
                         android:textSize="18sp"
+                        android:fontFamily="@font/varela_round"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Salary :  " />
@@ -148,6 +149,7 @@
 
                     <TextView
                         android:textSize="18sp"
+                        android:fontFamily="@font/varela_round"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Experience :  " />

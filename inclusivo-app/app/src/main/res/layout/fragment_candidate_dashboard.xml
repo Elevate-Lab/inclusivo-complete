@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Dashboard.CandidateDashboardFragment">
+    tools:context=".fragments.Dashboard.DashboardJobFragment">
 
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_view_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
+        android:visibility="gone"
         app:shimmer_auto_start="true">
 
         <LinearLayout
@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="20dp"
         android:clickable="true"
-        android:visibility="visible"
+        android:visibility="gone"
         android:elevation="1dp"
         android:background="@color/white"
         android:gravity="center_vertical"
@@ -57,7 +57,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
+            android:fontFamily="@font/varela_round"
             android:lineSpacingExtra="5dp"
             android:text="Something went wrong :(\nSwipe down to retry"
             android:gravity="center"
@@ -80,7 +80,7 @@
         android:id="@+id/prent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0" >
+        android:alpha="1" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,25 +91,25 @@
                 android:id="@+id/priority_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="14dp"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="Saved Jobs"
+                    android:fontFamily="@font/varela_round"
+                    android:text="Applied Jobs"
                     android:id="@+id/priority_heading"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="18sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/priority_job_rv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:nestedScrollingEnabled="false"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -124,10 +124,10 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:drawablePadding="4dp"
-                    android:fontFamily="@font/roboto_regular"
+                    android:fontFamily="@font/varela_round"
                     android:text="View all"
                     android:textColor="@color/primary_color"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_12" />
 
             </LinearLayout>
@@ -137,13 +137,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 android:paddingVertical="15dp"
                 android:lineSpacingExtra="5dp"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 app:strokeColor="@color/primary_color"
                 app:strokeWidth="2dp"
-                android:fontFamily="@font/roboto_medium"
+                android:fontFamily="@font/varela_round"
                 android:text="My Company"
                 android:textAllCaps="false"
                 android:textSize="16sp"
@@ -153,18 +153,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="14dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="Find jobs in these cities"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/varela_round"
+                android:text="Browse by cities"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/job_cities_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="22dp"
                 android:orientation="vertical"
                 android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
@@ -176,11 +176,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="14dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/roboto_medium"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/varela_round"
                 android:text="Browse by community"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/dashboard_tags_rv"
@@ -199,24 +199,24 @@
                 android:id="@+id/subs_company_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
+                android:fontFamily="@font/varela_round"
                 android:layout_marginHorizontal="14dp"
                 android:text="Subscribed Companies"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/subscribed_companies_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal"
                 android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -231,10 +231,10 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:drawablePadding="4dp"
-                android:fontFamily="@font/roboto_regular"
+                android:fontFamily="@font/varela_round"
                 android:text="View all"
                 android:textColor="@color/primary_color"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_12" />
 
             </LinearLayout>
@@ -243,7 +243,7 @@
                 android:id="@+id/your_jobs_applications_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginBottom="32dp"
                 android:orientation="vertical">
 
@@ -252,17 +252,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="14dp"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="Applications for the job"
+                    android:fontFamily="@font/varela_round"
+                    android:text="Applications"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="18sp" />
+
+
+                <ProgressBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:visibility="visible"
+                    android:progressTint="@color/primary_color"
+                    android:id="@+id/application_progress"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/your_jobs_applications_rv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="20dp"
                     android:nestedScrollingEnabled="false"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -277,10 +286,10 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:drawablePadding="4dp"
-                    android:fontFamily="@font/roboto_regular"
+                    android:fontFamily="@font/varela_round"
                     android:text="More details"
                     android:textColor="@color/primary_color"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_12" />
 
             </LinearLayout>
@@ -289,30 +298,30 @@
             android:id="@+id/saved_job_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="14dp"
-                android:fontFamily="@font/roboto_medium"
+                android:fontFamily="@font/varela_round"
                 android:text="Saved Jobs"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="20dp">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/saved_jobs_rv_removable"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:nestedScrollingEnabled="false"
                 android:orientation="vertical"
-                app:layout_constraintHeight_max="250dp"
+                app:layout_constraintHeight_max="245dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="2"
                 tools:listitem="@layout/job_list_rv_item" />
@@ -326,10 +335,10 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:drawablePadding="4dp"
-                android:fontFamily="@font/roboto_regular"
+                android:fontFamily="@font/varela_round"
                 android:text="View all"
                 android:textColor="@color/primary_color"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_12" />
 
         </LinearLayout>
@@ -338,24 +347,25 @@
             android:id="@+id/pref_city_jobs_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="14dp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="Jobs in preferred cities"
+                android:fontFamily="@font/varela_round"
+                android:text="Your preferences"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/jobs_preferred_cities_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:nestedScrollingEnabled="false"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -369,12 +379,11 @@
                 android:layout_gravity="end"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="32dp"
                 android:drawablePadding="4dp"
-                android:fontFamily="@font/roboto_regular"
+                android:fontFamily="@font/varela_round"
                 android:text="View all"
                 android:textColor="@color/primary_color"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_12" />
 
         </LinearLayout>

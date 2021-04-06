@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="40dp"
+        android:layout_height="5dp"
+        android:id="@+id/handle"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/ms_material_grey_400"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@id/handle"
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/varela_round"
+        android:textColor="@color/black"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="16dp"
+        android:text="What does the status mean?"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/heading"
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/varela_round"
+        android:layout_marginTop="14dp"
+        android:textColor="@color/black"
+        android:layout_marginHorizontal="16dp"
+        android:text="@string/pending_msg"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/heading"
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/varela_round"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:layout_marginHorizontal="16dp"
+        android:text="@string/process_msg"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/heading"
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/varela_round"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:layout_marginHorizontal="16dp"
+        android:text="@string/shortlisted_msg"/>
+
+    -<TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/heading"
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/varela_round"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="16dp"
+        android:text="@string/selected_msg"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/heading"
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/varela_round"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="16dp"
+        android:text="@string/reject_msg"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/understood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/varela_round"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="5dp"
+        android:layout_marginVertical="20dp"
+        android:layout_marginHorizontal="14dp"
+        app:strokeColor="@color/ms_material_grey_400"
+        app:strokeWidth="1dp"
+        android:textColor="@color/black"
+        android:text="Understood"
+        android:textAllCaps="false"
+        android:textSize="14sp" />
+
+</LinearLayout>

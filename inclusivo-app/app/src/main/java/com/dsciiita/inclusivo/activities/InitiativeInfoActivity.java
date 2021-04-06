@@ -2,6 +2,7 @@ package com.dsciiita.inclusivo.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,22 +45,27 @@ public class InitiativeInfoActivity extends AppCompatActivity {
     }
 
     private void deleteInitiative(int id) {
-
+        binding.btnDelete.setEnabled(false);
+        binding.progressBar.setVisibility(View.VISIBLE);
         String token = "token "+SharedPrefManager.getInstance(this).getToken();
 
         Call<Void> userRequestCall = ApiClient.getUserService().deleteInitiative(id, token);
         userRequestCall.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                    setResult(RESULT_OK, new Intent());
+                binding.btnDelete.setEnabled(true);
+                binding.progressBar.setVisibility(View.GONE);
+                    Toast.makeText(InitiativeInfoActivity.this, "Deleted successfully", Toast.LENGTH_SHORT).show();
+                    finish();
             }
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Log.i("ERROR FAILURE", t.getMessage());
+                binding.btnDelete.setEnabled(true);
+                binding.progressBar.setVisibility(View.GONE);
+                Toast.makeText(InitiativeInfoActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         });
-
-        Toast.makeText(InitiativeInfoActivity.this, "Deleted successfully", Toast.LENGTH_SHORT).show();
-        finish();
     }
 
     private void setToolBar() {
@@ -85,8 +91,8 @@ public class InitiativeInfoActivity extends AppCompatActivity {
                 if(response.isSuccessful()) {
                     InitiativeByIdResponse initiativesResponse = response.body();
                     initiative = initiativesResponse.getData();
-                    binding.tilInitiativeDescription.getEditText().setText(initiative.getDescription());
-                    binding.tilInitiativeName.getEditText().setText(initiative.getName());
+                    binding.initiativeDescription.setText(initiative.getDescription());
+                    binding.initiativeTitle.setText(initiative.getName());
                     checkEmployer(initiative.getCompanyID(), initiative.getId());
                 } else {
                     Snackbar.make(binding.parentLayout, "Something went wrong", Snackbar.LENGTH_SHORT).show();

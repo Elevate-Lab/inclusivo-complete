@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dsciiita.inclusivo.R;
 import com.dsciiita.inclusivo.models.Story;
 import com.dsciiita.inclusivo.storage.Constants;
@@ -45,9 +46,12 @@ public class CompanyStoryRVAdapter extends RecyclerView.Adapter<CompanyStoryRVAd
         holder.storyDesc.setText(storyList.get(position).getDescription());
 
         holder.storyCompanyName.setText(storyList.get(position).getCompany().getName());
-        Glide.with(context).load(storyList.get(position).getPhotoUrl())
+        if(storyList.get(position).getPhotoUrl()!=null)
+            Glide.with(context).load(storyList.get(position).getPhotoUrl())
                 .placeholder(Constants.PLACEHOLDER_IMAGE)
                 .into(holder.storyImage);
+        else
+            holder.storyImage.setImageResource(Constants.PLACEHOLDER_IMAGE);
     }
 
     @Override

@@ -272,7 +272,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="32dp"
             android:autoLink="email"
-            android:drawablePadding="32dp"
+            android:drawablePadding="28dp"
             android:fontFamily="@font/roboto_regular"
             android:text="btech@gmail.com"
             android:textColor="#085CFF"

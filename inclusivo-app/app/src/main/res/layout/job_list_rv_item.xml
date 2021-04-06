@@ -23,15 +23,18 @@
 
         <RelativeLayout
             android:id="@+id/save_layout"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-            <ImageView
-                android:id="@+id/save_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_save_red"
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/save_anim"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:lottie_autoPlay="false"
+                app:lottie_loop="false"
+                app:lottie_rawRes="@raw/save_anim"
                 android:visibility="visible" />
 
             <ProgressBar
@@ -46,9 +49,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/varela_round"
             android:textColor="@color/black"
             android:textSize="14sp"
+            android:textStyle="bold"
             android:ellipsize="end"
             android:maxLines="1"
             app:layout_constraintEnd_toStartOf="@+id/save_layout"
@@ -64,7 +68,7 @@
             android:drawablePadding="4dp"
             android:maxLines="1"
             android:ellipsize="end"
-            android:fontFamily="@font/roboto_regular"
+            android:fontFamily="@font/varela_round"
             android:text="Location"
             android:textSize="12sp"
             app:drawableStartCompat="@drawable/ic_location"
@@ -77,6 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:orientation="horizontal"
+            android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/job_company_img"
             app:layout_constraintTop_toBottomOf="@+id/location_txt">
@@ -85,7 +90,7 @@
                 android:id="@+id/job_type_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
+                android:fontFamily="@font/varela_round"
                 android:textSize="12sp" />
 
             <androidx.cardview.widget.CardView
@@ -98,7 +103,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
+                android:fontFamily="@font/varela_round"
                 android:text="Vacancy -"
                 android:textSize="12sp" />
 
@@ -108,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="4dp"
-                android:fontFamily="@font/roboto_regular"
+                android:fontFamily="@font/varela_round"
                 android:textSize="12sp" />
 
             <androidx.cardview.widget.CardView
@@ -123,7 +128,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:fontFamily="@font/roboto_regular"
+                android:fontFamily="@font/varela_round"
                 android:textSize="12sp" />
 
         </LinearLayout>
@@ -134,7 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/roboto_regular"
+            android:fontFamily="@font/varela_round"
             android:text="Waah bhaiya fuml on job searchbaamzi chal rhi. Mauj kardi bete"
             android:ellipsize="end"
             android:maxLines="2"
@@ -150,7 +155,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/job_role_txt">
@@ -166,7 +171,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/roboto_regular"
+                android:fontFamily="@font/varela_round"
                 android:text="+ 4"
                 android:visibility="gone"
                 android:gravity="end|center_vertical"

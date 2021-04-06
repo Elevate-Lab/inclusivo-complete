@@ -1,5 +1,6 @@
 package com.dsciiita.inclusivo.fragments.CompanyProfileFragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -210,6 +211,16 @@ public class CompanyOverviewFragment extends Fragment implements CompanyJobRVAda
         view.setOnClickListener(this::openLink);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case 1 :
+                if (resultCode == Activity.RESULT_OK) {
+                    ((CompanyProfileActivity) getActivity()).getData();
+                }
+        }
+    }
 
     private void setGone(View... views){
         for(View view: views)
@@ -228,7 +239,8 @@ public class CompanyOverviewFragment extends Fragment implements CompanyJobRVAda
 
     @Override
     public void onInitiativeClick(int position, View v) {
-        startActivity(new Intent(getActivity(), InitiativeInfoActivity.class).putExtra("id", initiativeList.get(position).getId()));
+        startActivityForResult(new Intent(getActivity(), InitiativeInfoActivity.class)
+                .putExtra("id", initiativeList.get(position).getId()), 1);
     }
 
     @Override
@@ -238,7 +250,8 @@ public class CompanyOverviewFragment extends Fragment implements CompanyJobRVAda
 
     @Override
     public void onStoryClick(int position, View v) {
-        startActivity(new Intent(getActivity(), StoryInfoActivity.class).putExtra("id", storyList.get(position).getId()));
+        startActivityForResult(new Intent(getActivity(), StoryInfoActivity.class)
+                .putExtra("id", storyList.get(position).getId()), 1);
     }
 
     @Override

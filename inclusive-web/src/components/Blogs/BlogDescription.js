@@ -86,7 +86,7 @@ function StoryDescription(props) {
                                     {storyData.name}
                                 </Typography>
                                 <Typography variant="h5" className={classes.title}>
-                                    Story by: {storyData.author_credits}
+                                    Blog by: {storyData.author_credits}
                                 </Typography>
                             </Grid>
                         </Grid>

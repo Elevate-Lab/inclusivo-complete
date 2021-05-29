@@ -26,12 +26,16 @@ const StoryListing = loadable(() => import('./components/Stories/StoryListing'))
 const AddScholarship = loadable(() => import('./pages/Scholarship/AddScholarship'));
 const ScholarshipList = loadable(() => import('./components/Scholarships/List'));
 const JobList = loadable(() => import('./components/JobListings/List'));
-const Subscribed = loadable(()=>import('./components/Company/Subscribed'));
-const InitiativesList = loadable(()=> import('./components/initiatives/List'));
+const Subscribed = loadable(() => import('./components/Company/Subscribed'));
+const InitiativesList = loadable(() => import('./components/initiatives/List'));
 const Dashboard = loadable(() => import('./components/Dashboard/DashboardHome'))
 const Navigation = loadable(() => import('./components/Layout/Navigation'));
+const BlogDescription = loadable(() => import('./components/Blogs/BlogDescription'));
+const BlogListing = loadable(() => import('./components/Blogs/BlogListing'));
+const VideoDescription = loadable(() => import('./components/Video/VideoDescription'));
+const VideoListing = loadable(() => import('./components/Video/VideoListing'));
 
-const useStyle = makeStyles(theme=>({
+const useStyle = makeStyles(theme => ({
     bossContainer: props => ({
         display: 'flex',
         flexDirection: 'column',
@@ -44,31 +48,31 @@ const useStyle = makeStyles(theme=>({
 
 function Layout(props) {
     const marginDetails = useSelector(state => state.marginDetails)
-    const prop = {marginDetails}
+    const prop = { marginDetails }
     const dispatch = useDispatch();
     const classes = useStyle(prop);
     const history = useHistory();
-    const [fetched,setIsfetched] = React.useState(false);
+    const [fetched, setIsfetched] = React.useState(false);
 
-    history.listen((newLocation,action) => {
-        if(action === "POP"){
-            if(newLocation.pathname==="/complete/employer" || newLocation.pathname==="/complete/candidate" || newLocation.pathname==="/auth"){
+    history.listen((newLocation, action) => {
+        if (action === "POP") {
+            if (newLocation.pathname === "/complete/employer" || newLocation.pathname === "/complete/candidate" || newLocation.pathname === "/auth") {
                 history.go(1);
             }
         }
     })
     React.useEffect(() => {
-        async function setUserData(){
+        async function setUserData() {
             dispatch(userStatus());
             setIsfetched(true);
         }
 
         setUserData();
-    },[])
+    }, [])
 
     return (
         <>
-            <Navigation {...props}/>
+            <Navigation {...props} />
             {
                 fetched ? <div className={classes.bossContainer}>
                     <Switch>
@@ -84,7 +88,7 @@ function Layout(props) {
                         <ProtectedRoute exact path="/home/company/add" component={AddCompany} />
                         <ProtectedRoute exact path="/home/company/:id" component={CompanyDescription} />
                         <ProtectedRoute exact path='/home/company/get/subscribed' component={Subscribed} />
-                        
+
                         {/* Job Routes */}
                         <Route exact path="/home/job/list" component={JobList} />
                         <Route exact path="/home/job/add" component={AddJob} />
@@ -96,6 +100,14 @@ function Layout(props) {
                         <ProtectedRoute exact path="/home/story/list" component={StoryListing} />
                         <ProtectedRoute exact path="/home/company/:cid/story/:sid" component={StoryDescription} />
 
+                        {/*  Blog Routes */}
+                        <ProtectedRoute exact path="/home/blog/list" component={BlogListing} />
+                        <ProtectedRoute exact path="/home/blog/:id" component={BlogDescription} />
+
+                        {/*  Video Routes */}
+                        <ProtectedRoute exact path="/home/video/list" component={VideoListing} />
+                        <ProtectedRoute exact path="/home/video/:id" component={VideoDescription} />
+
                         {/* Scholarship Routes */}
                         <ProtectedRoute exact path="/home/scholarship/list" component={ScholarshipList} />
                         <ProtectedRoute path="/home/scholarship/add" component={AddScholarship} />
@@ -106,7 +118,7 @@ function Layout(props) {
                     </Switch>
                 </div> : <div>Loading...</div>
             }
-            
+
         </>
     );
 }

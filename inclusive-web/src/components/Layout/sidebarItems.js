@@ -6,6 +6,9 @@ import {
     BusinessOutlined,
     LibraryBooksOutlined,
 } from '@material-ui/icons';
+import VideoCallIcon from '@material-ui/icons/VideoCall';
+import BookIcon from '@material-ui/icons/Book';
+
 import {
     Icon
 } from '@material-ui/core';
@@ -42,13 +45,23 @@ export const commonItems = [
         name: 'Scholarships',
         icon: <SchoolOutlined style={drawerIcon} />,
         route: '/home/scholarship/list'
+    },
+    {
+        name: 'Blogs',
+        icon: <BookIcon style={drawerIcon} />,
+        route: '/home/blog/list'
+    },
+    {
+        name: 'Videos',
+        icon: <VideoCallIcon style={drawerIcon} />,
+        route: '/home/video/list'
     }
 ]
 
 export const candidateItems = [
     {
         name: 'Liked Jobs',
-        icon: <Icon style={drawerIcon}> <img src={LikedJobs} alt="liked jobs"/></Icon>,
+        icon: <Icon style={drawerIcon}> <img src={LikedJobs} alt="liked jobs" /></Icon>,
         route: '/home/job/liked'
     },
     {
@@ -58,7 +71,7 @@ export const candidateItems = [
     },
     {
         name: 'Liked Scholarships',
-        icon: <Icon style={drawerIcon}><img src={SavedScholarship} alt="saved scholarship"/></Icon>,
+        icon: <Icon style={drawerIcon}><img src={SavedScholarship} alt="saved scholarship" /></Icon>,
         route: '/home/scholarship/liked'
     }
 ]

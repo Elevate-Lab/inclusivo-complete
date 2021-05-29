@@ -1,11 +1,11 @@
 import React from "react";
-import { Grid, Typography,TextField,InputAdornment,IconButton,Button,Snackbar } from "@material-ui/core";
-import { Email,Visibility,VisibilityOff }  from '@material-ui/icons'
-import { useSelector,useDispatch } from "react-redux";
+import { Grid, Typography, TextField, InputAdornment, IconButton, Button, Snackbar } from "@material-ui/core";
+import { Email, Visibility, VisibilityOff } from '@material-ui/icons'
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useStyles } from "./Styles";
 import axios from 'axios';
-import { registerUserRequest,registerUserSuccess,registerUserFailure } from '../../actions/authActions/registerActions';
+import { registerUserRequest, registerUserSuccess, registerUserFailure } from '../../actions/authActions/registerActions';
 import Loader from '../../assets/loader/loader';
 import { baseUrl } from '../../urlConstants';
 import Alert from '@material-ui/lab/Alert';
@@ -14,12 +14,12 @@ const Register = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const userRegisterDetails = useSelector((state) => state.userRegister);
-  const [error,setError] = React.useState('')
-  const [isError,setIsError] = React.useState(false);
-  const [successMsg,setSuccessMsg] = React.useState('');
-  const [isSuccess,setIsSuccess] = React.useState(false);
+  const [error, setError] = React.useState('')
+  const [isError, setIsError] = React.useState(false);
+  const [successMsg, setSuccessMsg] = React.useState('');
+  const [isSuccess, setIsSuccess] = React.useState(false);
   const history = useHistory();
-  const [email,setEmail] = React.useState('')
+  const [email, setEmail] = React.useState('')
   const [conpasswordValues, setConPasswordValues] = React.useState({
     password: '',
     showPassword: false,
@@ -28,7 +28,7 @@ const Register = (props) => {
     password: '',
     showPassword: false,
   });
-  const [formErrors,setFormErrors] = React.useState({});
+  const [formErrors, setFormErrors] = React.useState({});
   const handleCloseError = () => {
     setIsError(false);
   }
@@ -70,11 +70,11 @@ const Register = (props) => {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(validateForm()){
+    if (validateForm()) {
       const userData = {
         email: email,
         password1: passwordValues.password,
-        password2: conpasswordValues.password
+        password2: conpasswordValues.password,
       }
       dispatch(registerUserRequest());
       axios({
@@ -88,7 +88,7 @@ const Register = (props) => {
       })
         .then(response => {
           //console.log(response);
-          if(response.data.detail){
+          if (response.data.detail) {
             setIsSuccess(true);
             setSuccessMsg(response.data.detail);
           }
@@ -105,7 +105,7 @@ const Register = (props) => {
   }
   React.useLayoutEffect(() => {
     //console.log(props);
-    if(props.userEmail){
+    if (props.userEmail) {
       setEmail(props.userEmail);
     }
   }, [props]);

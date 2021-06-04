@@ -41,8 +41,8 @@ const useStyle = makeStyles(theme => ({
         flexDirection: 'column',
         alignItems: 'center',
         marginLeft: props.marginDetails.marginFromLeft,
-        marginTop: '56px',
-        padding: '0px 6px',
+        marginTop: '50px',
+        padding: '0px 0px',
     })
 }))
 

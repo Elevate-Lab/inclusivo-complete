@@ -35,6 +35,7 @@ const useStyles = makeStyles(() => ({
 function StoryDescription(props) {
     const classes = useStyles()
     const [loading, setLoading] = React.useState(true)
+    const [loadingVid, setLoadingVid] = React.useState(true)
     const [error, setError] = React.useState('')
     const [storyData, setStoryData] = React.useState({})
 
@@ -58,12 +59,19 @@ function StoryDescription(props) {
         setLoading(false);
     }
 
+    const extractId = (str) => {
+        return str.substring(str.indexOf('=')+1)
+    }
+
     React.useEffect(() => {
         getStoryData()
     }, [])
 
     React.useEffect(() => {
         console.log(storyData)
+        if(Object.keys(storyData).length!==0){
+            setLoadingVid(false)
+        }
     }, [storyData])
 
     return (
@@ -93,8 +101,12 @@ function StoryDescription(props) {
                         <Typography variant="subtitle1" className={classes.title}>
                             {storyData.description}
                         </Typography>
-                        <iframe width="100%" height="500px" style={{ marginBottom: "50px", padding: "20px" }} title="youtube video" frameBorder="none" src={`https://www.youtube.com/embed/${storyData.video_link}`}>
-                        </iframe>
+                        {loadingVid?
+                            null
+                            :
+                            <iframe width="100%" height="500px" style={{ marginBottom: "50px", padding: "20px" }} title="youtube video" frameBorder="none" src={`https://www.youtube.com/embed/${extractId(storyData.video_link)}`}>
+                            </iframe>
+                        }
                     </>
             }
         </>

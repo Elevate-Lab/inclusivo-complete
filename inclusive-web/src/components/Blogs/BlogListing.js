@@ -3,54 +3,68 @@ import {baseUrl} from '../../urlConstants';
 import {
     makeStyles,
     Grid,
-    GridList,
-    GridListTile,
-    GridListTileBar,
-    IconButton 
+    Typography
 } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 import Loader from '../../assets/loader/loader';
 import {Link} from 'react-router-dom'
+import clsx from 'clsx'
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        overflow: 'hidden',
-        backgroundColor: theme.palette.background.paper,
+    bContainer:{
+        width: "100%",
+        backgroundColor: "#fafafa",
+        paddingTop: "12px"
     },
     mainContainer: {
-        maxWidth: "1000px",
+        maxWidth: "1100px",
         width: "auto",
         margin : "0px auto",
-        alignItems : "center"
-
     },
-    image: {
-        width: 250,
-        '&:hover':{
-            boxShadow: "0px 0px 10px -2px rgba(0, 0, 0, 0.15)",
-            zoom: "1.2",
-            transitionDelay: "5000ms",
-        },
+    imgContainer: {
+        width: "180px",
+        minWidth: "180px",
+    },
+    detailsContainer: {
+        width: "calc(100% - 180px)",
+        padding: "0px 10px"
+    },
+    tileContainer:{
+        padding: "10px",
     },
     tile: {
-        // margin: "10px 40px",
-        [theme.breakpoints.up('xs')]: {
-            width: "100% !important"
-        },
-        [theme.breakpoints.between('sm', 'md')]: {
-            width: "48% !important"
-        },
-        [theme.breakpoints.up('md')]: {
-            width: "33.33% !important"
-        },
-        height: "auto"
+        backgroundColor: "#fff",
+        // width: "calc(100% - 20px)",
+        marginBottom: "12px",
+        padding: "30px 20px",
+        borderRadius: "5px",
+        boxShadow: "0px 0px 63px -41px rgba(0, 0, 0, 0.25)"
+    },
+    img:{
+        maxWidth: "158px",
+        maxHeight: "158px",
     },
     icon: {
         color: 'rgba(255, 255, 255, 0.54)',
-      },
+    },
+    ellipsis: {
+        lineHeight: "1.5em",
+        maxHeight: "3em",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        width: "100%",
+        display: "-webkit-box",
+        "-webkit-box-orient": "vertical",
+        "-webkit-line-clamp": 2,
+        lineClamp: 2,
+    },
+    description:{
+        marginTop: "8px"
+    },
+    tileLink:{
+        color: "inherit",
+        width: "100%"
+    }
 }))
 
 function BlogListing(props) {
@@ -98,29 +112,48 @@ function BlogListing(props) {
             error ? 
                 <Grid>{error}</Grid>
             : 
-            <div className={classes.root}>
-                <GridList className={classes.mainContainer} cols={3} cellHeight={300} justify="space-evenly">
-                    {storyData.map((story) => {
-                        return (
-                            <GridListTile key={story.id}  cols={1} className={classes.tile}>    
-                                <img className={classes.image} src={story.photo_url} style={{width: "100%"}} alt={story.name} />
-                                <GridListTileBar
-                                    title={story.name}
-                                    subtitle={<span>{"by " + story.author_credits}</span>}
-                                    style={{width: "100%"}}
-                                    actionIcon={
-                                        <Link to={`/home/blog/${story.id}`} key={story.id}>
-                                            <IconButton className={classes.icon}>
-                                                <InfoIcon />
-                                            </IconButton>
-                                        </Link>
-                                    }
-                                />
-                            </GridListTile>
-                        )
-                    })}
-                </GridList>
-            </div>
+            <Grid container justify='center' className={classes.bContainer}>
+                <Grid item container className={classes.mainContainer} alignItems='flex-start' justify="space-evenly">
+                    <Grid item container justify='center' style={{flex: "1 1"}} className={classes.tileContainer}>
+                        {storyData.map((story) => {
+                            return (
+                                <Grid item container key={story.id} className={classes.tile}>    
+                                    <Link to={`/home/blog/${story.id}`} key={story.id} className={classes.tileLink}>
+                                        <Grid item container xs={12}>
+                                            <Grid item container justify={'center'} alignItems={'center'} className={classes.imgContainer}>
+                                                <img className={classes.img} src={story.photo_url} style={{width: "100%"}} alt={story.name} />
+                                            </Grid>
+                                            <Grid item className={classes.detailsContainer}>
+                                                <Grid item container>
+                                                    <Typography className={classes.ellipsis} variant="h5" style={{fontWeight: "600"}}>{story.name}</Typography>
+                                                </Grid>
+                                                <Grid item container className={classes.description}>
+                                                    <Typography className={classes.ellipsis} variant="body2">{story.description}</Typography>
+                                                </Grid>
+                                                <Grid item container justify='flex-end' className={classes.description}>
+                                                    <Typography variant="body2" style={{fontWeight: "600"}}>-{story.author_credits}</Typography>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </Link>
+                                </Grid>
+                            )
+                        })}
+                    </Grid>
+                    <Grid item conainer alignItems='flex-start' className={clsx(classes.rightElements,classes.tileContainer)} style={{flex: "0 0 390px"}}>
+                        <Grid item container className={classes.tile}>
+                            <Typography variant="body1">
+                                Blogs section helps you keep updated with skills and technologies required to get in most of the companies.
+                            </Typography>
+                        </Grid>
+                        <Grid item container className={classes.tile}>
+                            <Typography variant="body1">
+                                Sort Blogs By
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
 
         } 
         </>

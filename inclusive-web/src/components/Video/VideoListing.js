@@ -3,12 +3,12 @@ import { baseUrl } from '../../urlConstants';
 import {
     makeStyles,
     Grid,
-    GridList,
-    GridListTile,
-    GridListTileBar,
-    IconButton,
+    Chip,
     Typography
 } from '@material-ui/core';
+import {
+    VideocamRounded
+} from '@material-ui/icons'
 import InfoIcon from '@material-ui/icons/Info';
 import Loader from '../../assets/loader/loader';
 import { Link } from 'react-router-dom';
@@ -36,18 +36,20 @@ const useStyles = makeStyles((theme) => ({
     },
     tileContainer:{
         padding: "10px",
+        minWidth: "200px"
     },
     tile: {
         backgroundColor: "#fff",
         // width: "calc(100% - 20px)",
         marginBottom: "12px",
-        padding: "30px 20px",
+        padding: "20px",
         borderRadius: "5px",
         boxShadow: "0px 0px 63px -41px rgba(0, 0, 0, 0.25)"
     },
     img:{
         maxWidth: "158px",
         maxHeight: "158px",
+        borderRadius: "5px"
     },
     icon: {
         color: 'rgba(255, 255, 255, 0.54)',
@@ -72,6 +74,16 @@ const useStyles = makeStyles((theme) => ({
     tileLink:{
         color: "inherit",
         width: "100%"
+    },
+    chipContainer:{
+        padding: "0px 10px 0px 10px"
+    },
+    chip: {
+        borderRadius: "5px",
+        marginRight: "12px",
+        marginTop: "10px",
+        fontWeight :"600",
+        background: "#e6e6e6"
     }
 }))
 
@@ -125,7 +137,7 @@ function BlogListing(props) {
                     :
                     <Grid container justify='center' className={classes.bContainer}>
                         <Grid item container className={classes.mainContainer} alignItems='flex-start' justify="space-evenly">
-                            <Grid item container justify='center' style={{flex: "1 1"}} className={classes.tileContainer}>
+                            <Grid item style={{flex: "2 2 calc(100% - 390px)"}} className={classes.tileContainer}>
                                 {storyData.map((story) => {
                                     return (
                                         <Grid item container key={story.id} className={classes.tile}>    
@@ -139,6 +151,7 @@ function BlogListing(props) {
                                                             <Typography className={classes.ellipsis} variant="h5" style={{fontWeight: "600"}}>{story.name}</Typography>
                                                         </Grid>
                                                         <Grid item container className={classes.description2}>
+                                                            <VideocamRounded style={{fontSize: "18px", marginRight: "4px"}}/>
                                                             <Typography variant="body2" style={{fontWeight: "600"}}>by {story.author_credits}</Typography>
                                                         </Grid>
                                                         <Grid item container className={classes.description}>
@@ -146,19 +159,31 @@ function BlogListing(props) {
                                                         </Grid>
                                                     </Grid>
                                                 </Grid>
+                                                {story.tags.length && 
+                                                <Grid className={classes.chipContainer}>
+                                                    {story.tags.map((tag) => {
+                                                        return(
+                                                            <Chip
+                                                                key={tag.id}
+                                                                label = {tag.name}
+                                                                className={classes.chip}
+                                                            />
+                                                        )
+                                                    })}
+                                                </Grid>}
                                             </Link>
                                         </Grid>
                                     )
                                 })}
                             </Grid>
-                            <Grid item conainer alignItems='flex-start' className={clsx(classes.rightElements,classes.tileContainer)} style={{flex: "0 0 390px"}}>
+                            <Grid item className={clsx(classes.rightElements,classes.tileContainer)} style={{flex: "1 1 390px"}}>
                                 <Grid item container className={classes.tile}>
-                                    <Typography variant="body1">
+                                    <Typography variant="body1" style={{fontWeight: "600"}}>
                                         Videos section helps you keep updated with skills and technologies required to get in most of the companies.
                                     </Typography>
                                 </Grid>
                                 <Grid item container className={classes.tile}>
-                                    <Typography variant="body1">
+                                    <Typography variant="body1" style={{fontWeight: "600"}}>
                                         Sort Videos By
                                     </Typography>
                                 </Grid>

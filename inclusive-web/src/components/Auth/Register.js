@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography, TextField, InputAdornment, IconButton, Button, Snackbar } from "@material-ui/core";
+import { Grid, Typography, TextField, InputAdornment, IconButton, Button, Snackbar, FormControlLabel,Checkbox } from "@material-ui/core";
 import { Email, Visibility, VisibilityOff } from '@material-ui/icons'
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -9,25 +9,32 @@ import { registerUserRequest, registerUserSuccess, registerUserFailure } from '.
 import Loader from '../../assets/loader/loader';
 import { baseUrl } from '../../urlConstants';
 import Alert from '@material-ui/lab/Alert';
+import {Link} from 'react-router-dom'
 
 const Register = (props) => {
   const classes = useStyles();
+
   const dispatch = useDispatch();
+  
   const userRegisterDetails = useSelector((state) => state.userRegister);
   const [error, setError] = React.useState('')
   const [isError, setIsError] = React.useState(false);
   const [successMsg, setSuccessMsg] = React.useState('');
   const [isSuccess, setIsSuccess] = React.useState(false);
+  const [checked, setChecked] = React.useState(false);
   const history = useHistory();
   const [email, setEmail] = React.useState('')
+  
   const [conpasswordValues, setConPasswordValues] = React.useState({
     password: '',
     showPassword: false,
   });
+  
   const [passwordValues, setPasswordValues] = React.useState({
     password: '',
     showPassword: false,
   });
+  
   const [formErrors, setFormErrors] = React.useState({});
   const handleCloseError = () => {
     setIsError(false);
@@ -52,6 +59,10 @@ const Register = (props) => {
       ...temp
     })
     return Object.values(temp).every(value => value === "")
+  }
+
+  const handleCheck = () => {
+    setChecked(!checked)
   }
   const handleClickShowPassword = () => {
     setPasswordValues({ ...passwordValues, showPassword: !passwordValues.showPassword });
@@ -194,7 +205,24 @@ const Register = (props) => {
                   })}
                 />
                 <div>
-                  <Button className={classes.formButton} variant="contained" color="secondary" onClick={handleSubmit}>
+                <Grid item container xs={12} alignItems='center' justify='space-between'>
+                  <Grid xs={1}>
+                    <Checkbox checked={checked} onChange={handleCheck} className={classes.check} name="checkedA" />
+                  </Grid>
+                  <Grid xs={11}>
+                    <Typography>
+                      Accept our 
+                      <Link to={'/legal'} style={{paddingLeft: "4px", paddingRight: "4px"}}>
+                        Terms and Condition
+                      </Link>
+                        , and
+                      <Link to={'/legal'} style={{paddingLeft: "4px"}}>
+                        Policies
+                      </Link>
+                    </Typography>
+                  </Grid>                  
+                </Grid>
+                <Button className={classes.formButton} variant="contained" disabled={!checked} onClick={handleSubmit}>
                     Register
                 </Button>
                 </div>

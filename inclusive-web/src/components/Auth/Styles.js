@@ -59,6 +59,9 @@ export const useStyles = makeStyles(theme => ({
         textAlign: "center",
         '& .MuiButton-root:hover':{
             background: "#ff3750",
+        },
+        '& .Mui-checked':{
+            color: "#ff3750"
         }
     },
     logo: {

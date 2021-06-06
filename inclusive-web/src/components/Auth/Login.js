@@ -1,9 +1,9 @@
 import React from "react";
 import axios from 'axios';
-import { Grid,Typography,TextField,InputAdornment,IconButton,Button } from "@material-ui/core";
-import { loginUserRequest,loginUserFailure,loginUserSuccess } from '../../actions/authActions/loginActions'
-import { Email,Visibility,VisibilityOff } from '@material-ui/icons';
-import { useSelector,useDispatch } from "react-redux";
+import { Grid, Typography, TextField, InputAdornment, IconButton, Button } from "@material-ui/core";
+import { loginUserRequest, loginUserFailure, loginUserSuccess } from '../../actions/authActions/loginActions'
+import { Email, Visibility, VisibilityOff } from '@material-ui/icons';
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useStyles } from "./Styles";
 import { baseUrl } from '../../urlConstants';
@@ -16,14 +16,14 @@ const Login = (props) => {
   const dispatch = useDispatch();
   const userLoginDetails = useSelector((state) => state.userLogin);
   const history = useHistory();
-  const [succesMsg,setSuccessMsg] = React.useState(false);
-  const [isError,setIsError] = React.useState(false);
-  const [email,setEmail] = React.useState('');
+  const [succesMsg, setSuccessMsg] = React.useState(false);
+  const [isError, setIsError] = React.useState(false);
+  const [email, setEmail] = React.useState('');
   const [passwordValues, setPasswordValues] = React.useState({
     password: '',
     showPassword: false,
   });
-  const [formErrors,setFormErrors] = React.useState({});
+  const [formErrors, setFormErrors] = React.useState({});
   const validateForm = () => {
     let temp = {};
     temp.password = passwordValues.password ? "" : "Password is required."
@@ -34,10 +34,10 @@ const Login = (props) => {
     return Object.values(temp).every(value => value === "")
   }
   const handleCloseMessage = () => {
-    if(succesMsg){
+    if (succesMsg) {
       setSuccessMsg(false);
     }
-    if(isError){
+    if (isError) {
       setIsError(false);
     }
   }
@@ -48,11 +48,11 @@ const Login = (props) => {
     setPasswordValues({ ...passwordValues, [prop]: event.target.value });
   };
   const handleEmailChange = (e) => {
-      setEmail(e.target.value);
+    setEmail(e.target.value);
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(validateForm()) {
+    if (validateForm()) {
       const userData = {
         email: email,
         password: passwordValues.password
@@ -74,7 +74,7 @@ const Login = (props) => {
             dispatch(loginUserSuccess(true));
             history.replace({
               pathname: '/profilestatus',
-              state : {
+              state: {
                 from: history.location
               }
             })
@@ -83,6 +83,7 @@ const Login = (props) => {
         .catch(err => {
           //console.log(err.response.data.non_field_errors);
           const errorMsg = err.response.data.non_field_errors;
+          console.log(err);
           setIsError(true);
           dispatch(loginUserFailure(errorMsg[0]));
         })
@@ -92,7 +93,7 @@ const Login = (props) => {
     if (props.userEmail) {
       setEmail(props.userEmail);
     }
-    if(props.message.length > 0 ){
+    if (props.message.length > 0) {
       setSuccessMsg(true);
     }
   }, [props]);

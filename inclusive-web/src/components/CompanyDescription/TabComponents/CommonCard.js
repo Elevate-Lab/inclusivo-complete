@@ -8,11 +8,12 @@ import {
 import {
     BookmarkBorderOutlined,
     ShareOutlined,
-    LocationOn
+    LocationOn,
 } from '@material-ui/icons'
+import VideoCallIcon from '@material-ui/icons/VideoCall';
 import companyPlaceholder from '../../../assets/company_placeholder.png'
 import clsx from 'clsx'
-import {toFilter} from '../../../helpers/methods'
+import { toFilter } from '../../../helpers/methods'
 import Moment from 'react-moment'
 import Tags from '../../Listing/Tags'
 
@@ -23,7 +24,7 @@ const useStyles = makeStyles(theme => ({
         background: "#fff",
         marginTop: "12px",
         borderRadius: "5px",
-        '&:hover':{
+        '&:hover': {
             boxShadow: "0px 0px 10px -2px rgba(0, 0, 0, 0.15)"
         },
         color: "#000"
@@ -37,7 +38,7 @@ const useStyles = makeStyles(theme => ({
         borderRadius: "5px",
         padding: "6px"
     },
-    title:{
+    title: {
         maxHeight: "56px",
         fontSize: "14px"
     },
@@ -51,8 +52,8 @@ const useStyles = makeStyles(theme => ({
     },
     ellipsis: {
         display: "-webkit-box",
-       "-webkit-box-orient": "vertical",
-       "-webkit-line-clamp": 2,
+        "-webkit-box-orient": "vertical",
+        "-webkit-line-clamp": 2,
         overflow: "hidden",
         textOverflow: "ellipsis",
     },
@@ -66,66 +67,97 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function CommonCard({data, type}) {
+function CommonCard({ data, type }) {
     const classes = useStyles()
 
     return (
         <Grid container item justify="center" className={classes.itemContainer}>
             <Grid item container direction="row">
                 <Grid xs={10} item container wrap="nowrap" alignItems="center">
-                    <Grid item style={{marginLeft: "4px"}}>
-                        <img 
-                            src={data.company.logo_url ? data.company.logo_url!=="" ? data.company.logo_url : companyPlaceholder : companyPlaceholder} 
-                            alt="company logo" 
-                            className={classes.logo}
-                            {
-                                ...(type==="scholarship" && {
-                                        style: {width: "56px"}
+                    <Grid item style={{ marginLeft: "4px" }}>
+                        {
+                            type !== "video" ?
+                                <img
+                                    src={data.company.logo_url ? data.company.logo_url !== "" ? data.company.logo_url : companyPlaceholder : companyPlaceholder}
+                                    alt="company logo"
+                                    className={classes.logo}
+                                    {
+                                    ...(type === "scholarship" && {
+                                        style: { width: "56px" }
                                     })
-                            }
-                        />
+                                    }
+                                /> : <img
+                                    src="https://i.ibb.co/7Wpgyzk/Pngtree-youtube-color-icon-3547792.png"
+                                    alt="Youtube logo"
+                                    className={classes.logo}
+                                />
+                        }
+
                     </Grid>
-                    <Grid item container direction="column" justify="space-between" style={{marginLeft: "4px"}}>
+                    <Grid item container direction="column" justify="space-between" style={{ marginLeft: "4px" }}>
                         <Grid item>
-                            <Typography 
-                                variant="h6" 
+                            <Typography
+                                variant="h6"
                                 className={clsx(classes.title, classes.ellipsis)}
                             >
-                                {data.title}
+                                {
+                                    type !== "video" ?
+                                        data.title : data.name
+                                }
                             </Typography>
                         </Grid>
-                        {type==="job" &&
+                        {type === "job" &&
+                            <Grid item>
+                                <Typography variant="caption">
+                                    <Grid item container alignItems="center">
+                                        {data.accepted_locations.length > 0 && <><LocationOn className={classes.locationIcon} />
+                                            {data.accepted_locations.map((location, idx) => (
+                                                <span key={idx} style={{ marginRight: "5px" }}>{location.name}</span>
+                                            ))}
+                                        </>}
+                                    </Grid>
+                                </Typography>
+                            </Grid>}
+                        {type === "video" &&
+                            <Grid item>
+                                <Typography variant="caption">
+                                    <Grid item container alignItems="center">
+                                        <>
+                                            <VideoCallIcon /> by {data.author_credits}
+                                        </>
+                                    </Grid>
+                                </Typography>
+                            </Grid>}
                         <Grid item>
-                            <Typography variant="caption">
-                                <Grid item container alignItems="center">
-                                    {data.accepted_locations.length > 0 && <><LocationOn className={classes.locationIcon} /> 
-                                    {data.accepted_locations.map((location, idx) => (
-                                            <span key={idx} style={{marginRight: "5px"}}>{location.name}</span>
-                                        ))}
-                                    </>}
-                                </Grid>
-                            </Typography>
-                        </Grid>}
-                        <Grid item>
-                            <Typography variant="caption">
-                                {type==="job" ? `${data.job_type} •` : ""} Vacancy - {data.vacancies} • <Moment filter={toFilter} fromNow>{data.posted_on}</Moment>
-                            </Typography>
+                            {
+                                type !== "video" ?
+                                    <Typography variant="caption">
+                                        {type === "job" ? `${data.job_type} •` : ""} Vacancy - {data.vacancies} • <Moment filter={toFilter} fromNow>{data.posted_on}</Moment>
+                                    </Typography>
+                                    : null
+                            }
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid xs={2} item alignItems="flex-end" container direction="column">
-                    <IconButton disableRipple className={classes.btn} style={{marginBottom: "6px"}}>
-                        <BookmarkBorderOutlined fontSize='small' />
-                    </IconButton>
-                    <IconButton disableRipple className={classes.btn}>
-                        <ShareOutlined fontSize='small' />
-                    </IconButton>
+                    {
+                        type !== "video" ?
+                            <>
+                                <IconButton disableRipple className={classes.btn} style={{ marginBottom: "6px" }}>
+                                    <BookmarkBorderOutlined fontSize='small' />
+                                </IconButton>
+                                <IconButton disableRipple className={classes.btn}>
+                                    <ShareOutlined fontSize='small' />
+                                </IconButton>
+                            </>
+                            : null
+                    }
                 </Grid>
             </Grid>
-            <Grid item container style={{marginTop: "4px"}}>
+            <Grid item container style={{ marginTop: "4px" }}>
                 <Typography varaint="subtitle2" className={clsx(classes.jobRole, classes.ellipsis)}>
                     {
-                        type==="job" ? data.job_role : data.description
+                        type === "job" ? data.job_role : data.description
                     }
                 </Typography>
             </Grid>

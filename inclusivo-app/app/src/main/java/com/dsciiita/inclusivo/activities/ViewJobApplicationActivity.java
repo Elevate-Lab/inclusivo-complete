@@ -67,12 +67,10 @@ public class ViewJobApplicationActivity extends AppCompatActivity {
 
 
     private void setToolBar() {
-        binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setHomeActionContentDescription("Back");
+        binding.toolbar.setNavigationOnClickListener(view -> finish());
     }
 
     private void onClick(View view) {

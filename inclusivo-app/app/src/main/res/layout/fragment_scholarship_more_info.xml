@@ -23,6 +23,7 @@
             android:id="@+id/scholarship_tag_chip_grp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusable="true"
             android:layout_marginTop="8dp" />
 
         <TextView
@@ -122,9 +123,10 @@
             android:drawablePadding="4dp"
             android:ellipsize="end"
             android:maxLines="8"
+            android:contentDescription="@string/read_more_about_company"
             android:text="Read more"
-            android:textColor="@color/primary_color"
-            android:textSize="12sp"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
             app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_12" />
 
         <TextView
@@ -145,7 +147,7 @@
             android:drawablePadding="32dp"
             android:fontFamily="@font/roboto_regular"
             android:text="+91 8127148581"
-            android:textColor="#085CFF"
+            android:textColorLink="@color/primary_text"
             android:textSize="14sp"
             app:drawableStartCompat="@drawable/ic_contact_14" />
 
@@ -159,7 +161,7 @@
             android:drawablePadding="32dp"
             android:fontFamily="@font/roboto_regular"
             android:text="btech@gmail.com"
-            android:textColor="#085CFF"
+            android:textColorLink="@color/primary_text"
             android:textSize="14sp"
             app:drawableStartCompat="@drawable/ic_email_14" />
 

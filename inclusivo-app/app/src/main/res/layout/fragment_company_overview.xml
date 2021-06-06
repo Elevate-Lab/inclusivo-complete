@@ -30,13 +30,15 @@
             android:layout_gravity="end"
             android:drawablePadding="4dp"
             android:text="Read more"
-            android:textColor="@color/primary_color"
-            android:textSize="12sp"
+            android:contentDescription="@string/read_more_company_description"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
             app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_12" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusable="true"
             android:layout_marginVertical="32dp">
 
             <TextView
@@ -120,7 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="Jobs"
+            android:text="Recent Jobs"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -146,8 +148,8 @@
             android:layout_marginTop="8dp"
             android:drawablePadding="4dp"
             android:text="See all jobs"
-            android:textColor="@color/primary_color"
-            android:textSize="12sp"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
             app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_12" />
 
         <TextView
@@ -179,8 +181,8 @@
             android:layout_marginTop="8dp"
             android:drawablePadding="4dp"
             android:text="See all Initiatives"
-            android:textColor="@color/primary_color"
-            android:textSize="12sp"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
             app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_12" />
 
 
@@ -213,8 +215,8 @@
             android:layout_marginTop="8dp"
             android:drawablePadding="4dp"
             android:text="See all Stories"
-            android:textColor="@color/primary_color"
-            android:textSize="12sp"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
             app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_12" />
 
         <TextView
@@ -246,8 +248,8 @@
             android:layout_marginTop="8dp"
             android:drawablePadding="4dp"
             android:text="See all Scholarships"
-            android:textColor="@color/primary_color"
-            android:textSize="12sp"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
             app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_12" />
 
         <TextView
@@ -266,7 +268,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="32dp"
             android:fontFamily="@font/roboto_regular"
-            android:textColor="#085CFF"
+            android:textColorLink="@color/primary_text"
             android:autoLink="phone"
             android:textSize="14sp"
             app:drawableStartCompat="@drawable/ic_contact_14" />
@@ -279,7 +281,7 @@
             android:drawablePadding="28dp"
             android:fontFamily="@font/roboto_regular"
             android:autoLink="email"
-            android:textColor="#085CFF"
+            android:textColorLink="@color/primary_text"
             android:textSize="14sp"
             app:drawableStartCompat="@drawable/ic_email_14" />
 
@@ -294,6 +296,7 @@
                 android:id="@+id/linked_in"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:contentDescription="@string/linkedin_profile"
                 android:layout_marginEnd="32dp"
                 android:visibility="gone"
                 android:src="@drawable/ic_linked_in" />
@@ -303,6 +306,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginEnd="32dp"
+                android:contentDescription="@string/twitter_handle_link"
                 android:visibility="gone"
                 android:src="@drawable/ic_twitter" />
 
@@ -310,6 +314,7 @@
                 android:id="@+id/facebook"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:contentDescription="@string/facebook_profile"
                 android:layout_marginEnd="32dp"
                 android:visibility="gone"
                 android:src="@drawable/ic_facebook" />
@@ -319,6 +324,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:visibility="gone"
+                android:contentDescription="@string/instagram_handle"
                 android:src="@drawable/ic_insta" />
 
         </LinearLayout>

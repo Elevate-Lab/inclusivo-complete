@@ -105,6 +105,19 @@
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/consent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/profile_description_til"
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/varela_round"
+        android:textColor="@color/gray"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:text="By confirming application, you agree to share your profile with employers. "/>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/apply"
         android:layout_width="0dp"
@@ -114,7 +127,7 @@
         android:backgroundTint="@color/primary_color"
         android:textColor="@color/white"
         android:text="Confirm application"
-        app:layout_constraintTop_toBottomOf="@id/profile_description_til"
+        app:layout_constraintTop_toBottomOf="@id/consent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"

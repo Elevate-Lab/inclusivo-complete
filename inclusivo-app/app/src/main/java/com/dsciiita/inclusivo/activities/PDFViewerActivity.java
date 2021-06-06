@@ -49,8 +49,12 @@ public class PDFViewerActivity extends AppCompatActivity implements OnLoadComple
 
         registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
-        String link, name;
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setHomeActionContentDescription("Back");
         binding.toolbar.setNavigationOnClickListener(view-> finish());
+
+        String link, name;
         Intent intent = getIntent();
         if(intent.hasExtra("resume_link")) {
             link = intent.getStringExtra("resume_link");

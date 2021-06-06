@@ -17,8 +17,8 @@ android {
         applicationId "com.dsciiita.inclusivo"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 8
-        versionName "3.0"
+        versionCode 9
+        versionName "4.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -86,6 +86,9 @@ dependencies {
     //pdf viewer
     implementation 'com.github.barteksc:pdfium-android:1.9.0'
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+
+    //youtube videos
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
 
 
 }

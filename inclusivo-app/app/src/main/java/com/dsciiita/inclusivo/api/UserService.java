@@ -12,6 +12,8 @@ import com.dsciiita.inclusivo.models.UserEmployee;
 import com.dsciiita.inclusivo.responses.ApplicationByCandidate;
 import com.dsciiita.inclusivo.responses.ApplicationByIdResponse;
 import com.dsciiita.inclusivo.responses.ApplicationsByJobResponse;
+import com.dsciiita.inclusivo.responses.BlogsByIdResponse;
+import com.dsciiita.inclusivo.responses.BlogsResponse;
 import com.dsciiita.inclusivo.responses.CompanyInitiativesResponse;
 import com.dsciiita.inclusivo.responses.CompanyJobsResponse;
 import com.dsciiita.inclusivo.responses.CompanyListsResponse;
@@ -35,6 +37,8 @@ import com.dsciiita.inclusivo.responses.LikedScholarshipResponse;
 import com.dsciiita.inclusivo.responses.LocationResponse;
 import com.dsciiita.inclusivo.responses.LoginResponse;
 import com.dsciiita.inclusivo.responses.ScholarshipByIDResponse;
+import com.dsciiita.inclusivo.responses.VideosAllResponse;
+import com.dsciiita.inclusivo.responses.VideosIdResponse;
 
 import java.util.Map;
 
@@ -246,4 +250,21 @@ public interface UserService {
         @GET("/job/scholarship/company/{COMPANY_ID}")
         Call<CompanyScholarshipResponse> getScholarshipsByCompany(@Path("COMPANY_ID") int companyID,
                                                               @Header("Authorization") String Token);
+
+        //blogs
+        @GET("/upskill/blog/get/")
+        Call<BlogsResponse> getBlogs(@Header("Authorization") String Token);
+
+        @GET("/upskill/blog/get/{BLOG_ID}/individual")
+        Call<BlogsByIdResponse> getBlogById(@Path("BLOG_ID") int blogId, @Header("Authorization") String Token);
+
+
+        //video
+        @GET("/upskill/video/get/")
+        Call<VideosAllResponse> getVideos(@Header("Authorization") String Token);
+
+        @GET("/upskill/video/get/{VIDEO_ID}/individual")
+        Call<VideosIdResponse> getVideoById(@Path("VIDEO_ID") int videoId, @Header("Authorization") String Token);
+
+
 }

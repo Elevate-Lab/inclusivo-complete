@@ -13,22 +13,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Inclusivo">
-
+        <activity android:name=".activities.AboutUsActivity"></activity>
+        <activity android:name=".activities.BlogListingActivity" />
+        <activity android:name=".activities.VideoListActivity" />
+        <activity
+            android:name=".activities.VideoInfoActivity"
+            android:configChanges="orientation|screenSize" />
         <activity android:name=".activities.OpenLinks">
             <intent-filter
                 android:autoVerify="true"
                 tools:targetApi="m">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
                     android:host="inclusivo.netlify.app"
                     android:scheme="https" />
-
             </intent-filter>
         </activity>
-
         <activity android:name=".activities.EvaluationResults" />
         <activity android:name=".activities.CompanyListingActivity" />
         <activity android:name=".activities.ProfileActivity" />
@@ -63,6 +67,7 @@
         <activity android:name=".activities.StoryInfoActivity" />
         <activity android:name=".activities.StoryListing" />
         <activity android:name=".activities.AddStoryActivity" />
+        <activity android:name=".activities.BlogInfoActivity" />
         <activity android:name=".activities.InitiativeInfoActivity" />
         <activity android:name=".activities.AddInitiativeActivity" />
         <activity android:name=".activities.CompanyProfileActivity" />

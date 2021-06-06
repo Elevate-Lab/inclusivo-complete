@@ -53,6 +53,9 @@ public class StoryListing extends AppCompatActivity {
         binding = ActivityStoryListingBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
 
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setHomeActionContentDescription("Back");
         binding.toolbar.setNavigationOnClickListener(view -> finish());
 
         token = "token "+ SharedPrefManager.getInstance(this).getToken();

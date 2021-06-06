@@ -169,7 +169,7 @@ public class ScholarshipRVAdapter extends RecyclerView.Adapter<ScholarshipRVAdap
             super(itemView);
             this.title = itemView.findViewById(R.id.job_title);
             this.desc = itemView.findViewById(R.id.aa);
-            this.saveAnim = itemView.findViewById(R.id.save_anim);
+            this.saveAnim = itemView.findViewById(R.id.save_img);
             this.progressBar = itemView.findViewById(R.id.saveProgress);
             this.profile = itemView.findViewById(R.id.job_company_img);
             this.expiry = itemView.findViewById(R.id.published_time_txt);

@@ -3,6 +3,7 @@ package com.dsciiita.inclusivo.fragments;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +50,12 @@ public class RegisterFragment extends Fragment implements Step {
 
         String email = ((CreateAccountActivity) getActivity()).getEmail();
         registerFragmentBinding.tilEmail.getEditText().setText(email);
+        setupHyperlink();
         return registerFragmentBinding.getRoot();
+    }
+
+    private void setupHyperlink() {
+        registerFragmentBinding.consent.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @Nullable

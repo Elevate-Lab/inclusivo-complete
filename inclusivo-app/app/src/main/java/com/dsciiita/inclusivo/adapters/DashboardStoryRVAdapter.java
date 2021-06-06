@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.dsciiita.inclusivo.R;
 import com.dsciiita.inclusivo.models.Story;
 import com.dsciiita.inclusivo.storage.Constants;
@@ -48,6 +49,7 @@ public class DashboardStoryRVAdapter extends RecyclerView.Adapter<DashboardStory
         if(objectList.get(position).getPhotoUrl()!=null)
             Glide.with(context).load(objectList.get(position).getPhotoUrl())
                 .placeholder(R.drawable.ic_stories)
+                    .transform(new RoundedCorners(16))
                 .into(holder.storyImage);
         else
             holder.storyImage.setBackgroundResource(R.drawable.ic_stories);

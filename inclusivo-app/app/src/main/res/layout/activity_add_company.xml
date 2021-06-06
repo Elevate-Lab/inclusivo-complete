@@ -87,6 +87,7 @@
                         android:id="@+id/logo_img"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:contentDescription="@string/profile_picture"
                         android:layout_gravity="center_horizontal"
                         android:src="@drawable/add_logo_default" />
 
@@ -96,6 +97,7 @@
                     android:id="@+id/add_logo_icon"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:contentDescription="@string/add_image"
                     android:src="@drawable/select_logo_add"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
@@ -126,7 +128,7 @@
                     android:id="@+id/company_name_tie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
                     android:inputType="textCapWords"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
@@ -155,7 +157,7 @@
                     android:id="@+id/company_title_tie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
                     android:inputType="text"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
@@ -176,7 +178,7 @@
                     android:id="@+id/company_profile_tie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
                     android:inputType="textMultiLine"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
@@ -197,7 +199,7 @@
                     android:id="@+id/company_description_tie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
                     android:inputType="textMultiLine"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
@@ -231,7 +233,7 @@
                     android:id="@+id/company_email_tie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
@@ -259,7 +261,7 @@
                     android:id="@+id/company_address_tie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
                     android:inputType="textMultiLine"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
@@ -293,7 +295,7 @@
                     android:id="@+id/company_contact_num_tie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
                     android:inputType="phone"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
@@ -326,7 +328,7 @@
                     android:id="@+id/company_short_code_tie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
                     android:inputType="text"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
@@ -385,7 +387,7 @@
                     android:id="@+id/company_website_tie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
                     android:inputType="text"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
@@ -417,7 +419,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_twitter"
                     android:drawablePadding="16dp"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
                     android:inputType="textMultiLine"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
@@ -439,7 +441,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_facebook"
                     android:drawablePadding="16dp"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
                     android:inputType="textMultiLine"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
@@ -461,7 +463,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="16dp"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
                     android:inputType="textMultiLine"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
@@ -483,7 +485,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_insta"
                     android:drawablePadding="16dp"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/varela_round"
                     android:inputType="textMultiLine"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
@@ -500,7 +502,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="32dp"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/varela_round"
         android:text="Add"
         android:textAllCaps="false"
         android:textSize="14sp"

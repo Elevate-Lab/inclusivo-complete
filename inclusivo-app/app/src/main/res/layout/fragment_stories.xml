@@ -6,44 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".fragments.Dashboard.StoriesFragment">
 
-
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_view_container"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/progress_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        app:shimmer_auto_start="true">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <include layout="@layout/placeholder_dashboard_stories" />
-
-        </LinearLayout>
-
-    </com.facebook.shimmer.ShimmerFrameLayout>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="@color/white"
         android:elevation="3dp"
-        android:visibility="gone"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingHorizontal="12dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="visible">
 
         <ProgressBar
+            android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:indeterminateTintMode="src_atop" />
-    </com.google.android.material.card.MaterialCardView>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:id="@+id/quote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:lineSpacingExtra="5dp"
+            android:fontFamily="@font/varela_round"
+            android:text=""
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/error_view"
@@ -51,6 +49,8 @@
         android:layout_height="0dp"
         android:background="@color/white"
         android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/error_occured"
         android:elevation="1dp"
         android:gravity="center_vertical"
         android:orientation="vertical"
@@ -129,6 +129,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/saved_stories_rv"
                             android:layout_width="match_parent"
+                            android:importantForAccessibility="yes"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="8dp"
                             android:layout_marginTop="16dp"
@@ -177,6 +178,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="8dp"
                             android:layout_marginTop="12dp"
+                            android:importantForAccessibility="yes"
                             android:nestedScrollingEnabled="false"
                             android:orientation="vertical"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -196,14 +198,15 @@
                         android:fontFamily="@font/varela_round"
                         android:lineSpacingExtra="5dp"
                         android:paddingVertical="5dp"
-                        android:text="View all"
+                        android:text="View all stories"
+                        android:textColor="@color/primary_text"
                         android:textAllCaps="false"
                         android:textSize="16sp"
                         app:cornerRadius="5dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:strokeColor="@color/primary_color"
+                        app:strokeColor="@color/primary_text"
                         app:strokeWidth="2dp" />
 
                 </LinearLayout>

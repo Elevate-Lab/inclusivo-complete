@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:fontFamily="@font/roboto_regular"
             android:text="Password"
             android:textColor="@color/black"
@@ -98,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:fontFamily="@font/roboto_regular"
             android:text="Confirm Password"
             android:textColor="@color/black"
@@ -126,6 +126,20 @@
 
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/consent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/btnRegister"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/varela_round"
+        android:textColor="@color/gray"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/signup_consent"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRegister"

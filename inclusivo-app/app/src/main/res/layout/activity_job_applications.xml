@@ -73,6 +73,8 @@
         android:padding="20dp"
         android:visibility="gone"
         android:elevation="1dp"
+        android:focusable="true"
+        android:contentDescription="@string/no_results"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="vertical">

@@ -23,7 +23,7 @@
     </style>
 
     <style name="company_profile_tab_txt_appearance" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
 

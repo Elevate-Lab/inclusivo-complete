@@ -71,8 +71,10 @@ public class StoriesFragment extends Fragment {
 
 
     private void getData() {
-        binding.shimmerViewContainer.setVisibility(View.VISIBLE);
-        binding.shimmerViewContainer.startShimmer();
+
+        int index = (int) (Math.random() * (9));
+        binding.quote.setText((getResources().getStringArray(R.array.diversity_quotes))[index]);
+        binding.progressLayout.setVisibility(View.VISIBLE);
         binding.prent.setVisibility(View.GONE);
         binding.prent.setAlpha(0);
         binding.errorView.setVisibility(View.GONE);
@@ -98,12 +100,12 @@ public class StoriesFragment extends Fragment {
                     binding.errorView.setVisibility(View.VISIBLE);
                     binding.errorAnim.playAnimation();
                 }
-                binding.shimmerViewContainer.setVisibility(View.GONE);
+                binding.progressLayout.setVisibility(View.GONE);
                 binding.refreshLayout.setRefreshing(false);
             }
             @Override
             public void onFailure(Call<CompanyStoryResponse> call, Throwable t) {
-                binding.shimmerViewContainer.setVisibility(View.GONE);
+                binding.progressLayout.setVisibility(View.GONE);
                 binding.refreshLayout.setRefreshing(false);
                 binding.errorView.setVisibility(View.VISIBLE);
                 binding.errorAnim.playAnimation();

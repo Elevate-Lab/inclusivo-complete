@@ -40,8 +40,9 @@
             android:layout_gravity="end"
             android:drawablePadding="4dp"
             android:text="Read more"
-            android:textColor="@color/primary_color"
-            android:textSize="12sp"
+            android:contentDescription="@string/read_more_about_role"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
             app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_12" />
 
         <TextView
@@ -57,6 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:focusable="true"
             android:orientation="horizontal">
 
             <TextView
@@ -74,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="#707070"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
 
@@ -84,6 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:focusable="true"
             android:orientation="horizontal">
 
 
@@ -102,7 +105,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="#707070"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
 
@@ -135,8 +138,9 @@
             android:layout_gravity="end"
             android:drawablePadding="4dp"
             android:text="Read more"
-            android:textColor="@color/primary_color"
-            android:textSize="12sp"
+            android:contentDescription="@string/read_more_about_selection_process"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
             app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_12" />
 
         <TextView
@@ -159,7 +163,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="More Info"
+            android:text="Additional Info"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -167,6 +171,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:focusable="true"
             android:orientation="horizontal">
 
             <TextView
@@ -183,7 +188,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="#707070"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
 
@@ -193,6 +198,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:focusable="true"
             android:orientation="horizontal">
 
             <TextView
@@ -209,7 +215,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="#707070"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
 
@@ -220,6 +226,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:focusable="true"
             android:orientation="horizontal">
 
             <TextView
@@ -236,7 +243,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="#707070"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
 
@@ -246,6 +253,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:focusable="true"
             android:orientation="horizontal">
 
             <TextView
@@ -264,7 +272,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="#707070"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
 
@@ -298,8 +306,9 @@
             android:ellipsize="end"
             android:maxLines="8"
             android:text="Read more"
-            android:textColor="@color/primary_color"
-            android:textSize="12sp"
+            android:contentDescription="@string/read_more_about_company"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
             app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_12" />
 
         <TextView
@@ -318,8 +327,8 @@
             android:layout_marginTop="8dp"
             android:autoLink="phone"
             android:drawablePadding="32dp"
+            android:textColorLink="@color/primary_text"
             android:fontFamily="@font/roboto_regular"
-            android:textColor="#085CFF"
             android:text="adadomaodmoamd"
             android:textSize="14sp"
             app:drawableStartCompat="@drawable/ic_contact_14" />
@@ -332,9 +341,9 @@
             android:layout_marginBottom="32dp"
             android:autoLink="email"
             android:text="aodnnad"
+            android:textColorLink="@color/primary_text"
             android:drawablePadding="28dp"
             android:fontFamily="@font/roboto_regular"
-            android:textColor="#085CFF"
             android:textSize="14sp"
             app:drawableStartCompat="@drawable/ic_email_14" />
 

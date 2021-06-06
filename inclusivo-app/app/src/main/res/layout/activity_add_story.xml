@@ -99,6 +99,7 @@
                 android:id="@+id/story_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/profile_picture"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/profile_default" />
 
@@ -108,6 +109,7 @@
             android:id="@+id/add_story_icon"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:contentDescription="@string/add_image"
             android:src="@drawable/select_logo_add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

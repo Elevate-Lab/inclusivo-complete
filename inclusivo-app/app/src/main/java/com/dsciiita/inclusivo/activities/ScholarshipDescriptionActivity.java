@@ -52,14 +52,25 @@ public class ScholarshipDescriptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityScholarshipDescriptionBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
-        binding.toolbar.setNavigationOnClickListener(view -> onBackPressed());
+
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setHomeActionContentDescription("Back");
+        binding.toolbar.setNavigationOnClickListener(view -> finish());
+
+
         token = "token " + SharedPrefManager.getInstance(this).getToken();
+
         scholarshipId = getIntent().getIntExtra("id", 0);
+
         scholarshipViewModel = new ViewModelProvider(this).get(ScholarshipViewModel.class);
+
         binding.saveImg.setOnClickListener(this::onClick);
         binding.shareImg.setOnClickListener(this::onClick);
         binding.btnApply.setOnClickListener(this::onClick);
+
         getScholarship();
+
     }
 
     private void onClick(View view) {

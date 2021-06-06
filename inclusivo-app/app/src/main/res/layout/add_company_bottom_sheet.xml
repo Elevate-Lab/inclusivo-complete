@@ -9,7 +9,8 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
         android:layout_marginHorizontal="20dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -19,11 +20,13 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:focusable="true"
                 android:orientation="vertical">
                 <ImageButton
                     android:id="@+id/btnRemove"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
+                    android:contentDescription="@string/remove"
                     android:layout_gravity="center"
                     android:padding="10dp"
                     android:background="@android:color/transparent"
@@ -51,12 +54,14 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:focusable="true"
                 android:orientation="vertical">
                 <ImageButton
                     android:id="@+id/btnAddNew"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
+                    android:contentDescription="@string/add_image"
                     android:padding="10dp"
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"

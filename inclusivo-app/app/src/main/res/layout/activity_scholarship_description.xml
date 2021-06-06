@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.JobDescriptionActivity">
+    tools:context=".activities.ScholarshipDescriptionActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -54,6 +54,7 @@
             android:id="@+id/company_logo_img"
             android:layout_width="0dp"
             android:layout_height="52dp"
+            android:contentDescription="@string/company_logo"
             android:layout_marginStart="16dp"
             android:scaleType="fitXY"
             android:src="@drawable/ic_companies"
@@ -81,11 +82,13 @@
 
         <RelativeLayout
             android:id="@+id/save_layout"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="28dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
+            android:contentDescription="@string/save_button"
             app:layout_constraintEnd_toEndOf="parent"
+            android:focusable="true"
             app:layout_constraintTop_toTopOf="parent">
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/save_img"
@@ -93,6 +96,7 @@
                 android:layout_height="match_parent"
                 app:lottie_rawRes="@raw/save_anim"
                 app:lottie_autoPlay="false"
+                android:contentDescription="@string/save_button"
                 android:layout_alignParentEnd="true"
                 app:lottie_loop="false"
                 android:visibility="visible" />
@@ -100,19 +104,21 @@
             <ProgressBar
                 android:id="@+id/saveProgress"
                 android:layout_width="wrap_content"
+                android:contentDescription="@string/save_button"
                 android:visibility="gone"
                 android:layout_height="wrap_content"/>
         </RelativeLayout>
 
         <ImageView
             android:id="@+id/share_img"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="16dp"
+            android:contentDescription="@string/share_button"
             android:src="@drawable/ic_share_red"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/save_layout" />
+            app:layout_constraintTop_toTopOf="@id/save_layout"/>
 
 
         <TextView
@@ -190,10 +196,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bottom_buttons"
-            app:tabIndicatorColor="@color/primary_color"
+            app:tabIndicatorColor="@color/primary_text"
             app:tabIndicatorHeight="2dp"
             app:tabMode="auto"
-            app:tabSelectedTextColor="@color/primary_color"
+            app:tabSelectedTextColor="@color/primary_text"
             app:tabTextAppearance="@style/company_profile_tab_txt_appearance"
             app:tabTextColor="@color/black" />
 

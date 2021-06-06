@@ -14,6 +14,18 @@
         <item>Prefer not to say</item>
     </string-array>
 
+    <string-array name="diversity_quotes">
+        <item>Diversity: the art of thinking independently together.\n~Malcolm Forbes</item>
+        <item>Strength lies in differences, not in similarities.\n~Stephen R. Covey</item>
+        <item>When everyone is included, everyone wins.\n~Jesse Jackson</item>
+        <item>A lot of different flowers make a bouquet.\n~Islamic Proverb</item>
+        <item>Diversity is the mix. Inclusion is making the mix work.\n~Andres Tapia</item>
+        <item>Differences challenge assumptions.\n~Anne Wilson Schaef</item>
+        <item>I can tell you, without diversity, creativity remains stagnant.\n~Edward Enninful</item>
+        <item>The greater the diversity, the greater the perfection.\n~Thomas Berry</item>
+        <item>What divides us pales in comparison to what unites us.\n~Edward Kennedy</item>
+    </string-array>
+
     <string-array name="company_size_spinner">
         <item>1-10</item>
         <item>11-20</item>
@@ -102,4 +114,55 @@
     <string name="shortlisted_msg"><b><font color='#2259B8'>Shortlisted</font></b>: The employer has shortlisted your application for further review.</string>
     <string name="process_msg"><b><font color='#C66400'>Process</font></b>: The employer has viewed your application and is under review.</string>
     <string name="pending_msg"><b>Pending</b>: The employer hasn\'t viewed your application yet.</string>
+
+    <string name="signup_consent">By signing up, you agree to our <a href="https://google.co.in">Terms &amp; Conditions</a> and that you have read our <a href="https://google.co.in">Privacy Policy</a></string>
+    <string name="save_button">Save</string>
+    <string name="update">Update Status</string>
+    <string name="share_button">Share</string>
+    <string name="read_more_about_role">Read more about role</string>
+    <string name="read_more_about_selection_process">Read more about selection process</string>
+    <string name="read_more_about_company">Read more about company</string>
+    <string name="view_all_preferred_cities">view all preferred cities</string>
+    <string name="view_all_saved_jobs">view all saved jobs</string>
+    <string name="more_details_about_applications">more details about applications</string>
+    <string name="view_all_subscribed_companies">view all subscribed companies</string>
+    <string name="read_more_company_description">Read more company description</string>
+    <string name="read_more_description">read more description</string>
+    <string name="view_all_saved_scholarships">view all saved scholarships</string>
+    <string name="search">Search</string>
+    <string name="cancel_search">Cancel search</string>
+    <string name="set_value">set value</string>
+    <string name="blog_image">blog image</string>
+    <string name="company_logo">company logo</string>
+    <string name="story_image">story image</string>
+    <string name="city_image">city image</string>
+    <string name="diversity_image">diversity image</string>
+    <string name="profile_picture">Profile picture</string>
+    <string name="diversity_illustration">diversity illustration</string>
+    <string name="youtube">youtube</string>
+    <string name="youtube_player">youtube player</string>
+    <string name="linkedin_profile">linkedIn profile</string>
+    <string name="twitter_handle_link">twitter handle link</string>
+    <string name="facebook_profile">facebook profile</string>
+    <string name="instagram_handle">instagram handle</string>
+    <string name="no_results">no results</string>
+    <string name="error_occured">error occured</string>
+    <string name="loading_content">loading content</string>
+    <string name="add">Add</string>
+    <string name="add_scholarship">Add scholarship</string>
+    <string name="add_story">Add story</string>
+    <string name="add_job">Add job</string>
+    <string name="add_initiative">add initiative</string>
+    <string name="inclusivo_logo">inclusivo logo</string>
+    <string name="add_image">add image</string>
+    <string name="work_experience">work experience</string>
+    <string name="no_internet_connection">no internet connection</string>
+    <string name="pdf_viewer">pdf viewer</string>
+    <string name="download">Download</string>
+    <string name="github_profile">github profile</string>
+    <string name="remove">remove</string>
+    <string name="pdf">pdf</string>
+    <string name="add_resume">add resume</string>
+    <string name="candidate_image">candidate image</string>
+    <string name="employer">employer</string>
 </resources>

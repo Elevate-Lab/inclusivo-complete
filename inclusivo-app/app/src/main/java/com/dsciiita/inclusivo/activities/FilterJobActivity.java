@@ -48,7 +48,10 @@ public class FilterJobActivity extends AppCompatActivity {
         binding = ActivityFilterBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
 
-        binding.toolbar.setNavigationOnClickListener(view -> finish());
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setHomeActionContentDescription("Back");
+        binding.toolbar.setNavigationOnClickListener(view-> finish());
 
         values = new ArrayList<>();
         types = new ArrayList<>();

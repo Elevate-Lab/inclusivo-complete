@@ -317,6 +317,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 app:rsb_min_interval="1"
+                android:contentDescription="@string/work_experience"
                 app:rsb_mode="range"
                 app:rsb_progress_color="@color/primary_color"
                 app:rsb_progress_height="4dp"
@@ -446,6 +447,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 app:singleLine="false"
+                android:focusable="true"
                 app:singleSelection="false">
 
                 <com.google.android.material.chip.Chip

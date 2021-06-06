@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
     android:layout_marginHorizontal="8dp"
+    android:focusable="true"
     app:strokeColor="@color/ms_material_grey_400"
     app:strokeWidth="1dp">
 
@@ -17,30 +18,35 @@
             android:id="@+id/job_company_img"
             android:layout_width="54dp"
             android:layout_height="54dp"
+            android:contentDescription="@string/company_logo"
             android:src="@drawable/ic_companies"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <RelativeLayout
             android:id="@+id/save_layout"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="@string/save_button"
             app:layout_constraintEnd_toEndOf="parent"
+            android:focusable="true"
             app:layout_constraintTop_toTopOf="parent">
-
             <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/save_anim"
+                android:id="@+id/save_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:lottie_autoPlay="false"
-                app:lottie_loop="false"
                 app:lottie_rawRes="@raw/save_anim"
+                app:lottie_autoPlay="false"
+                android:contentDescription="@string/save_button"
+                android:layout_alignParentEnd="true"
+                app:lottie_loop="false"
                 android:visibility="visible" />
 
             <ProgressBar
                 android:id="@+id/saveProgress"
                 android:layout_width="wrap_content"
                 android:visibility="gone"
+                android:contentDescription="@string/save_button"
                 android:layout_height="wrap_content"/>
         </RelativeLayout>
 
@@ -119,6 +125,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:focusable="true"
             android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +145,7 @@
                 android:fontFamily="@font/roboto_regular"
                 android:visibility="gone"
                 android:gravity="end|center_vertical"
-                android:textColor="@color/primary_color"
+                android:textColor="@color/primary_text"
                 android:textSize="14sp" />
         </LinearLayout>
 

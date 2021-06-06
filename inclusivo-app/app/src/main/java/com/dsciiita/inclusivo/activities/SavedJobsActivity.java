@@ -42,7 +42,12 @@ public class SavedJobsActivity extends AppCompatActivity implements JobRVAdapter
         binding = ActivitySavedJobsBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
 
+
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setHomeActionContentDescription("Back");
         binding.toolbar.setNavigationOnClickListener(view -> finish());
+
         binding.refreshLayout.setOnRefreshListener(this::getData);
 
         jobsList = new ArrayList<>();

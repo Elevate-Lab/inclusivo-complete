@@ -41,9 +41,14 @@ public class AppliedJobsActivity extends AppCompatActivity {
         binding = ActivityAppliedJobsBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
 
-        binding.toolbar.setNavigationOnClickListener(view -> onBackPressed());
         binding.titleToolbar.setText("Applied Jobs");
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setHomeActionContentDescription("Back");
+        binding.toolbar.setNavigationOnClickListener(view -> finish());
+
         binding.refreshLayout.setOnRefreshListener(this::getData);
+
 
         appliedJobs = new ArrayList<>();
         appliedJobsAdapter = new AppliedJobsRV(AppliedJobsActivity.this, appliedJobs, appliedJobListener);

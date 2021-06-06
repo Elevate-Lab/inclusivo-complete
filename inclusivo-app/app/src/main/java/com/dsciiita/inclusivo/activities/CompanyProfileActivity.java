@@ -47,7 +47,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CompanyProfileActivity extends AppCompatActivity {
+public class    CompanyProfileActivity extends AppCompatActivity {
 
     private ActivityCompanyProfileBinding binding;
     private CompanyViewModel viewModel;
@@ -71,7 +71,10 @@ public class CompanyProfileActivity extends AppCompatActivity {
         ViewAnimations.init(binding.fabAddScholarship);
         ViewAnimations.init(binding.fabAddInitiative);
 
-        binding.toolbar.setNavigationOnClickListener(view -> finish());
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setHomeActionContentDescription("Back");
+        binding.toolbar.setNavigationOnClickListener(view->finish());
 
         resultIntent = new Intent();
 

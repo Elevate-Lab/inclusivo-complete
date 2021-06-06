@@ -57,6 +57,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:scaleType="fitXY"
+            android:contentDescription="@string/company_logo"
             app:layout_constraintDimensionRatio="1:1"
             android:src="@drawable/ic_companies"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,11 +83,13 @@
 
         <RelativeLayout
             android:id="@+id/save_layout"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="28dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
+            android:contentDescription="@string/save_button"
             app:layout_constraintEnd_toEndOf="parent"
+            android:focusable="true"
             app:layout_constraintTop_toTopOf="parent">
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/save_img"
@@ -94,6 +97,7 @@
                 android:layout_height="match_parent"
                 app:lottie_rawRes="@raw/save_anim"
                 app:lottie_autoPlay="false"
+                android:contentDescription="@string/save_button"
                 android:layout_alignParentEnd="true"
                 app:lottie_loop="false"
                 android:visibility="visible" />
@@ -102,18 +106,20 @@
                 android:id="@+id/saveProgress"
                 android:layout_width="wrap_content"
                 android:visibility="gone"
+                android:contentDescription="@string/save_button"
                 android:layout_height="wrap_content"/>
         </RelativeLayout>
 
         <ImageView
             android:id="@+id/share_img"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="16dp"
+            android:contentDescription="@string/share_button"
             android:src="@drawable/ic_share_red"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/save_layout" />
+            app:layout_constraintTop_toTopOf="@id/save_layout"/>
 
 
         <TextView
@@ -171,7 +177,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="12dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/job_posted_time_txt"
+            app:layout_constraintTop_toBottomOf="@id/share_img"
             android:id="@+id/bottom_buttons">
 
             <com.google.android.material.button.MaterialButton
@@ -182,14 +188,15 @@
                 android:visibility="gone"
                 android:text="Update Status"
                 app:strokeWidth="1dp"
-                app:strokeColor="@color/primary_color"
+                android:textColor="@color/primary_text"
+                app:strokeColor="@color/primary_text"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:textAllCaps="false"
                 app:layout_constraintStart_toEndOf="@id/btnViewApplication"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:contentDescription="Edit" />
+                android:contentDescription="@string/update" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnViewApplication"
@@ -244,14 +251,14 @@
                 android:visibility="gone"
                 android:text="Evaluate skills"
                 app:strokeWidth="1dp"
-                app:strokeColor="@color/primary_color"
+                android:textColor="@color/primary_text"
+                app:strokeColor="@color/primary_text"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:textAllCaps="false"
                 app:layout_constraintStart_toEndOf="@id/btnApply"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:contentDescription="Edit" />
+                app:layout_constraintBottom_toBottomOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -261,14 +268,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bottom_buttons"
-            app:tabIndicatorColor="@color/primary_color"
+            app:tabIndicatorColor="@color/primary_text"
             app:tabIndicatorHeight="2dp"
             app:tabMode="auto"
-            app:tabSelectedTextColor="@color/primary_color"
+            app:tabSelectedTextColor="@color/primary_text"
             app:tabTextAppearance="@style/company_profile_tab_txt_appearance"
             app:tabTextColor="@color/black" />
 

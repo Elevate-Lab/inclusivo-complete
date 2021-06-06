@@ -7,7 +7,7 @@
     <RelativeLayout
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="124dp"
+        android:layout_height="104dp"
         android:layout_marginBottom="52dp"
         android:background="@color/primary_color"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,6 +21,7 @@
         android:layout_width="104dp"
         android:layout_height="104dp"
         android:src="@drawable/profile_default"
+        android:contentDescription="@string/profile_picture"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

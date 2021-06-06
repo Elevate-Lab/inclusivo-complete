@@ -6,22 +6,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.Dashboard.CompaniesFragment">
 
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_view_container"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/progress_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        app:shimmer_auto_start="true">
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:elevation="3dp"
+        android:paddingHorizontal="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="visible">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <include
-                layout="@layout/placeholder_dashboard_companies"/>
-        </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_centerInParent="true" />
 
-    </com.facebook.shimmer.ShimmerFrameLayout>
+        <TextView
+            android:id="@+id/quote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:lineSpacingExtra="5dp"
+            android:fontFamily="@font/varela_round"
+            android:text=""
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/error_view"
@@ -33,6 +53,8 @@
         android:clickable="true"
         android:visibility="gone"
         android:elevation="1dp"
+        android:focusable="true"
+        android:contentDescription="@string/error_occured"
         android:background="@color/white"
         android:gravity="center_vertical"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,7 +108,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:fontFamily="@font/varela_round"
             android:text="Browse companies"
             android:textColor="@color/black"
@@ -100,6 +122,7 @@
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="12dp"
             android:orientation="vertical"
+            android:importantForAccessibility="yes"
             android:nestedScrollingEnabled="false"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
@@ -116,10 +139,11 @@
                     android:paddingVertical="5dp"
                     android:lineSpacingExtra="5dp"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    app:strokeColor="@color/primary_color"
+                    app:strokeColor="@color/primary_text"
+                    android:textColor="@color/primary_text"
                     app:strokeWidth="2dp"
                     android:fontFamily="@font/varela_round"
-                    android:text="View all"
+                    android:text="View all companies"
                     android:textAllCaps="false"
                     android:textSize="16sp"
                     app:cornerRadius="5dp" />

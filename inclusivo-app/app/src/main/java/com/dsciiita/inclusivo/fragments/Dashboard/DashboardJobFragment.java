@@ -25,7 +25,7 @@ import com.dsciiita.inclusivo.adapters.DashboardJobItemsRVAdapter;
 import com.dsciiita.inclusivo.adapters.JobApplicationsRVAdapter;
 import com.dsciiita.inclusivo.adapters.JobRVAdapter;
 import com.dsciiita.inclusivo.api.ApiClient;
-import com.dsciiita.inclusivo.databinding.FragmentCandidateDashboardBinding;
+import com.dsciiita.inclusivo.databinding.FragmentJobsDashboardBinding;
 import com.dsciiita.inclusivo.models.Company;
 import com.dsciiita.inclusivo.models.FollowedCompanyData;
 import com.dsciiita.inclusivo.models.Job;
@@ -95,7 +95,7 @@ public class DashboardJobFragment extends Fragment {
 
     private int companyJobCount, currJob = 0;
 
-    FragmentCandidateDashboardBinding binding;
+    FragmentJobsDashboardBinding binding;
 
     public DashboardJobFragment() {
         // Required empty public constructor
@@ -130,7 +130,7 @@ public class DashboardJobFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentCandidateDashboardBinding.inflate(inflater);
+        binding = FragmentJobsDashboardBinding.inflate(inflater);
 
         setupAdapters();
         return binding.getRoot();
@@ -176,10 +176,13 @@ public class DashboardJobFragment extends Fragment {
 
     private void getData() {
 
+
+
         currJob = 0;
 
-        binding.shimmerViewContainer.setVisibility(View.VISIBLE);
-        binding.shimmerViewContainer.startShimmer();
+        int index = (int) (Math.random() * (9));
+        binding.quote.setText((getResources().getStringArray(R.array.diversity_quotes))[index]);
+        binding.progressLayout.setVisibility(View.VISIBLE);
         binding.prent.setVisibility(View.GONE);
         binding.prent.setAlpha(0);
         binding.errorView.setVisibility(View.GONE);
@@ -197,6 +200,7 @@ public class DashboardJobFragment extends Fragment {
 
             binding.priorityHeading.setText("Browse your recent jobs");
             companyJobAdapter = new JobRVAdapter(getContext(), companyJobs, companyJobsListener);
+            binding.viewAllPriority.setContentDescription("view all recent jobs");
             binding.priorityJobRv.setAdapter(companyJobAdapter);
             getCompanyJobs();
         } else {
@@ -209,6 +213,7 @@ public class DashboardJobFragment extends Fragment {
             appliedJobsAdapter = new AppliedJobsRV(getContext(), appliedJobs, appliedJobListener);
             binding.priorityJobRv.setAdapter(appliedJobsAdapter);
             binding.priorityHeading.setText("Applied jobs");
+            binding.viewAllPriority.setContentDescription("view all applied jobs");
             getAppliedJobs();
             getFollowedCompanies();
             getSavedJobs();
@@ -223,7 +228,7 @@ public class DashboardJobFragment extends Fragment {
         userRequestCall.enqueue(new Callback<ApplicationByCandidate>() {
             @Override
             public void onResponse(Call<ApplicationByCandidate> call, Response<ApplicationByCandidate> response) {
-                binding.shimmerViewContainer.setVisibility(View.GONE);
+                binding.progressLayout.setVisibility(View.GONE);
                 binding.refreshLayout.setRefreshing(false);
                 if(response.isSuccessful()) {
                     binding.prent.setVisibility(View.VISIBLE);
@@ -245,7 +250,7 @@ public class DashboardJobFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<ApplicationByCandidate> call, Throwable t) {
-                binding.shimmerViewContainer.setVisibility(View.GONE);
+                binding.progressLayout.setVisibility(View.GONE);
                 binding.refreshLayout.setRefreshing(false);
                 binding.priorityCategory.setVisibility(View.GONE);
             }
@@ -264,7 +269,7 @@ public class DashboardJobFragment extends Fragment {
         userRequestCall.enqueue(new Callback<CompanyJobsResponse>() {
             @Override
             public void onResponse(Call<CompanyJobsResponse> call, Response<CompanyJobsResponse> response) {
-                binding.shimmerViewContainer.setVisibility(View.GONE);
+                binding.progressLayout.setVisibility(View.GONE);
                 binding.refreshLayout.setRefreshing(false);
                 if(response.isSuccessful()) {
                     binding.prent.setVisibility(View.VISIBLE);
@@ -291,7 +296,7 @@ public class DashboardJobFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<CompanyJobsResponse> call, Throwable t) {
-                binding.shimmerViewContainer.setVisibility(View.GONE);
+                binding.progressLayout.setVisibility(View.GONE);
                 binding.refreshLayout.setRefreshing(false);
                 binding.priorityCategory.setVisibility(View.GONE);
             }
@@ -592,4 +597,5 @@ public class DashboardJobFragment extends Fragment {
         }
     };
 
+    
 }

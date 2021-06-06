@@ -4,6 +4,7 @@
     <item
         android:id="@+id/my_account_menu"
         android:title="My account" />
+
     <item
         android:id="@+id/my_company"
         android:title="My company" />
@@ -19,7 +20,12 @@
     <item
         android:id="@+id/subs_companies_menu"
         android:title="Subscribed companies" />
+
+    <item
+        android:id="@+id/about_menu"
+        android:title="About us"/>
     <item
         android:id="@+id/logout_menu"
         android:title="Logout" />
+
 </menu>

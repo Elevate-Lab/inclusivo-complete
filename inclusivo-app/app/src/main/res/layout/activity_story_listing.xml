@@ -37,6 +37,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="20dp"
         android:visibility="gone"
+        android:focusable="true"
+        android:contentDescription="@string/no_results"
         android:elevation="1dp"
         android:background="@color/white"
         android:gravity="center_vertical"
@@ -107,10 +109,12 @@
             android:id="@+id/refresh_layout"
             app:layout_constraintTop_toBottomOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/stories_rv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:importantForAccessibility="yes"
                     android:orientation="vertical"
                     android:layout_marginTop="8dp"
                     android:nestedScrollingEnabled="true"

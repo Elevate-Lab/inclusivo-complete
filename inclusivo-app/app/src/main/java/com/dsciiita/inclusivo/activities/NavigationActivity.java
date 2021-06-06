@@ -23,6 +23,7 @@ import com.dsciiita.inclusivo.fragments.Dashboard.DashboardJobFragment;
 import com.dsciiita.inclusivo.fragments.Dashboard.CompaniesFragment;
 import com.dsciiita.inclusivo.fragments.Dashboard.ScholarshipsFragment;
 import com.dsciiita.inclusivo.fragments.Dashboard.StoriesFragment;
+import com.dsciiita.inclusivo.fragments.Dashboard.UpskillFragment;
 import com.dsciiita.inclusivo.models.UserCandidate;
 import com.dsciiita.inclusivo.models.UserEmployee;
 import com.dsciiita.inclusivo.responses.GetUserResponse;
@@ -71,14 +72,6 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
 
         mainBinding.mainNavView.setNavigationItemSelectedListener(this);
 
-        try {
-            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-            String version = "Version "+pInfo.versionName;
-            mainBinding.versionCode.setText(version);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-            mainBinding.versionCode.setVisibility(View.GONE);
-        }
     }
 
 
@@ -101,7 +94,9 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         } else if(id == R.id.my_company) {
             startActivity(new Intent(this, CompanyProfileActivity.class)
                     .putExtra("companyID", SharedPrefManager.getInstance(this).getCompanyID()));
-        } else if(id == R.id.logout_menu) {
+        } else if(id == R.id.about_menu)
+            startActivity(new Intent(this, AboutUsActivity.class));
+        else if(id == R.id.logout_menu) {
             SharedPrefManager.getInstance(this).clear();
             Toast.makeText(this, "Successfully logged out", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(NavigationActivity.this, EmailActivity.class));
@@ -125,6 +120,9 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                     break;
                 case R.id.companies_menu:
                     fragment = new CompaniesFragment();
+                    break;
+                case R.id.upskill_menu:
+                    fragment = new UpskillFragment();
                     break;
                 case R.id.scholarship_menu:
                     fragment = new ScholarshipsFragment();

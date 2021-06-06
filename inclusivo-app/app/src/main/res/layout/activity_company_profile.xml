@@ -37,6 +37,8 @@
         android:padding="20dp"
         android:visibility="gone"
         android:elevation="1dp"
+        android:focusable="true"
+        android:contentDescription="@string/error_occured"
         android:background="@color/white"
         android:gravity="center_vertical"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,6 +96,7 @@
         android:layout_height="52dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
+        android:contentDescription="@string/company_logo"
         android:scaleType="fitXY"
         android:src="@drawable/ic_companies"
         app:layout_constraintStart_toStartOf="parent"
@@ -116,11 +119,12 @@
 
         <ImageView
             android:id="@+id/share_story"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_margin="16dp"
             android:src="@drawable/ic_share_red"
             android:visibility="visible"
+            android:contentDescription="@string/share_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -146,14 +150,14 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="32dp"
-        app:tabSelectedTextColor="@color/primary_color"
+        app:tabSelectedTextColor="@color/primary_text"
         app:tabTextAppearance="@style/company_profile_tab_txt_appearance"
         app:tabTextColor="@color/black"
         app:tabInlineLabel="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/company_profile_txt"
-        app:tabIndicatorColor="@color/primary_color"
+        app:tabIndicatorColor="@color/primary_text"
         app:tabIndicatorHeight="2dp"
         app:tabMode="auto" />
 
@@ -199,7 +203,8 @@
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             app:strokeWidth="1dp"
-            app:strokeColor="@color/primary_color"
+            android:textColor="@color/primary_text"
+            app:strokeColor="@color/primary_text"
             android:fontFamily="@font/roboto_medium"
             android:text="Unsubscribe"
             android:visibility="gone"
@@ -226,7 +231,8 @@
                 android:src="@drawable/ic_initiative"
                 android:tint="@color/white"
                 app:fabSize="mini"
-                app:rippleColor="@color/white" />
+                app:rippleColor="@color/white"
+                android:contentDescription="@string/add_initiative" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabAddJob"
@@ -236,7 +242,8 @@
                 android:src="@drawable/ic_jobs"
                 android:tint="@color/white"
                 app:fabSize="mini"
-                app:rippleColor="@color/white" />
+                app:rippleColor="@color/white"
+                android:contentDescription="@string/add_job" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabAddStory"
@@ -246,7 +253,8 @@
                 android:src="@drawable/ic_stories"
                 android:tint="@color/white"
                 app:fabSize="mini"
-                app:rippleColor="@color/white" />
+                app:rippleColor="@color/white"
+                android:contentDescription="@string/add_story" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabAddScholarship"
@@ -256,7 +264,8 @@
                 android:src="@drawable/ic_scholarship"
                 android:tint="@color/white"
                 app:fabSize="mini"
-                app:rippleColor="@color/white" />
+                app:rippleColor="@color/white"
+                android:contentDescription="@string/add_scholarship" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/addFab"
@@ -266,7 +275,8 @@
                 android:layout_marginVertical="7dp"
                 android:tint="@color/white"
                 android:src="@drawable/ic_round_add_24"
-                app:rippleColor="@color/white" />
+                app:rippleColor="@color/white"
+                android:contentDescription="@string/add" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

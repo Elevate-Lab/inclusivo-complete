@@ -10,6 +10,10 @@
         android:icon="@drawable/ic_companies"
         android:title="Companies" />
     <item
+        android:id="@+id/upskill_menu"
+        android:icon="@drawable/ic_competence"
+        android:title="Upskill" />
+    <item
         android:id="@+id/stories_menu"
         android:icon="@drawable/ic_stories"
         android:title="Stories" />

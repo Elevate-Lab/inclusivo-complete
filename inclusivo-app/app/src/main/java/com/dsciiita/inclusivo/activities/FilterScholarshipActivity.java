@@ -39,7 +39,11 @@ public class FilterScholarshipActivity extends AppCompatActivity {
         binding = ActivityFilterBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
 
-        binding.toolbar.setNavigationOnClickListener(view -> finish());
+
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setHomeActionContentDescription("Back");
+        binding.toolbar.setNavigationOnClickListener(view-> finish());
 
         binding.slidersLayout.setVisibility(View.GONE);
 

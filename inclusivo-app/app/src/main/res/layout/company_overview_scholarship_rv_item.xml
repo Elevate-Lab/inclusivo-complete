@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
+    android:focusable="true"
     app:strokeColor="@color/ms_material_grey_400"
     app:strokeWidth="1dp">
 
@@ -16,6 +17,7 @@
             android:id="@+id/job_company_img"
             android:layout_width="54dp"
             android:layout_height="54dp"
+            android:contentDescription="@string/company_logo"
             android:src="@drawable/ic_companies"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

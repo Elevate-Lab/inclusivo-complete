@@ -23,7 +23,10 @@ public class EvaluationResults extends AppCompatActivity {
         binding = ActivityEvaluationResultsBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
 
-        binding.toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setHomeActionContentDescription("Back");
+        binding.toolbar.setNavigationOnClickListener(view-> finish());
 
         EvaluationData data = new Gson().fromJson(getIntent().getStringExtra("data"), EvaluationData.class);
 

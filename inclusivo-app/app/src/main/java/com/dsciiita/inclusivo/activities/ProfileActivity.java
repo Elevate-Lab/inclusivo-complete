@@ -39,6 +39,10 @@ public class ProfileActivity extends AppCompatActivity {
         binding = ActivityProfileBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
 
+
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setHomeActionContentDescription("Back");
         binding.toolbar.setNavigationOnClickListener(view->finish());
 
         binding.progressBar.setVisibility(View.VISIBLE);

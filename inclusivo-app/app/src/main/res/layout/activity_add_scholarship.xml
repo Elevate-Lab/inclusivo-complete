@@ -300,6 +300,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 app:singleLine="false"
+                android:focusable="true"
                 app:singleSelection="false">
 
                 <com.google.android.material.chip.Chip

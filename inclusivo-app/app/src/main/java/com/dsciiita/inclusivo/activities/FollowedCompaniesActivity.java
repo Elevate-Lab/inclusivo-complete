@@ -37,7 +37,12 @@ public class FollowedCompaniesActivity extends AppCompatActivity implements Dash
 
         binding.shimmerViewContainer.startShimmer();
 
-        binding.toolbar.setNavigationOnClickListener(view -> finish());
+
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setHomeActionContentDescription("Back");
+        binding.toolbar.setNavigationOnClickListener(view-> finish());
+
         binding.refreshLayout.setOnRefreshListener(this::getData);
 
         companyAdapter = new DashboardCompanyRVAdapter(this, companyList, this);

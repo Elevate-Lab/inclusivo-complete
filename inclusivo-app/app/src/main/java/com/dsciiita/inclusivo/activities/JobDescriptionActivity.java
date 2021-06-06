@@ -81,7 +81,10 @@ public class JobDescriptionActivity extends AppCompatActivity {
         binding = ActivityJobDescriptionBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
 
-        binding.toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setHomeActionContentDescription("Back");
+        binding.toolbar.setNavigationOnClickListener(view-> finish());
 
         token  = "token "+ SharedPrefManager.getInstance(this).getToken();
         jobId = getIntent().getIntExtra("id", 0);

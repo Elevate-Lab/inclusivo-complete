@@ -11,6 +11,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"
         android:scaleType="fitCenter"
+        android:contentDescription="@string/diversity_illustration"
         android:src="@drawable/on_boarding_img_1"
         app:layout_constraintBottom_toTopOf="@+id/on_boarding_txt"
         app:layout_constraintEnd_toEndOf="parent"

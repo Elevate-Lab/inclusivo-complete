@@ -58,7 +58,11 @@ public class ScholarshipListing extends AppCompatActivity {
         binding = ActivityScholarshipListingBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
 
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setHomeActionContentDescription("Back");
         binding.toolbar.setNavigationOnClickListener(view -> finish());
+
         binding.shimmerViewContainer.startShimmer();
 
         token = "token "+ SharedPrefManager.getInstance(this).getToken();

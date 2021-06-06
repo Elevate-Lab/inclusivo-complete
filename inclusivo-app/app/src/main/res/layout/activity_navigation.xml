@@ -18,20 +18,19 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/white"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/side_nav_menu">
 
-        <TextView
-            android:id="@+id/version_code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Version"
-            android:layout_marginBottom="30dp"
-            android:fontFamily="@font/varela_round"
-            android:layout_gravity="bottom|center_horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:src="@drawable/nav_illustration"
+            android:layout_gravity="bottom"
+            android:contentDescription="@string/diversity_illustration"
+            android:layout_marginBottom="10dp"/>
+
 
     </com.google.android.material.navigation.NavigationView>
 

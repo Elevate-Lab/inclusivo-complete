@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:importantForAccessibility="yes"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/scholarship_rv_item" />
 
@@ -19,6 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="1dp"
+        android:focusable="true"
+        android:contentDescription="@string/no_results"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:padding="20dp"

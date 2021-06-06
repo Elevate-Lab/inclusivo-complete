@@ -57,6 +57,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="20dp"
         android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/error_occured"
         android:visibility="gone"
         android:elevation="1dp"
         android:background="@color/white"
@@ -284,6 +286,7 @@
                         android:layout_height="20dp"
                         android:layout_marginEnd="32dp"
                         android:visibility="gone"
+                        android:contentDescription="@string/linkedin_profile"
                         android:src="@drawable/ic_linked_in" />
 
                     <ImageView
@@ -292,6 +295,7 @@
                         android:layout_height="20dp"
                         android:layout_marginEnd="32dp"
                         android:visibility="gone"
+                        android:contentDescription="@string/twitter_handle_link"
                         android:src="@drawable/ic_twitter" />
 
                     <ImageView
@@ -299,6 +303,7 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:visibility="gone"
+                        android:contentDescription="@string/github_profile"
                         android:src="@drawable/ic_github" />
 
                 </LinearLayout>

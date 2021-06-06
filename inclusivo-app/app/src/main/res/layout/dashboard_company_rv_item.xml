@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     app:strokeColor="@color/ms_material_grey_400"
     app:strokeWidth="1dp"
+    android:focusable="true"
     android:layout_margin="8dp"
     app:cardCornerRadius="5dp">
 
@@ -19,6 +20,7 @@
             android:layout_height="0dp"
             android:padding="8dp"
             android:scaleType="fitCenter"
+            android:contentDescription="@string/company_logo"
             android:minWidth="85dp"
             app:layout_constraintDimensionRatio="1:1"
             android:src="@drawable/ic_companies"

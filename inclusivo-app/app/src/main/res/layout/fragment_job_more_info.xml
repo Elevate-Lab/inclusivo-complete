@@ -168,8 +168,9 @@
             android:ellipsize="end"
             android:maxLines="8"
             android:text="Read more"
-            android:textColor="@color/primary_color"
-            android:textSize="12sp"
+            android:contentDescription="@string/read_more_about_company"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
             app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_12" />
 
         <TextView
@@ -188,8 +189,9 @@
             android:layout_marginTop="8dp"
             android:autoLink="phone"
             android:drawablePadding="32dp"
+            android:textColorLink="@color/primary_text"
             android:fontFamily="@font/roboto_regular"
-            android:textColor="#085CFF"
+            android:text="adadomaodmoamd"
             android:textSize="14sp"
             app:drawableStartCompat="@drawable/ic_contact_14" />
 
@@ -200,9 +202,10 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="32dp"
             android:autoLink="email"
-            android:drawablePadding="32dp"
+            android:text="aodnnad"
+            android:textColorLink="@color/primary_text"
+            android:drawablePadding="28dp"
             android:fontFamily="@font/roboto_regular"
-            android:textColor="#085CFF"
             android:textSize="14sp"
             app:drawableStartCompat="@drawable/ic_email_14" />
     </LinearLayout>

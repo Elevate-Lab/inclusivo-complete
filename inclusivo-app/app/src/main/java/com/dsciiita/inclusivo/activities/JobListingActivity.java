@@ -66,7 +66,11 @@ public class JobListingActivity extends AppCompatActivity implements JobRVAdapte
         binding.jobListRv.setAdapter(jobAdapter);
 
 
-        binding.toolbar.setNavigationOnClickListener(view -> finish());
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setHomeActionContentDescription("Back");
+        binding.toolbar.setNavigationOnClickListener(view-> finish());
+
         binding.filterTxt.setOnClickListener(view -> startActivityForResult(new Intent(this, FilterJobActivity.class), FILTER_CODE));
         binding.animationView.setOnClickListener(view -> binding.animationView.playAnimation());
         binding.errorAnim.setOnClickListener(view -> binding.errorAnim.playAnimation());

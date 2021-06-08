@@ -2,6 +2,7 @@ import React from 'react';
 import './style.css'
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import Landing from './components/Auth/Landing';
+import LandingSec from './pages/Landing/Landing.js';
 import CompleteCandidate from './components/Profile/CompleteCandidate';
 import CompleteEmployer from './components/Profile/CompleteEmployer';
 import { NonProtectedRoute, ProtectedRoute } from './ProtectedRoute';
@@ -21,6 +22,7 @@ function App() {
           <Switch>
             <Route exact path="/legal" component={Legal} />
             <NonProtectedRoute exact path="/" component={Landing} />
+            <Route exact path="/Landing" component={LandingSec} />
             <NonProtectedRoute exact path="/auth" component={Auth} />
             <ProtectedRoute exact path="/complete/candidate" component={CompleteCandidate} />
             <ProtectedRoute exact path="/complete/employer" component={CompleteEmployer} />

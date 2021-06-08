@@ -60,7 +60,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function FormInput({value, handleChange, name, label, error=null, multiline, small, integer}) {
+function FormInput({value, handleChange, name, label, error=null, multiline, small, integer, placeholder="type here.."}) {
     const classes = useStyles()
 
     return (
@@ -87,7 +87,7 @@ function FormInput({value, handleChange, name, label, error=null, multiline, sma
                     value={value}
                     variant="outlined"
                     onChange={handleChange(integer)}
-                    placeholder="type here.."
+                    placeholder={placeholder}
                     name={name}
                     autoComplete="off"
                     multiline={multiline}

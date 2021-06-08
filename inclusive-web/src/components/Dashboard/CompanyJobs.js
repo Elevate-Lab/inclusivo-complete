@@ -70,9 +70,9 @@ const CompanyJobs = () => {
         <DashboardJobsSkeleton type="jobs" />
       )} {(!loading && !error && data.length === 0) && (
         <div>No Jobs Found</div>
-      ) }{ (!loading && error) && (
+      )}{(!loading && error) && (
         <div>Something went Wrong! Try Again</div>
-      ) }{(!loading && !error && data.length > 0) && (
+      )}{(!loading && !error && data.length > 0) && (
         data.slice(0, 3).map((data, idx) => (
           <Grid key={idx} item className={classes.jobCard}>
             <Card type="jobs" data={data} />
@@ -97,6 +97,7 @@ const CompanyJobs = () => {
                 background: "rgba(255, 234, 236, 1)",
                 width: "100px",
               }}
+              ariaLabel="View All"
               onClick={handleViewMore}
             >
               View All
@@ -108,6 +109,7 @@ const CompanyJobs = () => {
                 background: "rgba(255, 234, 236, 1)",
                 width: "100px",
               }}
+              ariaLabel="Close"
               onClick={handleViewMore}
             >
               Close

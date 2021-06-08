@@ -14,7 +14,7 @@ import {
     LinearProgress,
     Snackbar
 } from '@material-ui/core';
-import { 
+import {
     CenterFocusWeak,
     LinkedIn,
     Instagram,
@@ -99,7 +99,7 @@ const AddCompany = (props) => {
     const [profilePreview, setProfilePreview] = React.useState({
         profileImg: blankImage
     })
-    const [companyData,setCompanyData] = React.useState({
+    const [companyData, setCompanyData] = React.useState({
         name: "",
         title: "",
         short_code: "",
@@ -119,18 +119,18 @@ const AddCompany = (props) => {
     const [profileImageSelected, setprofileImageSelected] = React.useState(false);
     const [progress, setProgress] = React.useState(0);
     const [imageUploading, setImageUploading] = React.useState(false);
-    const [isAdding,setIsAdding] = React.useState(false);
-    const [successMsg,setMsg] = React.useState('');
-    const [isSuccess,setIsSuccess] = React.useState(false);
+    const [isAdding, setIsAdding] = React.useState(false);
+    const [successMsg, setMsg] = React.useState('');
+    const [isSuccess, setIsSuccess] = React.useState(false);
     const handleCloseSuccessMessage = () => {
         setIsSuccess(false);
-        if (props.location.state.mode === "ProfileComplete"){
+        if (props.location.state.mode === "ProfileComplete") {
             history.goBack();
         }
     }
- 
+
     const handleChange = (prop) => (event) => {
-        setCompanyData({...companyData, [prop]: event.target.value})
+        setCompanyData({ ...companyData, [prop]: event.target.value })
     };
     const handleProfileImage = (e) => {
         if (e.target.files[0]) {
@@ -203,7 +203,7 @@ const AddCompany = (props) => {
         await fetch(`${baseUrl}/company/add/`, requestOptions)
             .then(res => res.json())
             .then(res => {
-                if(res.status === "OK"){
+                if (res.status === "OK") {
                     setIsAdding(false);
                     setMsg(res.message);
                     setIsSuccess(true);
@@ -269,31 +269,31 @@ const AddCompany = (props) => {
     const iconsDisplay = (data) => {
         switch (data) {
             case "website":
-                return(
+                return (
                     <Language />
                 )
-            case "email": 
-                return(
+            case "email":
+                return (
                     <Email />
                 )
-            case "phone_number": 
-                    return(
-                        <Phone />
-                    )
-            case "short_code": 
-                    return(
-                        <Sms />
-                    )
+            case "phone_number":
+                return (
+                    <Phone />
+                )
+            case "short_code":
+                return (
+                    <Sms />
+                )
             default:
                 return;
         }
 
     }
 
-    const displayField = (data,idx) => {
-        return(
+    const displayField = (data, idx) => {
+        return (
             <div className={classes.formInputs} key={idx}>
-                <TextField 
+                <TextField
                     onChange={handleChange(data.name)}
                     className={classes.fieldInput}
                     name={data.name}
@@ -301,30 +301,30 @@ const AddCompany = (props) => {
                     label={data.label}
                     type={data.type}
                     {
-                        ...(data.type ==="textarea" && {
-                            multiline: true,
-                            rows: 3,
-                            variant: "outlined"
-                        })
+                    ...(data.type === "textarea" && {
+                        multiline: true,
+                        rows: 3,
+                        variant: "outlined"
+                    })
                     }
                     {
-                        ...(data.type === "select" && {
-                            select : true,
-                            defaultValue: 0
-                        })
+                    ...(data.type === "select" && {
+                        select: true,
+                        defaultValue: 0
+                    })
                     }
                     {
-                        ...(data.icon && {
-                            InputProps: {
-                                    endAdornment: <InputAdornment position="end">
-                                        {iconsDisplay(data.name)}                          
-                                    </InputAdornment>
-                                }
-                        })
+                    ...(data.icon && {
+                        InputProps: {
+                            endAdornment: <InputAdornment position="end">
+                                {iconsDisplay(data.name)}
+                            </InputAdornment>
+                        }
+                    })
                     }
                 >
                     {
-                        data.type ==="select" && [1,2,3,4,5,6,7,8,9,10].map((option) => (
+                        data.type === "select" && [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => (
                             <MenuItem key={option} value={option}>
                                 {option}
                             </MenuItem>
@@ -337,15 +337,19 @@ const AddCompany = (props) => {
 
     const socialMediaLinksField = [
         {
-            icon: <LinkedIn />,name: "linkedin"},
+            icon: <LinkedIn />, name: "linkedin"
+        },
         {
-            icon: <Twitter />,name: "twitter"},
+            icon: <Twitter />, name: "twitter"
+        },
         {
-            icon: <Facebook />,name: "facebook"},
+            icon: <Facebook />, name: "facebook"
+        },
         {
-            icon: <Instagram />,name: "instagram"}
-        ];
-                    
+            icon: <Instagram />, name: "instagram"
+        }
+    ];
+
     return (
         <>
             {imageUploading ? (
@@ -400,6 +404,7 @@ const AddCompany = (props) => {
                                         className={classes.formButton}
                                         variant="contained"
                                         color="secondary"
+                                        ariaLabel="Upload"
                                     >
                                         Upload
                                 </Button>
@@ -428,9 +433,9 @@ const AddCompany = (props) => {
                             }
 
                             <div>
-                                <Button className={classes.formButton} variant="contained" color="secondary" type="submit" onClick={handleSubmit} >
+                                <Button className={classes.formButton} variant="contained" color="secondary" type="submit" onClick={handleSubmit} ariaLabel="Add Company">
                                     Add Company
-                            </Button>
+                                </Button>
                             </div>
                         </form>
                     </Grid>

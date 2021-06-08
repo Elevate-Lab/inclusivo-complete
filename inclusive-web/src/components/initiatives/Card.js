@@ -117,10 +117,10 @@ const Card = ({ data }) => {
             </div>
           ) : (
             <DialogActions>
-              <Button onClick={handleDialogClose} color="primary">
+              <Button onClick={handleDialogClose} color="primary" ariaLabel="Cancel">
                 Cancel
               </Button>
-              <Button onClick={deleteInitiative} color="primary">
+              <Button onClick={deleteInitiative} color="primary" ariaLabel="Yes">
                 Yes Sure!
               </Button>
             </DialogActions>

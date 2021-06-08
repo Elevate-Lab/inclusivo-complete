@@ -149,7 +149,7 @@ const Login = (props) => {
                     helperText: formErrors.password
                   })
                   } />
-                <Button className={classes.formButton} variant="contained" onClick={handleSubmit}>
+                <Button className={classes.formButton} variant="contained" onClick={handleSubmit} ariaLabel="Login">
                   Login
                 </Button>
               </form>

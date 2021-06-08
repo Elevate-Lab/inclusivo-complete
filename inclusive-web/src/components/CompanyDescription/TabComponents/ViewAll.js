@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
         width: "142px",
         "&:hover": {
             background: "#ff3750",
-            "& .MuiTypography-h6":{
+            "& .MuiTypography-h6": {
                 color: "#fff !important",
             }
         }
@@ -24,17 +24,18 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function ViewAll({handleChange, value}) {
-    const classes=useStyles()
+function ViewAll({ handleChange, value }) {
+    const classes = useStyles()
     return (
         <Button
             disableRipple
-            className={classes.btn} 
-            onClick={handleChange(value)}   
+            className={classes.btn}
+            onClick={handleChange(value)}
+            ariaLabel="View All"
         >
             <Typography variant="h6" className={classes.btnText}>
                 View All
-            </Typography>            
+            </Typography>
         </Button>
     )
 }

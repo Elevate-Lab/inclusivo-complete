@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     container: {
         width: "90%",
         margin: "10px auto",
-        '& .MuiButton-root:hover':{
+        '& .MuiButton-root:hover': {
             background: "#ff3750",
         }
     },
@@ -74,7 +74,7 @@ const useStyles = makeStyles(theme => ({
     profileInputField: {
         display: "none"
     },
-    phoneFormInput : {
+    phoneFormInput: {
         background: "#fafafa",
         borderRadius: "5px",
         fontSize: "10px",
@@ -103,7 +103,7 @@ const useStyles = makeStyles(theme => ({
         "&:focus-within .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
             border: "2px solid #76B7F3 !important"
         },
-      },
+    },
 }));
 const StyledBadge = withStyles((theme) => ({
     badge: {
@@ -128,7 +128,7 @@ const initialValues = {
 
 const UpdateProfile = (props) => {
     const classes = useStyles();
-    
+
     const [gender, setGender] = React.useState("");
     const [userType, setUserType] = React.useState("");
 
@@ -136,16 +136,16 @@ const UpdateProfile = (props) => {
     const [profilePreview, setProfilePreview] = React.useState({
         profileImg: blankImage
     })
-    const [profileImageSelected,setprofileImageSelected] = React.useState(false);
-    const [progress,setProgress] = React.useState(0);
-    const [imageUploading,setImageUploading] = React.useState(false);
+    const [profileImageSelected, setprofileImageSelected] = React.useState(false);
+    const [progress, setProgress] = React.useState(0);
+    const [imageUploading, setImageUploading] = React.useState(false);
     const [isError, setIsError] = React.useState(false)
     const history = useHistory();
 
-    const [values, setValues, errors, setErrors, handleChange] = useForm(initialValues, false , ()=>{})
+    const [values, setValues, errors, setErrors, handleChange] = useForm(initialValues, false, () => { })
 
     const handleProfileImage = (e) => {
-        if(e.target.files[0]){
+        if (e.target.files[0]) {
             const reader = new FileReader();
             reader.onload = () => {
                 if (reader.readyState === 2) {
@@ -169,10 +169,10 @@ const UpdateProfile = (props) => {
             "state_changed",
             snapshot => {
                 const progress = Math.round(
-                    (snapshot.bytesTransferred/snapshot.totalBytes) * 100
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
                 );
                 setProgress((oldProgress) => {
-                    if(oldProgress === 100){
+                    if (oldProgress === 100) {
                         return 0;
                     }
                     return progress;
@@ -184,7 +184,7 @@ const UpdateProfile = (props) => {
             () => {
                 storage
                     .ref("user/profile")
-                    .child(`${profileImageValues.name.slice(0,-4)}_${profileImageValues.lastModified}`)
+                    .child(`${profileImageValues.name.slice(0, -4)}_${profileImageValues.lastModified}`)
                     .getDownloadURL()
                     .then(url => {
                         console.log(url);
@@ -201,7 +201,7 @@ const UpdateProfile = (props) => {
             }
         )
     }
-    
+
     const handleChangeGender = (e) => {
         setGender(e.target.value);
     }
@@ -213,34 +213,34 @@ const UpdateProfile = (props) => {
     const submitFunction = async (e) => {
         e.preventDefault();
         // if(validate()){
-            // let employerBool;
-            // if (IsEmployerValues === 'Employer') {
-            //     employerBool = true;
-            // } else if(IsEmployerValues === "Candidate") {
-            //     employerBool = false;
-            // }
+        // let employerBool;
+        // if (IsEmployerValues === 'Employer') {
+        //     employerBool = true;
+        // } else if(IsEmployerValues === "Candidate") {
+        //     employerBool = false;
+        // }
 
-            const key = localStorage.getItem('key');
+        const key = localStorage.getItem('key');
 
-            const body = values
-            body.gender = gender
-            body.is_employer = userType === "Employer" ? true : false
-            console.log(body)
+        const body = values
+        body.gender = gender
+        body.is_employer = userType === "Employer" ? true : false
+        console.log(body)
 
-            const requestOptions = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*',
-                    'Authorization': `token ${key}`,
-                },
-                body: JSON.stringify(body)
-            };
-            await fetch(`${baseUrl}/user/update/`, requestOptions).
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Authorization': `token ${key}`,
+            },
+            body: JSON.stringify(body)
+        };
+        await fetch(`${baseUrl}/user/update/`, requestOptions).
             then(res => res.json())
             .then(res => {
-                if(res.status === "OK"){
-                    if(res.data.is_employer){
+                if (res.status === "OK") {
+                    if (res.data.is_employer) {
                         history.push({
                             pathname: '/complete/employer',
                             state: {
@@ -255,7 +255,7 @@ const UpdateProfile = (props) => {
                             }
                         })
                     }
-                } 
+                }
             }).catch(err => {
                 console.log(err);
                 // setIsError(true);
@@ -264,172 +264,173 @@ const UpdateProfile = (props) => {
     }
 
     React.useLayoutEffect(() => {
-        if(localStorage.getItem('userEmail')){
+        if (localStorage.getItem('userEmail')) {
             setValues({
                 ...values,
                 email: localStorage.getItem('userEmail')
             })
         }
-    },[]);
+    }, []);
 
     return (
         <>
-        {imageUploading ? (
-            <LinearProgress variant="determinate" value={progress} />
-        ) : (<></>)}
-        <Grid container direction="column" justify="center" alignItems="center" className={classes.container}>
-            <Grid item xs={12}>
-                <Typography className={classes.formName}>
-                    Update Profile
+            {imageUploading ? (
+                <LinearProgress variant="determinate" value={progress} />
+            ) : (<></>)}
+            <Grid container direction="column" justify="center" alignItems="center" className={classes.container}>
+                <Grid item xs={12}>
+                    <Typography className={classes.formName}>
+                        Update Profile
                 </Typography>
-            </Grid>
+                </Grid>
                 <Grid item xs={12} >
-                <form onSubmit={submitFunction} className={classes.formContainer}>
-                    <Grid container item direction="column" alignItems="center" justify="center" className={classes.formInputs}>
-                        <StyledBadge badgeContent={
-                            <>
-                                <label htmlFor="imageInput" className={classes.profileInputLabel}>
-                                    <CenterFocusWeak className={classes.profileInputBadge} />
-                                </label>
-                                <input 
-                                    accept="image/*"
-                                    name="profileImage"
-                                    type="file" 
-                                    id="imageInput" 
-                                    className={classes.profileInputField}
-                                    onChange={handleProfileImage}
-                                />
-                            </>
-                            }    
-                            anchorOrigin={{
-                                vertical: "bottom",
-                                horizontal: "right"
-                            }}
+                    <form onSubmit={submitFunction} className={classes.formContainer}>
+                        <Grid container item direction="column" alignItems="center" justify="center" className={classes.formInputs}>
+                            <StyledBadge badgeContent={
+                                <>
+                                    <label htmlFor="imageInput" className={classes.profileInputLabel}>
+                                        <CenterFocusWeak className={classes.profileInputBadge} />
+                                    </label>
+                                    <input
+                                        accept="image/*"
+                                        name="profileImage"
+                                        type="file"
+                                        id="imageInput"
+                                        className={classes.profileInputField}
+                                        onChange={handleProfileImage}
+                                    />
+                                </>
+                            }
+                                anchorOrigin={{
+                                    vertical: "bottom",
+                                    horizontal: "right"
+                                }}
                             >
-                            <Avatar 
-                                alt="Profile Image" 
-                                src={profilePreview.profileImg} 
-                                className={classes.profileAvatar} 
-                            />
-                        </StyledBadge>
-                    </Grid>
-                    {
-                        profileImageSelected ? <div>
-                                <Button 
-                                    className={classes.formButton} 
-                                    variant="contained" 
+                                <Avatar
+                                    alt="Profile Image"
+                                    src={profilePreview.profileImg}
+                                    className={classes.profileAvatar}
+                                />
+                            </StyledBadge>
+                        </Grid>
+                        {
+                            profileImageSelected ? <div>
+                                <Button
+                                    className={classes.formButton}
+                                    variant="contained"
                                     color="secondary"
-                                    onClick={uploadProfileImage} 
+                                    onClick={uploadProfileImage}
+                                    ariaLabel="upload"
                                 >
                                     Upload
                                 </Button>
                             </div> : (<></>)
-                    }
-                    <div className={classes.formInputs}>
-                        <Controls.FormInput 
-                            value={values.first_name}
-                            name="first_name"
-                            handleChange={handleChange}
-                            label="First Name"
-                        />
-                    </div>
-                    <div className={classes.formInputs}>
-                        <Controls.FormInput 
-                            value={values.last_name}
-                            name="last_name"
-                            handleChange={handleChange}
-                            label="Last Name"
-                        />
-                    </div>
-                    <div className={classes.formInputs}>
-                        <Controls.FormInput 
-                            value={values.email}
-                            name="email"
-                            handleChange={() => {}}
-                            label="Email Address"
-                        />
-                    </div>
-                    <div className={classes.formInputs}>
-                        <Grid container direction="column">
-                            <Typography variant="h6" style={{ fontSize: "14px",margin: "10px 0px", letterSpacing: "0.4px" }}>
-                                Gender
+                        }
+                        <div className={classes.formInputs}>
+                            <Controls.FormInput
+                                value={values.first_name}
+                                name="first_name"
+                                handleChange={handleChange}
+                                label="First Name"
+                            />
+                        </div>
+                        <div className={classes.formInputs}>
+                            <Controls.FormInput
+                                value={values.last_name}
+                                name="last_name"
+                                handleChange={handleChange}
+                                label="Last Name"
+                            />
+                        </div>
+                        <div className={classes.formInputs}>
+                            <Controls.FormInput
+                                value={values.email}
+                                name="email"
+                                handleChange={() => { }}
+                                label="Email Address"
+                            />
+                        </div>
+                        <div className={classes.formInputs}>
+                            <Grid container direction="column">
+                                <Typography variant="h6" style={{ fontSize: "14px", margin: "10px 0px", letterSpacing: "0.4px" }}>
+                                    Gender
                             </Typography>
-                            <TextField 
-                                value={gender}
-                                variant="outlined"
-                                style={{width: "100%"}}
-                                className={classes.phoneFormInput}
-                                id="gender"
-                                name="gender"
-                                onChange={handleChangeGender}
-                                select
-                            >
-                                <MenuItem key="Male" value="Male">
-                                    Male
+                                <TextField
+                                    value={gender}
+                                    variant="outlined"
+                                    style={{ width: "100%" }}
+                                    className={classes.phoneFormInput}
+                                    id="gender"
+                                    name="gender"
+                                    onChange={handleChangeGender}
+                                    select
+                                >
+                                    <MenuItem key="Male" value="Male">
+                                        Male
                                 </MenuItem>
-                                <MenuItem key="Female" value="Female">
-                                    Female
+                                    <MenuItem key="Female" value="Female">
+                                        Female
                                 </MenuItem>
-                                <MenuItem key="Other" value="Other">
-                                    Other
+                                    <MenuItem key="Other" value="Other">
+                                        Other
                                 </MenuItem>
-                            </TextField>
-                        </Grid>
-                    </div>
-                    <div className={classes.formInputs}>
-                        <Controls.DatePicker
-                            values={values}
-                            setValues={setValues}
-                            label="Date of Birth"
-                            name="dob"
-                            onlyFuture={false}
-                        />
-                    </div>
-                    <div className={classes.formInputs}>
-                        <Grid container direction="column">
-                            <Typography variant="h6" style={{ fontSize: "14px",margin: "10px 0px", letterSpacing: "0.4px" }}>
-                                Who are you ?
+                                </TextField>
+                            </Grid>
+                        </div>
+                        <div className={classes.formInputs}>
+                            <Controls.DatePicker
+                                values={values}
+                                setValues={setValues}
+                                label="Date of Birth"
+                                name="dob"
+                                onlyFuture={false}
+                            />
+                        </div>
+                        <div className={classes.formInputs}>
+                            <Grid container direction="column">
+                                <Typography variant="h6" style={{ fontSize: "14px", margin: "10px 0px", letterSpacing: "0.4px" }}>
+                                    Who are you ?
                             </Typography>
-                            <TextField 
-                                value={userType}
-                                variant="outlined"
-                                style={{width: "100%"}}
-                                className={classes.phoneFormInput}
-                                id="userType"
-                                name="userType"
-                                onChange={handleChangeUserType}
-                                select
-                            >
-                                <MenuItem key="Candidate" value="Candidate">
-                                    Candidate
+                                <TextField
+                                    value={userType}
+                                    variant="outlined"
+                                    style={{ width: "100%" }}
+                                    className={classes.phoneFormInput}
+                                    id="userType"
+                                    name="userType"
+                                    onChange={handleChangeUserType}
+                                    select
+                                >
+                                    <MenuItem key="Candidate" value="Candidate">
+                                        Candidate
                                 </MenuItem>
-                                <MenuItem key="Employer" value="Employer">
-                                    Employer
+                                    <MenuItem key="Employer" value="Employer">
+                                        Employer
                                 </MenuItem>
-                            </TextField>
-                        </Grid>
-                    </div>
-                    {
-                        (
-                            <Button className={classes.formButton} variant="contained" type="submit">
-                                Update
-                            </Button>
-                        ) 
-                    }
-                    {
-                        isError ? (
-                            <Snackbar open={isError} autoHideDuration={6000} onClose={() => setIsError(false)}>
-                                <Alert onClose={() => setIsError(false)} severity="error">
-                                    Please Try Again
+                                </TextField>
+                            </Grid>
+                        </div>
+                        {
+                            (
+                                <Button className={classes.formButton} variant="contained" type="submit" ariaLabel="Update">
+                                    Update
+                                </Button>
+                            )
+                        }
+                        {
+                            isError ? (
+                                <Snackbar open={isError} autoHideDuration={6000} onClose={() => setIsError(false)}>
+                                    <Alert onClose={() => setIsError(false)} severity="error">
+                                        Please Try Again
                                 </Alert>
-                            </Snackbar>
-                        ) : (
-                            <></>
-                        )
-                    }
-                </form>
+                                </Snackbar>
+                            ) : (
+                                <></>
+                            )
+                        }
+                    </form>
+                </Grid>
             </Grid>
-        </Grid>
         </>
     )
 }

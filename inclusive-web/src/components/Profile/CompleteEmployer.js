@@ -2,11 +2,8 @@ import React from "react";
 import {
   makeStyles,
   Grid,
-  FormControl,
-  InputLabel,
   Button,
   Typography,
-  Select,
   MenuItem,
   TextField,
   IconButton,
@@ -228,7 +225,7 @@ const CompleteEmployer = () => {
             <Grid container direction="column">
               <Typography
                 variant="h6"
-                style={{ fontSize: "14px", margin: "10px 0px",  letterSpacing: "0.4px" }}
+                style={{ fontSize: "14px", margin: "10px 0px", letterSpacing: "0.4px" }}
               >
                 Alternate Phone Number
               </Typography>
@@ -250,20 +247,20 @@ const CompleteEmployer = () => {
               >
                 Select Your Company
               </Typography>
-            <TextField
-              defaultValue=""
-              className={classes.phoneFormInput}
-              name="companyId"
-              select
-              variant="outlined"
-              onChange={handleChange}
-            >
-              {companyList.map((option) => (
-                <MenuItem key={option.id} value={option.id}>
-                  {option.name}
-                </MenuItem>
-              ))}
-            </TextField>
+              <TextField
+                defaultValue=""
+                className={classes.phoneFormInput}
+                name="companyId"
+                select
+                variant="outlined"
+                onChange={handleChange}
+              >
+                {companyList.map((option) => (
+                  <MenuItem key={option.id} value={option.id}>
+                    {option.name}
+                  </MenuItem>
+                ))}
+              </TextField>
             </Grid>
           </div>
 
@@ -314,6 +311,7 @@ const CompleteEmployer = () => {
               variant="contained"
               color="secondary"
               type="submit"
+              ariaLabel="Continue"
             >
               Continue
             </Button>

@@ -2,7 +2,6 @@ import React from "react";
 import { useStyles } from "./Styles";
 import {
   Grid,
-  ButtonBase,
   Typography,
   IconButton,
   Icon,
@@ -142,7 +141,7 @@ const Card = ({ data, type, status, tagsToShow }) => {
         <Grid item container direction="row">
           <Grid xs={10} item container wrap="nowrap" alignItems="center">
             <Grid item style={{ marginLeft: "4px" }}>
-              <ButtonBase>
+              <>
                 {data.company && (
                   <img
                     src={
@@ -155,7 +154,7 @@ const Card = ({ data, type, status, tagsToShow }) => {
                   />
                 )}
                 {
-                  type==="scholarships" && !data.company && (
+                  type === "scholarships" && !data.company && (
                     <img
                       src={
                         scholarshipPlaceholder
@@ -167,7 +166,7 @@ const Card = ({ data, type, status, tagsToShow }) => {
                     />
                   )
                 }
-              </ButtonBase>
+              </>
             </Grid>
             <Grid
               item

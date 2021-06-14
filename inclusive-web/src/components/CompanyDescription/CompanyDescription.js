@@ -4,13 +4,11 @@ import {
     makeStyles,
     Grid,
     Typography,
-    Tab,
     Tabs,
-    Button
 } from '@material-ui/core'
-import {baseUrl} from '../../urlConstants'
+import { baseUrl } from '../../urlConstants'
 import DescriptionHeader from '../Description/DescriptionHeader'
-import {tabsData} from './CompanyTabsData' 
+import { tabsData } from './CompanyTabsData'
 import CompanyOverview from './TabComponents/CompanyOverview'
 import InititiativesOverview from './TabComponents/InititiativesOverview'
 import JobsOverview from './TabComponents/JobsOverview'
@@ -18,9 +16,9 @@ import ScholarshipsOverview from './TabComponents/ScholarshipsOverview'
 import StoriesOverview from './TabComponents/StoriesOverview'
 
 const useStyles = makeStyles(theme => ({
-    mainContainer: { 
+    mainContainer: {
         maxWidth: "1100px",
-        margin : "0px auto",
+        margin: "0px auto",
         "& .MuiTabs-indicator": {
             display: "none"
         },
@@ -55,7 +53,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function CompanyDescription({match}) {
+function CompanyDescription({ match }) {
     const classes = useStyles()
     const [loading, setLoading] = React.useState(true)
     const [company, setCompany] = React.useState({})
@@ -63,14 +61,14 @@ function CompanyDescription({match}) {
     const [error, setError] = React.useState('')
 
     const getCompanyDetails = async () => {
-        let authToken=1;
+        let authToken = 1;
         if (localStorage.getItem('key')) {
             authToken = localStorage.getItem('key');
         }
         const requestOptions = {
             method: 'GET',
-            headers: { 
-                'Content-Type': 'application/json', 
+            headers: {
+                'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
                 'Authorization': `token ${authToken}`,
             },
@@ -78,15 +76,15 @@ function CompanyDescription({match}) {
         const response = await fetch(`${baseUrl}/company/company_details/${match.params.id}`, requestOptions);
         const res = await response.json();
         console.log(res);
-        if(res.status==="error"){
+        if (res.status === "error") {
             setError(res.message)
-        } else{
+        } else {
             setCompany(res.data)
         }
         setLoading(false)
     }
 
-    React.useEffect(()=> {
+    React.useEffect(() => {
         getCompanyDetails()
     }, [])
 
@@ -97,27 +95,23 @@ function CompanyDescription({match}) {
         console.log(tabValue)
     }
 
-    const onClick = () => {
-        console.log("clicked")
-    }
-
     return (
         <>
             {loading ?
                 <Typography>
                     loading...
                 </Typography>
-            :    
+                :
                 error ?
                     <Typography>
                         {error}
                     </Typography>
-                :
+                    :
                     <Grid container className={classes.mainContainer}>
                         <Grid item container>
-                            <DescriptionHeader data={company} type="company"/>
+                            <DescriptionHeader data={company} type="company" />
                         </Grid>
-                        <Grid item container className={classes.subContainer} style={{padding: "8px 6px"}}>
+                        <Grid item container className={classes.subContainer} style={{ padding: "8px 6px" }}>
                             <Tabs
                                 value={value}
                                 variant="scrollable"
@@ -125,7 +119,7 @@ function CompanyDescription({match}) {
                                 aria-label="scrollable force tabs example"
                                 className={classes.tabContainer}
                             >
-                                {tabsData.map((tabData)=>{
+                                {tabsData.map((tabData) => {
                                     return (
                                         <Grid
                                             key={tabData.value}
@@ -133,39 +127,41 @@ function CompanyDescription({match}) {
                                             container
                                             direction="row"
                                             alignItems="center"
-                                            className={clsx(classes.tab,{
+                                            className={clsx(classes.tab, {
                                                 [classes.selected]: tabData.value === value
                                             })}
                                             onClick={handleChange(tabData.value)}
                                         >
-                                            <Grid 
-                                                item 
+                                            <Grid
+                                                item
                                                 container
                                                 justify="center"
                                                 alignItems="center"
-                                                className={classes.tabImage} 
-                                                style={{background: tabData.backgroundColor}}
+                                                className={classes.tabImage}
+                                                style={{ background: tabData.backgroundColor }}
                                             >
-                                                <img src={tabData.image} style={{width: "15px"}}/>
-                                            </Grid>   
-                                            <Typography 
-                                                variant="caption" 
-                                                style={{margin: "0 6px",
+                                                <img src={tabData.image} alt="Company" style={{ width: "15px" }} />
+                                            </Grid>
+                                            <Typography
+                                                variant="caption"
+                                                style={{
+                                                    margin: "0 6px",
                                                     fontWeight: "600",
                                                     fontSize: "14px",
                                                     color: "#3a3a3a",
-                                                    letterSpacing: "0.4px"}}
+                                                    letterSpacing: "0.4px"
+                                                }}
                                             >
                                                 {tabData.tab}
                                             </Typography>
                                         </Grid>
                                     )
                                 })}
-                            </Tabs>                 
+                            </Tabs>
                         </Grid>
                         {
-                            value===0 &&
-                            <CompanyOverview 
+                            value === 0 &&
+                            <CompanyOverview
                                 company={company}
                                 tabsData={tabsData}
                                 company_id={match.params.id}
@@ -174,19 +170,19 @@ function CompanyDescription({match}) {
                         }
                         <Grid item container direction="column" className={classes.subContainer}>
                             {
-                                value===1 && 
-                                <InititiativesOverview company_id={match.params.id} overview={false}/>
+                                value === 1 &&
+                                <InititiativesOverview company_id={match.params.id} overview={false} />
                             }
                             {
-                                value===2 &&
+                                value === 2 &&
                                 <JobsOverview company_id={match.params.id} overview={false} />
                             }
                             {
-                                value===3 &&
+                                value === 3 &&
                                 <ScholarshipsOverview company_id={match.params.id} overview={false} />
                             }
                             {
-                                value===4 &&
+                                value === 4 &&
                                 <StoriesOverview company_id={match.params.id} overview={false} />
                             }
                         </Grid>

@@ -5,11 +5,11 @@ import {
     Typography,
     Button
 } from '@material-ui/core'
-import {baseUrl} from '../../../urlConstants'
+import { baseUrl } from '../../../urlConstants'
 import clsx from 'clsx'
 import axios from 'axios'
 import StoryCardSkeleton from '../../Loaders/StoryCardSkeletion'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
     storyCards: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
         borderRadius: "5px",
         height: "340px",
         maxWidth: "280px",
-        '&:hover':{
+        '&:hover': {
             boxShadow: "0px 0px 10px -2px rgba(0, 0, 0, 0.15)"
         },
         [theme.breakpoints.down('sm')]: {
@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
         padding: "8px",
         minHeight: "142px"
     },
-    storyName:{
+    storyName: {
         maxHeight: "56px",
         fontSize: "14px"
     },
@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
     btnText: {
         fontSize: "12px",
         fontWeight: 600,
-        color: "#ff3750" 
+        color: "#ff3750"
     },
     ellipsis: {
         display: "-webkit-box",
@@ -74,7 +74,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function InititiativesOverview({company_id, overview}) {
+function InititiativesOverview({ company_id, overview }) {
     const classes = useStyles()
 
     const [data, setData] = React.useState([])
@@ -84,18 +84,18 @@ function InititiativesOverview({company_id, overview}) {
     const getData = async () => {
         let key = localStorage.getItem("key");
         const requestOptions = {
-          method: "get",
-          headers: {
-            Authorization: `token ${key}`,
-          },
-          params: {
-              company_id: company_id
-          }
+            method: "get",
+            headers: {
+                Authorization: `token ${key}`,
+            },
+            params: {
+                company_id: company_id
+            }
         };
-    
+
         const response = await axios.get(`${baseUrl}/company/story/get/`, requestOptions)
         console.log(response.data)
-        if(response.data.status === "error"){
+        if (response.data.status === "error") {
             setError(response.data.message)
         } else {
             setData(response.data.data)
@@ -105,26 +105,26 @@ function InititiativesOverview({company_id, overview}) {
 
     React.useEffect(() => {
         getData()
-    },[])
+    }, [])
 
     return (
         <>
-            {loading ? 
+            {loading ?
                 <StoryCardSkeleton />
-            :
-                error ? 
+                :
+                error ?
                     <Grid container justify="center">
                         <Typography variant="caption">
                             {error}
                         </Typography>
                     </Grid>
-                :   
+                    :
                     <Grid container justify="center">
-                        {data.slice(0, overview? (data.length > 3) ? 3 : data.length + 1 : data.length + 1).map(story => {
+                        {data.slice(0, overview ? (data.length > 3) ? 3 : data.length + 1 : data.length + 1).map(story => {
                             return (
                                 <Grid item container direction="column" className={classes.storyCards}>
                                     <Grid className={classes.imgContainer}>
-                                        <img src={story.photo_url} className={classes.img}/>
+                                        <img src={story.photo_url} className={classes.img} />
                                     </Grid>
                                     <Grid className={classes.details}>
                                         <Typography variant="h6" className={clsx(classes.storyName, classes.ellipsis)} gutterBottom>
@@ -134,9 +134,9 @@ function InititiativesOverview({company_id, overview}) {
                                             {story.description}
                                         </Typography>
                                     </Grid>
-                                    <Grid style={{padding: "6px 8px"}}>
+                                    <Grid style={{ padding: "6px 8px" }}>
                                         <Link to={`/home/company/${story.company.id}/story/${story.id}`} key={story.id}>
-                                            <Button>
+                                            <Button ariaLabel="Read More">
                                                 <Typography className={classes.btnText}>
                                                     READ MORE
                                                 </Typography>

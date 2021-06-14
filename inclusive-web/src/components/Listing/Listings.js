@@ -50,7 +50,7 @@ const Listing = ({ type }) => {
     locations: [],
     job_type: "",
   };
-  const validate = (values) => {};
+  const validate = (values) => { };
 
   const [values, setValues, errors, setErrors, handleChange] = useForm(
     selectedFilters,
@@ -126,7 +126,7 @@ const Listing = ({ type }) => {
     }
   }, []);
 
-  React.useEffect(() => {}, [cityData, values, companyName, hasMoreData]);
+  React.useEffect(() => { }, [cityData, values, companyName, hasMoreData]);
 
   const handleOpenFilters = () => {
     setOpenFilters(true);
@@ -305,10 +305,10 @@ const Listing = ({ type }) => {
       type === "jobs"
         ? "job/get/"
         : type === "scholarships"
-        ? "job/scholarship/get/"
-        : type === "companies"
-        ? "company/get/"
-        : "";
+          ? "job/scholarship/get/"
+          : type === "companies"
+            ? "company/get/"
+            : "";
 
     await axios({
       method: "post",
@@ -386,6 +386,7 @@ const Listing = ({ type }) => {
                   type="submit"
                   onClick={handleDefaultSubmit}
                   variant="outlined"
+                  ariaLabel="Search"
                 >
                   <Search />
                 </Button>
@@ -402,7 +403,7 @@ const Listing = ({ type }) => {
         alignItems="center"
         justify="space-between"
       >
-        <Button onClick={handleOpenFilters}>
+        <Button onClick={handleOpenFilters} ariaLabel="filter">
           <img src={filterIcon} alt="filterIcon" />
           &nbsp; Filters
         </Button>
@@ -426,7 +427,7 @@ const Listing = ({ type }) => {
               )}
             </Grid>
             <Grid item xs={12} container >
-              {(type ==="jobs" || type==="scholarships") && <Grid item direction="column" container xs={12} md={6} style={{height: "fit-content"}}>
+              {(type === "jobs" || type === "scholarships") && <Grid item direction="column" container xs={12} md={6} style={{ height: "fit-content" }}>
                 {(type === "jobs" || type === "scholarships") && (
                   <Grid item xs={12} container direction="column">
                     <FormGroup className={clsx(classes.checkBoxContainer, classes.labelContainer)} row>
@@ -466,17 +467,17 @@ const Listing = ({ type }) => {
                 {type === "jobs" && (
                   <Grid item container direction="column" xs={12}>
                     <FormGroup row className={clsx(classes.checkBoxContainer, classes.labelContainer)}>
-                        <FormControlLabel
-                          label="Select salary range"
-                          control={
-                            <GreenCheckbox
-                              checked={filtersSelected.salary}
-                              onChange={handleChangeSelectedFilters}
-                              name="salary"
-                            />
-                          }
-                        />
-                      </FormGroup>
+                      <FormControlLabel
+                        label="Select salary range"
+                        control={
+                          <GreenCheckbox
+                            checked={filtersSelected.salary}
+                            onChange={handleChangeSelectedFilters}
+                            name="salary"
+                          />
+                        }
+                      />
+                    </FormGroup>
                     <Grid item xs={12} className={classes.formFieldContainer}>
                       {filtersSelected.salary && (
                         <>
@@ -544,17 +545,17 @@ const Listing = ({ type }) => {
                 {(type === "jobs" || type === "scholarships") && (
                   <Grid item container xs={12} direction="column">
                     <FormGroup row className={clsx(classes.checkBoxContainer, classes.labelContainer)}>
-                        <FormControlLabel
-                          label="Job Type"
-                          control={
-                            <GreenCheckbox
-                              checked={filtersSelected.jobType}
-                              onChange={handleChangeSelectedFilters}
-                              name="jobType"
-                            />
-                          }
-                        />
-                      </FormGroup>
+                      <FormControlLabel
+                        label="Job Type"
+                        control={
+                          <GreenCheckbox
+                            checked={filtersSelected.jobType}
+                            onChange={handleChangeSelectedFilters}
+                            name="jobType"
+                          />
+                        }
+                      />
+                    </FormGroup>
                     {filtersSelected.jobType && (
                       <Grid
                         item
@@ -577,17 +578,17 @@ const Listing = ({ type }) => {
                 {(type === "jobs" || type === "scholarships") && (
                   <Grid container item xs={12} direction="column">
                     <FormGroup row className={clsx(classes.checkBoxContainer, classes.labelContainer)}>
-                        <FormControlLabel
-                          label="Filter by locations"
-                          control={
-                            <GreenCheckbox
-                              checked={filtersSelected.locations}
-                              onChange={handleChangeSelectedFilters}
-                              name="locations"
-                            />
-                          }
-                        />
-                      </FormGroup>
+                      <FormControlLabel
+                        label="Filter by locations"
+                        control={
+                          <GreenCheckbox
+                            checked={filtersSelected.locations}
+                            onChange={handleChangeSelectedFilters}
+                            name="locations"
+                          />
+                        }
+                      />
+                    </FormGroup>
                     {filtersSelected.locations && (
                       <Grid item xs={12} className={classes.controlsformFieldContainer}>
                         <Controls.AddChip
@@ -603,17 +604,17 @@ const Listing = ({ type }) => {
                 )}
                 <Grid item container direction="column" xs={12}>
                   <FormGroup row className={clsx(classes.checkBoxContainer, classes.labelContainer)}>
-                      <FormControlLabel
-                        label="Filter by Company Name"
-                        control={
-                          <GreenCheckbox
-                            checked={filtersSelected.companyName}
-                            onChange={handleChangeSelectedFilters}
-                            name="companyName"
-                          />
-                        }
-                      />
-                    </FormGroup>
+                    <FormControlLabel
+                      label="Filter by Company Name"
+                      control={
+                        <GreenCheckbox
+                          checked={filtersSelected.companyName}
+                          onChange={handleChangeSelectedFilters}
+                          name="companyName"
+                        />
+                      }
+                    />
+                  </FormGroup>
                   <Grid item xs={12} className={classes.formFieldContainer}>
                     {filtersSelected.companyName && (
                       <Autocomplete
@@ -644,7 +645,7 @@ const Listing = ({ type }) => {
               justify="flex-end"
               className={classes.innerContainer}
             >
-              <Button style={{ marginRight: "1%" }} onClick={handleResetButton}>
+              <Button style={{ marginRight: "1%" }} onClick={handleResetButton} ariaLabel="reset">
                 Reset
               </Button>
               <Button
@@ -653,6 +654,7 @@ const Listing = ({ type }) => {
                   color: "#06B0C5",
                   marginLeft: "1%",
                 }}
+                ariaLabel="Show Results"
               >
                 Show Results
               </Button>
@@ -669,7 +671,7 @@ const Listing = ({ type }) => {
         {(type === "jobs" || type === "scholarships") &&
           fetchedData.length > 0 &&
           !isError &&
-          fetchedData.map((data,idx) => (
+          fetchedData.map((data, idx) => (
             <Card data={data} type={type} status={null} key={idx} />
           ))}
         {type === "companies" &&
@@ -699,6 +701,7 @@ const Listing = ({ type }) => {
               size="small"
               variant="outlined"
               style={{ background: "#fff" }}
+              ariaLabel="View More"
             >
               View More
             </Button>

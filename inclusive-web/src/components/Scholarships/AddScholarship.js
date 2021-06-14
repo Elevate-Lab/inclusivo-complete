@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
     makeStyles,
     Grid,
@@ -9,14 +9,14 @@ import {
     Checkbox,
     FormControlLabel
 } from '@material-ui/core';
-import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import Tags from '../AddJob/Tags.js';
 import Degrees from '../AddJob/Degrees.js';
 import { baseUrl } from '../../urlConstants';
-import {tagList} from './TagList';
-import {format} from 'date-fns';
+import { tagList } from './TagList';
+import { format } from 'date-fns';
 
 const useStyles = makeStyles(theme => ({
     formName: {
@@ -56,32 +56,32 @@ const useStyles = makeStyles(theme => ({
     },
     dateFieldInput: {
         width: "95%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    background: "#FAFAFA",
-    '& .MuiOutlinedInput-root' : {
-      borderRadius: "5px",
-    },
-    '& input' : {
-      padding: "10px 14px",
-      fontSize: "12px",
-      opacity: "0.8"
-    },
-    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#E6E6E6"
-    },
-    "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#E6E6E6"
-    },
-    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#76B7F3"
-    },
-    "& .MuiInputLabel-outlined": {
-      color: "#E6E6E6"
-    },
-    "&:hover .MuiInputLabel-outlined": {
-      color: "#E6E6E6",
-    },
+        marginLeft: "auto",
+        marginRight: "auto",
+        background: "#FAFAFA",
+        '& .MuiOutlinedInput-root': {
+            borderRadius: "5px",
+        },
+        '& input': {
+            padding: "10px 14px",
+            fontSize: "12px",
+            opacity: "0.8"
+        },
+        "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#E6E6E6"
+        },
+        "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#E6E6E6"
+        },
+        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#76B7F3"
+        },
+        "& .MuiInputLabel-outlined": {
+            color: "#E6E6E6"
+        },
+        "&:hover .MuiInputLabel-outlined": {
+            color: "#E6E6E6",
+        },
     }
 }));
 
@@ -95,7 +95,7 @@ const AddScholarship = () => {
         title: "",
         description: "",
         selectionProcess: "",
-        last_date: format(Date.now(),'yyyy-MM-dd'),
+        last_date: format(Date.now(), 'yyyy-MM-dd'),
         short_code: "",
         company_id: 1,
         degrees: [],
@@ -107,8 +107,8 @@ const AddScholarship = () => {
     })
 
     const AddInfo = [
-        { label: "Title", name: "title", type: "text"},
-        { label: "Description", name: "description", type: "textarea"},
+        { label: "Title", name: "title", type: "text" },
+        { label: "Description", name: "description", type: "textarea" },
         { label: "Selection Process", name: "selection_process", type: "textarea" },
     ]
 
@@ -118,7 +118,7 @@ const AddScholarship = () => {
 
     const additional_info = [
         { label: "Vacancies", name: "vacancies", type: "text" },
-        { label: "Add Tag", name: "tags", type: "select" }, 
+        { label: "Add Tag", name: "tags", type: "select" },
     ]
 
     let authToken = 'b48eef6b74aa372c1ab5f65f9b85c11099679043';
@@ -129,7 +129,7 @@ const AddScholarship = () => {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'token '+authToken,
+            'Authorization': 'token ' + authToken,
         },
     };
 
@@ -137,9 +137,9 @@ const AddScholarship = () => {
     React.useEffect(() => {
         getDegrees();
         getCompanyId();
-    },[])
+    }, [])
 
-    const getDegrees = async ()  => {
+    const getDegrees = async () => {
         const response = await fetch(`${baseUrl}/user/degree/dropdown`, requestOptions);
         const data = await response.json();
         await setDegreeList(data.data);
@@ -149,60 +149,64 @@ const AddScholarship = () => {
         const response = await fetch(`${baseUrl}/user/get/0`, requestOptions);
         const data = await response.json();
         setScholarshipData(prevState => {
-            return !data ? prevState : {...prevState, company_id: data.data.employer.company.id}
+            return !data ? prevState : { ...prevState, company_id: data.data.employer.company.id }
         })
     }
-    
+
 
     // Input handlers
     const handleDegree = (degree) => (event) => {
         setScholarshipData(prevState => {
-            return prevState.degrees.includes(degree) ? prevState : {...prevState, degrees: [...prevState.degrees, degree]};
+            return prevState.degrees.includes(degree) ? prevState : { ...prevState, degrees: [...prevState.degrees, degree] };
         });
     }
-    
+
     const handleTags = (tag) => (event) => {
         setScholarshipData(prevState => {
-            return prevState.tags.includes(tag) ? prevState : {...prevState, tags: [...prevState.tags, tag]};
+            return prevState.tags.includes(tag) ? prevState : { ...prevState, tags: [...prevState.tags, tag] };
         });
     }
 
     const clearElement = (event, tag) => {
-        if(event === "degrees"){
+        if (event === "degrees") {
             setScholarshipData(prevState => {
-                return {...prevState, degrees: prevState.degrees.filter((item, index) => {
-                    return item !== tag ;
-                })}
+                return {
+                    ...prevState, degrees: prevState.degrees.filter((item, index) => {
+                        return item !== tag;
+                    })
+                }
             });
         }
-        if(event === "tags"){
+        if (event === "tags") {
             setScholarshipData(prevState => {
-                return {...prevState, tags: prevState.tags.filter((item, index) => {
-                    return item !== tag ;
-                })}
+                return {
+                    ...prevState, tags: prevState.tags.filter((item, index) => {
+                        return item !== tag;
+                    })
+                }
             });
         }
     }
 
     const handleChange = (prop) => (event) => {
-        if(prop==="vacancies"){
-            setScholarshipData({...scholarshipData, [prop]: parseInt(event.target.value)})
+        if (prop === "vacancies") {
+            setScholarshipData({ ...scholarshipData, [prop]: parseInt(event.target.value) })
         }
-        else if(prop!=="degrees" && prop!=="tags"){
-            setScholarshipData({...scholarshipData, [prop]: event.target.value})
+        else if (prop !== "degrees" && prop !== "tags") {
+            setScholarshipData({ ...scholarshipData, [prop]: event.target.value })
         }
     }
 
     const handleDateChange = (date) => {
         setSelectedDate(date)
         setScholarshipData(prevState => {
-            return {...prevState, last_date: format(date,'yyyy-MM-dd')}
+            return { ...prevState, last_date: format(date, 'yyyy-MM-dd') }
         });
     }
 
     const handleCheckboxChange = (event) => {
         setScholarshipData(prevState => {
-            return {...prevState, is_apply_here: event.target.checked}
+            return { ...prevState, is_apply_here: event.target.checked }
         })
     }
 
@@ -231,20 +235,20 @@ const AddScholarship = () => {
     }
 
     // Display functions
-    const displayField = (data,idx) => {
-        return(
+    const displayField = (data, idx) => {
+        return (
             <div className={classes.formInputs} key={idx}>
                 {
                     data.name === "degrees" && (
-                        <Degrees degrees={scholarshipData.degrees} clear={clearElement} name={data.name}/>
+                        <Degrees degrees={scholarshipData.degrees} clear={clearElement} name={data.name} />
                     )
                 }
                 {
                     data.name === "tags" && (
-                        <Tags tags={scholarshipData.tags} clear={clearElement} name={data.name}/>
+                        <Tags tags={scholarshipData.tags} clear={clearElement} name={data.name} />
                     )
                 }
-                <TextField 
+                <TextField
                     className={classes.fieldInput}
                     onChange={handleChange(data.name)}
                     name={data.name}
@@ -252,19 +256,19 @@ const AddScholarship = () => {
                     label={data.label}
                     type={data.type}
                     variant='outlined'
-                
+
                     {
-                        ...(data.type ==="textarea" && {
-                            multiline: true,
-                            rows: 3,
-                            variant: "outlined"
-                        })
+                    ...(data.type === "textarea" && {
+                        multiline: true,
+                        rows: 3,
+                        variant: "outlined"
+                    })
                     }
                     {
-                        ...(data.type === "select" && {
-                            select : true,
-                            defaultValue: ""
-                        })
+                    ...(data.type === "select" && {
+                        select: true,
+                        defaultValue: ""
+                    })
                     }
                 >
                     {
@@ -278,11 +282,11 @@ const AddScholarship = () => {
                     {
                         data.name === "degrees" && degreeList
                             .map((option) => (
-                            <MenuItem key={option.id} value={option.name} onClick={handleDegree(option)}>
-                                {option.degree_name}, {option.degree_type}
-                            </MenuItem>
-                        
-                        ))
+                                <MenuItem key={option.id} value={option.name} onClick={handleDegree(option)}>
+                                    {option.degree_name}, {option.degree_type}
+                                </MenuItem>
+
+                            ))
                     }
                 </TextField>
             </div>
@@ -296,45 +300,45 @@ const AddScholarship = () => {
                     <Typography className={classes.formName}>
                         Add Job
                     </Typography>
-                    
+
                 </Grid>
 
                 <Grid item>
 
-                    
+
 
                     <Typography className={classes.sectionName}>
-                    <strong> Add Info</strong>
+                        <strong> Add Info</strong>
                     </Typography>
                     <form className={classes.formContainer}>
                         {
-                            AddInfo.map((formType,idx) => (
-                                displayField(formType, idx)
-                            ))
-                        }
-                    </form>
-                    
-
-                    <Typography className={classes.sectionName}>
-                    <strong> Requirements </strong>
-                    </Typography>
-                    
-                  
-                    <form className={classes.formContainer}>
-                        {
-                            requirements.map((formType,idx) => (
+                            AddInfo.map((formType, idx) => (
                                 displayField(formType, idx)
                             ))
                         }
                     </form>
 
+
                     <Typography className={classes.sectionName}>
-                    <strong> Add More Info</strong>
+                        <strong> Requirements </strong>
+                    </Typography>
+
+
+                    <form className={classes.formContainer}>
+                        {
+                            requirements.map((formType, idx) => (
+                                displayField(formType, idx)
+                            ))
+                        }
+                    </form>
+
+                    <Typography className={classes.sectionName}>
+                        <strong> Add More Info</strong>
                     </Typography>
 
                     <form className={classes.formContainer}>
                         {
-                            additional_info.map((formType,idx) => (
+                            additional_info.map((formType, idx) => (
                                 displayField(formType, idx)
                             ))
                         }
@@ -342,7 +346,7 @@ const AddScholarship = () => {
 
                     <form className={classes.formContainer}>
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                            <KeyboardDatePicker 
+                            <KeyboardDatePicker
                                 inputVariant="outlined"
                                 margin="normal"
                                 id="date-picker-dialog"
@@ -350,39 +354,39 @@ const AddScholarship = () => {
                                 format="dd/MM/yyyy"
                                 value={selectedDate}
                                 onChange={handleDateChange}
-                                KeyboardButtonProps={{'aria-label': 'change date'}}
+                                KeyboardButtonProps={{ 'aria-label': 'change date' }}
                                 className={classes.dateFieldInput}
                             />
                         </MuiPickersUtilsProvider>
                     </form>
-                    
+
                     <form className={classes.formContainer}>
                         <FormControlLabel
-                            control={<Checkbox checked={scholarshipData.is_apply_here} onChange={handleCheckboxChange}/>}
+                            control={<Checkbox checked={scholarshipData.is_apply_here} onChange={handleCheckboxChange} />}
                             label="Apply Here"
                         />
                     </form>
-                    
+
                     <form className={classes.formInputs}>
                         {
-                            scholarshipData.is_apply_here ? null : 
-                            <TextField 
-                                className={classes.fieldInput}
-                                onChange={handleChange("apply_url")}
-                                name="apply_url"
-                                id="apply_url"
-                                label="Apply Url"
-                                type="text"
-                                variant='outlined'
-                            ></TextField>
+                            scholarshipData.is_apply_here ? null :
+                                <TextField
+                                    className={classes.fieldInput}
+                                    onChange={handleChange("apply_url")}
+                                    name="apply_url"
+                                    id="apply_url"
+                                    label="Apply Url"
+                                    type="text"
+                                    variant='outlined'
+                                ></TextField>
                         }
                     </form>
 
                     <form className={classes.buttonContainer}>
-                        <Button className={classes.formButton} variant="contained" color="secondary" type="submit" onClick={handleSubmit('Draft')}>
+                        <Button className={classes.formButton} variant="contained" color="secondary" type="submit" onClick={handleSubmit('Draft')} ariaLabel="Save as Draft">
                             Save as Draft
                         </Button>
-                        <Button className={classes.formButton} variant="contained" color="secondary" type="submit" onClick={handleSubmit('Published')}>
+                        <Button className={classes.formButton} variant="contained" color="secondary" type="submit" onClick={handleSubmit('Published')} ariaLabel="Post Job">
                             Post Job
                         </Button>
                     </form>

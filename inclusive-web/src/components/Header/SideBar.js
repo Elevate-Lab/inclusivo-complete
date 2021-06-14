@@ -1,8 +1,8 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
-import {List, ListItem, ListItemText, Divider} from '@material-ui/core/';
+import { List, ListItem, ListItemText, Divider } from '@material-ui/core/';
 import MenuIcon from '@material-ui/icons/Menu';
 import { SocialHadles } from './SocialHandles';
 
@@ -20,19 +20,19 @@ export const SideBar = () => {
     }
   });
   const classes = useStyles();
-  const toggleDrawer = ( open) => (event) => {
+  const toggleDrawer = (open) => (event) => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
 
-    setSideDrawer( open );
+    setSideDrawer(open);
   };
   const list = () => (
     <div
       className={classes.list}
       role="presentation"
-      onClick={toggleDrawer( false)}
-      onKeyDown={toggleDrawer ( false)}
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
     >
       <List>
         {['Profile', 'Companies', 'Jobs', 'Applications'].map((text, index) => (
@@ -55,7 +55,7 @@ export const SideBar = () => {
 
   return (
     <>
-      <Button onClick={toggleDrawer(true)} style={{marginLeft:"0"}}><MenuIcon style={{fontSize: "30px" ,color: "black" }} /></Button>
+      <Button onClick={toggleDrawer(true)} style={{ marginLeft: "0" }} ariaLabel="Menu"><MenuIcon style={{ fontSize: "30px", color: "black" }} /></Button>
       <SwipeableDrawer
         ModalProps={{
           BackdropProps: {

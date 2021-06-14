@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "10px",
     width: "100%",
   },
-  phoneFormInput : {
+  phoneFormInput: {
     background: "#fafafa",
     borderRadius: "5px",
     fontSize: "10px",
@@ -151,7 +151,7 @@ const CompleteCandidate = () => {
     diversity_tags: [],
   };
   const history = useHistory();
-  const validate = () => {}
+  const validate = () => { }
 
   const [values, setValues, errors, setErrors, handleChange] = useForm(initialValues, false, validate)
 
@@ -230,8 +230,8 @@ const CompleteCandidate = () => {
       job_role: values.job_role,
       profile_description: values.profile_description,
       resume_link: values.resume_link,
-      year: values.last_date.slice(0,4),
-      month: values.last_date.slice(5,7),
+      year: values.last_date.slice(0, 4),
+      month: values.last_date.slice(5, 7),
       registered_via: RegisteredVia,
       linkedin: values.linkedin,
       github: values.github,
@@ -296,7 +296,7 @@ const CompleteCandidate = () => {
       <Grid item>
         <form className={classes.formContainer} onSubmit={submitFunction}>
           <div className={classes.formInputs}>
-            <Controls.FormInput 
+            <Controls.FormInput
               value={values.nationality}
               name="nationality"
               handleChange={handleChange}
@@ -346,32 +346,32 @@ const CompleteCandidate = () => {
           </div>
           <div className={classes.formInputs}>
             <Grid container direction="column">
-              <Typography variant="h6" style={{ fontSize: "14px",margin: "10px 0px", letterSpacing: "0.4px" }}>
+              <Typography variant="h6" style={{ fontSize: "14px", margin: "10px 0px", letterSpacing: "0.4px" }}>
                 Registered Via
               </Typography>
-            <TextField 
-              value={RegisteredVia}
-              variant="outlined"
-              style={{width: "100%"}}
-              className={classes.phoneFormInput}
-              id="registeredVia"
-              name="registeredVia"
-              onChange={handleChangeRegisteredVia}
-              select
-            >
-              <MenuItem key="Email" value="Email">
-                Email
+              <TextField
+                value={RegisteredVia}
+                variant="outlined"
+                style={{ width: "100%" }}
+                className={classes.phoneFormInput}
+                id="registeredVia"
+                name="registeredVia"
+                onChange={handleChangeRegisteredVia}
+                select
+              >
+                <MenuItem key="Email" value="Email">
+                  Email
                 </MenuItem>
-              <MenuItem key="Social" value="Social">
-                Social
+                <MenuItem key="Social" value="Social">
+                  Social
                 </MenuItem>
-              <MenuItem key="Careers" value="Careers">
-                Careers
+                <MenuItem key="Careers" value="Careers">
+                  Careers
                 </MenuItem>
-              <MenuItem key="Friend" value="Friend">
-                Friend
+                <MenuItem key="Friend" value="Friend">
+                  Friend
                 </MenuItem>
-            </TextField>
+              </TextField>
             </Grid>
           </div>
           <div className={classes.formInputs}>
@@ -410,42 +410,42 @@ const CompleteCandidate = () => {
 
           <div className={classes.formInputs}>
             <Grid container direction="column">
-              <Typography variant="h6" style={{ fontSize: "14px",margin: "10px 0px", letterSpacing: "0.4px" }}>
+              <Typography variant="h6" style={{ fontSize: "14px", margin: "10px 0px", letterSpacing: "0.4px" }}>
                 Current City
               </Typography>
-            <FormControl className={classes.fieldInput}>
-              <Autocomplete
-                id="current-city"
-                options={cityData}
-                loading={fetchingCities}
-                getOptionLabel={(option) =>
-                  option.name +
-                  ", " +
-                  option.state_name +
-                  ", " +
-                  option.country_name
-                }
-                onChange={handleChangeCity}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    className={clsx(classes.root4, classes.input)}
-                    variant="outlined"
-                    InputProps={{
-                      ...params.InputProps,
-                      endAdornment: (
-                        <React.Fragment>
-                          {fetchingCities ? (
-                            <CircularProgress color="inherit" size={20} />
-                          ) : null}
-                          {params.InputProps.endAdornment}
-                        </React.Fragment>
-                      ),
-                    }}
-                  />
-                )}
-              />
-            </FormControl>
+              <FormControl className={classes.fieldInput}>
+                <Autocomplete
+                  id="current-city"
+                  options={cityData}
+                  loading={fetchingCities}
+                  getOptionLabel={(option) =>
+                    option.name +
+                    ", " +
+                    option.state_name +
+                    ", " +
+                    option.country_name
+                  }
+                  onChange={handleChangeCity}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      className={clsx(classes.root4, classes.input)}
+                      variant="outlined"
+                      InputProps={{
+                        ...params.InputProps,
+                        endAdornment: (
+                          <React.Fragment>
+                            {fetchingCities ? (
+                              <CircularProgress color="inherit" size={20} />
+                            ) : null}
+                            {params.InputProps.endAdornment}
+                          </React.Fragment>
+                        ),
+                      }}
+                    />
+                  )}
+                />
+              </FormControl>
             </Grid>
           </div>
 
@@ -474,24 +474,25 @@ const CompleteCandidate = () => {
               variant="contained"
               color="secondary"
               type="submit"
+              ariaLabel="Submit"
             >
               Submit
             </Button>
           </div>
         </form>
-          {isError ? (
-            <Snackbar
-              open={isError}
-              autoHideDuration={6000}
-              onClose={() => setIsError(false)}
-            >
-              <Alert onClose={() => setIsError(false)} severity="error">
-                Please Try Again
+        {isError ? (
+          <Snackbar
+            open={isError}
+            autoHideDuration={6000}
+            onClose={() => setIsError(false)}
+          >
+            <Alert onClose={() => setIsError(false)} severity="error">
+              Please Try Again
               </Alert>
-            </Snackbar>
-          ) : (
-            <></>
-          )}
+          </Snackbar>
+        ) : (
+          <></>
+        )}
       </Grid>
     </Grid>
   );

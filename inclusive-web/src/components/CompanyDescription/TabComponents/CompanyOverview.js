@@ -48,22 +48,22 @@ const useStyles = makeStyles(theme => ({
     btn: {
         background: "#fff",
         border: "none",
-        '&:focus' : {
-            outline : "none"
+        '&:focus': {
+            outline: "none"
         },
         display: "flex",
         alignItems: "center"
     },
 }))
 
-function CompanyOverview({company, tabsData, company_id, handleChange}) {
+function CompanyOverview({ company, tabsData, company_id, handleChange }) {
     const [descButtonStatus, setDescButtonStatus] = React.useState({
         text: 'Read More',
-        expanded : false 
+        expanded: false
     })
 
     const handleReadMoreAbout = () => {
-        if(!descButtonStatus.expanded){
+        if (!descButtonStatus.expanded) {
             setDescButtonStatus({
                 text: "Read Less",
                 expanded: true
@@ -88,77 +88,77 @@ function CompanyOverview({company, tabsData, company_id, handleChange}) {
                     </Grid>
                     <Grid item container direction="column">
                         {
-                            company.company.description.length > 200 ? ( 
+                            company.company.description.length > 200 ? (
                                 <>
-                                <Grid xs={12} item className={classes.paddingClass}>
-                                    <Typography variant="body2">
-                                        {company.company.description.substring(0, 200)}<span id="dots" style={
-                                            descButtonStatus.expanded ? { display: "inline" } : { display: "none" }
-                                        } >...</span><span style={
-                                            descButtonStatus.expanded ? { display: "inline" } : { display: "none" }
-                                        } > {company.company.description.substring(201,company.company.description.length-1)} </span>
-                                    </Typography>
-                                </Grid>
-                                <Grid xs={12} item className={classes.buttonContainer}>
-                                    <button className={classes.btn} onClick={handleReadMoreAbout}>
-                                            <span style={{color: "#3a3a3a"}}>{descButtonStatus.text}</span>  { 
+                                    <Grid xs={12} item className={classes.paddingClass}>
+                                        <Typography variant="body2">
+                                            {company.company.description.substring(0, 200)}<span id="dots" style={
+                                                descButtonStatus.expanded ? { display: "inline" } : { display: "none" }
+                                            } >...</span><span style={
+                                                descButtonStatus.expanded ? { display: "inline" } : { display: "none" }
+                                            } > {company.company.description.substring(201, company.company.description.length - 1)} </span>
+                                        </Typography>
+                                    </Grid>
+                                    <Grid xs={12} item className={classes.buttonContainer}>
+                                        <button className={classes.btn} onClick={handleReadMoreAbout} ariaLabel={descButtonStatus.text}>
+                                            <span style={{ color: "#3a3a3a" }}>{descButtonStatus.text}</span>  {
                                                 descButtonStatus.expanded ? (
-                                                    <ExpandLess style={{color: "#7a7a7a"}}/>
+                                                    <ExpandLess style={{ color: "#7a7a7a" }} />
                                                 ) : (
-                                                    <ExpandMore style={{color: "#7a7a7a"}}/>
+                                                    <ExpandMore style={{ color: "#7a7a7a" }} />
                                                 )
                                             }
-                                    </button>
-                                </Grid>    
+                                        </button>
+                                    </Grid>
                                 </>
                             ) : (
                                 <>
                                     <Grid xs={12} item className={classes.paddingClass}>
                                         <Typography variant="body2">
-                                            {company.company.description}  
+                                            {company.company.description}
                                         </Typography>
                                     </Grid>
                                 </>
                             )
                         }
-                    </Grid> 
+                    </Grid>
                 </Grid>
             </Grid>
             <Grid item container direction="column" className={classes.subContainer}>
-                <SectionTitle 
-                    backgroundColor={tabsData[1].backgroundColor} 
-                    image={tabsData[1].image} 
+                <SectionTitle
+                    backgroundColor={tabsData[1].backgroundColor}
+                    image={tabsData[1].image}
                     name={tabsData[1].tab}
                 />
-                <InitiativesOverview company_id={company_id} overview={true}/>
-                <ViewAll handleChange={handleChange} value={1}/>
+                <InitiativesOverview company_id={company_id} overview={true} />
+                <ViewAll handleChange={handleChange} value={1} />
             </Grid>
             <Grid item container direction="column" className={classes.subContainer}>
-                <SectionTitle 
-                    backgroundColor={tabsData[2].backgroundColor} 
-                    image={tabsData[2].image} 
+                <SectionTitle
+                    backgroundColor={tabsData[2].backgroundColor}
+                    image={tabsData[2].image}
                     name={tabsData[2].tab}
                 />
-                <JobsOverview company_id={company_id} overview={true}/>
-                <ViewAll handleChange={handleChange} value={2}/>
+                <JobsOverview company_id={company_id} overview={true} />
+                <ViewAll handleChange={handleChange} value={2} />
             </Grid>
             <Grid item container direction="column" className={classes.subContainer}>
-                <SectionTitle 
-                    backgroundColor={tabsData[3].backgroundColor} 
-                    image={tabsData[3].image} 
+                <SectionTitle
+                    backgroundColor={tabsData[3].backgroundColor}
+                    image={tabsData[3].image}
                     name={tabsData[3].tab}
                 />
-                <ScholarshipsOverview company_id={company_id} overview={true}/>
-                <ViewAll handleChange={handleChange} value={3}/>
+                <ScholarshipsOverview company_id={company_id} overview={true} />
+                <ViewAll handleChange={handleChange} value={3} />
             </Grid>
             <Grid item container direction="column" className={classes.subContainer}>
-                <SectionTitle 
-                    backgroundColor={tabsData[4].backgroundColor} 
-                    image={tabsData[4].image} 
+                <SectionTitle
+                    backgroundColor={tabsData[4].backgroundColor}
+                    image={tabsData[4].image}
                     name={tabsData[4].tab}
                 />
-                <StoriesOverview company_id={company_id} overview={true}/> 
-                <ViewAll handleChange={handleChange} value={4}/>
+                <StoriesOverview company_id={company_id} overview={true} />
+                <ViewAll handleChange={handleChange} value={4} />
             </Grid>
         </>
     )

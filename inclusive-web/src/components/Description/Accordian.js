@@ -9,12 +9,12 @@ import {
     ExpandMore,
     ExpandLess,
 } from '@material-ui/icons'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
     aboutContainer: {
         marginBottom: "5px",
-        marginTop:"5px",
+        marginTop: "5px",
         background: "#fff",
         borderRadius: "3px",
         width: '100%',
@@ -32,24 +32,24 @@ const useStyles = makeStyles(theme => ({
     btn: {
         background: "#fff",
         border: "none",
-        '&:focus' : {
-            outline : "none"
+        '&:focus': {
+            outline: "none"
         },
         display: "flex",
         alignItems: "center"
     },
 }))
 
-function Accordian({data,title,button=false,to="",buttonName=""}) {
+function Accordian({ data, title, button = false, to = "", buttonName = "" }) {
     const classes = useStyles()
 
     const [descButtonStatus, setDescButtonStatus] = React.useState({
         text: 'Read More',
-        expanded : false 
+        expanded: false
     })
 
     const handleReadMore = () => {
-        if(!descButtonStatus.expanded){
+        if (!descButtonStatus.expanded) {
             setDescButtonStatus({
                 text: "Read Less",
                 expanded: true
@@ -71,44 +71,44 @@ function Accordian({data,title,button=false,to="",buttonName=""}) {
             </Grid>
             <Grid item container direction="column">
                 {
-                    data.length > 200 ? ( 
+                    data.length > 200 ? (
                         <>
-                        <Grid xs={12} item className={classes.paddingClass}>
-                            <Typography variant="body2">
-                                {data.substring(0, 200)}<span id="dots" style={
-                                    descButtonStatus.expanded ? { display: "inline" } : { display: "none" }
-                                } ></span><span style={
-                                    descButtonStatus.expanded ? { display: "inline" } : { display: "none" }
-                                } > {data.substring(201,data.length-1)} </span>
-                            </Typography>
-                            {button && descButtonStatus.expanded &&
-                                <Link to={to}>
-                                    <Button>{buttonName}</Button>
-                                </Link>
-                            }
-                        </Grid>
-                        <Grid xs={12} item className={classes.buttonContainer}>
-                            <button className={classes.btn} onClick={handleReadMore}>
-                                    <span>{descButtonStatus.text}</span>  { 
+                            <Grid xs={12} item className={classes.paddingClass}>
+                                <Typography variant="body2">
+                                    {data.substring(0, 200)}<span id="dots" style={
+                                        descButtonStatus.expanded ? { display: "inline" } : { display: "none" }
+                                    } ></span><span style={
+                                        descButtonStatus.expanded ? { display: "inline" } : { display: "none" }
+                                    } > {data.substring(201, data.length - 1)} </span>
+                                </Typography>
+                                {button && descButtonStatus.expanded &&
+                                    <Link to={to}>
+                                        <Button ariaLabel={buttonName}>{buttonName}</Button>
+                                    </Link>
+                                }
+                            </Grid>
+                            <Grid xs={12} item className={classes.buttonContainer}>
+                                <button className={classes.btn} onClick={handleReadMore} ariaLabel={descButtonStatus.text}>
+                                    <span>{descButtonStatus.text}</span>  {
                                         descButtonStatus.expanded ? (
                                             <ExpandLess />
                                         ) : (
                                             <ExpandMore />
                                         )
                                     }
-                            </button>
-                        </Grid>    
+                                </button>
+                            </Grid>
                         </>
                     ) : (
                         <>
                             <Grid xs={12} item className={classes.paddingClass}>
                                 <Typography variant="body2">
-                                    {data}  
+                                    {data}
                                 </Typography>
                                 {button &&
-                                <Link to={to}>
-                                    <Button>{buttonName}</Button>
-                                </Link>}
+                                    <Link to={to}>
+                                        <Button>{buttonName}</Button>
+                                    </Link>}
                             </Grid>
                         </>
                     )

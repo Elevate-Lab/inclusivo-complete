@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
     },
     container: {
         padding: "0 64px",
-        [theme.breakpoints.down('xs')]:{
+        [theme.breakpoints.down('xs')]: {
             flexDirection: "column",
             padding: 0
         }
@@ -76,7 +76,7 @@ const useStyles = makeStyles(theme => ({
     my2: {
         margin: "0 0 8px 0"
     },
-    my3:{
+    my3: {
         margin: "0 0 4px 0"
     },
     mx: {
@@ -95,7 +95,7 @@ const useStyles = makeStyles(theme => ({
     buttonSuccess: {
         backgroundColor: green[500],
         '&:hover': {
-          backgroundColor: green[700],
+            backgroundColor: green[700],
         },
     },
     buttonProgress: {
@@ -114,9 +114,9 @@ const useStyles = makeStyles(theme => ({
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
-}  
+}
 
-function ApplicantDescriptionComponent({handleShowList, applicant, updateStatus, data, processing, processMsg}) {
+function ApplicantDescriptionComponent({ handleShowList, applicant, updateStatus, data, processing, processMsg }) {
     console.log(applicant)
     const classes = useStyles()
     const [success, setSuccess] = React.useState(false);
@@ -130,32 +130,32 @@ function ApplicantDescriptionComponent({handleShowList, applicant, updateStatus,
         [classes.buttonSuccess]: success,
         [classes.mx]: true
     });
-    
+
     React.useEffect(() => {
         return () => {
-          clearTimeout(timer.current);
+            clearTimeout(timer.current);
         };
     }, []);
 
     const handleButtonClick = () => {
         if (!processing) {
-          setSuccess(false);
-          setDisable(true);
+            setSuccess(false);
+            setDisable(true);
         }
     };
 
     const handleSnackClose = (event, reason) => {
         if (reason === 'clickaway') {
-          return;
-        }    
+            return;
+        }
         setSnackOpen(false);
     };
 
     // Methods
     const toFilter = (d) => {
         let date = '';
-        if (d[0]==='a'){
-            date = '1'+ d.slice(1)
+        if (d[0] === 'a') {
+            date = '1' + d.slice(1)
             return date
         }
         else return d;
@@ -199,9 +199,9 @@ function ApplicantDescriptionComponent({handleShowList, applicant, updateStatus,
 
 
     const displayButton = (status) => {
-        switch(status){
+        switch (status) {
             case "Pending":
-                return(
+                return (
                     <>
                         <div className={classes.wrapper}>
                             <Button
@@ -210,139 +210,143 @@ function ApplicantDescriptionComponent({handleShowList, applicant, updateStatus,
                                 className={buttonClassname}
                                 disabled={processing || disable}
                                 onClick={handleClick("Process", applicant.id, "Processed")}
-                                style={{backgroundColor: !disable ? data.filter((value) => value.status === "Process")[0].backgroundColor : null}}
+                                style={{ backgroundColor: !disable ? data.filter((value) => value.status === "Process")[0].backgroundColor : null }}
                                 size="small"
+                                ariaLabel="Mark as Reviewed"
                             >
                                 <Typography variant="caption" className={clsx(classes.btnText, classes.mx3)}>
                                     <strong>Mark as Reviewed</strong>
                                 </Typography>
                             </Button>
-                            {processing  && <CircularProgress size={24} className={classes.buttonProgress} />}
+                            {processing && <CircularProgress size={24} className={classes.buttonProgress} />}
                             {
-                                processMsg !== "" && !processing ? 
-                                    processMsg==="success" ? 
-                                    <Snackbar 
-                                        open={snackOpen} 
-                                        autoHideDuration={1500} 
-                                        onClose={handleSnackClose}
-                                        anchorOrigin={{ vertical:'bottom', horizontal:'right' }}
-                                    >
-                                        <Alert onClose={handleSnackClose} severity="success">
-                                            Candidate {snackMsg}
+                                processMsg !== "" && !processing ?
+                                    processMsg === "success" ?
+                                        <Snackbar
+                                            open={snackOpen}
+                                            autoHideDuration={1500}
+                                            onClose={handleSnackClose}
+                                            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                                        >
+                                            <Alert onClose={handleSnackClose} severity="success">
+                                                Candidate {snackMsg}
+                                            </Alert>
+                                        </Snackbar>
+                                        :
+                                        <Snackbar open={snackOpen} autoHideDuration={1500} onClose={handleSnackClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+                                            <Alert onClose={handleSnackClose} severity="error">
+                                                Some error occurred
                                         </Alert>
-                                    </Snackbar>
+                                        </Snackbar>
                                     :
-                                    <Snackbar open={snackOpen} autoHideDuration={1500} onClose={handleSnackClose} anchorOrigin={{ vertical:'bottom', horizontal:'right' }}>
-                                        <Alert onClose={handleSnackClose} severity="error">
-                                            Some error occurred
-                                        </Alert>
-                                    </Snackbar>
-                                :
-                                null
+                                    null
                             }
-                           
+
                         </div>
 
                     </>
                 )
             case "Process":
-                return(
+                return (
                     <>
-                       
-                            {["Shortlisted", "Rejected"]
-                                .map((action) => {
-                                    return(
-                                        <div className={classes.wrapper}>
-                                            <Button
-                                                variant="contained"
-                                                color="secondary"
-                                                className={buttonClassname}
-                                                disabled={processing || disable}
-                                                onClick={handleClick(action, applicant.id, action)}
-                                                style={{backgroundColor: !disable ? data.filter((value) => value.status === action)[0].backgroundColor : null}}
-                                                size="small"
-                                            >
-                                                <Typography variant="caption" className={clsx(classes.btnText, classes.mx3)}>
-                                                <strong>{action.slice(0, action.length-2)}</strong>  
-                                                </Typography>
-                                            </Button>
-                                            {processing  && <CircularProgress size={24} className={classes.buttonProgress} />}
-                                        </div>   
-                                        
-                                    )
-                                })
-                            }
-                            {
-                                processMsg !== "" && !processing ? 
-                                    processMsg==="success" ? 
-                                    <Snackbar open={snackOpen} autoHideDuration={1500} onClose={handleSnackClose} anchorOrigin={{ vertical:'bottom', horizontal:'right' }}>
-                                        <Alert onClose={handleSnackClose} severity={snackMsg==="Rejected" ? "warning" : "success"}>
+
+                        {["Shortlisted", "Rejected"]
+                            .map((action) => {
+                                return (
+                                    <div className={classes.wrapper}>
+                                        <Button
+                                            variant="contained"
+                                            color="secondary"
+                                            ariaLabel={action.slice(0, action.length - 2)}
+                                            className={buttonClassname}
+                                            disabled={processing || disable}
+                                            onClick={handleClick(action, applicant.id, action)}
+                                            style={{ backgroundColor: !disable ? data.filter((value) => value.status === action)[0].backgroundColor : null }}
+                                            size="small"
+                                        >
+                                            <Typography variant="caption" className={clsx(classes.btnText, classes.mx3)}>
+                                                <strong>{action.slice(0, action.length - 2)}</strong>
+                                            </Typography>
+                                        </Button>
+                                        {processing && <CircularProgress size={24} className={classes.buttonProgress} />}
+                                    </div>
+
+                                )
+                            })
+                        }
+                        {
+                            processMsg !== "" && !processing ?
+                                processMsg === "success" ?
+                                    <Snackbar open={snackOpen} autoHideDuration={1500} onClose={handleSnackClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+                                        <Alert onClose={handleSnackClose} severity={snackMsg === "Rejected" ? "warning" : "success"}>
                                             Candidate {snackMsg}
                                         </Alert>
                                     </Snackbar>
                                     :
-                                    <Snackbar open={snackOpen} autoHideDuration={1500} onClose={handleSnackClose} anchorOrigin={{ vertical:'bottom', horizontal:'right' }}>
+                                    <Snackbar open={snackOpen} autoHideDuration={1500} onClose={handleSnackClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
                                         <Alert onClose={handleSnackClose} severity="error">
                                             Some error occurred
                                         </Alert>
                                     </Snackbar>
                                 :
                                 null
-                            }
-                                     
+                        }
+
 
                     </>
                 )
             case "Shortlisted":
-                return(
+                return (
                     <>
                         <div className={classes.wrapper}>
-                        <Button
-                            variant="contained"
-                            color="secondary"
-                            className={buttonClassname}
-                            disabled={processing || disable}
-                            onClick={handleClick("Selected", applicant.id, "Shortlisted")}
-                            style={{backgroundColor: !disable ? data.filter((value) => value.status === "Selected")[0].backgroundColor : null}}
-                            size="small"
-                        >
-                            <Typography variant="caption" className={clsx(classes.btnText, classes.mx3)}>
-                               <strong>Accept</strong>
-                            </Typography>
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="secondary"
-                            className={buttonClassname}
-                            disabled={processing || disable}
-                            onClick={handleClick("Rejected", applicant.id, "Rejected")}
-                            style={{backgroundColor: !disable ? data.filter((value) => value.status === "Rejected")[0].backgroundColor : null}}
-                            size="small"
-                        >
-                            <Typography variant="caption" className={clsx(classes.btnText, classes.mx3)}>
-                                <strong>Reject</strong>
-                            </Typography>
-                        </Button>
-                        {processing  && <CircularProgress size={24} className={classes.buttonProgress} />}
-                        {
-                            processMsg !== "" && !processing ? 
-                                processMsg==="success" ? 
-                                <Snackbar open={snackOpen} autoHideDuration={1500} onClose={handleSnackClose} anchorOrigin={{ vertical:'bottom', horizontal:'right' }}>
-                                    <Alert onClose={handleSnackClose} severity={snackMsg==="Rejected" ? "warning" : "success"}>
-                                        Candidate {snackMsg}
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                ariaLabel="Accept"
+                                className={buttonClassname}
+                                disabled={processing || disable}
+                                onClick={handleClick("Selected", applicant.id, "Shortlisted")}
+                                style={{ backgroundColor: !disable ? data.filter((value) => value.status === "Selected")[0].backgroundColor : null }}
+                                size="small"
+                            >
+                                <Typography variant="caption" className={clsx(classes.btnText, classes.mx3)}>
+                                    <strong>Accept</strong>
+                                </Typography>
+                            </Button>
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                ariaLabel="Reject"
+                                className={buttonClassname}
+                                disabled={processing || disable}
+                                onClick={handleClick("Rejected", applicant.id, "Rejected")}
+                                style={{ backgroundColor: !disable ? data.filter((value) => value.status === "Rejected")[0].backgroundColor : null }}
+                                size="small"
+                            >
+                                <Typography variant="caption" className={clsx(classes.btnText, classes.mx3)}>
+                                    <strong>Reject</strong>
+                                </Typography>
+                            </Button>
+                            {processing && <CircularProgress size={24} className={classes.buttonProgress} />}
+                            {
+                                processMsg !== "" && !processing ?
+                                    processMsg === "success" ?
+                                        <Snackbar open={snackOpen} autoHideDuration={1500} onClose={handleSnackClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+                                            <Alert onClose={handleSnackClose} severity={snackMsg === "Rejected" ? "warning" : "success"}>
+                                                Candidate {snackMsg}
+                                            </Alert>
+                                        </Snackbar>
+                                        :
+                                        <Snackbar open={snackOpen} autoHideDuration={1500} onClose={handleSnackClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+                                            <Alert onClose={handleSnackClose} severity="error">
+                                                Some error occurred
                                     </Alert>
-                                </Snackbar>
-                                :
-                                <Snackbar open={snackOpen} autoHideDuration={1500} onClose={handleSnackClose} anchorOrigin={{ vertical:'bottom', horizontal:'right' }}>
-                                    <Alert onClose={handleSnackClose} severity="error">
-                                        Some error occurred
-                                    </Alert>
-                                </Snackbar>
-                            :
-                            null
-                        }
+                                        </Snackbar>
+                                    :
+                                    null
+                            }
                         </div>
-                        
+
                     </>
                 )
             default:
@@ -357,7 +361,7 @@ function ApplicantDescriptionComponent({handleShowList, applicant, updateStatus,
                     <Moment filter={toFilter} fromNow>{applicant.application_date}</Moment>
                 </Typography>
                 <IconButton disableRipple onClick={handleShowList({})} className={classes.closeBtn}>
-                    <ClearRounded fontSize="small"/>
+                    <ClearRounded fontSize="small" />
                 </IconButton>
             </Grid>
 
@@ -367,10 +371,11 @@ function ApplicantDescriptionComponent({handleShowList, applicant, updateStatus,
                     {/* DP section */}
                     <Grid item container direction="column" alignItems="center" className={classes.my}>
                         <img
-                            src={applicant.candidate.user.photo_url? applicant.candidate.user.photo_url : blank_image}
+                            src={applicant.candidate.user.photo_url ? applicant.candidate.user.photo_url : blank_image}
+                            alt="profile"
                             className={classes.displayProfile}
                         />
-                        <Typography variant="caption" className={classes.title} style={{fontSize: "14px"}}>
+                        <Typography variant="caption" className={classes.title} style={{ fontSize: "14px" }}>
                             {applicant.candidate.user.first_name} {applicant.candidate.user.last_name}
                         </Typography>
                         <Typography variant="caption" className={classes.caption}>
@@ -383,9 +388,9 @@ function ApplicantDescriptionComponent({handleShowList, applicant, updateStatus,
                         <Typography className={clsx(classes.title, classes.my)}>
                             Diversity Tags
                         </Typography>
-                        {applicant.candidate.diversity_tags.map((tag)=> {
-                            return(
-                                <Chip 
+                        {applicant.candidate.diversity_tags.map((tag) => {
+                            return (
+                                <Chip
                                     label={tag.name}
                                     key={tag.id}
                                     className={clsx(classes.chip, classes.my2)}
@@ -394,24 +399,24 @@ function ApplicantDescriptionComponent({handleShowList, applicant, updateStatus,
                         })}
                     </Grid>
                 </Grid>
-                <Grid item container direction="column" alignItems="center" className={clsx(classes.subContainer2,classes.my)}>
-                    
+                <Grid item container direction="column" alignItems="center" className={clsx(classes.subContainer2, classes.my)}>
+
                     {/* Profile Description section */}
                     <Grid item container className={clsx(classes.my, classes.detailsContainer)}>
-                        <Typography style={{fontSize: "14px"}}>
+                        <Typography style={{ fontSize: "14px" }}>
                             {applicant.candidate.profile_description}
                         </Typography>
                         <Grid item container justify="center" className={clsx(classes.my)}>
                             <a href={applicant.candidate.resume_link}>
-                                <Button className={classes.mx}>
-                                    <Typography variant="caption" display="block" style={{color: "#4694E7"}}>
+                                <Button className={classes.mx} ariaLabel="Resume Link">
+                                    <Typography variant="caption" display="block" style={{ color: "#4694E7" }}>
                                         Resume Link
                                     </Typography>
                                 </Button>
-                            </a>  
+                            </a>
                             <Link to={`/profile/${applicant.candidate.id}`}>
-                                <Button className={classes.mx}>
-                                    <Typography variant="caption" display="block" style={{color: "#4694E7"}}>
+                                <Button className={classes.mx} ariaLabel="Profile Link">
+                                    <Typography variant="caption" display="block" style={{ color: "#4694E7" }}>
                                         Profile Link
                                     </Typography>
                                 </Button>
@@ -430,7 +435,7 @@ function ApplicantDescriptionComponent({handleShowList, applicant, updateStatus,
                         {aboutBasicData.map((data) => {
                             return (
                                 <Grid item container className={classes.my3}>
-                                    <Typography variant="caption" className={clsx(classes.title)} style={{minWidth: "110px"}}>
+                                    <Typography variant="caption" className={clsx(classes.title)} style={{ minWidth: "110px" }}>
                                         {data.key}
                                     </Typography>
                                     <Typography variant="caption" className={classes.caption}>
@@ -445,7 +450,7 @@ function ApplicantDescriptionComponent({handleShowList, applicant, updateStatus,
                         {aboutContactData.map((data) => {
                             return (
                                 <Grid item container className={classes.my3}>
-                                    <Typography variant="caption" className={clsx(classes.title)} style={{minWidth: "110px"}}>
+                                    <Typography variant="caption" className={clsx(classes.title)} style={{ minWidth: "110px" }}>
                                         {data.key}
                                     </Typography>
                                     <Typography variant="caption" className={classes.caption}>

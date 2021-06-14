@@ -123,6 +123,7 @@ const InitiativesList = (props) => {
         onClick={handleDialogOpen}
         variant="outlined"
         className={classes.addButton}
+        ariaLabel="Add initiative"
       >
         Add initiative
       </Button>
@@ -166,6 +167,7 @@ const InitiativesList = (props) => {
                 size="small"
                 color="secondary"
                 onClick={handleDialogClose}
+                ariaLabel="Close"
               >
                 Close
               </Button>
@@ -174,6 +176,7 @@ const InitiativesList = (props) => {
                 size="small"
                 color="secondary"
                 onClick={handleAddInitiatives}
+                ariaLabel="Add"
               >
                 Add
               </Button>

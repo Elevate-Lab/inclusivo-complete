@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-    makeStyles, 
+    makeStyles,
     TextField,
     Typography,
     Button,
@@ -24,31 +24,31 @@ import { storage } from '../../firebase/index';
 import { baseUrl } from '../../urlConstants.js';
 
 const useStyles = makeStyles(theme => ({
-    input:{
+    input: {
         margin: "2% 0"
     },
-    previewImg:{
+    previewImg: {
         textAlign: "center",
         fontWeight: "600",
-        margin:"2% 0",
+        margin: "2% 0",
         border: "1px solid #DFDFDF",
         borderRadius: "15px",
-        padding:"2% 5%",
+        padding: "2% 5%",
 
-            '& img':{
-                    maxWidth:"100%",
-                    maxHeight: "100%"
-            }
+        '& img': {
+            maxWidth: "100%",
+            maxHeight: "100%"
+        }
     },
-    imageInputLabel:{
+    imageInputLabel: {
         margin: "2% auto",
-        width:"10%",
-        textAlign:"center",
+        width: "10%",
+        textAlign: "center",
         padding: "10px",
         border: "1px solid #DFDFDF",
-        color:"#FF3750",
+        color: "#FF3750",
         borderRadius: "10px",
-        cursor:"pointer"
+        cursor: "pointer"
     },
     imageUploadField: {
         display: "none"
@@ -60,44 +60,44 @@ const useStyles = makeStyles(theme => ({
 
 const styles = (theme) => ({
     root: {
-      margin: 0,
-      padding: theme.spacing(2),
+        margin: 0,
+        padding: theme.spacing(2),
     },
     closeButton: {
-      position: 'absolute',
-      right: theme.spacing(1),
-      top: theme.spacing(1),
-      color: theme.palette.grey[500],
+        position: 'absolute',
+        right: theme.spacing(1),
+        top: theme.spacing(1),
+        color: theme.palette.grey[500],
     }
-  });
+});
 
 const AddStory = () => {
 
     const classes = useStyles();
 
-    const [editing,setEditing] = React.useState(true);
+    const [editing, setEditing] = React.useState(true);
 
     const [storyImageValues, setStoryImageValues] = React.useState(null);
     const [storyImageSelected, setStoryImageSelected] = React.useState(false);
     const [previewImageUpload, setPreviewImageUpload] = React.useState(false);
     const [imageUploading, setImageUploading] = React.useState(false);
-    const [progress,setProgress] = React.useState(0);
+    const [progress, setProgress] = React.useState(0);
 
-    
 
-    const [newStory, setNewStory] = React.useState({title:"", photoUrl:placeholderImg , description:""});
+
+    const [newStory, setNewStory] = React.useState({ title: "", photoUrl: placeholderImg, description: "" });
     const newStoryChange = (e) => {
         let id = e.target.id;
-        setNewStory((prev)=>({
+        setNewStory((prev) => ({
             ...prev,
-            [id]:e.target.value
+            [id]: e.target.value
         }));
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log("changed");
         setPreviewImageUpload(false);
-    },[newStory.photoUrl])
+    }, [newStory.photoUrl])
 
     const [open, setOpen] = React.useState(true);
 
@@ -105,10 +105,10 @@ const AddStory = () => {
 
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-       const handleClickOpen = () => {
-      setOpen(true);
+    const handleClickOpen = () => {
+        setOpen(true);
     };
-       const handleClose = () => {
+    const handleClose = () => {
         setOpen(false);
         setEditing(false);
     };
@@ -116,29 +116,29 @@ const AddStory = () => {
     const DialogTitle = withStyles(styles)((props) => {
         const { children, classes, onClose, ...other } = props;
         return (
-          <MuiDialogTitle disableTypography className={classes.root} {...other}>
-            <Typography variant="h5">{children}</Typography>
-            {onClose ? (
-              <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-                <CloseIcon />
-              </IconButton>
-            ) : null}
-          </MuiDialogTitle>
+            <MuiDialogTitle disableTypography className={classes.root} {...other}>
+                <Typography variant="h5">{children}</Typography>
+                {onClose ? (
+                    <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+                        <CloseIcon />
+                    </IconButton>
+                ) : null}
+            </MuiDialogTitle>
         );
-      });
-    
+    });
 
-      const handleAddImageClick = (e) => {
-          imageFileInput.current.click();
-      }
 
-      const handleStoryImage = (e) => {
-          setPreviewImageUpload(true);
-        if(e.target.files[0]){
+    const handleAddImageClick = (e) => {
+        imageFileInput.current.click();
+    }
+
+    const handleStoryImage = (e) => {
+        setPreviewImageUpload(true);
+        if (e.target.files[0]) {
             const reader = new FileReader();
             reader.onload = () => {
                 if (reader.readyState === 2) {
-                    setNewStory((prev)=>({
+                    setNewStory((prev) => ({
                         ...prev,
                         photoUrl: reader.result
                     }))
@@ -160,10 +160,10 @@ const AddStory = () => {
             "state_changed",
             snapshot => {
                 const progress = Math.round(
-                    (snapshot.bytesTransferred/snapshot.totalBytes) * 100
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
                 );
                 setProgress((oldProgress) => {
-                    if(oldProgress === 100){
+                    if (oldProgress === 100) {
                         return 0;
                     }
                     return progress;
@@ -175,11 +175,11 @@ const AddStory = () => {
             () => {
                 storage
                     .ref("company/story")
-                    .child(`${storyImageValues.name.slice(0,-4)}_${storyImageValues.lastModified}`)
+                    .child(`${storyImageValues.name.slice(0, -4)}_${storyImageValues.lastModified}`)
                     .getDownloadURL()
                     .then(url => {
                         console.log(url);
-                        setNewStory((prev)=>({
+                        setNewStory((prev) => ({
                             ...prev,
                             photoUrl: url
                         }))
@@ -212,9 +212,9 @@ const AddStory = () => {
         console.log(data);
     }
 
-      
 
-    return editing?(
+
+    return editing ? (
         <div>
             <Dialog
                 fullScreen={fullScreen}
@@ -233,30 +233,30 @@ const AddStory = () => {
                         className={classes.input}
                         id="title" label="Title"
                         value={newStory.title}
-                        fullWidth 
+                        fullWidth
                         onChange={newStoryChange}
                     />
-                    <Button color="secondary" variant="outlined" onClick={handleAddImageClick}>
+                    <Button color="secondary" variant="outlined" onClick={handleAddImageClick} ariaLabel="Add Image">
                         Add Image
                     </Button>
-                    
-                    <input 
+
+                    <input
                         accept="image/*"
                         name="storyImage"
-                        type="file" 
-                        id="imageInput" 
+                        type="file"
+                        id="imageInput"
                         className={classes.imageUploadField}
                         ref={imageFileInput}
                         onChange={handleStoryImage}
                     />
-                    
+
                     <div className={classes.previewImg}>
-                        {previewImageUpload?(<CircularProgress color="secondary" />):
-                        (<img
-                            src={newStory.photoUrl} 
-                            onError={(e)=>{e.target.src="/images/placeholder-image.png"}} 
-                            alt="preview"
-                        />)}
+                        {previewImageUpload ? (<CircularProgress color="secondary" />) :
+                            (<img
+                                src={newStory.photoUrl}
+                                onError={(e) => { e.target.src = "/images/placeholder-image.png" }}
+                                alt="preview"
+                            />)}
                         <Typography variant="caption" display="block">
                             Image Preview
                         </Typography>
@@ -280,10 +280,10 @@ const AddStory = () => {
                         <PostIcon />
                     </Button>
                 </DialogActions>
-                {progress>0 && <LinearProgress variant="determinate" color="secondary" value={progress} className={classes.progressBar}/>}
+                {progress > 0 && <LinearProgress variant="determinate" color="secondary" value={progress} className={classes.progressBar} />}
             </Dialog>
         </div>
-    ):<Redirect to="/" />
+    ) : <Redirect to="/" />
 }
 
 export default AddStory;

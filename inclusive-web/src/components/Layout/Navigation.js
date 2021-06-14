@@ -1,5 +1,5 @@
-import React,{useState, useEffect, useLayoutEffect} from 'react'
-import {useSelector, useDispatch} from 'react-redux'
+import React, { useState, useEffect, useLayoutEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { baseUrl } from '../../urlConstants';
 import clsx from 'clsx'
 import {
@@ -28,11 +28,11 @@ import {
     MenuRounded,
     ClearRounded,
 } from '@material-ui/icons'
-import { 
-    desktopViewOpen, 
-    mobileViewOpen, 
-    desktopViewClose, 
-    mobileViewClose, 
+import {
+    desktopViewOpen,
+    mobileViewOpen,
+    desktopViewClose,
+    mobileViewClose,
     handleDarkMode
 } from '../../actions/marginActions/actions'
 import Loader from '../../assets/loader/loader';
@@ -95,7 +95,7 @@ const useStyles = makeStyles(theme => ({
         borderRadius: '5px',
         color: '#ffffff'
     },
-    drawerItemText:{
+    drawerItemText: {
         fontSize: '0.8rem',
     },
     drawerIcon: {
@@ -122,7 +122,7 @@ const useStyles = makeStyles(theme => ({
     divider: {
         background: '#AEB6C7'
     },
-    hide:{
+    hide: {
         display: 'none',
     },
     button: property => ({
@@ -160,10 +160,10 @@ function Layout(props) {
     const [isUserEmployer, setIsUserEmployer] = useState(false)
 
     const dispatch = useDispatch()
-    
+
     const darkMode = marginDetails.darkMode
     const marginFromLeft = marginDetails.marginFromLeft
-    const property = {sidebarWidth, marginFromLeft}
+    const property = { sidebarWidth, marginFromLeft }
     const classes = useStyles(property)
 
     const toggleSidebar = () => {
@@ -180,7 +180,7 @@ function Layout(props) {
 
     // Check if user is employer or candidate
     const getUser = async () => {
-        let authToken=1;
+        let authToken = 1;
         if (localStorage.getItem('key')) {
             authToken = localStorage.getItem('key');
         }
@@ -188,7 +188,7 @@ function Layout(props) {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'token '+authToken,
+                'Authorization': 'token ' + authToken,
             },
         };
         const response = await fetch(`${baseUrl}/user/get/0`, requestOptions);
@@ -200,9 +200,9 @@ function Layout(props) {
     }
 
     // Effects
-    useEffect (() => {
+    useEffect(() => {
         // console.log(darkMode)
-    },[marginDetails])
+    }, [marginDetails])
 
     useLayoutEffect(() => {
         // console.log(darkMode)
@@ -211,23 +211,23 @@ function Layout(props) {
         let timeoutId = null;
         const resizeListener = () => {
             clearTimeout(timeoutId);
-            timeoutId = setTimeout(() => {setIsMobileView(checkWidthChange())}, 100);
+            timeoutId = setTimeout(() => { setIsMobileView(checkWidthChange()) }, 100);
         };
         window.addEventListener('resize', resizeListener);
-    
+
         return () => {
             window.removeEventListener('resize', resizeListener);
         }
     }, [])
-   
-    useEffect(() =>{
-        if(isMobileView && isMobileSidebarOpen){
+
+    useEffect(() => {
+        if (isMobileView && isMobileSidebarOpen) {
             setSidebarWidth(236)
             dispatch(mobileViewOpen())
-        } else if(isMobileView && !isMobileSidebarOpen) {
+        } else if (isMobileView && !isMobileSidebarOpen) {
             setSidebarWidth(0)
             dispatch(mobileViewClose())
-        } else if(!isOpen){
+        } else if (!isOpen) {
             setSidebarWidth(236)
             dispatch(desktopViewOpen())
         } else {
@@ -242,7 +242,7 @@ function Layout(props) {
     }
 
     const handleTouchItem = () => {
-        if(isMobileView){
+        if (isMobileView) {
             //console.log("Hey!")
             setIsMobileSidebarOpen(false)
         }
@@ -255,11 +255,11 @@ function Layout(props) {
     }
 
     // display functions
-    const list = (data,key) => {
-        return(
+    const list = (data, key) => {
+        return (
             <Link to={data.route} key={key}>
                 <ListItem button className={classes.drawerItem} key={data.name} onClick={handleTouchItem}>
-                    <ListItemIcon style={{minWidth: '36px'}}>{data.icon}</ListItemIcon>
+                    <ListItemIcon style={{ minWidth: '36px' }}>{data.icon}</ListItemIcon>
                     <ListItemText className={clsx({
                         [classes.hide]: isOpen
                     })}>
@@ -281,11 +281,11 @@ function Layout(props) {
                 className={classes.drawer}
                 variant="persistent"
                 {
-                    ...(isMobileView ? 
+                ...(isMobileView ?
                     {
                         open: isMobileSidebarOpen
                     }
-                    : 
+                    :
                     {
                         open: true
                     })
@@ -296,66 +296,66 @@ function Layout(props) {
                 containerstyle={{ transform: 'none' }}
             >
                 <div className={classes.drawerHeader}>
-                    <img 
-                        src="/images/Group.svg" 
-                        className={clsx(classes.logo,{
+                    <img
+                        src="/images/Group.svg"
+                        className={clsx(classes.logo, {
                             [classes.hide]: isOpen
-                        })} 
+                        })}
                         alt='Logo'
                     />
-                    <img 
-                        src="/images/IncMini.svg" 
-                        className={clsx(classes.logo,{
+                    <img
+                        src="/images/IncMini.svg"
+                        className={clsx(classes.logo, {
                             [classes.hide]: !isOpen
-                        })} 
+                        })}
                         alt='Logo'
                     />
                     {
-                        isMobileView && isMobileSidebarOpen && 
+                        isMobileView && isMobileSidebarOpen &&
                         (
-                            <IconButton onClick={toggleOnMobileView} style={{color: '#ffffff'}}>
+                            <IconButton onClick={toggleOnMobileView} style={{ color: '#ffffff' }}>
                                 <ClearRounded />
                             </IconButton>
                         )
                     }
                 </div>
-                <div style={{overflowY: "auto", overflowX: "hidden", marginBottom: '52px'}}>
+                <div style={{ overflowY: "auto", overflowX: "hidden", marginBottom: '52px' }}>
                     <List>
-                        {commonItems.map((data,key) => {
-                            return list(data,key)
+                        {commonItems.map((data, key) => {
+                            return list(data, key)
                         })}
                     </List>
                     <Divider className={classes.divider} />
                     <List>
                         {
-                            loading ? 
+                            loading ?
                                 <div className={classes.sweetLoading}>
-                                    <Loader loading={loading} color="#ffffff"/>
+                                    <Loader loading={loading} color="#ffffff" />
                                 </div>
-                            :
-                                isUserEmployer ? 
+                                :
+                                isUserEmployer ?
                                     employerItems.map(data => {
                                         return list(data)
                                     })
-                                :
+                                    :
                                     candidateItems.map(data => {
                                         return list(data)
                                     })
                         }
                     </List>
                 </div>
-                
+
                 <div className={classes.position}>
-                    {!isMobileView && <Button onClick={toggleSidebar} className={classes.toggleButton}>
+                    {!isMobileView && <Button onClick={toggleSidebar} className={classes.toggleButton} ariaLabel="Arrow">
                         {!isOpen ?
-                            <ArrowBackIosRounded style={{fontSize: '18px'}}/> :
-                            <ArrowForwardIosRounded style={{fontSize: '18px'}}/>
+                            <ArrowBackIosRounded style={{ fontSize: '18px' }} /> :
+                            <ArrowForwardIosRounded style={{ fontSize: '18px' }} />
                         }
-                    </Button>}                 
-                    
-                    <List className={classes.drawerBottom} style={{ paddingTop: '0px'}}>
+                    </Button>}
+
+                    <List className={classes.drawerBottom} style={{ paddingTop: '0px' }}>
                         <ListItem button className={classes.drawerItem} onClick={handleLogout}>
-                            <ListItemIcon style={{minWidth: '36px'}}><Icon className={classes.drawerIcon}><img src={Logout} alt="logout"/></Icon></ListItemIcon>
+                            <ListItemIcon style={{ minWidth: '36px' }}><Icon className={classes.drawerIcon}><img src={Logout} alt="logout" /></Icon></ListItemIcon>
                             <ListItemText className={clsx({
                                 [classes.hide]: isOpen
                             })}>
@@ -373,26 +373,26 @@ function Layout(props) {
             <AppBar color={`pallete.text`} className={classes.appbar}>
                 <Toolbar className={classes.toolbar}>
                     {isMobileView && !isMobileSidebarOpen &&
-                        <div style={{flexGrow: 1}}>
+                        <div style={{ flexGrow: 1 }}>
                             <IconButton onClick={toggleOnMobileView}>
                                 <MenuRounded />
                             </IconButton>
                         </div>
                     }
-                    <div style={{flexGrow: 1}}>
-                        <img 
-                            src="/images/inclusivo.svg" 
-                            className={clsx(classes.logo,{
+                    <div style={{ flexGrow: 1 }}>
+                        <img
+                            src="/images/inclusivo.svg"
+                            className={clsx(classes.logo, {
                                 [classes.hide]: !(isMobileView && !isMobileSidebarOpen)
-                            })} 
+                            })}
                             alt='Logo'
-                        />        
+                        />
                     </div>
                     <div>
                         <Link to='/home/profile'>
-                        <IconButton>
-                            <AccountCircleTwoTone />
-                        </IconButton>
+                            <IconButton>
+                                <AccountCircleTwoTone />
+                            </IconButton>
                         </Link>
                     </div>
                 </Toolbar>

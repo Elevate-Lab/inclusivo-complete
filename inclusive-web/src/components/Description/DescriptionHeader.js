@@ -17,50 +17,51 @@ const useStyles = makeStyles(() => ({
     }
 }))
 
-function DescriptionHeader({data, type}) {
+function DescriptionHeader({ data, type }) {
     const classes = useStyles()
 
     return (
-        <Grid item container wrap="nowrap" alignItems="center" style={{flex: "1 1"}}>
+        <Grid item container wrap="nowrap" alignItems="center" style={{ flex: "1 1" }}>
             <Grid item>
                 <ButtonBase disableRipple disableTouchRipple>
                     {data.company &&
-                        <img 
-                            src={data.company.logo_url ? data.company.logo_url : companyPlaceholder} 
-                            className={classes.image1} 
+                        <img
+                            src={data.company.logo_url ? data.company.logo_url : companyPlaceholder}
+                            className={classes.image1}
+                            alt="Company logo"
                         />
                     }
                 </ButtonBase>
             </Grid>
             <Grid item container direction="column">
-                <Typography variant="h6" style={{ fontWeight: '600' }}>
-                    {type==="company" ?
+                <Typography variant="h5" style={{ fontWeight: '600' }}>
+                    {type === "company" ?
                         data.company.name
-                    :
+                        :
                         data.title
                     }
                 </Typography>
-                {type!=="job" ?
+                {type !== "job" ?
                     null
-                :
+                    :
                     <Typography variant="subtitle2">
                         {data.company ? data.company.name : null}
-                        <span style={{margin: "0 4px"}}>•</span>  
+                        <span style={{ margin: "0 4px" }}>•</span>
                         {data.job_type}
                     </Typography>
                 }
-                {type!=="scholarship" ?
+                {type !== "scholarship" ?
                     null
-                :
+                    :
                     <Typography variant="subtitle2">
                         {data.company ? data.company.name : null}
                     </Typography>
                 }
-                {type!=="company" ?
+                {type !== "company" ?
                     <Typography variant="subtitle2">
                         <Moment filter={toFilter} fromNow>{data.posted_on}</Moment>
                     </Typography>
-                :
+                    :
                     <Typography variant="subtitle2">
                         {data.company.title}
                     </Typography>

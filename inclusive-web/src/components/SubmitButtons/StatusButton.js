@@ -24,19 +24,20 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function StatusButton({handleSubmit, msg, status, disable, processing}) {
+function StatusButton({ handleSubmit, msg, status, disable, processing }) {
     const classes = useStyles()
     return (
-        <Button 
+        <Button
             onClick={handleSubmit(status)}
             className={classes.btn}
             disableRipple
             disabled={disable}
-            style={{background: !disable ? status==="Draft" ? "#06B0C5" : "#4AA64E" : "#e6e6e6"}}
+            style={{ background: !disable ? status === "Draft" ? "#06B0C5" : "#4AA64E" : "#e6e6e6" }}
+            ariaLabel={msg}
         >
-            <Typography 
-                variant="h6" 
-                style={{fontSize: "12px", letterSpacing: "0.4px", color: "#fff"}}
+            <Typography
+                variant="h6"
+                style={{ fontSize: "12px", letterSpacing: "0.4px", color: "#fff" }}
             >
                 {msg}
             </Typography>

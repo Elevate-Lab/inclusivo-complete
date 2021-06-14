@@ -20,6 +20,8 @@ import { green } from '@material-ui/core/colors';
 import blank_image from '../../assets/blank_image.png'
 import Moment from 'react-moment';
 import clsx from 'clsx'
+import { TextField } from '@material-ui/core';
+import { baseUrl } from '../../urlConstants';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -117,12 +119,12 @@ function Alert(props) {
 }
 
 function ApplicantDescriptionComponent({ handleShowList, applicant, updateStatus, data, processing, processMsg }) {
-    console.log(applicant)
     const classes = useStyles()
     const [success, setSuccess] = React.useState(false);
     const [disable, setDisable] = React.useState(false);
     const [snackOpen, setSnackOpen] = React.useState(false);
     const [snackMsg, setSnackMsg] = React.useState("Processed");
+    const [recruiterNotesText, setRecruiterNotesText] = React.useState("");
 
     const timer = React.useRef();
 
@@ -135,6 +137,31 @@ function ApplicantDescriptionComponent({ handleShowList, applicant, updateStatus
         return () => {
             clearTimeout(timer.current);
         };
+    }, []);
+
+    let authToken = 1;
+    if (localStorage.getItem('key')) {
+        authToken = localStorage.getItem('key');
+    }
+
+    const getNotes = async () => {
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Authorization': `token ${authToken}`,
+            },
+        };
+        const response = await fetch(`${baseUrl}/job/application/status/${applicant.id}`, requestOptions);
+        const res = await response.json();
+        if (res.data?.[res.data.length - 1].recruiter_notes) {
+            setRecruiterNotesText(res.data[res.data.length - 1].recruiter_notes);
+        }
+    }
+
+    React.useEffect(() => {
+        getNotes();
     }, []);
 
     const handleButtonClick = () => {
@@ -191,12 +218,11 @@ function ApplicantDescriptionComponent({ handleShowList, applicant, updateStatus
     ]
 
     const handleClick = (type, id, textmsg) => () => {
-        updateStatus(type, id);
+        updateStatus(type, id, recruiterNotesText);
         handleButtonClick();
         setSnackOpen(true);
         setSnackMsg(textmsg);
     }
-
 
     const displayButton = (status) => {
         switch (status) {
@@ -459,6 +485,12 @@ function ApplicantDescriptionComponent({ handleShowList, applicant, updateStatus
                                 </Grid>
                             )
                         })}
+                        <Typography variant="caption" className={clsx(classes.caption, classes.my)}>
+                            NOTES
+                        </Typography>
+                        <TextField value={recruiterNotesText} placeholder="Recruiter Notes" onChange={(event) => {
+                            setRecruiterNotesText(event.target.value);
+                        }} />
                     </Grid>
                 </Grid>
             </Grid>

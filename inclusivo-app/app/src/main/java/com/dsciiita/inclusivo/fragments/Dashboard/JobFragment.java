@@ -2,7 +2,6 @@ package com.dsciiita.inclusivo.fragments.Dashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +42,9 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,10 +64,10 @@ import static com.dsciiita.inclusivo.storage.Constants.WORKING_MOTHER_URL;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DashboardJobFragment#newInstance} factory method to
+ * Use the {@link JobFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DashboardJobFragment extends Fragment {
+public class JobFragment extends Fragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -97,7 +98,7 @@ public class DashboardJobFragment extends Fragment {
 
     FragmentJobsDashboardBinding binding;
 
-    public DashboardJobFragment() {
+    public JobFragment() {
         // Required empty public constructor
     }
 
@@ -109,8 +110,8 @@ public class DashboardJobFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment CandidateDashboardFragment.
      */
-    public static DashboardJobFragment newInstance(String param1, String param2) {
-        DashboardJobFragment fragment = new DashboardJobFragment();
+    public static JobFragment newInstance(String param1, String param2) {
+        JobFragment fragment = new JobFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -305,13 +306,12 @@ public class DashboardJobFragment extends Fragment {
 
     private void getApplicationForAJob(Job job) {
             String jobTitle = job.getTitle();
-            binding.applicationForJob.setText("Applications for " + jobTitle);
             jobID = job.getJobId();
-            getApplications(jobID);
+            getApplications(jobID, jobTitle);
     }
 
 
-    private void getApplications(int jobID){
+    private void getApplications(int jobID, String jobTitle){
         binding.applicationProgress.setVisibility(View.VISIBLE);
         applications = new ArrayList<>();
         applications.clear();
@@ -333,6 +333,7 @@ public class DashboardJobFragment extends Fragment {
                         Collections.sort(applications, (obj1, obj2) -> obj2.getApplicationDate().compareToIgnoreCase(obj1.getApplicationDate()));
                         if (applications.size() >= 2)
                             applications = applications.subList(0, 2);
+                        binding.applicationForJob.setText("Applications for " + jobTitle);
                         applicationAdapter.updateAdapter(applications);
                         binding.applicationProgress.setVisibility(View.GONE);
                     }
@@ -576,7 +577,8 @@ public class DashboardJobFragment extends Fragment {
     AppliedJobsRV.onJobListener appliedJobListener = new AppliedJobsRV.onJobListener() {
         @Override
         public void onJobClick(int position, View v) {
-            startActivity(new Intent(getActivity(), JobDescriptionActivity.class).putExtra("id", appliedJobs.get(position).getJob().getJobId()));
+            startActivity(new Intent(getContext(), ViewJobApplicationActivity.class)
+                    .putExtra("applicationId", appliedJobs.get(position).getId()));
         }
 
         @Override

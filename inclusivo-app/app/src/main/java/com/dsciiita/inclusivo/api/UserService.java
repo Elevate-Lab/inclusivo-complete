@@ -4,6 +4,7 @@ import com.dsciiita.inclusivo.models.Company;
 import com.dsciiita.inclusivo.models.Initiative;
 import com.dsciiita.inclusivo.models.Job;
 import com.dsciiita.inclusivo.models.JobFilterBody;
+import com.dsciiita.inclusivo.models.JobStatus;
 import com.dsciiita.inclusivo.models.Scholarship;
 import com.dsciiita.inclusivo.models.Story;
 import com.dsciiita.inclusivo.models.User;
@@ -11,6 +12,7 @@ import com.dsciiita.inclusivo.models.UserCandidate;
 import com.dsciiita.inclusivo.models.UserEmployee;
 import com.dsciiita.inclusivo.responses.ApplicationByCandidate;
 import com.dsciiita.inclusivo.responses.ApplicationByIdResponse;
+import com.dsciiita.inclusivo.responses.ApplicationStatusResponseByID;
 import com.dsciiita.inclusivo.responses.ApplicationsByJobResponse;
 import com.dsciiita.inclusivo.responses.BlogsByIdResponse;
 import com.dsciiita.inclusivo.responses.BlogsResponse;
@@ -213,14 +215,19 @@ public interface UserService {
         @GET("/job/applications/{JOB_ID}/list")
         Call<ApplicationsByJobResponse> getApplicationsForJob(@Path("JOB_ID") int id, @Header("Authorization") String Token);
 
-        @FormUrlEncoded
+
         @POST("/job/application/status/update/{APPLICATION_ID}/")
         Call<DefaultResponse> updateApplicationStatus(@Path("APPLICATION_ID") int applicationId,
-                                              @Field("status") String status,
+                                                      @Body JobStatus status,
                                               @Header("Authorization") String Token);
 
         @GET("/job/application/get/{APPLICATION_ID}")
         Call<ApplicationByIdResponse> getApplicationByID(@Path("APPLICATION_ID") int id, @Header("Authorization") String Token);
+
+
+        //get status and notes etc
+        @GET("/job/application/status/{APPLICATION_ID}")
+        Call<ApplicationStatusResponseByID> getApplicationStatusDetails(@Path("APPLICATION_ID") int id, @Header("Authorization") String Token);
 
 
         @POST("/job/application/evaluate/{JOB_ID}/")

@@ -14,12 +14,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
 
 import com.dsciiita.inclusivo.R;
+import com.dsciiita.inclusivo.adapters.AppliedJobsRV;
 import com.dsciiita.inclusivo.api.ApiClient;
 import com.dsciiita.inclusivo.databinding.ActivityViewJobApplicationBinding;
 import com.dsciiita.inclusivo.models.Diversity;
 import com.dsciiita.inclusivo.models.JobApplication;
+import com.dsciiita.inclusivo.models.JobStatus;
 import com.dsciiita.inclusivo.models.UserCandidate;
 import com.dsciiita.inclusivo.responses.ApplicationByIdResponse;
+import com.dsciiita.inclusivo.responses.ApplicationStatusResponseByID;
 import com.dsciiita.inclusivo.responses.CityResponse;
 import com.dsciiita.inclusivo.responses.DefaultResponse;
 import com.dsciiita.inclusivo.storage.SharedPrefManager;
@@ -27,6 +30,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -36,12 +40,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.view.View.GONE;
+
 public class ViewJobApplicationActivity extends AppCompatActivity {
 
     private ActivityViewJobApplicationBinding binding;
-
+    private BottomSheetDialog bottomSheetDialog;
     private ArrayAdapter<CharSequence> adapter;
     private int id;
+    private MaterialButton understoodBtn;
     private String updatedStatus, status, token;
 
     @Override
@@ -51,6 +58,10 @@ public class ViewJobApplicationActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setToolBar();
+
+        bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.status_help_bottomsheet);
+        understoodBtn = bottomSheetDialog.findViewById(R.id.understood);
 
         adapter = ArrayAdapter.createFromResource(this,
                 R.array.application_status_spinner, android.R.layout.simple_spinner_item);
@@ -63,6 +74,34 @@ public class ViewJobApplicationActivity extends AppCompatActivity {
         id = getIntent().getIntExtra("applicationId", 0);
 
         getJobApplication();
+        getStatusDetails();
+    }
+
+    private void getStatusDetails() {
+        Call<ApplicationStatusResponseByID> userRequestCall = ApiClient.getUserService().getApplicationStatusDetails(id, token);
+        userRequestCall.enqueue(new Callback<ApplicationStatusResponseByID>() {
+            @Override
+            public void onResponse(Call<ApplicationStatusResponseByID> call, Response<ApplicationStatusResponseByID> response) {
+                if(response.isSuccessful()) {
+                    List<JobStatus> statuses = response.body().getData();
+                    if(statuses!=null && statuses.size()>0) {
+                        binding.infoHeader.setVisibility(View.VISIBLE);
+                        binding.extraInfo.setVisibility(View.VISIBLE);
+                        JobStatus status = statuses.get(statuses.size() - 1);
+                        if (SharedPrefManager.getInstance(ViewJobApplicationActivity.this).isEmployer())
+                            binding.extraInfo.setText(status.getRecruiterNotes());
+                        else
+                            binding.extraInfo.setText(status.getMessage());
+                    } else {
+                        binding.infoHeader.setVisibility(GONE);
+                        binding.extraInfo.setVisibility(GONE);
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ApplicationStatusResponseByID> call, Throwable t) {
+            }
+        });
     }
 
 
@@ -97,13 +136,13 @@ public class ViewJobApplicationActivity extends AppCompatActivity {
                     Snackbar.make(binding.parent, "Something went wrong.", Snackbar.LENGTH_SHORT);
                 }
 
-                binding.progressBar.setVisibility(View.GONE);
+                binding.progressBar.setVisibility(GONE);
                 binding.parent.setVisibility(View.VISIBLE);
             }
             @Override
             public void onFailure(Call<ApplicationByIdResponse> call, Throwable t) {
                 Snackbar.make(binding.parent, "Something went wrong.", Snackbar.LENGTH_SHORT);
-                binding.progressBar.setVisibility(View.GONE);
+                binding.progressBar.setVisibility(GONE);
                 binding.parent.setVisibility(View.VISIBLE);
             }
         });
@@ -119,8 +158,8 @@ public class ViewJobApplicationActivity extends AppCompatActivity {
             binding.genderTxt.setText(candidate.getUser().getGender());
 
             if(candidate.getResumeLink()==null || candidate.getResumeLink().isEmpty()) {
-                binding.resumeLinkTxt.setVisibility(View.GONE);
-                binding.resumeTxt.setVisibility(View.GONE);
+                binding.resumeLinkTxt.setVisibility(GONE);
+                binding.resumeTxt.setVisibility(GONE);
             } else {
                 binding.resumeLinkTxt.setVisibility(View.VISIBLE);
                 binding.resumeTxt.setVisibility(View.VISIBLE);
@@ -149,9 +188,18 @@ public class ViewJobApplicationActivity extends AppCompatActivity {
         binding.cbIsRelocation.setEnabled(false);
 
         status = application.getStatus();
-        binding.status.setText(application.getStatus());
+        updateStatus(status);
+
+        if(SharedPrefManager.getInstance(ViewJobApplicationActivity.this).isEmployer()) {
+            binding.updateStatus.setVisibility(View.VISIBLE);
+            binding.infoHeader.setText("Recruiter notes");
+        } else {
+            binding.updateStatus.setVisibility(GONE);
+            binding.infoHeader.setText("Message from recruiters");
+        }
+
         if(application.getStatus().equals("Selected") || application.getStatus().equals("Rejected"))
-            binding.updateStatus.setVisibility(View.GONE);
+            binding.updateStatus.setVisibility(GONE);
 
        setTags(application);
        setLocations(application);
@@ -177,7 +225,46 @@ public class ViewJobApplicationActivity extends AppCompatActivity {
 
     }
 
-    private void updateApplicationStatus(BottomSheetDialog dialog, View progressBar) {
+
+    private void updateStatus(String status){
+        int layout = R.layout.pending_application_chip_layout;
+        switch (status) {
+            case "Process":
+                layout = R.layout.process_application_chip_layout;
+                break;
+            case "Shortlisted":
+                layout = R.layout.shortlisted_application_chip_layout;
+                break;
+            case "Rejected":
+                layout = R.layout.rejected_application_chip_layout;
+                break;
+            case "Selected":
+                layout = R.layout.selected_application_chip_layout;
+                break;
+        }
+        Chip chip = (Chip) LayoutInflater.from(this)
+                .inflate(layout, binding.statusChip, false);
+        chip.setText(status);
+        chip.setId(ViewCompat.generateViewId());
+        chip.setCloseIconVisible(false);
+        chip.setOnTouchListener((v, event) -> {
+            if (v==chip) {
+                if (event.getX() <= v.getPaddingLeft()) {
+                    bottomSheetDialog.show();
+                    understoodBtn.setOnClickListener(view->{
+                        bottomSheetDialog.dismiss();
+                    });
+                }
+                return true;
+            }
+            return false;
+        });
+        binding.statusChip.removeAllViews();
+        binding.statusChip.addView(chip);
+    }
+
+
+    private void updateApplicationStatus(BottomSheetDialog dialog, JobStatus updatedStatus, View progressBar) {
 
         String token = "token "+ SharedPrefManager.getInstance(this).getToken();
 
@@ -185,17 +272,18 @@ public class ViewJobApplicationActivity extends AppCompatActivity {
         userRequestCall.enqueue(new Callback<DefaultResponse>() {
             @Override
             public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
-                progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(GONE);
                 dialog.dismiss();
-                status = updatedStatus;
-                binding.status.setText(updatedStatus);
+                status = updatedStatus.getStatus();
+                updateStatus(status);
+                binding.extraInfo.setText(updatedStatus.getRecruiterNotes());
                 if(status.equals("Selected") || status.equals("Rejected"))
-                    binding.updateStatus.setVisibility(View.GONE);
+                    binding.updateStatus.setVisibility(GONE);
                 Toast.makeText(ViewJobApplicationActivity.this, "Updated successfully", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(Call<DefaultResponse> call, Throwable t) {
-                progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(GONE);
                 dialog.dismiss();
                 Toast.makeText(ViewJobApplicationActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
             }
@@ -232,7 +320,7 @@ public class ViewJobApplicationActivity extends AppCompatActivity {
     private void addLink(View view, String url){
         view.setVisibility(View.VISIBLE);
         if(url.isEmpty()) {
-            view.setVisibility(View.GONE);
+            view.setVisibility(GONE);
             return;
         }
         if(!url.startsWith("https://"))
@@ -262,10 +350,12 @@ public class ViewJobApplicationActivity extends AppCompatActivity {
     private void getConfirmation() {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
         bottomSheetDialog.setContentView(R.layout.update_application_bottomsheet);
-        MaterialButton applyBtn = bottomSheetDialog.findViewById(R.id.apply);
-        applyBtn.setVisibility(View.GONE);
+        MaterialButton updateStatusButton = bottomSheetDialog.findViewById(R.id.update_status_btn);
+        updateStatusButton.setVisibility(GONE);
         MaterialButton cancelBtn = bottomSheetDialog.findViewById(R.id.cancel);
         ListView listView = bottomSheetDialog.findViewById(R.id.list_item);
+        TextInputLayout messageTil = bottomSheetDialog.findViewById(R.id.message_til);
+        TextInputLayout notesTil = bottomSheetDialog.findViewById(R.id.notes_til);
 
         ArrayList<String> list = new ArrayList<>();
 
@@ -294,12 +384,16 @@ public class ViewJobApplicationActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             updatedStatus = adapter.getItem(position);
-            applyBtn.setVisibility(View.VISIBLE);
+            updateStatusButton.setVisibility(View.VISIBLE);
         });
 
-        applyBtn.setOnClickListener(view->{
+        updateStatusButton.setOnClickListener(view->{
+            String message = messageTil.getEditText().getText().toString().trim();
+            String notes = notesTil.getEditText().getText().toString().trim();
+            JobStatus jobStatus = new JobStatus(updatedStatus, message, notes);
+            updateStatusButton.setEnabled(false);
             bottomSheetDialog.findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
-            updateApplicationStatus(bottomSheetDialog, bottomSheetDialog.findViewById(R.id.progress_bar));
+            updateApplicationStatus(bottomSheetDialog, jobStatus, bottomSheetDialog.findViewById(R.id.progress_bar));
         });
 
         bottomSheetDialog.show();

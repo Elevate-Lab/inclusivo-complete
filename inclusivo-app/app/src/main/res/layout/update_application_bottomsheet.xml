@@ -65,6 +65,70 @@
         android:layout_marginHorizontal="16dp"
         android:text="Current Status: Process"/>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/message_til"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/msg"
+        android:hint="Message"
+        app:hintTextColor="@color/primary_color"
+        app:boxStrokeColor="@color/primary_color"
+        app:boxStrokeWidth="1dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/message_tiet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:textColorHint="@color/primary_color"
+            android:fontFamily="@font/roboto_medium"
+            android:inputType="textMultiLine|textCapSentences"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/notes_til"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/message_til"
+        android:hint="Recruiter notes"
+        app:hintTextColor="@color/primary_color"
+        app:boxStrokeColor="@color/primary_color"
+        app:boxStrokeWidth="1dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/note_tiet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:textColorHint="@color/primary_color"
+            android:fontFamily="@font/roboto_medium"
+            android:inputType="textMultiLine|textCapSentences"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/consent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/notes_til"
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/varela_round"
+        android:textColor="@color/gray"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="5dp"
+        android:text="Only visible to you"/>
+
     <ListView
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -73,7 +137,7 @@
         android:id="@+id/list_item"
         android:choiceMode="singleChoice"
         app:layout_constraintBottom_toTopOf="@id/buttons"
-        app:layout_constraintTop_toBottomOf="@id/msg"
+        app:layout_constraintTop_toBottomOf="@id/consent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -91,7 +155,7 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/apply"
+        android:id="@+id/update_status_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"

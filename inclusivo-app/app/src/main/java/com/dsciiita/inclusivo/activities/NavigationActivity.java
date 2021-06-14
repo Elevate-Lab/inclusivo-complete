@@ -1,13 +1,10 @@
 package com.dsciiita.inclusivo.activities;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -19,7 +16,7 @@ import com.bumptech.glide.Glide;
 import com.dsciiita.inclusivo.R;
 import com.dsciiita.inclusivo.api.ApiClient;
 import com.dsciiita.inclusivo.databinding.ActivityNavigationBinding;
-import com.dsciiita.inclusivo.fragments.Dashboard.DashboardJobFragment;
+import com.dsciiita.inclusivo.fragments.Dashboard.JobFragment;
 import com.dsciiita.inclusivo.fragments.Dashboard.CompaniesFragment;
 import com.dsciiita.inclusivo.fragments.Dashboard.ScholarshipsFragment;
 import com.dsciiita.inclusivo.fragments.Dashboard.StoriesFragment;
@@ -32,8 +29,6 @@ import com.dsciiita.inclusivo.storage.SharedPrefManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
-
-import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -108,7 +103,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
 
 
     private void setUpBottomNavigation() {
-        getSupportFragmentManager().beginTransaction().add(R.id.main_fragment_container, new DashboardJobFragment()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.main_fragment_container, new JobFragment()).commit();
         bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.job_menu);
 
@@ -116,7 +111,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
             Fragment fragment = null;
             switch (item.getItemId()) {
                 case R.id.job_menu:
-                    fragment = new DashboardJobFragment();
+                    fragment = new JobFragment();
                     break;
                 case R.id.companies_menu:
                     fragment = new CompaniesFragment();
@@ -201,7 +196,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
             mainBinding.drawer.closeDrawer(GravityCompat.START);
         } else if (bottomNavigationView.getSelectedItemId() != R.id.job_menu) {
             bottomNavigationView.setSelectedItemId(R.id.job_menu);
-            getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new DashboardJobFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new JobFragment()).commit();
         } else {
             super.onBackPressed();
         }

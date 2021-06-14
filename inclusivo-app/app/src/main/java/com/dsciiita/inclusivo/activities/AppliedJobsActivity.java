@@ -96,23 +96,13 @@ public class AppliedJobsActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode) {
-            case 2 :
-                if (resultCode == Activity.RESULT_OK) {
-                    getData();
-                }
-        }
-    }
-
 
     AppliedJobsRV.onJobListener appliedJobListener = new AppliedJobsRV.onJobListener() {
         @Override
         public void onJobClick(int position, View v) {
-            startActivityForResult(new Intent(getApplicationContext(), JobDescriptionActivity.class)
-                    .putExtra("id", appliedJobs.get(position).getJob().getJobId()), 2);
+            startActivity(new Intent(getApplicationContext(), ViewJobApplicationActivity.class)
+                    .putExtra("applicationId", appliedJobs.get(position).getId()));startActivity(new Intent(getApplicationContext(), ViewJobApplicationActivity.class)
+                    .putExtra("applicationId", appliedJobs.get(position).getId()));
         }
 
         @Override

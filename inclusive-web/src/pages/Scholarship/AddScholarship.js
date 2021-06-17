@@ -45,6 +45,12 @@ const initialValues = {
     vacancies: null
 }
 
+const initialPromptValues = {
+    title: "",
+    description: "",
+    selection_process: ""
+}
+
 function AddJob() {
 
     const classes = useStyles()
@@ -70,7 +76,7 @@ function AddJob() {
             return Object.keys(error).every(data => error[data]==="")
     }
 
-    const [values, setValues, errors, setErrors, handleChange] = useForm(initialValues, true, validate)
+    const [values, setValues, errors, setErrors, handleChange, promptValues, setPromptValues] = useForm(initialValues, true, validate, initialPromptValues)
     const [degreeList, setDegreeList] = React.useState({})
     const [processing, setProcessing] = React.useState({
         published: false,
@@ -221,6 +227,7 @@ function AddJob() {
                             multiline={info.multiline}
                             key={info.name}
                             error={errors[info.name]}
+                            promptValue={promptValues[info.name]}
                         />
                     )
                 })}

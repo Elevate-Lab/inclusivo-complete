@@ -36,6 +36,9 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "remark-gfm": "^1.0.0",
+    "retext": "^7.0.1",
+    "retext-equality": "^5.7.0",
+    "retext-profanities": "^6.1.0",
     "swiper": "^6.4.15",
     "web-vitals": "^0.2.4"
   },

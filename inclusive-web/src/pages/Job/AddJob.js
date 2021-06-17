@@ -62,6 +62,14 @@ const initialValues = {
     vacancies: null
 }
 
+const initialPromptValues = {
+    job_role: "",
+    job_type: "",
+    title: "",
+    description: "",
+    selection_process: ""
+}
+
 function AddJob() {
 
     const classes = useStyles()
@@ -89,7 +97,7 @@ function AddJob() {
             })
     }
 
-    const [values, setValues, errors, setErrors, handleChange] = useForm(initialValues, true, validate)
+    const [values, setValues, errors, setErrors, handleChange, promptValues, setPromptValues] = useForm(initialValues, true, validate, initialPromptValues)
 
     const [cityList, setCityList] = React.useState({})
     const [degreeList, setDegreeList] = React.useState({})
@@ -264,6 +272,7 @@ function AddJob() {
                             multiline={info.multiline}
                             key={info.name}
                             error={errors[info.name]}
+                            promptValue={promptValues[info.name]}
                         />
                     )
                 })}

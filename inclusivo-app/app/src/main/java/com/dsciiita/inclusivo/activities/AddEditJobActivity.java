@@ -3,6 +3,10 @@ package com.dsciiita.inclusivo.activities;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +21,7 @@ import androidx.core.view.ViewCompat;
 import com.dsciiita.inclusivo.R;
 import com.dsciiita.inclusivo.api.ApiClient;
 import com.dsciiita.inclusivo.databinding.ActivityAddJobBinding;
+import com.dsciiita.inclusivo.fragments.RegisterFragment;
 import com.dsciiita.inclusivo.models.City;
 import com.dsciiita.inclusivo.models.Degree;
 import com.dsciiita.inclusivo.models.Diversity;
@@ -26,6 +31,7 @@ import com.dsciiita.inclusivo.responses.DefaultResponse;
 import com.dsciiita.inclusivo.responses.DegreeListsResponse;
 import com.dsciiita.inclusivo.responses.JobByIdResponse;
 import com.dsciiita.inclusivo.responses.LocationResponse;
+import com.dsciiita.inclusivo.storage.Constants;
 import com.dsciiita.inclusivo.storage.SharedPrefManager;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.snackbar.Snackbar;
@@ -35,8 +41,11 @@ import com.jaygoo.widget.RangeSeekBar;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,6 +70,7 @@ public class AddEditJobActivity extends AppCompatActivity {
     private Job editedJob;
     private int jobID;
 
+    private HashMap<String, String> genderMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +141,9 @@ public class AddEditJobActivity extends AppCompatActivity {
             addJobBinding.publicCheckBox.setVisibility(View.GONE);
         }
 
+
+        genderMap = Constants.buildMap();
+        setValidationTextWatcher();
     }
 
     @Override
@@ -153,12 +166,7 @@ public class AddEditJobActivity extends AppCompatActivity {
 
 
     private void setToolBar() {
-        addJobBinding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        addJobBinding.toolbar.setNavigationOnClickListener(view -> finish());
     }
 
 
@@ -609,5 +617,75 @@ public class AddEditJobActivity extends AppCompatActivity {
 
         }
     };
+
+
+    private class ValidationTextWatcher implements TextWatcher {
+        private View view;
+
+        private ValidationTextWatcher(View view) {
+            this.view = view;
+        }
+
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void afterTextChanged(Editable editable) {
+            switch (view.getId()) {
+                case R.id.job_description_tie:
+                    String[] text = addJobBinding.tilJobDescription.getEditText().getText().toString().split(" ");
+                    String lastWord, twoWords;
+                    if(text.length==0)
+                        lastWord = "";
+                    else
+                        lastWord = text[text.length-1];
+
+                    if(text.length<=1)
+                        twoWords = "";
+                    else
+                        twoWords = text[text.length-2]+" "+text[text.length-1];
+
+                    lastWord = lastWord.toLowerCase();
+                    twoWords = twoWords.toLowerCase();
+
+                    if(genderMap.containsKey(lastWord))
+                        addJobBinding.tilJobDescription.getEditText().setError("Use gender inclusive terms like '"+genderMap.get(lastWord)+"' instead of '"+lastWord+"'");
+                    else if(genderMap.containsKey(twoWords))
+                        addJobBinding.tilJobDescription.getEditText().setError("Use gender inclusive terms like '"+genderMap.get(twoWords)+"' instead of '"+twoWords+"'");
+                    else
+                        addJobBinding.tilJobDescription.getEditText().setError(null);
+                    break;
+                case R.id.selection_process_tie:
+                    String[] text2 = addJobBinding.tilSelectionProcess.getEditText().getText().toString().split(" ");
+                    String lastWord2, twoWords2;
+                    if(text2.length==0)
+                        lastWord2 = "";
+                    else
+                        lastWord2 = text2[text2.length-1];
+
+                    if(text2.length<=1)
+                        twoWords2 = "";
+                    else
+                        twoWords2 = text2[text2.length-2]+" "+text2[text2.length-1];
+
+                    lastWord2 = lastWord2.toLowerCase();
+                    twoWords2 = twoWords2.toLowerCase();
+                    if(genderMap.containsKey(lastWord2))
+                        addJobBinding.tilSelectionProcess.getEditText().setError("Use gender inclusive terms like '"+genderMap.get(lastWord2)+"' instead of '"+lastWord2+"'");
+                    else if(genderMap.containsKey(twoWords2))
+                        addJobBinding.tilSelectionProcess.getEditText().setError("Use gender inclusive terms like '"+genderMap.get(twoWords2)+"' instead of '"+twoWords2+"'");
+                    else
+                        addJobBinding.tilSelectionProcess.getEditText().setError(null);
+                    break;
+            }
+        }
+    }
+
+    private void setValidationTextWatcher() {
+        addJobBinding.tilJobDescription.getEditText().addTextChangedListener(new ValidationTextWatcher(addJobBinding.tilJobDescription.getEditText()));
+        addJobBinding.tilSelectionProcess.getEditText().addTextChangedListener(new ValidationTextWatcher(addJobBinding.tilSelectionProcess.getEditText()));
+    }
 
 }

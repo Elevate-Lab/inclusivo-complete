@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.dsciiita.inclusivo.databinding.ActivityAddInitiativeBinding;
 import com.dsciiita.inclusivo.databinding.ActivityAddStoryBinding;
 import com.dsciiita.inclusivo.models.Story;
 import com.dsciiita.inclusivo.responses.DefaultResponse;
+import com.dsciiita.inclusivo.storage.Constants;
 import com.dsciiita.inclusivo.storage.SharedPrefManager;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
@@ -31,6 +34,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,6 +48,7 @@ public class AddStoryActivity extends AppCompatActivity {
     String profileUrl;
     private boolean isImageSelected;
     private BottomSheetDialog bottomSheetDialog;
+    private HashMap<String, String> genderMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +68,9 @@ public class AddStoryActivity extends AppCompatActivity {
         ImageButton sheetRemove = bottomSheetDialog.findViewById(R.id.btnRemove);
         sheetRemove.setOnClickListener(this::onClick);
         sheetAddNew.setOnClickListener(this::onClick);
+
+        genderMap = Constants.buildMap();
+        setValidationTextWatcher();
     }
 
 
@@ -181,6 +189,53 @@ public class AddStoryActivity extends AppCompatActivity {
             isImageSelected = false;
             bottomSheetDialog.cancel();
         }
+    }
+
+
+    private class ValidationTextWatcher implements TextWatcher {
+        private View view;
+
+        private ValidationTextWatcher(View view) {
+            this.view = view;
+        }
+
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void afterTextChanged(Editable editable) {
+            switch (view.getId()) {
+                case R.id.story_description_tie:
+                    String[] text = binding.tilStoryDescription.getEditText().getText().toString().split(" ");
+                    String lastWord, twoWords;
+                    if(text.length==0)
+                        lastWord = "";
+                    else
+                        lastWord = text[text.length-1];
+
+                    if(text.length<=1)
+                        twoWords = "";
+                    else
+                        twoWords = text[text.length-2]+" "+text[text.length-1];
+
+                    lastWord = lastWord.toLowerCase();
+                    twoWords = twoWords.toLowerCase();
+
+                    if(genderMap.containsKey(lastWord))
+                        binding.tilStoryDescription.getEditText().setError("Use gender inclusive terms like '"+genderMap.get(lastWord)+"' instead of '"+lastWord+"'");
+                    else if(genderMap.containsKey(twoWords))
+                        binding.tilStoryDescription.getEditText().setError("Use gender inclusive terms like '"+genderMap.get(twoWords)+"' instead of '"+twoWords+"'");
+                    else
+                        binding.tilStoryDescription.getEditText().setError(null);
+                    break;
+            }
+        }
+    }
+
+    private void setValidationTextWatcher() {
+        binding.tilStoryDescription.getEditText().addTextChangedListener(new ValidationTextWatcher(binding.tilStoryDescription.getEditText()));
     }
 
 }

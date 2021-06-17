@@ -200,8 +200,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/varela_round"
                     android:gravity="top"
-                    android:minLines="3"
-                    android:inputType="textMultiLine"
+                    android:minLines="5"
+                    android:inputType="textMultiLine|textCapSentences"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -235,7 +235,7 @@
                     android:fontFamily="@font/varela_round"
                     android:gravity="top"
                     android:inputType="textMultiLine"
-                    android:minLines="3"
+                    android:minLines="4"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -815,7 +815,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="32dp"
         android:fontFamily="@font/varela_round"
-        android:text="Add Job"
+        android:text="Add"
         android:textAllCaps="false"
         android:textSize="14sp"
         app:cornerRadius="5dp"

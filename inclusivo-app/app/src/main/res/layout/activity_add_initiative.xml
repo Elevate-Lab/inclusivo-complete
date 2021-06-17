@@ -120,6 +120,8 @@
             android:id="@+id/initiative_description_tie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:lines="10"
+            android:gravity="top"
             android:fontFamily="@font/varela_round"
             android:inputType="textMultiLine|textCapSentences"
             android:textColor="@color/black"

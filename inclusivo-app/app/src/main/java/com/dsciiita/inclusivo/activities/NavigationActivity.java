@@ -3,8 +3,11 @@ package com.dsciiita.inclusivo.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -27,6 +30,7 @@ import com.dsciiita.inclusivo.responses.GetUserResponse;
 import com.dsciiita.inclusivo.responses.UserTypeResponse;
 import com.dsciiita.inclusivo.storage.SharedPrefManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 
@@ -34,11 +38,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
+import uk.co.deanwild.materialshowcaseview.ShowcaseConfig;
 
 public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ActivityNavigationBinding mainBinding;
     private BottomNavigationView bottomNavigationView;
     private NavigationView navigationView;
+    private ActionBarDrawerToggle toggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +57,36 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         getUser();
         setUpSideNavigation();
         setUpBottomNavigation();
+
+
+        startShowCaseTour();
+    }
+
+    private void startShowCaseTour() {
+        View target0 = bottomNavigationView.findViewById(R.id.job_menu);
+        View target1 = bottomNavigationView.findViewById(R.id.companies_menu);
+        View target2 = bottomNavigationView.findViewById(R.id.upskill_menu);
+        View target3 = bottomNavigationView.findViewById(R.id.stories_menu);
+        View target4 = bottomNavigationView.findViewById(R.id.scholarship_menu);
+
+        String SHOWCASE_ID = "NAVIGATION_ITEMS_TOUR";
+        ShowcaseConfig config = new ShowcaseConfig();
+        config.setFadeDuration(500);
+        config.setDelay(200); // half second between each showcase view
+        MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(this, SHOWCASE_ID);
+
+        sequence.setConfig(config);
+        sequence.addSequenceItem(target0,
+                "Apply for jobs", "GOT IT");
+        sequence.addSequenceItem(target1,
+                "Browse companies", "GOT IT");
+        sequence.addSequenceItem(target2,
+                "Free access to tech blogs and videos with upskill", "GOT IT");
+        sequence.addSequenceItem(target3,
+                "View stories from different companies", "GOT IT");
+        sequence.addSequenceItem(target4,
+                "Apply for scholarships", "GOT IT");
+        sequence.start();
     }
 
 
@@ -58,7 +96,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
 
         setSupportActionBar(mainBinding.contentLayout.toolbarMain);
         getSupportActionBar().setTitle("");
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mainBinding.drawer,
+        toggle = new ActionBarDrawerToggle(this, mainBinding.drawer,
                 mainBinding.contentLayout.toolbarMain,
                 R.string.drawer_open, R.string.drawer_close);
         mainBinding.drawer.addDrawerListener(toggle);

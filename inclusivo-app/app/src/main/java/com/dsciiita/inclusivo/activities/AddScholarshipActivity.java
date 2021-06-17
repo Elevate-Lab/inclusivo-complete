@@ -3,6 +3,8 @@ package com.dsciiita.inclusivo.activities;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,7 @@ import com.dsciiita.inclusivo.models.Job;
 import com.dsciiita.inclusivo.models.Scholarship;
 import com.dsciiita.inclusivo.responses.DefaultResponse;
 import com.dsciiita.inclusivo.responses.DegreeListsResponse;
+import com.dsciiita.inclusivo.storage.Constants;
 import com.dsciiita.inclusivo.storage.SharedPrefManager;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
@@ -31,6 +34,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -41,6 +45,8 @@ import retrofit2.Response;
 public class AddScholarshipActivity extends AppCompatActivity {
 
     ActivityAddScholarshipBinding binding;
+
+    private HashMap<String, String> genderMap;
 
     private Calendar calendar;
     private String title, shortCode, desc, applyUrl, lastDate, selectionProcess, mobile;
@@ -80,6 +86,9 @@ public class AddScholarshipActivity extends AppCompatActivity {
             addDegreeChip(degree, selected);
             binding.tilDegrees.getEditText().setText("");
         });
+
+        genderMap = Constants.buildMap();
+        setValidationTextWatcher();
     }
 
 
@@ -274,6 +283,76 @@ public class AddScholarshipActivity extends AppCompatActivity {
             setResult(RESULT_OK, new Intent());
             addScholarship();
         }
+    }
+
+
+    private class ValidationTextWatcher implements TextWatcher {
+        private View view;
+
+        private ValidationTextWatcher(View view) {
+            this.view = view;
+        }
+
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void afterTextChanged(Editable editable) {
+            switch (view.getId()) {
+                case R.id.scholarship_description_tie:
+                    String[] text = binding.tilScholarshipDescription.getEditText().getText().toString().split(" ");
+                    String lastWord, twoWords;
+                    if(text.length==0)
+                        lastWord = "";
+                    else
+                        lastWord = text[text.length-1];
+
+                    if(text.length<=1)
+                        twoWords = "";
+                    else
+                        twoWords = text[text.length-2]+" "+text[text.length-1];
+
+                    lastWord = lastWord.toLowerCase();
+                    twoWords = twoWords.toLowerCase();
+
+                    if(genderMap.containsKey(lastWord))
+                        binding.tilScholarshipDescription.getEditText().setError("Use gender inclusive terms like '"+genderMap.get(lastWord)+"' instead of '"+lastWord+"'");
+                    else if(genderMap.containsKey(twoWords))
+                        binding.tilScholarshipDescription.getEditText().setError("Use gender inclusive terms like '"+genderMap.get(twoWords)+"' instead of '"+twoWords+"'");
+                    else
+                        binding.tilScholarshipDescription.getEditText().setError(null);
+                    break;
+                case R.id.selection_process_tie:
+                    String[] text2 = binding.tilSelectionProcess.getEditText().getText().toString().split(" ");
+                    String lastWord2, twoWords2;
+                    if(text2.length==0)
+                        lastWord2 = "";
+                    else
+                        lastWord2 = text2[text2.length-1];
+
+                    if(text2.length<=1)
+                        twoWords2 = "";
+                    else
+                        twoWords2 = text2[text2.length-2]+" "+text2[text2.length-1];
+
+                    lastWord2 = lastWord2.toLowerCase();
+                    twoWords2 = twoWords2.toLowerCase();
+                    if(genderMap.containsKey(lastWord2))
+                        binding.tilSelectionProcess.getEditText().setError("Use gender inclusive terms like '"+genderMap.get(lastWord2)+"' instead of '"+lastWord2+"'");
+                    else if(genderMap.containsKey(twoWords2))
+                        binding.tilSelectionProcess.getEditText().setError("Use gender inclusive terms like '"+genderMap.get(twoWords2)+"' instead of '"+twoWords2+"'");
+                    else
+                        binding.tilSelectionProcess.getEditText().setError(null);
+                    break;
+            }
+        }
+    }
+
+    private void setValidationTextWatcher() {
+        binding.tilScholarshipDescription.getEditText().addTextChangedListener(new ValidationTextWatcher(binding.tilScholarshipDescription.getEditText()));
+        binding.tilSelectionProcess.getEditText().addTextChangedListener(new ValidationTextWatcher(binding.tilScholarshipDescription.getEditText()));
     }
 
 }

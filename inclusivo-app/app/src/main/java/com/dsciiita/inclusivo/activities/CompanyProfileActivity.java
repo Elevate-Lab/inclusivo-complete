@@ -46,6 +46,8 @@ import java.util.Set;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
+import uk.co.deanwild.materialshowcaseview.ShowcaseConfig;
 
 public class    CompanyProfileActivity extends AppCompatActivity {
 
@@ -127,6 +129,18 @@ public class    CompanyProfileActivity extends AppCompatActivity {
 
         getData();
 
+    }
+
+    private void showAddItemsTour() {
+        String SHOWCASE_ID = "ADD_FIELDS_TOUR";
+        ShowcaseConfig config = new ShowcaseConfig();
+        config.setFadeDuration(500);
+        config.setDelay(200); // half second between each showcase view
+        MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(this, SHOWCASE_ID);
+        sequence.setConfig(config);
+        sequence.addSequenceItem(binding.fabLayout,
+                "Add jobs, initiatives, stories & scholarships", "GOT IT");
+        sequence.start();
     }
 
 
@@ -297,6 +311,7 @@ public class    CompanyProfileActivity extends AppCompatActivity {
         } else {
             if(company.getId()==SharedPrefManager.getInstance(this).getCompanyID()){
                 binding.fabLayout.setVisibility(View.VISIBLE);
+                showAddItemsTour();
             }
             binding.buttonLayout.setVisibility(View.GONE);
         }

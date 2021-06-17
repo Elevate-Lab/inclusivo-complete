@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -60,6 +60,9 @@ import java.util.TimeZone;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
+import uk.co.deanwild.materialshowcaseview.ShowcaseConfig;
 
 @SuppressLint("ClickableViewAccessibility")
 public class JobDescriptionActivity extends AppCompatActivity {
@@ -105,6 +108,38 @@ public class JobDescriptionActivity extends AppCompatActivity {
 
         getJob();
 
+
+    }
+
+
+    private void startShowCaseTourCandidate() {
+        String SHOWCASE_ID = "JOB_ACTIVITY_CANDIDATE";
+        ShowcaseConfig config = new ShowcaseConfig();
+        config.setFadeDuration(500);
+        config.setDelay(200);
+
+        MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(this, SHOWCASE_ID);
+        sequence.setConfig(config);
+        sequence.addSequenceItem(binding.btnApply,
+                "Apply for this job", "GOT IT");
+        sequence.addSequenceItem(binding.btnEvaluate,
+                "Match your skills with job requirements", "GOT IT");
+        sequence.start();
+    }
+
+    private void startShowCaseTourEmployer() {
+        String SHOWCASE_ID = "JOB_ACTIVITY_EMPLOYER";
+        ShowcaseConfig config = new ShowcaseConfig();
+        config.setFadeDuration(500);
+        config.setDelay(200);
+
+        MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(this, SHOWCASE_ID);
+        sequence.setConfig(config);
+        sequence.addSequenceItem(binding.btnViewApplication,
+                "Access applications for this job", "GOT IT");
+        sequence.addSequenceItem(binding.btnEdit,
+                "Update job status", "GOT IT");
+        sequence.start();
     }
 
 
@@ -361,8 +396,10 @@ public class JobDescriptionActivity extends AppCompatActivity {
             setViewsGone(binding.btnApply, binding.btnEvaluate, binding.saveImg);
             status = job.getStatus();
 
-            if(SharedPrefManager.getInstance(this).getCompanyID()==job.getCompany().getId())
+            if(SharedPrefManager.getInstance(this).getCompanyID()==job.getCompany().getId()) {
                 setViewsVisible(binding.btnEdit, binding.btnViewApplication);
+                startShowCaseTourEmployer();
+            }
 
             if(status.equals("Hired") || status.equals("Expired"))
                 binding.btnEdit.setVisibility(View.GONE);
@@ -421,8 +458,10 @@ public class JobDescriptionActivity extends AppCompatActivity {
                     return false;
                 });
                 binding.applicationStatus.addView(chip);
-            } else
+            } else {
                 setViewsVisible(binding.btnApply, binding.btnEvaluate);
+                startShowCaseTourCandidate();
+            }
         }
 
         if(!job.getIsApplyHere()){
@@ -501,7 +540,7 @@ public class JobDescriptionActivity extends AppCompatActivity {
         String[] tabTextsArray = {"Overview", "About", "Recruitment", "More Info"};
         new TabLayoutMediator(binding.jobDescriptionTbl, binding.jobDescriptionVp2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+            public void onConfigureTab(TabLayout.Tab tab, int position) {
                 tab.setText(tabTextsArray[position]);
             }
         }).attach();

@@ -41,11 +41,11 @@ export default function useForm(initialValues, validateOnChange = true, validate
             let neutralErr = [];
             getPromptValues.messages.forEach((item) => {
                 if(item.source === 'retext-equality'){
-                    if(!neutralErr.includes(item.actual)){
+                    if(!neutralErr.includes(item.actual) && item.actual!=='working mother' && item.actual!=='mother'){
                         neutralErr.push(item.actual);
                     }
                     item.expected.forEach((correct) => {
-                        if(!neutral.includes(correct)){
+                        if(!neutral.includes(correct) && item.actual!=='working mother' && item.actual!=='mother'){
                             neutral.push(correct);
                         }
                     })
@@ -68,8 +68,8 @@ export default function useForm(initialValues, validateOnChange = true, validate
             neutral.forEach((item) => {
                 str3 = str3 + item + (neutral.indexOf(item)===neutral.length-1 ? ' ' : ', ');
             })
-            let val1 = (str1.length ? `Don't use ${str1}${profane.length>1 ? "these words are" : "it's" } profane. ` : ``)
-            let val2 = (str2.length ? `${str2}may be insensitive, use ${str3}instead. ` : ``)
+            let val1 = (str1.length ? `Please don't use ${str1}${profane.length>1 ? "these words are" : "it's" } profane. ` : ``)
+            let val2 = (str2.length ? `Please try not to use " ${str2}", since ${neutralErr.length>1 ? "these words" : "this word"} may be insensitive to some users, use ${str3}instead. ` : ``)
             setPromptValues({
                 ...promptValues,
                 [name]: val1+val2

@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import {
     Link
 } from 'react-router-dom'
+// import '../../styles/sidebar.css'
 import {
     AppBar,
     Toolbar,
@@ -18,8 +19,12 @@ import {
     ListItemText,
     Button,
     Typography,
-    Icon
+    Icon,
+    Collapse
 } from '@material-ui/core'
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import BookIcon from '@material-ui/icons/Book';
 import {
     AccountCircleTwoTone,
     DashboardOutlined,
@@ -42,6 +47,11 @@ import {
     employerItems
 } from './sidebarItems'
 import Logout from '../../assets/Icons/LogoutIcon.svg';
+
+const drawerIcon = {
+    color: '#ffffff',
+    fontSize: '16px'
+}
 
 const useStyles = makeStyles(theme => ({
     appbar: property => ({
@@ -67,8 +77,19 @@ const useStyles = makeStyles(theme => ({
         width: property.sidebarWidth,
         flexShrink: 0,
         color: '#ffffff',
-        zIndex: 2
+        zIndex: 2,
     }),
+    scroll: {
+        "&::-webkit-scrollbar":{
+            width: "8px",
+        },
+        "&::-webkit-scrollbar-thumb":{
+            background: "rgba(256,256,256,0.15)",
+            backgroundClip: "content-box",
+            border: '2px solid transparent',
+            borderRadius: "10px"
+        }
+    },
     drawerPaper: property => ({
         width: property.sidebarWidth,
         background: '#212630',
@@ -142,6 +163,9 @@ const useStyles = makeStyles(theme => ({
     sweetLoading: {
         display: "flex",
         justifyContent: "center"
+    },
+    nested: {
+        paddingLeft: "30px"
     }
 }))
 
@@ -172,6 +196,7 @@ function Layout(props) {
 
     const [isMobileView, setIsMobileView] = useState(false)
     const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false)
+    const [listOpen, setListOpen] = useState(false)
 
     const toggleOnMobileView = () => {
         setIsMobileSidebarOpen(!isMobileSidebarOpen)
@@ -248,6 +273,10 @@ function Layout(props) {
         }
     }
 
+    const handleOpenItem = () => {
+        setListOpen(!listOpen);
+    }
+
     const handleLogout = async () => {
         await localStorage.removeItem('key')
         await localStorage.removeItem('userEmail')
@@ -319,11 +348,88 @@ function Layout(props) {
                         )
                     }
                 </div>
-                <div style={{ overflowY: "auto", overflowX: "hidden", marginBottom: '52px' }}>
+                <div className={classes.scroll} style={{ overflowY: "auto", overflowX: "hidden", marginBottom: isMobileView ? '52px' : '120px' }}>
                     <List>
                         {commonItems.map((data, key) => {
                             return list(data, key)
                         })}
+                        {
+                            loading ?
+                                null
+                                :
+                                isUserEmployer ?
+                                    <React.Fragment className={clsx({
+                                                [classes.hide]: isOpen
+                                            })}>
+                                        <ListItem button className={classes.drawerItem} onClick={handleOpenItem}>
+                                            <ListItemIcon style={{ minWidth: '36px' }}><BookIcon style={drawerIcon} /></ListItemIcon>
+                                            <ListItemText >
+                                                <Typography className={classes.drawerItemText}>
+                                                    Diversity Training
+                                                </Typography>
+                                            </ListItemText>
+                                            {listOpen ? <ExpandLess /> : <ExpandMore />}
+                                        </ListItem>
+                                        <Collapse in={listOpen} timeout="auto" unmountOnExit>
+                                            <List>
+                                                <Link to={'/home/blog/list'} style={{color: "#ffffff"}}>
+                                                    <ListItem button className={classes.nested}>
+                                                        <ListItemText>
+                                                            <Typography className={classes.drawerItemText}>
+                                                                Blogs
+                                                            </Typography>
+                                                        </ListItemText>
+                                                    </ListItem>
+                                                </Link>
+                                                <Link to={'/home/video/list'} style={{color: "#ffffff"}}>
+                                                    <ListItem button className={classes.nested}>
+                                                        <ListItemText>
+                                                            <Typography className={classes.drawerItemText}>
+                                                                Videos
+                                                            </Typography>
+                                                        </ListItemText>
+                                                    </ListItem>
+                                                </Link>
+                                            </List>
+                                        </Collapse>
+                                    </React.Fragment>
+                                    :
+                                    <React.Fragment>
+                                        <ListItem button className={classes.drawerItem} onClick={handleOpenItem}>
+                                            <ListItemIcon style={{ minWidth: '36px' }}><BookIcon style={drawerIcon} /></ListItemIcon>
+                                            <ListItemText className={clsx({
+                                                [classes.hide]: isOpen
+                                            })}>
+                                                <Typography className={classes.drawerItemText}>
+                                                    Upskill Module
+                                                </Typography>
+                                            </ListItemText>
+                                            {listOpen ? <ExpandLess /> : <ExpandMore />}
+                                        </ListItem>
+                                        <Collapse in={listOpen} timeout="auto" unmountOnExit>
+                                            <List>
+                                                <Link to={'/home/blog/list'} style={{color: "#ffffff"}}>
+                                                    <ListItem button className={classes.nested}>
+                                                        <ListItemText>
+                                                            <Typography className={classes.drawerItemText}>
+                                                                Blogs
+                                                            </Typography>
+                                                        </ListItemText>
+                                                    </ListItem>
+                                                </Link>
+                                                <Link to={'/home/video/list'} style={{color: "#ffffff"}}>
+                                                    <ListItem button className={classes.nested}>
+                                                        <ListItemText>
+                                                            <Typography className={classes.drawerItemText}>
+                                                                Videos
+                                                            </Typography>
+                                                        </ListItemText>
+                                                    </ListItem>
+                                                </Link>
+                                            </List>
+                                        </Collapse>
+                                    </React.Fragment>
+                        }
                     </List>
                     <Divider className={classes.divider} />
                     <List>

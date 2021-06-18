@@ -20,21 +20,24 @@
         app:layout_constraintTop_toTopOf="parent"
         android:visibility="visible">
 
-        <ProgressBar
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:lottie_rawRes="@raw/rainbow_loader"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_centerInParent="true" />
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
 
         <TextView
             android:id="@+id/quote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:lineSpacingExtra="5dp"
             android:fontFamily="@font/varela_round"

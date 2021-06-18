@@ -116,8 +116,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     UserTypeResponse user = response.body().getData();
                     SharedPrefManager.getInstance(LoginActivity.this).setEmployer(user.isEmployer());
-                    Log.d("Checking the Type :", "" + user.isEmployer() + " SharedPrefValue : " + SharedPrefManager.getInstance(LoginActivity.this).isEmployer());
-                    startActivity(new Intent(LoginActivity.this, CreateAccountActivity.class).putExtra("PROGRESS", true));
+                    startActivity(new Intent(LoginActivity.this, CreateAccountActivity.class).putExtra("PROGRESS", true)
+                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    finish();
                 }
             }
 

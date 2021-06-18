@@ -92,18 +92,22 @@ public class CreateAccountActivity extends AppCompatActivity implements StepperL
                                 replaceFragments(4);
                                 activityCreateAccountBinding.stepperLayout.setVisibility(View.VISIBLE);
                             }
-                            else
+                            else {
                                 startActivity(new Intent(CreateAccountActivity.this, NavigationActivity.class)
-                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                finish();
+                            }
                         } else{
                             UserCandidate candidate = user.getCandidate();
                             if (candidate.getMobile() == null || candidate.getMobile().isEmpty()) {
                                 replaceFragments(3);
                                 activityCreateAccountBinding.stepperLayout.setVisibility(View.VISIBLE);
                             }
-                            else
+                            else {
                                 startActivity(new Intent(CreateAccountActivity.this, NavigationActivity.class)
-                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                finish();
+                            }
                         }
                     } else {
                         activityCreateAccountBinding.stepperLayout.setCurrentStepPosition(2);
@@ -112,9 +116,11 @@ public class CreateAccountActivity extends AppCompatActivity implements StepperL
                 } else{
                     activityCreateAccountBinding.stepperLayout.setCurrentStepPosition(1);
                     activityCreateAccountBinding.stepperLayout.setVisibility(View.VISIBLE);
+                    activityCreateAccountBinding.progressBar.setVisibility(View.GONE);
+                    activityCreateAccountBinding.verifyTxt.setVisibility(View.GONE);
                 }
-                activityCreateAccountBinding.progressBar.setVisibility(View.GONE);
-                activityCreateAccountBinding.verifyTxt.setVisibility(View.GONE);
+//                activityCreateAccountBinding.progressBar.setVisibility(View.GONE);
+//                activityCreateAccountBinding.verifyTxt.setVisibility(View.GONE);
             }
 
             @Override

@@ -63,6 +63,7 @@ public class EmailActivity extends AppCompatActivity {
                     }
                     else
                         startActivity(new Intent(EmailActivity.this, CreateAccountActivity.class).putExtra("email", email));
+                    finish();
                 }else{
                     Snackbar.make(binding.parentLayout, "Something went wrong", Snackbar.LENGTH_SHORT).show();
                 }

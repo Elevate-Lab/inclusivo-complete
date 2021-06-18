@@ -17,11 +17,12 @@ import Alert from '@material-ui/lab/Alert';
 import { CenterFocusWeak } from '@material-ui/icons';
 import { storage } from '../../firebase/index';
 import { baseUrl } from '../../urlConstants';
-import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import useForm from '../../customHooks/useForm';
 import { format } from "date-fns";
 import Controls from "../Form/Controls/Controls";
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import CheckIcon from '@material-ui/icons/Check';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -408,6 +409,80 @@ const UpdateProfile = (props) => {
                                         Employer
                                 </MenuItem>
                                 </TextField>
+                            </Grid>
+                            <Grid container direction="column">
+                                <Typography variant="hr" style={{ fontSize: "16px", margin: "30px 0px 10px", letterSpacing: "0.4px" }}>
+                                    Preferences
+                            </Typography>
+                                <Typography variant="h6" style={{ fontSize: "14px", margin: "10px 0px", letterSpacing: "0.4px" }}>
+                                    Subcriptions
+                            </Typography>
+                                <ToggleButton
+                                    value="check"
+                                    selected={true}
+                                    style={{ fontSize: "14px", margin: "10px 0px", letterSpacing: "0.4px" }}
+                                >
+                                    Email <CheckIcon />
+                                </ToggleButton>
+                                <ToggleButton
+                                    value="check"
+                                    style={{ fontSize: "14px", margin: "10px 0px", letterSpacing: "0.4px" }}
+                                    selected={true}
+                                >
+                                    Device <CheckIcon />
+                                </ToggleButton>
+                                <Typography variant="h6" style={{ fontSize: "14px", margin: "10px 0px", letterSpacing: "0.4px" }}>
+                                    Job Alerts
+                            </Typography>
+                                <ToggleButton
+                                    value="check"
+                                    selected={true}
+                                    style={{ fontSize: "14px", margin: "10px 0px", letterSpacing: "0.4px" }}
+                                >
+                                    Email <CheckIcon />
+                                </ToggleButton>
+                                <ToggleButton
+                                    value="check"
+                                    selected={true}
+                                    style={{ fontSize: "14px", margin: "10px 0px", letterSpacing: "0.4px" }}
+                                >
+                                    Device <CheckIcon />
+                                </ToggleButton>
+                                <Typography variant="h6" style={{ fontSize: "14px", margin: "10px 0px", letterSpacing: "0.4px" }}>
+                                    Security
+                            </Typography>
+                                <ToggleButton
+                                    value="check"
+                                    selected={true}
+                                    style={{ fontSize: "14px", margin: "10px 0px", letterSpacing: "0.4px" }}
+
+                                >
+                                    Email <CheckIcon />
+                                </ToggleButton>
+                                <ToggleButton
+                                    value="check"
+                                    selected={true}
+                                    style={{ fontSize: "14px", margin: "10px 0px", letterSpacing: "0.4px" }}
+                                >
+                                    Device <CheckIcon />
+                                </ToggleButton>
+                                <Typography variant="h6" style={{ fontSize: "14px", margin: "10px 0px", letterSpacing: "0.4px" }}>
+                                    Updates and Offers
+                            </Typography>
+                                <ToggleButton
+                                    value="check"
+                                    selected={true}
+                                    style={{ fontSize: "14px", margin: "10px 0px", letterSpacing: "0.4px" }}
+                                >
+                                    Email <CheckIcon />
+                                </ToggleButton>
+                                <ToggleButton
+                                    value="check"
+                                    selected={true}
+                                    style={{ fontSize: "14px", margin: "10px 0px", letterSpacing: "0.4px" }}
+                                >
+                                    Device <CheckIcon />
+                                </ToggleButton>
                             </Grid>
                         </div>
                         {

@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css'
-import { BrowserRouter, Route, Switch} from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Landing from './components/Auth/Landing';
 import LandingSec from './pages/Landing/Landing.js';
 import CompleteCandidate from './components/Profile/CompleteCandidate';
@@ -17,21 +17,21 @@ function App() {
 
   return (
     // <Provider store={store}>
-      <>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/legal" component={Legal} />
-            <NonProtectedRoute exact path="/" component={Landing} />
-            <Route exact path="/Landing" component={LandingSec} />
-            <NonProtectedRoute exact path="/auth" component={Auth} />
-            <ProtectedRoute exact path="/complete/candidate" component={CompleteCandidate} />
-            <ProtectedRoute exact path="/complete/employer" component={CompleteEmployer} />
-            <ProtectedRoute path="/home" component={Layout} />
-            <ProtectedRoute path="/profilestatus" component = {UserStatus} />
-            <ProtectedRoute path="/addcompany" component = {AddCompany} />
-          </Switch>
-        </BrowserRouter>
-      </>
+    <>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/legal" component={Legal} />
+          <NonProtectedRoute exact path="/" component={Landing} />
+          <Route exact path="/Landing" component={LandingSec} />
+          <NonProtectedRoute exact path="/auth" component={Auth} />
+          <ProtectedRoute exact path="/complete/candidate" component={CompleteCandidate} />
+          <ProtectedRoute exact path="/complete/employer" component={CompleteEmployer} />
+          <ProtectedRoute path="/home" component={Layout} />
+          <ProtectedRoute path="/profilestatus" component={UserStatus} />
+          <ProtectedRoute path="/addcompany" component={AddCompany} />
+        </Switch>
+      </BrowserRouter>
+    </>
     // </Provider>
   );
 }

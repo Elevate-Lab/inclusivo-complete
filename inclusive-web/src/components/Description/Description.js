@@ -7,18 +7,31 @@ import {
     IconButton,
     Typography,
     Chip,
-    Button
+    Button,
+    TextField,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    Snackbar,
+    CircularProgress
 } from '@material-ui/core';
 import {
     ShareOutlined,
     Favorite,
     FavoriteBorder
 } from '@material-ui/icons'
+import MuiAlert from '@material-ui/lab/Alert';
 import ApplicantsComponent from '../Applicants/ApplicantsComponent'
 import '../../style.css';
 import DescriptionHeader from './DescriptionHeader';
 import Accordian from './Accordian'
 import { useSelector } from 'react-redux'
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />
+}  
 
 const useStyles = makeStyles(theme => ({
     mainContainer: {
@@ -81,6 +94,14 @@ const useStyles = makeStyles(theme => ({
     tabSelected: {
         background: "#ff3750",
         color: "#fff"
+    },
+    buttonProgress: {
+        color: theme.palette.primary,
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -8,
+        marginLeft: -8,
     }
 }))
 
@@ -90,6 +111,35 @@ const Description = ({ type, data, id, buttonVisibility }) => {
     const [isApplied, setIsApplied] = React.useState(type === "job" ? data.is_applied : null);
     const [tab, setTab] = React.useState(0)
     const userStatus = useSelector(state => state.userStatus)
+    
+    const [why, setWhy] = React.useState("")
+    const [whyError, setWhyError] = React.useState(false)
+    
+    const [open, setOpen] = React.useState(false)
+    const [openSnackbar, setOpenSnackbar] = React.useState(false)
+    const [processing, setProcessing] = React.useState(false)
+    const [processedMsg, setProcessedMsg] = React.useState("")
+    const [severity, setSeverity] = React.useState("success")
+
+    const handleSnackbarClose = (event, reason) => {
+        if(reason === 'clickaway'){
+            return;
+        }
+        setOpenSnackbar(false);
+    }
+
+    const handleOpen = () => {
+        setOpen(true)
+    }
+
+    const handleClose = () => {
+        setOpen(false)
+    }
+  
+    const handleAnswer = (e) => {
+        setWhy(e.target.value)
+        if(e.target.value.length!==0) setWhyError(false)
+    }
 
     let authToken = 1;
     if (localStorage.getItem('key')) {
@@ -98,12 +148,13 @@ const Description = ({ type, data, id, buttonVisibility }) => {
 
     const handleApply = async (e) => {
         e.preventDefault()
-        const body = {
-            status: "Pending"
-        }
-        if (type === "job") {
+        if (type === "job" && why.length!==0) {
+            const body = {
+                status: "Pending",
+                message: why
+            }
             setIsApplied(true)
-
+            setProcessing(true)
             const requestOptions = {
                 method: 'POST',
                 headers: {
@@ -116,9 +167,26 @@ const Description = ({ type, data, id, buttonVisibility }) => {
 
             const response = await fetch(`${baseUrl}/job/application/create/${id}/`, requestOptions);
             const data = await response.json();
-            console.log(data);
+            console.log(data.status);
+            if(data.status === 'Inserted'){
+                console.log("Hello")
+                setSeverity('success')
+                setProcessedMsg('Job apllication submitted')
+                setOpenSnackbar(true)
+                setProcessing(false)
+            }else{
+                setSeverity('error')
+                setProcessedMsg('Some error occured')
+                setIsApplied(false)
+                setOpenSnackbar(true)
+                setProcessing(false)
+            }
+        }
+        else if(why.length===0){
+            setWhyError(true);
         }
     }
+
     const handleLikefunc = (value, is_liked) => async () => {
         const body = {
             is_liked: is_liked
@@ -204,27 +272,63 @@ const Description = ({ type, data, id, buttonVisibility }) => {
                 :
                 <Grid container item justify="space-between" className={classes.subContainer}>
                     <Grid item>
+                        <Snackbar open={openSnackbar} anchorOrigin={{ vertical:"bottom", horizontal:"center" }} autoHideDuration={6000} onClose={handleSnackbarClose}>
+                            <Alert onClose={handleSnackbarClose} severity={severity}>
+                                {processedMsg}
+                            </Alert>
+                        </Snackbar>
                         {type === "scholarship" ?
                             <a href={data.apply_url}>
                                 <Button variant="outlined" className={classes.tabButton} ariaLabel="Apply Link">
                                     Apply Link
-                                    </Button>
+                                </Button>
                             </a>
                             :
                             data.is_apply_here ?
                                 type === "job" && isApplied ?
                                     <Button disabled className={classes.disabledButton} ariaLabel="Applied">
                                         Applied
-                                        </Button>
+                                        {processing && <CircularProgress size={16} className={classes.buttonProgress} />}
+                                    </Button>
                                     :
-                                    <Button variant="outlined" className={classes.tabButton} onClick={handleApply} ariaLabel="Apply">
-                                        Apply
+                                    <>
+                                        <Button variant="outlined" className={classes.tabButton} onClick={handleOpen} ariaLabel="Apply">
+                                            Apply
                                         </Button>
+                                        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                                            <DialogTitle id="form-dialog-title">Apply</DialogTitle>
+                                            <DialogContent>
+                                            <DialogContentText>
+                                                Send a message for why you are a good fit for the role?
+                                            </DialogContentText>
+                                            <TextField
+                                                autoFocus
+                                                margin="dense"
+                                                id="answer"
+                                                label="Answer"
+                                                type="answer"
+                                                fullWidth
+                                                onChange={handleAnswer}
+                                                error = {whyError}
+                                                helperText= {whyError ? "This field should not be empty" : "Required field"}
+                                            />
+                                            </DialogContent>
+                                            <DialogActions>
+                                            <Button onClick={handleClose} color="primary">
+                                                Cancel
+                                            </Button>
+                                            <Button onClick={handleApply} color="primary">
+                                                Apply
+                                            </Button>
+                                            </DialogActions>
+                                        </Dialog>
+                                        
+                                    </>
                                 :
                                 <a href={data.apply_url}>
                                     <Button variant="outlined" className={classes.tabButton} ariaLabel="Apply Link">
                                         Apply Link
-                                        </Button>
+                                    </Button>
                                 </a>
                         }
                     </Grid>

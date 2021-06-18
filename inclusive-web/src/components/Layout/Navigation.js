@@ -358,10 +358,10 @@ function Layout(props) {
                                 null
                                 :
                                 isUserEmployer ?
-                                    <React.Fragment className={clsx({
+                                    <React.Fragment>
+                                        <ListItem button onClick={handleOpenItem} className={clsx(classes.drawerItem, {
                                                 [classes.hide]: isOpen
                                             })}>
-                                        <ListItem button className={classes.drawerItem} onClick={handleOpenItem}>
                                             <ListItemIcon style={{ minWidth: '36px' }}><BookIcon style={drawerIcon} /></ListItemIcon>
                                             <ListItemText >
                                                 <Typography className={classes.drawerItemText}>
@@ -370,7 +370,9 @@ function Layout(props) {
                                             </ListItemText>
                                             {listOpen ? <ExpandLess /> : <ExpandMore />}
                                         </ListItem>
-                                        <Collapse in={listOpen} timeout="auto" unmountOnExit>
+                                        <Collapse in={listOpen} timeout="auto" unmountOnExit className={clsx({
+                                                [classes.hide]: isOpen
+                                            })}>
                                             <List>
                                                 <Link to={'/home/blog/list'} style={{color: "#ffffff"}}>
                                                     <ListItem button className={classes.nested}>
@@ -395,7 +397,9 @@ function Layout(props) {
                                     </React.Fragment>
                                     :
                                     <React.Fragment>
-                                        <ListItem button className={classes.drawerItem} onClick={handleOpenItem}>
+                                        <ListItem button onClick={handleOpenItem} className={clsx(classes.drawerItem, {
+                                                [classes.hide]: isOpen
+                                            })}>
                                             <ListItemIcon style={{ minWidth: '36px' }}><BookIcon style={drawerIcon} /></ListItemIcon>
                                             <ListItemText className={clsx({
                                                 [classes.hide]: isOpen
@@ -406,7 +410,9 @@ function Layout(props) {
                                             </ListItemText>
                                             {listOpen ? <ExpandLess /> : <ExpandMore />}
                                         </ListItem>
-                                        <Collapse in={listOpen} timeout="auto" unmountOnExit>
+                                        <Collapse in={listOpen} timeout="auto" unmountOnExit className={clsx({
+                                                [classes.hide]: isOpen
+                                            })}>
                                             <List>
                                                 <Link to={'/home/blog/list'} style={{color: "#ffffff"}}>
                                                     <ListItem button className={classes.nested}>

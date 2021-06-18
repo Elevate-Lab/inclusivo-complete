@@ -348,7 +348,7 @@ function Layout(props) {
                         )
                     }
                 </div>
-                <div className={classes.scroll} style={{ overflowY: "auto", overflowX: "hidden", marginBottom: '52px' }}>
+                <div className={classes.scroll} style={{ overflowY: "auto", overflowX: "hidden", marginBottom: isMobileView ? '52px' : '120px' }}>
                     <List>
                         {commonItems.map((data, key) => {
                             return list(data, key)

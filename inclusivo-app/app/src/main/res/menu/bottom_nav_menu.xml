@@ -6,18 +6,17 @@
         android:icon="@drawable/ic_jobs"
         android:title="Jobs" />
     <item
-        android:id="@+id/companies_menu"
-        android:icon="@drawable/ic_companies"
-        android:title="Companies" />
+        android:id="@+id/stories_menu"
+        android:icon="@drawable/ic_stories"
+        android:title="Stories" />
     <item
         android:id="@+id/upskill_menu"
         android:icon="@drawable/ic_competence"
         android:title="Upskill" />
     <item
-        android:id="@+id/stories_menu"
-        android:icon="@drawable/ic_stories"
-        android:title="Stories" />
-
+        android:id="@+id/events_menu"
+        android:icon="@drawable/ic_round_event_available_24"
+        android:title="Events" />
     <item
         android:id="@+id/scholarship_menu"
         android:icon="@drawable/ic_scholarship"

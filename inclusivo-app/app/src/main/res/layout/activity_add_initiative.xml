@@ -41,11 +41,12 @@
         app:cardCornerRadius="5dp"
         app:cardElevation="10dp"
         android:layout_centerInParent="true">
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminateTintMode="src_atop"
-            android:layout_margin="10dp" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:lottie_rawRes="@raw/rainbow_loader"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"/>
     </com.google.android.material.card.MaterialCardView>
 
     <LinearLayout

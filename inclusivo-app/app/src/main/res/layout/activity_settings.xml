@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SettingsActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/white"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Settings"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="140.5dp"
+            tools:layout_editor_absoluteY="15dp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/notifications"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="5dp"
+            android:layout_marginHorizontal="20dp"
+            android:text="Notifications"
+            app:icon="@drawable/ic_round_notifications_24"
+            app:iconTint="@color/gray"
+            app:iconPadding="20dp"
+            android:textColor="@color/black"
+            android:gravity="start|center_vertical"
+            style="?android:attr/borderlessButtonStyle"
+            android:fontFamily="@font/varela_round"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:padding="0dp"/>
+
+        <View
+            android:id="@+id/line3"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/gray"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/share"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="5dp"
+            android:layout_marginHorizontal="20dp"
+            android:text="Share App"
+            android:textColor="@color/black"
+            app:icon="@drawable/ic_round_share_24"
+            app:iconTint="@color/gray"
+            app:iconPadding="20dp"
+            android:gravity="start|center_vertical"
+            style="?android:attr/borderlessButtonStyle"
+            android:fontFamily="@font/varela_round"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:padding="0dp"/>
+
+        <View
+            android:id="@+id/line4"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/gray"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/rate"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="5dp"
+            android:layout_marginHorizontal="20dp"
+            android:text="Rate and Review"
+            app:icon="@drawable/ic_round_rate_review_24"
+            app:iconTint="@color/gray"
+            app:iconPadding="20dp"
+            android:textColor="@color/black"
+            android:gravity="start|center_vertical"
+            style="?android:attr/borderlessButtonStyle"
+            android:fontFamily="@font/varela_round"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:padding="0dp"/>
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/gray"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/privacy"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="5dp"
+            app:icon="@drawable/ic_round_policy_24"
+            app:iconTint="@color/gray"
+            app:iconPadding="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:text="Privacy"
+            android:textColor="@color/black"
+            android:gravity="start|center_vertical"
+            style="?android:attr/borderlessButtonStyle"
+            android:fontFamily="@font/varela_round"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:padding="0dp"/>
+
+        <View
+            android:id="@+id/line5"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/gray"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            app:icon="@drawable/ic_logout_black_24dp"
+            app:iconTint="@color/gray"
+            app:iconPadding="20dp"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="5dp"
+            android:layout_marginHorizontal="20dp"
+            android:text="Logout"
+            android:textColor="@color/black"
+            android:gravity="start|center_vertical"
+            style="?android:attr/borderlessButtonStyle"
+            android:fontFamily="@font/varela_round"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:padding="0dp"/>
+
+        <View
+            android:id="@+id/line6"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/gray"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

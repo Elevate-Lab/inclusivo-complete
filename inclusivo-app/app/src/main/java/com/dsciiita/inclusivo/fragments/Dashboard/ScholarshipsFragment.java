@@ -114,6 +114,7 @@ public class ScholarshipsFragment extends Fragment {
         int index = (int) (Math.random() * (9));
         binding.quote.setText((getResources().getStringArray(R.array.diversity_quotes))[index]);
         binding.progressLayout.setVisibility(View.VISIBLE);
+        binding.progressBar.setFrame(30);
         binding.prent.setVisibility(View.GONE);
         binding.prent.setAlpha(0);
         binding.errorView.setVisibility(View.GONE);

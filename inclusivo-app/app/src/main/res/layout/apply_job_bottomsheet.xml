@@ -35,11 +35,13 @@
         android:elevation="4dp"
         android:visibility="gone"
         android:background="@drawable/bottomsheet_round_corner_bg">
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:lottie_rawRes="@raw/rainbow_loader"
+            app:lottie_loop="true"
             android:layout_centerInParent="true"
-            android:indeterminateTintMode="src_atop"/>
+            app:lottie_autoPlay="true"/>
     </RelativeLayout>
 
 

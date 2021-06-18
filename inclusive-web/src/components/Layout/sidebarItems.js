@@ -46,16 +46,6 @@ export const commonItems = [
         icon: <SchoolOutlined style={drawerIcon} />,
         route: '/home/scholarship/list'
     },
-    {
-        name: 'Blogs',
-        icon: <BookIcon style={drawerIcon} />,
-        route: '/home/blog/list'
-    },
-    {
-        name: 'Videos',
-        icon: <VideoCallIcon style={drawerIcon} />,
-        route: '/home/video/list'
-    }
 ]
 
 export const candidateItems = [

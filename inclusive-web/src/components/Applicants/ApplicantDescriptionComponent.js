@@ -155,7 +155,7 @@ function ApplicantDescriptionComponent({ handleShowList, applicant, updateStatus
         };
         const response = await fetch(`${baseUrl}/job/application/status/${applicant.id}`, requestOptions);
         const res = await response.json();
-        if (res.data?.[res.data.length - 1].recruiter_notes) {
+        if (res.data.length? res.data.[res.data.length - 1].recruiter_notes : false) {
             setRecruiterNotesText(res.data[res.data.length - 1].recruiter_notes);
         }
     }

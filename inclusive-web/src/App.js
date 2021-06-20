@@ -21,8 +21,8 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/legal" component={Legal} />
-          <NonProtectedRoute exact path="/" component={Landing} />
-          <Route exact path="/Landing" component={LandingSec} />
+          <NonProtectedRoute exact path="/" component={LandingSec} />
+          <Route exact path="/signin" component={Landing} />
           <NonProtectedRoute exact path="/auth" component={Auth} />
           <ProtectedRoute exact path="/complete/candidate" component={CompleteCandidate} />
           <ProtectedRoute exact path="/complete/employer" component={CompleteEmployer} />

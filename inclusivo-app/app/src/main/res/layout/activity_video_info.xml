@@ -63,12 +63,13 @@
             android:id="@+id/youtube_player_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:handleNetworkEvents="true"
             android:contentDescription="@string/youtube_player"
             app:layout_constraintDimensionRatio="16:9"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:showYouTubeButton="false"
+            app:showYouTubeButton="true"
             app:showFullScreenButton="true" />
 
         <ScrollView

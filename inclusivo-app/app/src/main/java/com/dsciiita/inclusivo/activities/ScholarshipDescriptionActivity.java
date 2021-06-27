@@ -94,7 +94,7 @@ public class ScholarshipDescriptionActivity extends AppCompatActivity {
             intent.setData(applyWebPage);
             startActivity(intent);
         }catch (Exception e) {
-            Snackbar.make(binding.parentLayout, "Something went wrong", BaseTransientBottomBar.LENGTH_SHORT);
+            Snackbar.make(binding.parentLayout, "Something went wrong", BaseTransientBottomBar.LENGTH_SHORT).show();
         }
     }
 

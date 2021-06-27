@@ -166,7 +166,7 @@ public class UpdateProfileFragment extends Fragment implements Step {
 
         if(email.isEmpty()){
             updateProfileFragmentBinding.btnNext.setEnabled(true);
-            Snackbar.make(updateProfileFragmentBinding.parent, "Email required", BaseTransientBottomBar.LENGTH_LONG);
+            Snackbar.make(updateProfileFragmentBinding.parent, "Email required", BaseTransientBottomBar.LENGTH_LONG).show();
             return;
         }
 

@@ -60,11 +60,8 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
     }
 
     private void startShowCaseTour() {
-        View target0 = bottomNavigationView.findViewById(R.id.job_menu);
         View target3 = bottomNavigationView.findViewById(R.id.events_menu);
         View target2 = bottomNavigationView.findViewById(R.id.upskill_menu);
-        View target1 = bottomNavigationView.findViewById(R.id.stories_menu);
-        View target4 = bottomNavigationView.findViewById(R.id.scholarship_menu);
 
         String SHOWCASE_ID = "NAVIGATION_ITEMS_TOUR";
         ShowcaseConfig config = new ShowcaseConfig();
@@ -73,16 +70,9 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(this, SHOWCASE_ID);
 
         sequence.setConfig(config);
-        sequence.addSequenceItem(target0,
-                "Apply for jobs", "GOT IT");
-        sequence.addSequenceItem(target1,
-                "Browse companies", "GOT IT");
         sequence.addSequenceItem(target2,
                 "Free access to tech blogs and videos with upskill", "GOT IT");
-        sequence.addSequenceItem(target3,
-                "View stories from different companies", "GOT IT");
-        sequence.addSequenceItem(target4,
-                "Apply for scholarships", "GOT IT");
+
         sequence.start();
     }
 

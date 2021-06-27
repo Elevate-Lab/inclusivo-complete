@@ -2,6 +2,7 @@ package com.dsciiita.inclusivo.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -29,6 +30,8 @@ public class EmailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityEmailBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
+
+        binding.policy.setMovementMethod(LinkMovementMethod.getInstance());
 
         binding.loginContinueBtn.setOnClickListener(this::onClick);
     }

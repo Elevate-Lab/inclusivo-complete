@@ -38,7 +38,7 @@ import javax.net.ssl.HttpsURLConnection;
 public class PDFViewerActivity extends AppCompatActivity implements OnLoadCompleteListener {
 
     ActivityPDFViewerBinding binding;
-
+    boolean isError = false;
     ProgressDialog progressDialog;
 
     @Override
@@ -110,25 +110,27 @@ public class PDFViewerActivity extends AppCompatActivity implements OnLoadComple
                 }
 
             } catch (IOException e) {
-                binding.errorView.setVisibility(View.VISIBLE);
-                binding.errorAnim.playAnimation();
-                binding.progressBar.setVisibility(View.GONE);
-                e.printStackTrace();
-                return null;
+                isError = true;
             }
             return inputStream;
         }
 
         @Override
         protected void onPostExecute(InputStream inputStream) {
-            binding.pdfView.fromStream(inputStream).enableSwipe(true)
-                    .swipeHorizontal(false)
-                    .spacing(5)
-                    .enableDoubletap(true)
-                    .enableAnnotationRendering(true)
-                    .onLoad(PDFViewerActivity.this::loadComplete)
-                    .scrollHandle(new DefaultScrollHandle(PDFViewerActivity.this))
-                    .load();
+            if(isError){
+                binding.errorView.setVisibility(View.VISIBLE);
+                binding.errorAnim.playAnimation();
+                binding.progressBar.setVisibility(View.GONE);
+            }else {
+                binding.pdfView.fromStream(inputStream).enableSwipe(true)
+                        .swipeHorizontal(false)
+                        .spacing(5)
+                        .enableDoubletap(true)
+                        .enableAnnotationRendering(true)
+                        .onLoad(PDFViewerActivity.this::loadComplete)
+                        .scrollHandle(new DefaultScrollHandle(PDFViewerActivity.this))
+                        .load();
+            }
         }
     }
 

@@ -26,6 +26,32 @@ export const commonItems = [
         icon: <DashboardOutlined style={drawerIcon} />,
         route: '/home'
     },
+]
+
+export const employerInitialItems = [
+    {
+        name: 'My Company',
+        icon: <BusinessOutlined style={drawerIcon} />,
+        route: '/home/company/'
+    },
+    {
+        name: 'Company Jobs',
+        icon: <WorkOutlineOutlined style={drawerIcon} />,
+        route: '/home/company'
+    },
+    {
+        name: 'Company Scholarships',
+        icon: <SchoolOutlined style={drawerIcon} />,
+        route: '/home/company'
+    },
+    {
+        name: 'Company Stories',
+        icon: <LibraryBooksOutlined style={drawerIcon} />,
+        route: '/home/company'
+    },
+]
+
+export const candidateInitialItems = [
     {
         name: 'Jobs',
         icon: <WorkOutlineOutlined style={drawerIcon} />,
@@ -37,14 +63,14 @@ export const commonItems = [
         route: '/home/company/list'
     },
     {
-        name: 'Stories',
-        icon: <LibraryBooksOutlined style={drawerIcon} />,
-        route: '/home/story/list'
-    },
-    {
         name: 'Scholarships',
         icon: <SchoolOutlined style={drawerIcon} />,
         route: '/home/scholarship/list'
+    },
+    {
+        name: 'Stories',
+        icon: <LibraryBooksOutlined style={drawerIcon} />,
+        route: '/home/story/list'
     },
 ]
 

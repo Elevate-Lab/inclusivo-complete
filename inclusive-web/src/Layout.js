@@ -12,6 +12,7 @@ import { ProfileDetails } from './pages/Profile/ProfileDetails';
 import { ProtectedRoute } from './ProtectedRoute';
 import { userStatus } from './actions/authActions/userStatusActions';
 import { useSelector, useDispatch } from 'react-redux'
+// import CompanyJobs from './components/Company/CompanyJobs/CompanyJobs'
 import CompanyListing from './components/Company/CompanyListing'
 
 const ScholarshipDescription = loadable(() => import('./components/Description/ScholarshipDescription'));
@@ -34,6 +35,9 @@ const BlogDescription = loadable(() => import('./components/Blogs/BlogDescriptio
 const BlogListing = loadable(() => import('./components/Blogs/BlogListing'));
 const VideoDescription = loadable(() => import('./components/Video/VideoDescription'));
 const VideoListing = loadable(() => import('./components/Video/VideoListing'));
+const CompanyJobs = loadable(() => import('./components/Company/CompanyJobs/CompanyJobs'));
+const CompanyScholarships = loadable(() => import('./components/Company/CompanyScholarships/CompanyScholarships'));
+const CompanyStories = loadable(() => import('./components/Company/CompanyStories/CompanyStories'));
 
 const useStyle = makeStyles(theme => ({
     bossContainer: props => ({
@@ -88,6 +92,9 @@ function Layout(props) {
                         <ProtectedRoute exact path="/home/company/add" component={AddCompany} />
                         <ProtectedRoute exact path="/home/company/:id" component={CompanyDescription} />
                         <ProtectedRoute exact path='/home/company/get/subscribed' component={Subscribed} />
+                        <ProtectedRoute exact path='/home/company/:id/jobs' component={CompanyJobs} />
+                        <ProtectedRoute exact path='/home/company/:id/scholarships' component={CompanyScholarships} />
+                        <ProtectedRoute exact path='/home/company/:id/stories' component={CompanyStories} />
 
                         {/* Job Routes */}
                         <Route exact path="/home/job/list" component={JobList} />

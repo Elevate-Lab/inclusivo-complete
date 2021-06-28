@@ -28,6 +28,7 @@ import '../../style.css';
 import DescriptionHeader from './DescriptionHeader';
 import Accordian from './Accordian'
 import { useSelector } from 'react-redux'
+import Share from '../Share/Share';
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />
@@ -219,6 +220,21 @@ const Description = ({ type, data, id, buttonVisibility }) => {
         }
         else return d;
     }
+    
+    // Share Dialog
+    const [shareDialogOpen, setShareDialogOpen] = React.useState(false)
+
+    const handleShareDialogOpen = () => {
+      setShareDialogOpen(true)
+    }
+    
+    const handleShareDialogClose = () => {
+      console.log("heelo")
+      setShareDialogOpen(false)
+    }
+  
+    const jobUrl = `https://www.inclusivo.netlify.app/home/job/${data.id}`
+    const scholarshipUrl = `https://www.inclusivo.netlify.app/home/scholarship/${data.id}`
 
     return (
         <Grid container className={classes.mainContainer}>
@@ -234,7 +250,7 @@ const Description = ({ type, data, id, buttonVisibility }) => {
                             <FavoriteBorder style={{ color: "black" }} fontSize="small" />
                         </IconButton>
                     }
-                    <IconButton>
+                    <IconButton onClick={handleShareDialogOpen}>
                         <ShareOutlined fontSize='small' />
                     </IconButton>
                 </Grid>
@@ -503,6 +519,7 @@ const Description = ({ type, data, id, buttonVisibility }) => {
                     }
                 </Grid>
             }
+            <Share open={shareDialogOpen} handleClose={handleShareDialogClose} url={type === "jobs" ? jobUrl : scholarshipUrl} />
         </Grid>
     )
 }

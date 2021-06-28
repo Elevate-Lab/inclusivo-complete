@@ -120,8 +120,7 @@ public class JobDescriptionActivity extends AppCompatActivity {
 
         MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(this, SHOWCASE_ID);
         sequence.setConfig(config);
-        sequence.addSequenceItem(binding.btnApply,
-                "Apply for this job", "GOT IT");
+
         sequence.addSequenceItem(binding.btnEvaluate,
                 "Match your skills with job requirements", "GOT IT");
         sequence.start();

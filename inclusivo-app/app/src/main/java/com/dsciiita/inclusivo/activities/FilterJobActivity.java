@@ -75,9 +75,9 @@ public class FilterJobActivity extends AppCompatActivity {
         types.add("Salary");
         types.add("Experience");
 
-        salarySeekBar.setMax(10000000);
-        experienceSeekBar.setMax(60);
-        salarySeekBar.setProgress(100000);
+        salarySeekBar.setMax(1000000);
+        experienceSeekBar.setMax(20);
+        salarySeekBar.setProgress(50000);
         experienceSeekBar.setProgress(1);
 
         getTags();
@@ -165,10 +165,9 @@ public class FilterJobActivity extends AppCompatActivity {
         salarySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                progress = progress / 10000;
-                progress = progress * 10000;
+                progress = progress / 2000;
+                progress = progress * 2000;
                 salaryTextView.setText(String.valueOf(progress));
-                Log.i("<>",String.valueOf(progress));
             }
 
             @Override
@@ -205,6 +204,8 @@ public class FilterJobActivity extends AppCompatActivity {
         tagSelected.clear();
         companySelected.clear();
         jobTypeSelected.clear();
+        binding.seekBarExperience.setProgress(0);
+        binding.seekBarSalary.setProgress(0);
         for(int i=0;i< values.size(); i++ )  {
             binding.options.setItemChecked(i,false);
         }
@@ -302,6 +303,8 @@ public class FilterJobActivity extends AppCompatActivity {
         resultIntent.putExtra("company_name", finalCompanies.toString());
         resultIntent.putExtra("tags", finalTags.toString());
         resultIntent.putExtra("job_type", finalTypes.toString());
+        resultIntent.putExtra("salary", salaryTextView.getText().toString());
+        resultIntent.putExtra("experience", experienceTextView.getText().toString());
         setResult(Activity.RESULT_OK, resultIntent);
         finish();
 

@@ -103,7 +103,7 @@ public class StoryListing extends AppCompatActivity {
             public void onFailure(Call<CompanyStoryResponse> call, Throwable t) {
                 binding.storiesRv.setVisibility(View.GONE);
                 binding.refreshLayout.setRefreshing(false);
-                Snackbar.make(binding.shimmerViewContainer, "Something went wrong", BaseTransientBottomBar.LENGTH_SHORT);
+                Snackbar.make(binding.shimmerViewContainer, "Something went wrong", BaseTransientBottomBar.LENGTH_SHORT).show();
                 binding.shimmerViewContainer.setVisibility(View.GONE);
             }
         });

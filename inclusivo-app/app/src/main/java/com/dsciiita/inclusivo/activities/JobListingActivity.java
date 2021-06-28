@@ -129,28 +129,8 @@ public class JobListingActivity extends AppCompatActivity implements JobRVAdapte
             }
         });
 
-        showSearchTour();
     }
 
-    private void showSearchTour() {
-        String SHOWCASE_ID = "SEARCH_TOUR";
-        ShowcaseConfig config = new ShowcaseConfig();
-        config.setFadeDuration(500);
-        config.setDelay(200); // half second between each showcase view
-        MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(this, SHOWCASE_ID);
-        sequence.setOnItemDismissedListener((itemView, position) -> {
-            if(position==0)
-                binding.searchBar.setVisibility(View.VISIBLE);
-            if(position==1)
-                binding.searchBar.setVisibility(View.GONE);
-        });
-        sequence.setConfig(config);
-        sequence.addSequenceItem(binding.toolbar.findViewById(R.id.search),
-                "Search jobs here", "GOT IT");
-        sequence.addSequenceItem(binding.category,
-                "Select categories", "GOT IT");
-        sequence.start();
-    }
 
     private void getData(Intent intent) {
         binding.shimmerViewContainer.setVisibility(View.VISIBLE);

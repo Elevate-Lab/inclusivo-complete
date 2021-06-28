@@ -115,7 +115,8 @@
     <string name="process_msg"><b><font color='#C66400'>Process</font></b>: The employer has viewed your application and is under review.</string>
     <string name="pending_msg"><b>Pending</b>: The employer hasn\'t viewed your application yet.</string>
 
-    <string name="signup_consent">By signing up, you agree to our <a href="https://deploy-preview-89--inclusivo.netlify.app/legal">Terms &amp; Conditions</a> and that you have read our <a href="https://deploy-preview-89--inclusivo.netlify.app/legal">Privacy Policy</a></string>
+    <string name="signup_consent">By signing up, you agree to our <a href="https://inclusivo.netlify.app/legal">Terms &amp; Conditions</a> and that you have read our <a href="https://inclusivo.netlify.app/legal">Privacy Policy</a></string>
+    <string name="policy"><a href="https://inclusivo.netlify.app/legal">Privacy Policy</a></string>
     <string name="save_button">Save</string>
     <string name="update">Update Status</string>
     <string name="share_button">Share</string>

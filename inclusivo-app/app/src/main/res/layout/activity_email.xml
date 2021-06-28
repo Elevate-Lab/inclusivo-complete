@@ -38,8 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:importantForAccessibility="no"
-            android:src="@drawable/login_bg_img"
-            app:layout_constraintDimensionRatio="360:337"
+            android:src="@drawable/login_bg"
+            app:layout_constraintDimensionRatio="360:290"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -118,10 +118,22 @@
             android:layout_marginHorizontal="16dp"
             android:textAllCaps="false"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tilEmail" />
+            app:layout_constraintBottom_toTopOf="@id/policy"
+            app:layout_constraintTop_toBottomOf="@id/tilEmail" />
+
+
+            <TextView
+                android:id="@+id/policy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="32dp"
+                android:fontFamily="@font/varela_round"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="@string/policy"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

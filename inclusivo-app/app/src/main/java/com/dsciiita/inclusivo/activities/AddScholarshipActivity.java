@@ -230,7 +230,7 @@ public class AddScholarshipActivity extends AppCompatActivity {
         }
 
         if(tags.isEmpty()){
-            Snackbar.make(binding.parent, "Select at least 1 tag", BaseTransientBottomBar.LENGTH_SHORT);
+            Snackbar.make(binding.parent, "Select at least 1 tag", BaseTransientBottomBar.LENGTH_SHORT).show();
             binding.btnAdd.setEnabled(true);
             return;
         }

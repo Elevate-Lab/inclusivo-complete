@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getUserDetails } from "../../actions/userDetails/user.actions";
 import profilePlaceholder from '../../assets/blank_image.png'
+import RainbowLoader from "../../components/Loaders/RainbowLoader/RainbowLoader";
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: (pc) => ({
@@ -558,7 +559,8 @@ export const ProfileDetails = () => {
             </Box>
           </Box>)
             ):
-            "loading"}
+            <RainbowLoader />
+            }
       
     </>
   );

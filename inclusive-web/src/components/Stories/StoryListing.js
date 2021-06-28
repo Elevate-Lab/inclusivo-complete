@@ -1,5 +1,5 @@
 import React from "react";
-import { baseUrl } from '../../urlConstants';
+import { baseUrl } from '../../urlConstants'
 import {
     makeStyles,
     Grid,
@@ -8,9 +8,9 @@ import {
     GridListTileBar,
     IconButton
 } from '@material-ui/core';
-import InfoIcon from '@material-ui/icons/Info';
-import Loader from '../../assets/loader/loader';
+import InfoIcon from '@material-ui/icons/Info'
 import { Link } from 'react-router-dom'
+import RainbowLoader from "../Loaders/RainbowLoader/RainbowLoader"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -91,9 +91,7 @@ function StoryListing(props) {
     return (
         <>
             {loading ?
-                <Grid>
-                    <Loader loading={loading} />
-                </Grid>
+                <RainbowLoader />
                 :
                 error ?
                     <Grid>{error}</Grid>

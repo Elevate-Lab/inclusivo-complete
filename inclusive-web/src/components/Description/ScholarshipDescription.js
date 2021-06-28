@@ -4,7 +4,7 @@ import {baseUrl} from '../../urlConstants'
 import {
     Grid
 } from '@material-ui/core'
-import Loader from '../../assets/loader/loader';
+import RainbowLoader from '../Loaders/RainbowLoader/RainbowLoader';
 
 function ScholarshipDescription(props) {
 
@@ -42,9 +42,7 @@ function ScholarshipDescription(props) {
     return (
         <>
             {loading ? 
-                <Grid>
-                    <Loader loading={loading} />
-                </Grid>  
+                <RainbowLoader />
             :
                 error ? 
                     <Grid>{error}</Grid>

@@ -6,10 +6,9 @@ import {
     Typography,
     Chip
 } from '@material-ui/core';
-import InfoIcon from '@material-ui/icons/Info';
-import Loader from '../../assets/loader/loader';
 import {Link} from 'react-router-dom'
 import clsx from 'clsx'
+import RainbowLoader from "../Loaders/RainbowLoader/RainbowLoader";
 
 const useStyles = makeStyles((theme) => ({
     bContainer:{
@@ -118,9 +117,7 @@ function BlogListing(props) {
     return (
         <>
         {loading ? 
-            <Grid>
-                <Loader loading={loading} />
-            </Grid>  
+            <RainbowLoader />
         :
             error ? 
                 <Grid>{error}</Grid>

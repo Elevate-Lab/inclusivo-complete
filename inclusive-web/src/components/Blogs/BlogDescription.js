@@ -6,9 +6,9 @@ import {
     Typography,
     Chip
 } from '@material-ui/core'
-import Loader from '../../assets/loader/loader'
 import clsx from 'clsx'
 import {Link} from 'react-router-dom'
+import RainbowLoader from "../Loaders/RainbowLoader/RainbowLoader";
 
 const useStyles = makeStyles(() => ({
     bContainer:{
@@ -141,9 +141,7 @@ function StoryDescription(props) {
     return (
         <>
             {loading ?
-                <Grid>
-                    <Loader loading={loading} />
-                </Grid>
+                <RainbowLoader />
                 :
                 error ?
                     <Grid>{error}</Grid>

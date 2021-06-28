@@ -5,7 +5,7 @@ import {
     Grid,
     Typography
 } from '@material-ui/core'
-import Loader from '../../assets/loader/loader';
+import RainbowLoader from "../Loaders/RainbowLoader/RainbowLoader";
 
 const useStyles = makeStyles(() => ({
     mainContainer: {
@@ -76,9 +76,7 @@ function StoryDescription(props) {
     return (
         <>
         {loading ? 
-            <Grid>
-                <Loader loading={loading} />
-            </Grid>  
+            <RainbowLoader />
         :
             error ? 
                 <Grid>{error}</Grid>

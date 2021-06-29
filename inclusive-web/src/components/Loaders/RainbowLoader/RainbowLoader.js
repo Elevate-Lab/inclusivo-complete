@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 function RainbowLoader() {
     const classes = useStyles()
     return (
-        <Grid container justify='center' alignItems='center' style={{height: "calc(100vh - 56px)"}}>
+        <Grid container justify='center' alignItems='center' style={{height: "calc(100vh - 140px)"}}>
             <Grid item container justify='center' alignItems='center' className={classes.loaderContainer}>
                 <div class="Loading-progress"></div>
             </Grid>

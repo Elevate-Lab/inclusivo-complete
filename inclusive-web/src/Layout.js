@@ -14,6 +14,7 @@ import { userStatus } from './actions/authActions/userStatusActions';
 import { useSelector, useDispatch } from 'react-redux'
 // import CompanyJobs from './components/Company/CompanyJobs/CompanyJobs'
 import CompanyListing from './components/Company/CompanyListing'
+import Events from './components/Events/Events';
 
 const ScholarshipDescription = loadable(() => import('./components/Description/ScholarshipDescription'));
 const AddCompany = loadable(() => import('./components/Company/AddCompany'));
@@ -122,6 +123,9 @@ function Layout(props) {
 
                         {/* Initiatives routes */}
                         <ProtectedRoute path="/home/company/:id/initiatives" component={InitiativesList} />
+
+                        {/* Events */}
+                        <ProtectedRoute path="/home/events" component={Events} />
                     </Switch>
                 </div> : <div>Loading...</div>
             }

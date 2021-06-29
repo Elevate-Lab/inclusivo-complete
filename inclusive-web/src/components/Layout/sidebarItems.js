@@ -5,9 +5,8 @@ import {
     SchoolOutlined,
     BusinessOutlined,
     LibraryBooksOutlined,
+    EventOutlined
 } from '@material-ui/icons';
-import VideoCallIcon from '@material-ui/icons/VideoCall';
-import BookIcon from '@material-ui/icons/Book';
 
 import {
     Icon
@@ -49,6 +48,11 @@ export const employerInitialItems = [
         icon: <LibraryBooksOutlined style={drawerIcon} />,
         route: '/home/company'
     },
+    {
+        name: 'Events',
+        icon: <EventOutlined style={drawerIcon} />,
+        route: '/home/events'
+    }
 ]
 
 export const candidateInitialItems = [
@@ -72,6 +76,11 @@ export const candidateInitialItems = [
         icon: <LibraryBooksOutlined style={drawerIcon} />,
         route: '/home/story/list'
     },
+    {
+        name: 'Events',
+        icon: <EventOutlined style={drawerIcon} />,
+        route: '/home/events'
+    }
 ]
 
 export const candidateItems = [

@@ -241,18 +241,26 @@ const initialValues = {
 
 const checkWidthChange = () => {
     if (window.innerWidth > 600 ) return true;
-    else return false;
+    return false;
 }
 
 function Landing() {
     const classes = useStyles();
+    
+    const [menuOpen, setMenuOpen] = React.useState(true)
 
     React.useLayoutEffect(() => {
         // console.log(darkMode)
         let timeoutId = null;
         const resizeListener = () => {
             clearTimeout(timeoutId);
-            timeoutId = setTimeout(() => { if(checkWidthChange()){setMenuOpen(true)} }, 100);
+            timeoutId = setTimeout(() => { 
+                if(checkWidthChange()){
+                    setMenuOpen(true)
+                }else{
+                    setMenuOpen(false)
+                } 
+            }, 100);
         };
         window.addEventListener('resize', resizeListener);
 
@@ -267,8 +275,6 @@ function Landing() {
 
     const [open, setOpen] = React.useState(false)
     const [forEmployer, setForEmployer] = React.useState(false)
-
-    const [menuOpen, setMenuOpen] = React.useState(true)
 
     const handleMenu = () => {
         setMenuOpen(!menuOpen)
@@ -603,12 +609,12 @@ function Landing() {
                 />
             </Grid>
             <Grid item container className={clsx(classes.container,classes.sectionContainer)} style={{marginTop: "140px"}}>
-                <Grid item xs={1} sm={1}>
+                <Grid item xs={3} sm={1}>
                     <img src={Upskill} 
                         className={clsx(classes.upskill)}                    
                     />
                 </Grid>
-                <Grid item xs={11} sm={11}>
+                <Grid item xs={9} sm={11}>
                     <Typography className={classes.bodyText3}>
                         Think we only provide jobs?
                     </Typography>

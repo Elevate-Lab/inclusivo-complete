@@ -297,7 +297,8 @@ function Landing() {
 
     const handleTabChange = (value) => () => {
         setOpen(false)
-        setMenuOpen(false)
+        if(isMobileView)
+            setMenuOpen(false)
         setForEmployer(value==0 ? true : false)
         window.scrollTo(0,0)
     }

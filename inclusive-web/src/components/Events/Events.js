@@ -7,12 +7,11 @@ import {
     Button
 } from '@material-ui/core';
 import {
-    VideocamRounded,
     LocationOn
 } from '@material-ui/icons'
 import { Link } from 'react-router-dom';
 import clsx from 'clsx'
-import UpskillSS from '../../assets/Landing/UpskillSS.svg'
+import Demo from '../../assets/Events/Demo.jpg'
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Keyboard, Mousewheel, Autoplay, EffectCoverflow, Pagination } from "swiper/core";
 SwiperCore.use([Autoplay, Keyboard, Mousewheel, EffectCoverflow, Pagination]);
@@ -129,6 +128,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "5px",
         cursor: "pointer",
         margin: "12px 0",
+        boxShadow: "0 0 63px -49px rgba(0,0,0,0.25)",
         [theme.breakpoints.down('sm')]:{
             width: "45%"
         },
@@ -181,7 +181,7 @@ function Events() {
                             </Grid>                                         
                         </Grid>
                     </Grid>
-                    <img src={UpskillSS}
+                    <img src={Demo}
                         className={clsx(classes.quote2,classes.eventImg)}
                     />
                 </Grid>
@@ -193,7 +193,7 @@ function Events() {
         return(
             <Grid className={classes.eventCard}>
                 <Grid item container style={{position: "relative"}}>
-                    <img src={UpskillSS}
+                    <img src={Demo}
                         className={clsx(classes.eventCardImg)}
                     />
                     {

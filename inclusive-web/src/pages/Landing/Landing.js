@@ -23,6 +23,7 @@ import Question from '../../assets/Landing/Question.svg'
 import Upskill from '../../assets/Landing/Upskill.svg'
 import Star from '../../assets/Landing/Star.svg'
 import UpskillSS from '../../assets/Landing/UpskillSS.svg'
+import HowItWorks from '../../assets/Landing/HowItWorks4.png'
 import clsx from 'clsx'
 
 import { baseUrl } from '../../urlConstants'
@@ -171,7 +172,7 @@ const useStyles = makeStyles((theme) => ({
         width: "100%"
     },
     quote2:{
-        width: "80%"
+        width: "80%",
     },
     star: {
         width: "3em"
@@ -546,6 +547,11 @@ function Landing() {
                                 </Typography>
                             </Grid>
                         </Grid>
+                    </Grid>
+                    <Grid className={clsx(classes.container,classes.sectionContainer)} style={{marginTop: "140px"}}>
+                        <img src={HowItWorks} 
+                            className={clsx(classes.quote)}                    
+                        />
                     </Grid>
                 </>
                 :

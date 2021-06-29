@@ -70,8 +70,8 @@ const Card = ({ data, isApplied = false, type, status, tagsToShow }) => {
     setShareDialogOpen(false)
   }
 
-  const jobUrl = `https://www.inclusivo.netlify.app/home/job/${data.id}`
-  const scholarshipUrl = `https://www.inclusivo.netlify.app/home/scholarship/${data.id}`
+  const jobUrl = `https://winclusivo.netlify.app/home/job/${data.id}`
+  const scholarshipUrl = `https://inclusivo.netlify.app/home/scholarship/${data.id}`
   const toFilter = (d) => {
     let date = "";
     if (d[0] === "a") {

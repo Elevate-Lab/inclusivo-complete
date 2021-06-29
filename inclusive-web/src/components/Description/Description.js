@@ -233,8 +233,8 @@ const Description = ({ type, data, id, buttonVisibility }) => {
       setShareDialogOpen(false)
     }
   
-    const jobUrl = `https://www.inclusivo.netlify.app/home/job/${data.id}`
-    const scholarshipUrl = `https://www.inclusivo.netlify.app/home/scholarship/${data.id}`
+    const jobUrl = `https://inclusivo.netlify.app/home/job/${data.id}`
+    const scholarshipUrl = `https://inclusivo.netlify.app/home/scholarship/${data.id}`
 
     return (
         <Grid container className={classes.mainContainer}>

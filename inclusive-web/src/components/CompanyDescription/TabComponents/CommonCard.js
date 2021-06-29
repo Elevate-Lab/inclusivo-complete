@@ -73,8 +73,8 @@ function CommonCard({ data, type}) {
     const classes = useStyles()
     const [shareDialogOpen, setShareDialogOpen] = React.useState(false)
 
-    const jobUrl = `https://www.inclusivo.netlify.app/home/job/${data.id}`
-    const scholarshipUrl = `https://www.inclusivo.netlify.app/home/scholarship/${data.id}`
+    const jobUrl = `https://inclusivo.netlify.app/home/job/${data.id}`
+    const scholarshipUrl = `https://inclusivo.netlify.app/home/scholarship/${data.id}`
 
     const handleShareDialogOpen = () => {
       setShareDialogOpen(true)

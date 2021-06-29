@@ -248,18 +248,28 @@ const checkWidthChange = () => {
 function Landing() {
     const classes = useStyles();
     
-    const [menuOpen, setMenuOpen] = React.useState(true)
+    const [menuOpen, setMenuOpen] = React.useState(false)
+    const [isMobileView, setIsMobileView] = React.useState(false)
 
     React.useLayoutEffect(() => {
         // console.log(darkMode)
         let timeoutId = null;
+        if(checkWidthChange()===true){
+            setMenuOpen(true)
+            setIsMobileView(false)
+        }else{
+            setMenuOpen(false)
+            setIsMobileView(true)
+        }
         const resizeListener = () => {
             clearTimeout(timeoutId);
             timeoutId = setTimeout(() => { 
                 if(checkWidthChange()){
                     setMenuOpen(true)
+                    setIsMobileView(false)
                 }else{
                     setMenuOpen(false)
+                    setIsMobileView(true)
                 } 
             }, 100);
         };
@@ -287,6 +297,7 @@ function Landing() {
 
     const handleTabChange = (value) => () => {
         setOpen(false)
+        setMenuOpen(false)
         setForEmployer(value==0 ? true : false)
         window.scrollTo(0,0)
     }
@@ -548,7 +559,7 @@ function Landing() {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid className={clsx(classes.container,classes.sectionContainer)} style={{marginTop: "140px"}}>
+                    <Grid className={clsx(classes.container,classes.sectionContainer)} style={{marginTop: "80px"}}>
                         <img src={HowItWorks} 
                             className={clsx(classes.quote)}                    
                         />
@@ -592,16 +603,6 @@ function Landing() {
                                 <Typography className={classes.bodyText2}>
                                 Our features also assist candidates upskill and prepare for their dream company as well as interviews. Resources are present to grow confidence in candidates.
                                 </Typography>
-                            </Grid>
-                            <Grid item container justify='space-between'>
-                                {/* <img src={Flower1}
-                                    style={{transform: 'translate(-20px,0)'}} 
-                                    className={clsx(classes.flower)}                    
-                                />
-                                <img src={Flower2} 
-                                    style={{transform: 'translate(20px,0)'}} 
-                                    className={clsx(classes.flower)}                    
-                                /> */}
                             </Grid>
                         </Grid>
                     </Grid>
@@ -656,27 +657,27 @@ function Landing() {
                 >
                     <SwiperSlide className={classes.mySwiper}>
                         <img src={UpskillSS} 
-                            className={clsx(classes.quote2)}                    
+                            className={clsx(classes.quote)}                    
                         />
                     </SwiperSlide>
                     <SwiperSlide className={classes.mySwiper}>
                         <img src={UpskillSS} 
-                            className={clsx(classes.quote2)}                    
+                            className={clsx(classes.quote)}                    
                         />
                     </SwiperSlide>
                     <SwiperSlide className={classes.mySwiper}>
                         <img src={UpskillSS} 
-                            className={clsx(classes.quote2)}                    
+                            className={clsx(classes.quote)}                    
                         />
                     </SwiperSlide>
                     <SwiperSlide className={classes.mySwiper}>
                         <img src={UpskillSS} 
-                            className={clsx(classes.quote2)}                    
+                            className={clsx(classes.quote)}                    
                         />
                     </SwiperSlide>
                     <SwiperSlide className={classes.mySwiper}>
                         <img src={UpskillSS} 
-                            className={clsx(classes.quote2)}                    
+                            className={clsx(classes.quote)}                    
                         />
                     </SwiperSlide>
                 </Swiper>

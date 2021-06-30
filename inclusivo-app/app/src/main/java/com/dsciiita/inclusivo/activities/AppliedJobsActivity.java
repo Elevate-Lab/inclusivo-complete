@@ -12,6 +12,7 @@ import com.dsciiita.inclusivo.R;
 import com.dsciiita.inclusivo.adapters.AppliedJobsRV;
 import com.dsciiita.inclusivo.api.ApiClient;
 import com.dsciiita.inclusivo.databinding.ActivityAppliedJobsBinding;
+import com.dsciiita.inclusivo.models.Job;
 import com.dsciiita.inclusivo.models.JobApplicationByCandidateData;
 import com.dsciiita.inclusivo.models.JobFilterSearch;
 import com.dsciiita.inclusivo.responses.ApplicationByCandidate;

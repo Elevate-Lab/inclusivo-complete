@@ -15,4 +15,8 @@
     <color name="progres_color">#5CBBF1</color>
     <color name="placeholder_back">#B1B1B1</color>
     <color name="gray">#6B6B6B</color>
+
+    <color name="process_text">#C66400</color>
+    <color name="rejected_text">#BB4E3F</color>
+    <color name="shortlisted_name">#2259B8</color>
 </resources>

@@ -66,7 +66,6 @@ public class JobRVAdapter extends RecyclerView.Adapter<JobRVAdapter.ViewHolder>{
         inflater = LayoutInflater.from(context);
         locationResponses = new ArrayList<>();
         this.mOnNoteListener = mOnNoteListener;
-
     }
 
     @NonNull
@@ -78,9 +77,6 @@ public class JobRVAdapter extends RecyclerView.Adapter<JobRVAdapter.ViewHolder>{
 
     public void updateAdapter(List<Job> mDataList) {
         this.jobList = mDataList;
-        locationResponses.clear();
-        for(Job job: mDataList)
-            locationResponses.add(job.getLocations());
         notifyDataSetChanged();
     }
 
@@ -112,10 +108,17 @@ public class JobRVAdapter extends RecyclerView.Adapter<JobRVAdapter.ViewHolder>{
             holder.companyImg.setBackgroundResource(R.drawable.ic_companies);
 
         String location = "";
+        locationResponses.clear();
+        for(Job job: jobList)
+            locationResponses.add(job.getLocations());
         List<CityResponse> response = locationResponses.get(position);
         if(response!=null) {
-            for (CityResponse cityResponse : response)
-                location = cityResponse.getName() + ", " + location;
+            for (int i=0; i<response.size(); i++) {
+                if(i==0)
+                    location = response.get(i).getName();
+                else
+                    location =  location + ", " + response.get(i).getName();
+            }
         }
         holder.jobLocations.setText(location);
 

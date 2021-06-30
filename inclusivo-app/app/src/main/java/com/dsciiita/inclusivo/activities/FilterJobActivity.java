@@ -75,10 +75,7 @@ public class FilterJobActivity extends AppCompatActivity {
         types.add("Salary");
         types.add("Experience");
 
-        salarySeekBar.setMax(1000000);
-        experienceSeekBar.setMax(20);
-        salarySeekBar.setProgress(50000);
-        experienceSeekBar.setProgress(1);
+
 
         getTags();
         getCompanies();
@@ -198,6 +195,10 @@ public class FilterJobActivity extends AppCompatActivity {
             }
         });
 
+        salarySeekBar.setMax(1000000);
+        experienceSeekBar.setMax(20);
+        salarySeekBar.setProgress(0);
+        experienceSeekBar.setProgress(0);
     }
 
     private void clearFilter() {
@@ -303,8 +304,10 @@ public class FilterJobActivity extends AppCompatActivity {
         resultIntent.putExtra("company_name", finalCompanies.toString());
         resultIntent.putExtra("tags", finalTags.toString());
         resultIntent.putExtra("job_type", finalTypes.toString());
-        resultIntent.putExtra("salary", salaryTextView.getText().toString());
-        resultIntent.putExtra("experience", experienceTextView.getText().toString());
+        if(Integer.parseInt(salaryTextView.getText().toString())!=0)
+            resultIntent.putExtra("salary", salaryTextView.getText().toString());
+        if(Integer.parseInt(experienceTextView.getText().toString())!=0)
+            resultIntent.putExtra("experience", experienceTextView.getText().toString());
         setResult(Activity.RESULT_OK, resultIntent);
         finish();
 

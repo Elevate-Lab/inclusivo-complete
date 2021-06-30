@@ -45,6 +45,26 @@ public class JobApplicationsRVAdapter extends RecyclerView.Adapter<JobApplicatio
         holder.name.setText(candName);
         holder.jobRole.setText(candidate.getJobRole());
         holder.desc.setText(candidate.getProfileDesc());
+
+        String status = objectList.get(position).getStatus();
+        holder.status.setText(status);
+        switch (status) {
+            case "Selected":
+                holder.status.setTextColor(context.getResources().getColor(R.color.green));
+                break;
+            case "Shortlisted":
+                holder.status.setTextColor(context.getResources().getColor(R.color.shortlisted_name));
+                break;
+            case "Pending":
+                holder.status.setTextColor(context.getResources().getColor(R.color.black));
+                break;
+            case "Process":
+                holder.status.setTextColor(context.getResources().getColor(R.color.process_text));
+                break;
+            case "Rejected":
+                holder.status.setTextColor(context.getResources().getColor(R.color.rejected_text));
+                break;
+        }
     }
 
     @Override
@@ -58,7 +78,7 @@ public class JobApplicationsRVAdapter extends RecyclerView.Adapter<JobApplicatio
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        TextView name, jobRole, desc;
+        TextView name, jobRole, desc, status;
         onClickListener listener;
 
          public ViewHolder(View itemView, onClickListener onClickListener){
@@ -66,6 +86,7 @@ public class JobApplicationsRVAdapter extends RecyclerView.Adapter<JobApplicatio
              this.name = itemView.findViewById(R.id.candi_name);
              this.jobRole = itemView.findViewById(R.id.candi_job_role);
              this.desc = itemView.findViewById(R.id.candi_profile_desc);
+             this.status = itemView.findViewById(R.id.status);
              listener = onClickListener;
              itemView.setOnClickListener(this);
              itemView.setOnLongClickListener(this);

@@ -209,7 +209,7 @@ public class JobDescriptionActivity extends AppCompatActivity {
             bottomSheetDialog.setContentView(R.layout.apply_job_bottomsheet);
         else
             bottomSheetDialog.setContentView(R.layout.apply_external_bottomsheet);
-        MaterialButton applyBtn = bottomSheetDialog.findViewById(R.id.apply);
+        MaterialButton updateStatusButton = bottomSheetDialog.findViewById(R.id.apply);
         MaterialButton cancelBtn = bottomSheetDialog.findViewById(R.id.cancel);
 
         TextInputLayout msg = bottomSheetDialog.findViewById(R.id.profile_description_til);
@@ -218,11 +218,12 @@ public class JobDescriptionActivity extends AppCompatActivity {
         LottieAnimationView animationView = bottomSheetDialog.findViewById(R.id.animation_view);
         RelativeLayout progressBar = bottomSheetDialog.findViewById(R.id.progress_bar);
 
-        applyBtn.setOnClickListener(view->{
+        updateStatusButton.setOnClickListener(view->{
             if(job.getIsApplyHere()) {
+                msg.setError(null);
                 String message = msg.getEditText().getText().toString().trim();
                 if(message.isEmpty()) {
-                    Toast.makeText(this, "Answer the questions", Toast.LENGTH_SHORT).show();
+                    msg.setError("This is required question");
                     return;
                 }
                 createApplication(animationView, progressBar, message);
@@ -261,9 +262,9 @@ public class JobDescriptionActivity extends AppCompatActivity {
 
     private void getStatusConfirmation() {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
-        bottomSheetDialog.setContentView(R.layout.update_application_bottomsheet);
-        MaterialButton applyBtn = bottomSheetDialog.findViewById(R.id.apply);
-        applyBtn.setVisibility(View.GONE);
+        bottomSheetDialog.setContentView(R.layout.update_job_bottomsheet);
+        MaterialButton updateStatusButton = bottomSheetDialog.findViewById(R.id.update_status_btn);
+        updateStatusButton.setVisibility(View.GONE);
         MaterialButton cancelBtn = bottomSheetDialog.findViewById(R.id.cancel);
         ListView listView = bottomSheetDialog.findViewById(R.id.list_item);
 
@@ -298,11 +299,11 @@ public class JobDescriptionActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             updatedStatus = adapter.getItem(position);
-            applyBtn.setVisibility(View.VISIBLE);
+            updateStatusButton.setVisibility(View.VISIBLE);
         });
 
 
-        applyBtn.setOnClickListener(view->{
+        updateStatusButton.setOnClickListener(view->{
             bottomSheetDialog.findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
             updateJobStatus(bottomSheetDialog, bottomSheetDialog.findViewById(R.id.progress_bar));
         });

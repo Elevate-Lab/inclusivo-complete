@@ -6,10 +6,10 @@ import { useHistory } from "react-router-dom";
 import { useStyles } from "./Styles";
 import axios from 'axios';
 import { registerUserRequest, registerUserSuccess, registerUserFailure } from '../../actions/authActions/registerActions';
-import Loader from '../../assets/loader/loader';
 import { baseUrl } from '../../urlConstants';
 import Alert from '@material-ui/lab/Alert';
 import { Link } from 'react-router-dom'
+import RainbowLoader from "../Loaders/RainbowLoader/RainbowLoader";
 
 const Register = (props) => {
   const classes = useStyles();
@@ -134,9 +134,10 @@ const Register = (props) => {
       <Grid item xs={12} md={6}>
         <img className={classes.logo} src="/images/inclusivo.svg" alt="logo" />
         {
-          userRegisterDetails.loading ? <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "150px" }}>
-            <Loader loading={userRegisterDetails.loading} />
-          </div> : <Grid
+          userRegisterDetails.loading ?
+            <RainbowLoader />
+           : 
+           <Grid
             className={classes.container}
             container
             direction="column"

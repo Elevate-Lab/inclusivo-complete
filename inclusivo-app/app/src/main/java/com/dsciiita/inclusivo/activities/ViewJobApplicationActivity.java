@@ -85,13 +85,26 @@ public class ViewJobApplicationActivity extends AppCompatActivity {
                 if(response.isSuccessful()) {
                     List<JobStatus> statuses = response.body().getData();
                     if(statuses!=null && statuses.size()>0) {
-                        binding.infoHeader.setVisibility(View.VISIBLE);
-                        binding.extraInfo.setVisibility(View.VISIBLE);
                         JobStatus status = statuses.get(statuses.size() - 1);
-                        if (SharedPrefManager.getInstance(ViewJobApplicationActivity.this).isEmployer())
-                            binding.extraInfo.setText(status.getRecruiterNotes());
-                        else
-                            binding.extraInfo.setText(status.getMessage());
+                        if (SharedPrefManager.getInstance(ViewJobApplicationActivity.this).isEmployer()) {
+                            if (status.getRecruiterNotes()!=null && !status.getRecruiterNotes().isEmpty()) {
+                                binding.infoHeader.setVisibility(View.VISIBLE);
+                                binding.extraInfo.setVisibility(View.VISIBLE);
+                                binding.extraInfo.setText(status.getRecruiterNotes());
+                            } else {
+                                binding.infoHeader.setVisibility(View.GONE);
+                                binding.extraInfo.setVisibility(View.GONE);
+                            }
+                        }else {
+                            if (status.getMessage()!=null && !status.getMessage().isEmpty()) {
+                                binding.infoHeader.setVisibility(View.VISIBLE);
+                                binding.extraInfo.setVisibility(View.VISIBLE);
+                                binding.extraInfo.setText(status.getMessage());
+                            } else {
+                                binding.infoHeader.setVisibility(View.GONE);
+                                binding.extraInfo.setVisibility(View.GONE);
+                            }
+                        }
                     } else {
                         binding.infoHeader.setVisibility(GONE);
                         binding.extraInfo.setVisibility(GONE);
@@ -133,7 +146,7 @@ public class ViewJobApplicationActivity extends AppCompatActivity {
                     JobApplication application = response.body().getData();
                     setValues(application);
                 } else {
-                    Snackbar.make(binding.parent, "Something went wrong.", Snackbar.LENGTH_SHORT);
+                    Snackbar.make(binding.parent, "Something went wrong.", Snackbar.LENGTH_SHORT).show();
                 }
 
                 binding.progressBar.setVisibility(GONE);
@@ -141,7 +154,7 @@ public class ViewJobApplicationActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<ApplicationByIdResponse> call, Throwable t) {
-                Snackbar.make(binding.parent, "Something went wrong.", Snackbar.LENGTH_SHORT);
+                Snackbar.make(binding.parent, "Something went wrong.", Snackbar.LENGTH_SHORT).show();
                 binding.progressBar.setVisibility(GONE);
                 binding.parent.setVisibility(View.VISIBLE);
             }
@@ -247,6 +260,8 @@ public class ViewJobApplicationActivity extends AppCompatActivity {
         chip.setText(status);
         chip.setId(ViewCompat.generateViewId());
         chip.setCloseIconVisible(false);
+
+
         chip.setOnTouchListener((v, event) -> {
             if (v==chip) {
                 if (event.getX() <= v.getPaddingLeft()) {

@@ -14,6 +14,7 @@ import InititiativesOverview from './TabComponents/InititiativesOverview'
 import JobsOverview from './TabComponents/JobsOverview'
 import ScholarshipsOverview from './TabComponents/ScholarshipsOverview'
 import StoriesOverview from './TabComponents/StoriesOverview'
+import RainbowLoader from '../Loaders/RainbowLoader/RainbowLoader'
 
 const useStyles = makeStyles(theme => ({
     mainContainer: {
@@ -98,9 +99,7 @@ function CompanyDescription({ match }) {
     return (
         <>
             {loading ?
-                <Typography>
-                    loading...
-                </Typography>
+                <RainbowLoader/>
                 :
                 error ?
                     <Typography>

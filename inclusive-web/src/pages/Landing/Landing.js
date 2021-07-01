@@ -4,11 +4,14 @@ import {
     Typography,
     makeStyles,
     Button,
-    Collapse
+    Collapse,
+    IconButton
 } from '@material-ui/core'
 import {
     ExpandLess,
-    ExpandMore
+    ExpandMore,
+    Close,
+    Menu
 } from '@material-ui/icons'
 import axios from 'axios';
 import inclusivo from '../../assets/inclusivo.svg'
@@ -20,6 +23,7 @@ import Question from '../../assets/Landing/Question.svg'
 import Upskill from '../../assets/Landing/Upskill.svg'
 import Star from '../../assets/Landing/Star.svg'
 import UpskillSS from '../../assets/Landing/UpskillSS.svg'
+import HowItWorks from '../../assets/Landing/HowItWorks4.png'
 import clsx from 'clsx'
 
 import { baseUrl } from '../../urlConstants'
@@ -41,12 +45,69 @@ const useStyles = makeStyles((theme) => ({
             color: "#fff"
         }
     },
+    appbar:{
+        height: "76px",
+        maxHeight: "76px",
+        position: "fixed",
+        boxShadow: "0px 0px 34px -9px rgba(0, 0, 0, 0.25)",
+        zIndex: 2,
+        background: "#fff",
+        [theme.breakpoints.down('xs')]:{
+            maxHeight: "100%",
+            height: "inherit"
+        }
+    },
+    pos:{
+        [theme.breakpoints.down('xs')]:{
+            justifyContent: "flex-start"
+        }
+    },
+    bossNavItemContainer: {
+        paddingTop: "16px",
+        maxWidth: "calc(100% - 130px)",
+        [theme.breakpoints.down('xs')]:{
+            width: "100%",
+            maxWidth: "100%"
+        }
+    },
+    navItemsContainer:{
+        [theme.breakpoints.down('xs')]:{
+            width: "100%",
+            padding: "20px 0"
+        }
+    },
     navItems: {
         padding: "0 10px",
         margin: "0 10px",
         height: "40px",
         cursor: "pointer",
-        borderRadius: "5px"
+        borderRadius: "5px",
+        [theme.breakpoints.down('xs')]:{
+            margin: "0 0",
+            padding: "0 0"
+        }
+    },
+    navContainer: {
+        width: "80%",
+        color: "#484848",
+        [theme.breakpoints.down('xs')]:{
+            flexDirection: "column",
+        }
+    },
+    logoContainer: {
+        paddingTop: "24px",
+        paddingLeft: "2px",
+        maxWidth: "130px",
+        [theme.breakpoints.down('xs')]:{
+            width: "100%",
+            maxWidth: "100%",
+        }
+    },
+    closeBtn:{
+        display: "none",
+        [theme.breakpoints.down('xs')]:{
+            display: "block"
+        }
     },
     dropDown :{
         marginTop: "20px",
@@ -56,20 +117,22 @@ const useStyles = makeStyles((theme) => ({
     nested:{
         marginBottom: "8px"
     },
+    signinContainer:{
+        [theme.breakpoints.down('xs')]:{
+            width: "100%",
+            display: 'flex',
+            justifyContent: 'center'
+        }
+    },
     container: {
         width: "80%",
         color: "#484848",
     },
-    appbar:{
-        height: "76px",
-        maxHeight: "76px",
-        position: "fixed",
-        boxShadow: "0px 0px 34px -9px rgba(0, 0, 0, 0.25)",
-        zIndex: 2,
-        background: "#fff"
-    },
     logo:{
         height: "20px",
+        [theme.breakpoints.down('xs')]:{
+            height: "16px"
+        }
     },
     image:{
         width: "90%"  
@@ -109,15 +172,19 @@ const useStyles = makeStyles((theme) => ({
         width: "100%"
     },
     quote2:{
-        width: "80%"
+        width: "80%",
     },
     star: {
         width: "3em"
     },
     upskill:{
-        height: "80%"
+        height: "80%",
+        [theme.breakpoints.down('sm')]:{
+            height: "40%"
+        }
     },
     bottom:{
+        padding: "30px 0",
         background: "#F3FBFF",
     },
     aboutSection:{
@@ -143,9 +210,29 @@ const useStyles = makeStyles((theme) => ({
         background: "#FF3750",
         color: "#fff",
     },
+    signInBtn: {
+        background: "#FF3750",
+        color: "#fff",
+        padding: "6px 20px",
+        borderRadius: "5px",
+        margin: "5px 0 20px 0"
+    },
     mySwiper:{
         display: "flex",
         justifyContent: "center"
+    },
+    display:{
+        display:"none"
+    },
+    padding: {
+        padding: "24px 0",
+        paddingLeft: "2px"
+    },
+    el: {
+        [theme.breakpoints.down('xs')]:{
+            marginTop: "20px",
+            justifyContent: "center"
+        }
     }
 }))
 
@@ -153,8 +240,45 @@ const initialValues = {
     email: ''
 }
 
+const checkWidthChange = () => {
+    if (window.innerWidth > 600 ) return true;
+    return false;
+}
+
 function Landing() {
     const classes = useStyles();
+    
+    const [menuOpen, setMenuOpen] = React.useState(false)
+    const [isMobileView, setIsMobileView] = React.useState(false)
+
+    React.useLayoutEffect(() => {
+        // console.log(darkMode)
+        let timeoutId = null;
+        if(checkWidthChange()===true){
+            setMenuOpen(true)
+            setIsMobileView(false)
+        }else{
+            setMenuOpen(false)
+            setIsMobileView(true)
+        }
+        const resizeListener = () => {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => { 
+                if(checkWidthChange()){
+                    setMenuOpen(true)
+                    setIsMobileView(false)
+                }else{
+                    setMenuOpen(false)
+                    setIsMobileView(true)
+                } 
+            }, 100);
+        };
+        window.addEventListener('resize', resizeListener);
+
+        return () => {
+            window.removeEventListener('resize', resizeListener);
+        }
+    }, [])
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -163,12 +287,18 @@ function Landing() {
     const [open, setOpen] = React.useState(false)
     const [forEmployer, setForEmployer] = React.useState(false)
 
+    const handleMenu = () => {
+        setMenuOpen(!menuOpen)
+    }
+
     const handleClick = () => {
         setOpen(!open)
     }
 
     const handleTabChange = (value) => () => {
         setOpen(false)
+        if(isMobileView)
+            setMenuOpen(false)
         setForEmployer(value==0 ? true : false)
         window.scrollTo(0,0)
     }
@@ -239,15 +369,30 @@ function Landing() {
     return (
         <Grid container justify='center' className={classes.mainContainer}>
             <Grid item container className={classes.appbar} justify='center'>
-                <Grid item container alignItems='flex-start' className={classes.container}>
-                    <Grid item container alignItems='center' style={{paddingTop: "24px", maxWidth: "130px"}}>
-                        <img src={inclusivo} 
-                            className={clsx(classes.logo)}                    
-                        />
+                <Grid item container alignItems='flex-start' className={classes.navContainer}>
+                    <Grid item container alignItems='center' className={{[classes.logoContainer]:menuOpen ,[classes.padding]: !menuOpen}}>
+                        <Grid item container alignItems='center' justify='space-between'>
+                            <img src={inclusivo} 
+                                className={clsx(classes.logo)}                    
+                            />
+                            { !menuOpen ? 
+                                <IconButton onClick={handleMenu}>
+                                    <Menu className={classes.closeBtn}/>
+                                </IconButton>
+                                :
+                                <IconButton onClick={handleMenu}>
+                                    <Close className={classes.closeBtn}/>
+                                </IconButton>
+                            }
+                        </Grid>
                     </Grid>
-                    <Grid item container style={{paddingTop: "16px", maxWidth: "calc(100% - 130px)"}}>
-                        <Grid item container justify='flex-end'>
-                            <Grid item>
+                    <Grid item container 
+                        className={clsx(classes.bossNavItemContainer,{
+                            [classes.display]: !menuOpen
+                        })}
+                    >
+                        <Grid item container justify='flex-end' className={classes.pos}>
+                            <Grid item className={classes.navItemsContainer}>
                                 <Grid item container alignItems='center' className={classes.navItems} onClick={handleClick}>
                                     <Typography style={{marginRight: "4px"}}>How it Works</Typography>
                                     {open ? <ExpandLess /> : <ExpandMore />}
@@ -263,9 +408,9 @@ function Landing() {
                                     </Grid>
                                 </Collapse>
                             </Grid>
-                            <Grid item>
+                            <Grid item className={classes.signinContainer}>
                                 <Link to='/signin'>
-                                    <Grid item container alignItems='center' justify='center' className={clsx(classes.tabButton,classes.navItems)}>
+                                    <Grid item container alignItems='center' justify='center' className={clsx(classes.signInBtn)}>
                                         <Typography>Sign In</Typography>
                                     </Grid>
                                 </Link>
@@ -324,7 +469,7 @@ function Landing() {
                         </form>
                     </Grid>
                 </Grid>
-                <Grid item container xs={12} sm={6} justify="flex-end">
+                <Grid item container xs={12} sm={6} justify="flex-end" className={classes.el}>
                     <img src={Diversity} 
                         className={clsx(classes.image)}                    
                     />
@@ -384,7 +529,7 @@ function Landing() {
 
                     {/* how it works */}
                     <Grid item container className={clsx(classes.container,classes.sectionContainer)} style={{marginTop: "0px"}}>
-                        <Grid item container justify='center' item xs={12} sm={4} className={clsx(classes.aboutSection)}>
+                        <Grid item container justify='center' item md={4} sm={12} className={clsx(classes.aboutSection)}>
                             <Grid item>
                                 <Typography className={classes.title2} style={{padding: "20px 16px 0 0"}}>
                                     Share about your company culture
@@ -394,7 +539,7 @@ function Landing() {
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Grid item container justify='center' xs={12} sm={4} className={classes.aboutSection}>
+                        <Grid item container justify='center' md={4} sm={12} className={classes.aboutSection}>
                             <Grid item>
                                 <Typography className={classes.title2} style={{padding: "20px 16px 0 0"}}>
                                     Learn more about diversity
@@ -404,7 +549,7 @@ function Landing() {
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Grid item container justify='center' xs={12} sm={4} className={clsx(classes.aboutSection)}>
+                        <Grid item container justify='center' md={4} sm={12} className={clsx(classes.aboutSection)}>
                             <Grid item>
                                 <Typography className={classes.title2} style={{padding: "20px 16px 0 0"}}>
                                     Post Openings with Ease!
@@ -414,6 +559,11 @@ function Landing() {
                                 </Typography>
                             </Grid>
                         </Grid>
+                    </Grid>
+                    <Grid className={clsx(classes.container,classes.sectionContainer)} style={{marginTop: "80px"}}>
+                        <img src={HowItWorks} 
+                            className={clsx(classes.quote)}                    
+                        />
                     </Grid>
                 </>
                 :
@@ -426,7 +576,7 @@ function Landing() {
 
                     {/* how it works */}
                     <Grid item container className={clsx(classes.container,classes.sectionContainer)} style={{marginTop: "0px"}}>
-                        <Grid item container justify='center' item xs={12} sm={4} className={clsx(classes.aboutSection)}>
+                        <Grid item container justify='center' item md={4} sm={12} className={clsx(classes.aboutSection)}>
                             <Grid item>
                                 <Typography className={classes.title2} style={{padding: "20px 16px 0 0"}}>
                                     We help Diversify
@@ -436,7 +586,7 @@ function Landing() {
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Grid item container justify='center' xs={12} sm={4} className={clsx(classes.aboutSection)}>
+                        <Grid item container justify='center' md={4} sm={12} className={clsx(classes.aboutSection)}>
                             <Grid item>
                                 <Typography className={classes.title2} style={{padding: "20px 16px 0 0"}}>
                                     Listen From Community!
@@ -446,7 +596,7 @@ function Landing() {
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Grid item container justify='center' xs={12} sm={4} className={classes.aboutSection}>
+                        <Grid item container justify='center' md={4} sm={12} className={classes.aboutSection}>
                             <Grid item>
                                 <Typography className={classes.title2} style={{padding: "20px 16px 0 0"}}>
                                     Push Yourself!
@@ -454,16 +604,6 @@ function Landing() {
                                 <Typography className={classes.bodyText2}>
                                 Our features also assist candidates upskill and prepare for their dream company as well as interviews. Resources are present to grow confidence in candidates.
                                 </Typography>
-                            </Grid>
-                            <Grid item container justify='space-between'>
-                                {/* <img src={Flower1}
-                                    style={{transform: 'translate(-20px,0)'}} 
-                                    className={clsx(classes.flower)}                    
-                                />
-                                <img src={Flower2} 
-                                    style={{transform: 'translate(20px,0)'}} 
-                                    className={clsx(classes.flower)}                    
-                                /> */}
                             </Grid>
                         </Grid>
                     </Grid>
@@ -477,12 +617,12 @@ function Landing() {
                 />
             </Grid>
             <Grid item container className={clsx(classes.container,classes.sectionContainer)} style={{marginTop: "140px"}}>
-                <Grid item xs={1} sm={1}>
+                <Grid item xs={3} sm={1}>
                     <img src={Upskill} 
                         className={clsx(classes.upskill)}                    
                     />
                 </Grid>
-                <Grid item xs={11} sm={11}>
+                <Grid item xs={9} sm={11}>
                     <Typography className={classes.bodyText3}>
                         Think we only provide jobs?
                     </Typography>
@@ -518,27 +658,27 @@ function Landing() {
                 >
                     <SwiperSlide className={classes.mySwiper}>
                         <img src={UpskillSS} 
-                            className={clsx(classes.quote2)}                    
+                            className={clsx(classes.quote)}                    
                         />
                     </SwiperSlide>
                     <SwiperSlide className={classes.mySwiper}>
                         <img src={UpskillSS} 
-                            className={clsx(classes.quote2)}                    
+                            className={clsx(classes.quote)}                    
                         />
                     </SwiperSlide>
                     <SwiperSlide className={classes.mySwiper}>
                         <img src={UpskillSS} 
-                            className={clsx(classes.quote2)}                    
+                            className={clsx(classes.quote)}                    
                         />
                     </SwiperSlide>
                     <SwiperSlide className={classes.mySwiper}>
                         <img src={UpskillSS} 
-                            className={clsx(classes.quote2)}                    
+                            className={clsx(classes.quote)}                    
                         />
                     </SwiperSlide>
                     <SwiperSlide className={classes.mySwiper}>
                         <img src={UpskillSS} 
-                            className={clsx(classes.quote2)}                    
+                            className={clsx(classes.quote)}                    
                         />
                     </SwiperSlide>
                 </Swiper>
@@ -549,7 +689,7 @@ function Landing() {
                 />
             </Grid>
             <Grid item container className={classes.bottom} justify='center'>
-                <Grid item container className={classes.container} alignItems='center'>
+                <Grid item container className={classes.container}>
                     <Grid item xs={12} sm={4}>
                         <Typography className={classes.bodyText}>
                             About Us
@@ -566,30 +706,21 @@ function Landing() {
                     </Grid>
                     <Grid item xs={12} sm={4}>
                         <Typography className={classes.bodyText}>
-                            About Us
+                            How it Works
                         </Typography>
                         <Typography className={classes.bodyText}>
-                            Our Crew
-                        </Typography>
-                        <Typography className={classes.bodyText}>
-                            Help
-                        </Typography>
-                        <Typography className={classes.bodyText}>
-                            Contact Us
+                            Statistics
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={4}>
                         <Typography className={classes.bodyText}>
-                            About Us
+                            SignIn
                         </Typography>
                         <Typography className={classes.bodyText}>
-                            Our Crew
+                            Sign Up
                         </Typography>
                         <Typography className={classes.bodyText}>
-                            Help
-                        </Typography>
-                        <Typography className={classes.bodyText}>
-                            Contact Us
+                            Copyright Inclusivo 21
                         </Typography>
                     </Grid>
                 </Grid>

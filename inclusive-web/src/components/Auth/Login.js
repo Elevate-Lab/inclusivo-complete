@@ -7,9 +7,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useStyles } from "./Styles";
 import { baseUrl } from '../../urlConstants';
-import Loader from '../../assets/loader/loader';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
+import RainbowLoader from "../Loaders/RainbowLoader/RainbowLoader";
 
 const Login = (props) => {
   const classes = useStyles();
@@ -103,9 +103,10 @@ const Login = (props) => {
       <Grid item xs={12} md={5}>
         <img className={classes.logo} src="/images/inclusivo.svg" alt="logo" />
         {
-          userLoginDetails.loading ? <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "150px" }}>
-            <Loader loading={userLoginDetails.loading} />
-          </div> : <Grid className={classes.container} container direction="column" justify="center">
+          userLoginDetails.loading ? 
+          <RainbowLoader />
+          : 
+          <Grid className={classes.container} container direction="column" justify="center">
             <Grid item xs={12}>
               <Typography className={classes.formName}>
                 Login

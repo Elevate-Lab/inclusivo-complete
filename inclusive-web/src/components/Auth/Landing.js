@@ -30,6 +30,7 @@ import female from '../../assets/Display/female.png';
 import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
+import RainbowLoader from '../Loaders/RainbowLoader/RainbowLoader';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Autoplay]);
@@ -135,9 +136,9 @@ const Landing = (props) => {
           alt="logo"
         />
         {
-          checkUserDetails.loading ? <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "150px" }}>
-            <Loader loading={checkUserDetails.loading} />
-          </div> : <Grid className={classes.container} container direction="column" justify="center">
+          checkUserDetails.loading ? 
+            <RainbowLoader />
+           : <Grid className={classes.container} container direction="column" justify="center">
             <Grid item xs={12}>
               <Typography className={classes.formName}>
                 Be a Part of Inclusivo

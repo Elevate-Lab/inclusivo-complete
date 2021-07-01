@@ -5,9 +5,8 @@ import {
     SchoolOutlined,
     BusinessOutlined,
     LibraryBooksOutlined,
+    EventOutlined
 } from '@material-ui/icons';
-import VideoCallIcon from '@material-ui/icons/VideoCall';
-import BookIcon from '@material-ui/icons/Book';
 
 import {
     Icon
@@ -26,6 +25,37 @@ export const commonItems = [
         icon: <DashboardOutlined style={drawerIcon} />,
         route: '/home'
     },
+]
+
+export const employerInitialItems = [
+    {
+        name: 'My Company',
+        icon: <BusinessOutlined style={drawerIcon} />,
+        route: '/home/company/'
+    },
+    {
+        name: 'Company Jobs',
+        icon: <WorkOutlineOutlined style={drawerIcon} />,
+        route: '/home/company'
+    },
+    {
+        name: 'Company Scholarships',
+        icon: <SchoolOutlined style={drawerIcon} />,
+        route: '/home/company'
+    },
+    {
+        name: 'Company Stories',
+        icon: <LibraryBooksOutlined style={drawerIcon} />,
+        route: '/home/company'
+    },
+    {
+        name: 'Events',
+        icon: <EventOutlined style={drawerIcon} />,
+        route: '/home/events'
+    }
+]
+
+export const candidateInitialItems = [
     {
         name: 'Jobs',
         icon: <WorkOutlineOutlined style={drawerIcon} />,
@@ -37,15 +67,20 @@ export const commonItems = [
         route: '/home/company/list'
     },
     {
+        name: 'Scholarships',
+        icon: <SchoolOutlined style={drawerIcon} />,
+        route: '/home/scholarship/list'
+    },
+    {
         name: 'Stories',
         icon: <LibraryBooksOutlined style={drawerIcon} />,
         route: '/home/story/list'
     },
     {
-        name: 'Scholarships',
-        icon: <SchoolOutlined style={drawerIcon} />,
-        route: '/home/scholarship/list'
-    },
+        name: 'Events',
+        icon: <EventOutlined style={drawerIcon} />,
+        route: '/home/events'
+    }
 ]
 
 export const candidateItems = [

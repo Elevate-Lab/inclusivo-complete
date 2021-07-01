@@ -689,7 +689,7 @@ const Listing = ({ type }) => {
           <div>Something Went Wrong, Please Try Again</div>
         )}
         {
-          (type === "companies" && isFetching) ? <CompanyListingSkeleton /> : (fetchedData.length === 0 && !isError) && <div>No {type} Found Try Again</div>
+          (type === "companies" && isFetching) ? <CompanyListingSkeleton /> : (!isFetching && fetchedData.length === 0 && !isError) && <div>No {type} Found Try Again</div>
         }
         {
           ((type === "jobs" || type === "scholarships") && isFetching) ? <CommonCardSkeleton type={type === "jobs" ? "job" : type} /> : (fetchedData.length === 0 && !isError && !isFetching) && <div>No {type} Found Try Again</div>

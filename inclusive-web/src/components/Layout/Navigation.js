@@ -43,6 +43,8 @@ import {
 import Loader from '../../assets/loader/loader';
 import {
     commonItems,
+    candidateInitialItems,
+    employerInitialItems,
     candidateItems,
     employerItems
 } from './sidebarItems'
@@ -182,6 +184,7 @@ function Layout(props) {
 
     const [isOpen, setIsOpen] = useState(false)
     const [isUserEmployer, setIsUserEmployer] = useState(false)
+    const [companyId, setCompanyId] = useState(0)
 
     const dispatch = useDispatch()
 
@@ -218,9 +221,15 @@ function Layout(props) {
         };
         const response = await fetch(`${baseUrl}/user/get/0`, requestOptions);
         const data = await response.json();
+        console.log(data);
         setIsUserEmployer(prevState => {
             return !data.data ? prevState : data.data.employer ? true : false;
         })
+        if(Object.keys(data).length!=0){
+            if(Object.keys(data.data).length!=0 && data.data.employer){
+                setCompanyId(data.data.employer.company.id)
+            }
+        }
         setLoading(false)
     }
 
@@ -285,8 +294,13 @@ function Layout(props) {
 
     // display functions
     const list = (data, key) => {
+        let route = data.route
+        if(data.name==='My Company') route=`${data.route}${companyId}`
+        if(data.name==='Company Jobs') route=`${data.route}/${companyId}/jobs`
+        if(data.name==='Company Scholarships') route=`${data.route}/${companyId}/scholarships`
+        if(data.name==='Company Stories') route=`${data.route}/${companyId}/stories`
         return (
-            <Link to={data.route} key={key}>
+            <Link to={route} key={key}>
                 <ListItem button className={classes.drawerItem} key={data.name} onClick={handleTouchItem}>
                     <ListItemIcon style={{ minWidth: '36px' }}>{data.icon}</ListItemIcon>
                     <ListItemText className={clsx({
@@ -353,6 +367,21 @@ function Layout(props) {
                         {commonItems.map((data, key) => {
                             return list(data, key)
                         })}
+                        {
+                            loading ?
+                                <div className={classes.sweetLoading}>
+                                    <Loader loading={loading} color="#ffffff" />
+                                </div>
+                                :
+                                !isUserEmployer ?
+                                    candidateInitialItems.map(data => {
+                                        return list(data)
+                                    })
+                                    :
+                                    employerInitialItems.map(data => {
+                                        return list(data)
+                                    })
+                        }
                         {
                             loading ?
                                 null

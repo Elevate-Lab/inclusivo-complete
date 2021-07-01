@@ -99,7 +99,7 @@ export const useStyles = makeStyles(theme => ({
     link: {
         textDecoration: "none",
         color: "#000",
-        width: "100%"
+        width: "83%",
     },
     itemContainer: {
         marginTop: "12px",
@@ -228,5 +228,25 @@ export const useStyles = makeStyles(theme => ({
         [theme.breakpoints.up('md')]: {
             flexBasis: "32%"
         }
+    },
+    ellipsis2: {
+        lineHeight: "2em",
+        maxHeight: "2em",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        width: "100%",
+        display: "-webkit-box",
+        "-webkit-box-orient": "vertical",
+        "-webkit-line-clamp": 1,
+        lineClamp: 1,
+    },
+    statusContainer:{
+        padding: "0 12px",
+        maxWidth: "360px"
+    },
+    status: {
+        height: "40px",
+        borderRadius: "5px",
+        letterSpacing: "0.05rem",
     }
 }))

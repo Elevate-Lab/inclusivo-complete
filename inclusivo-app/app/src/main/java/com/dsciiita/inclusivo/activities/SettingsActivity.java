@@ -56,7 +56,7 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         binding.privacy.setOnClickListener(view -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://deploy-preview-89--inclusivo.netlify.app/legal"));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://inclusivo.netlify.app/legal"));
             startActivity(intent);
         });
 

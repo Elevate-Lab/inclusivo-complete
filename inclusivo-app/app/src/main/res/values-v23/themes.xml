@@ -16,5 +16,50 @@
         <!-- Customize your theme here. -->
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="android:windowLightStatusBar">true</item>
+
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+    </style>
+
+    <style name="registered_via_spinner_style" parent="Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="company_profile_tab_txt_appearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+
+    <style name="chip_theme" parent="@style/Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor">@color/chip_bg_color_selector</item>
+        <item name="chipStrokeColor">@color/primary_color</item>
+        <item name="chipCornerRadius">28dp</item>
+        <item name="chipStrokeWidth">1dp</item>
+    </style>
+
+    <style name="chipFont">
+        <item name="fontFamily">@font/varela_round</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="statusChipStyle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/varela_round</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottomsheet_round_corner_bg</item>
+    </style>
+
+    <style name="splash_style" parent="Theme.Inclusivo">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/splash_drawable</item>
     </style>
 </resources>

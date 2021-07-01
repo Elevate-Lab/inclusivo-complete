@@ -1,10 +1,10 @@
 import React from "react";
+import {baseUrl} from '../../urlConstants'
 import { useStyles } from "./Styles";
 import {
   Grid,
   Typography,
   IconButton,
-  Icon,
 } from "@material-ui/core";
 import clsx from "clsx";
 import {
@@ -12,21 +12,66 @@ import {
   ShareOutlined,
   BookmarkBorderOutlined,
   BookmarkBorder,
-} from "@material-ui/icons";
-import Moment from "react-moment";
-import { Link } from "react-router-dom";
-import Tags from "./Tags";
-import { CheckCircleOutline } from "@material-ui/icons";
-import toBeReviewed from "../../assets/Icons/ToBeReviewed.png";
-import inProcess from "../../assets/Icons/InProcess.png";
-import shortlisted from "../../assets/Icons/ShortListed.png";
-import rejected from "../../assets/Icons/Rejected.png";
-import companyPlaceholder from "../../assets/company_placeholder.png";
-import scholarshipPlaceholder from '../../assets/scholarship_placeholder.jpg';
+} from "@material-ui/icons"
+import Moment from "react-moment"
+import { Link } from "react-router-dom"
+import Tags from "./Tags"
+import companyPlaceholder from "../../assets/company_placeholder.png"
+import scholarshipPlaceholder from '../../assets/scholarship_placeholder.jpg'
+import Share from "../Share/Share"
 
-const Card = ({ data, type, status, tagsToShow }) => {
-  const classes = useStyles();
-  const [isLiked, setIsLiked] = React.useState(false);
+const Card = ({ data, isApplied = false, type, status, tagsToShow }) => {
+  console.log(isApplied)
+  const classes = useStyles()
+  const [isLiked, setIsLiked] = React.useState(false)
+  const [shareDialogOpen, setShareDialogOpen] = React.useState(false)
+  const [loading, setLoading] = React.useState(true)
+  const [applicationStatus, setApplicationStatus] = React.useState("Loading")
+  const [error, setError] = React.useState('')
+ 
+  // Application Status
+  let authToken;
+  if (localStorage.getItem('key')) {
+    authToken = localStorage.getItem('key');
+  }
+  const requestOptions = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'token ' + authToken,
+    },
+  };
+
+  React.useEffect(() => {
+    if (isApplied) {
+      getApplicationStatus();
+    }
+  }, [])
+
+  const getApplicationStatus = async () => {
+    console.log(authToken, data.id)
+    const response = await fetch(`${baseUrl}/job/application/status/${data.id}`, requestOptions);
+    const d = await response.json();
+    if(d.status === "error"){
+        setError(d.message)
+    } else {
+        setApplicationStatus(d.data.status)
+        console.log(d)
+    }
+    setLoading(false)
+}
+
+  const handleShareDialogOpen = () => {
+    setShareDialogOpen(true)
+  }
+
+  const handleShareDialogClose = () => {
+    console.log("heelo")
+    setShareDialogOpen(false)
+  }
+
+  const jobUrl = `https://winclusivo.netlify.app/home/job/${data.id}`
+  const scholarshipUrl = `https://inclusivo.netlify.app/home/scholarship/${data.id}`
   const toFilter = (d) => {
     let date = "";
     if (d[0] === "a") {
@@ -38,227 +83,195 @@ const Card = ({ data, type, status, tagsToShow }) => {
     setIsLiked(data.is_liked);
   }, [isLiked, data.is_liked]);
 
-  const getStatus = (statusType) => {
-    var statusData = {};
-    const iconStyle = {
-      color: "#FFFFFF",
-    };
-    switch (statusType) {
-      case "Pending":
-        statusData = {
-          type: "tobereviewed",
-          value: "To Be Reviewed",
-          icon: (
-            <Icon style={iconStyle}>
-              <img src={toBeReviewed} alt="tobereviewed" />
-            </Icon>
-          ),
-          color: "rgba(253, 151, 15, 1)",
-        };
-      case "Process":
-        statusData = {
-          type: "inProcess",
-          value: "In Process",
-          icon: (
-            <Icon style={iconStyle}>
-              <img src={inProcess} alt="inprocess" />
-            </Icon>
-          ),
-          color: "#06B0C5",
-        };
-      case "Shortlisted":
-        statusData = {
-          type: "shortlisted",
-          value: "Shortlisted",
-          icon: (
-            <Icon style={iconStyle}>
-              <img src={shortlisted} alt="shortlisted" />
-            </Icon>
-          ),
-          color: "#A64A97",
-        };
-      case "Rejected":
-        statusData = {
-          type: "rejected",
-          value: "Rejected",
-          icon: (
-            <Icon style={iconStyle}>
-              <img src={rejected} alt="rejected" />
-            </Icon>
-          ),
-          color: "#E73E3A",
-        };
-      case "Selected":
-        statusData = {
-          type: "accepted",
-          value: "Accepted",
-          icon: (
-            <Icon style={iconStyle}>
-              <CheckCircleOutline />
-            </Icon>
-          ),
-          color: "#4AA64E",
-        };
+  const getStatusAttr = (value) => {
+    switch (value) {
+      case 'Published':
+        return {
+          backgroundColor: "rgba(6,176,197,0.4)",
+          color: "#3e3e3e"
+        }
+      case 'Expired':
+        return {
+          backgroundColor: "rgba(255,26,26,0.4)",
+          color: "#3e3e3e"
+        }
+      case 'Draft':
+        return {
+          backgroundColor: "rgba(6,176,197,0.6)",
+          color: "#3e3e3e"
+        }
+      case 'Disabled':
+        return {
+          backgroundColor: "#E6E6E6",
+          color: "#3e3e3e"
+        }
+      case 'Hired':
+        return {
+          backgroundColor: "rgba(74,166,78,0.4)",
+          color: "#3e3e3e"
+        }
+      default:
+        return {}
     }
+  }
+
+  const statusEl = (value) => {
+    console.log(value)
+    let attr = getStatusAttr(value);
     return (
-      <Grid
-        item
-        container
-        justify="center"
-        style={{
-          maxWidth: "250px",
-          margin: "5px auto 0px",
-          padding: "5px",
-          background: `${statusData.color}`,
-          borderRadius: "5px",
-        }}
-      >
-        {statusData.icon}&nbsp;{" "}
-        <Typography style={{ color: "#fff", fontWeight: "600" }}>
-          {statusData.value}
-        </Typography>
+      <Grid item container justify='center' alignItems='center' className={classes.status} style={attr}>
+        <Typography variant="subtitle2">Status: {value === 'Published' ? "Live" : value}</Typography>
       </Grid>
-    );
-  };
+    )
+  }
 
   return (
-    <Link
-      to={
-        type === `jobs`
-          ? `/home/job/${data.id}`
-          : `/home/scholarship/${data.id}`
-      }
-      className={classes.link}
+    <Grid
+      container
+      xs={12}
+      item
+      justify="center"
+      className={classes.itemContainer}
+      key={data.id}
     >
-      <Grid
-        container
-        xs={12}
-        item
-        justify="center"
-        className={classes.itemContainer}
-        key={data.id}
-      >
-        <Grid item container direction="row">
-          <Grid xs={10} item container wrap="nowrap" alignItems="center">
-            <Grid item style={{ marginLeft: "4px" }}>
-              <>
-                {data.company && (
-                  <img
-                    src={
-                      data.company.logo_url.length > 0 ? data.company.logo_url : companyPlaceholder
-                    }
-                    alt="Company logo"
-                    className={
-                      type === "jobs" ? classes.image2 : classes.image1
-                    }
-                  />
-                )}
-                {
-                  type === "scholarships" && !data.company && (
+      <Grid item container direction="row">
+        <Link
+          to={
+            type === `jobs`
+              ? `/home/job/${data.id}`
+              : `/home/scholarship/${data.id}`
+          }
+          className={classes.link}
+        >
+          <Grid item container xs={10} direction="row">
+            <Grid item container wrap="nowrap" alignItems="center">
+              <Grid item style={{ marginLeft: "4px" }}>
+                <>
+                  {data.company && (
                     <img
                       src={
-                        scholarshipPlaceholder
+                        data.company.logo_url.length > 0 ? data.company.logo_url : companyPlaceholder
                       }
-                      alt="Scholarship Logo"
+                      alt="Company logo"
                       className={
                         type === "jobs" ? classes.image2 : classes.image1
                       }
                     />
-                  )
-                }
-              </>
+                  )}
+                  {
+                    type === "scholarships" && !data.company && (
+                      <img
+                        src={
+                          scholarshipPlaceholder
+                        }
+                        alt="Scholarship Logo"
+                        className={
+                          type === "jobs" ? classes.image2 : classes.image1
+                        }
+                      />
+                    )
+                  }
+                </>
+              </Grid>
+              <Grid
+                item
+                container
+                direction="column"
+                justify="space-between"
+                className={classes.detailsContainer}
+              >
+                <Grid item>
+                  <Typography
+                    variant="h6"
+                    className={clsx(classes.title, classes.ellipsis2)}
+                  >
+                    {data.title}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  {type === "jobs" && (
+                    <Typography variant="caption">
+                      <Grid item container alignItems="center">
+                        {data.accepted_locations.length > 0 && (
+                          <>
+                            <LocationOn className={classes.locationIcon} />
+                            {data.accepted_locations.map((location, idx) => (
+                              <span key={idx} style={{ marginRight: "5px" }}>
+                                {location.name}
+                              </span>
+                            ))}
+                          </>
+                        )}
+                      </Grid>
+                    </Typography>
+                  )}
+                </Grid>
+                <Grid item>
+                  {type === "jobs" && (
+                    <Typography variant="caption">
+                      {data.job_type} • Vacancy - {data.vacancies} •{" "}
+                      <Moment filter={toFilter} fromNow>
+                        {data.posted_on}
+                      </Moment>
+                    </Typography>
+                  )}
+                </Grid>
+                <Grid item>
+                  {type === "scholarships" && (
+                    <Typography variant="caption">
+                      <Moment filter={toFilter} fromNow>
+                        {data.posted_on}
+                      </Moment>
+                    </Typography>
+                  )}
+                </Grid>
+              </Grid>
             </Grid>
-            <Grid
-              item
-              container
-              direction="column"
-              justify="space-between"
-              className={classes.detailsContainer}
+          </Grid>
+        </Link>
+        <Grid xs={2} item alignItems="flex-end" container direction="column">
+          {isLiked ? (
+            <IconButton
+              disableRipple
+              className={classes.btn}
+              style={{ marginBottom: "6px" }}
             >
-              <Grid item>
-                <Typography
-                  variant="h6"
-                  className={clsx(classes.title, classes.ellipsis)}
-                >
-                  {data.title}
-                </Typography>
-              </Grid>
-              <Grid item>
-                {type === "jobs" && (
-                  <Typography variant="caption">
-                    <Grid item container alignItems="center">
-                      {data.accepted_locations.length > 0 && (
-                        <>
-                          <LocationOn className={classes.locationIcon} />
-                          {data.accepted_locations.map((location, idx) => (
-                            <span key={idx} style={{ marginRight: "5px" }}>
-                              {location.name}
-                            </span>
-                          ))}
-                        </>
-                      )}
-                    </Grid>
-                  </Typography>
-                )}
-              </Grid>
-              <Grid item>
-                {type === "jobs" && (
-                  <Typography variant="caption">
-                    {data.job_type} • Vacancy - {data.vacancies} •{" "}
-                    <Moment filter={toFilter} fromNow>
-                      {data.posted_on}
-                    </Moment>
-                  </Typography>
-                )}
-              </Grid>
-              <Grid item>
-                {type === "scholarships" && (
-                  <Typography variant="caption">
-                    <Moment filter={toFilter} fromNow>
-                      {data.posted_on}
-                    </Moment>
-                  </Typography>
-                )}
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid xs={2} item alignItems="flex-end" container direction="column">
-            {isLiked ? (
-              <IconButton
-                disableRipple
-                className={classes.btn}
-                style={{ marginBottom: "6px" }}
-              >
-                <BookmarkBorder style={{ color: "red" }} fontSize="small" />
-              </IconButton>
-            ) : (
-              <IconButton
-                disableRipple
-                className={classes.btn}
-                style={{ marginBottom: "6px" }}
-              >
-                <BookmarkBorderOutlined fontSize="small" />
-              </IconButton>
-            )}
-            <IconButton disableRipple className={classes.btn}>
-              <ShareOutlined fontSize="small" />
+              <BookmarkBorder style={{ color: "red" }} fontSize="small" />
             </IconButton>
-          </Grid>
-        </Grid>
-        <Grid item xs={12} className={classes.description}>
-          <Typography
-            varaint="subtitle2"
-            className={clsx(classes.jobRole, classes.ellipsis)}
-          >
-            {type === "jobs" ? data.job_role : data.description}
-          </Typography>
-        </Grid>
-        {status === "applied_jobs" && getStatus(status)}
-        <Grid className={classes.tag} item container xs={12}>
-          {data.tags.length > 0 && status === null && <Tags data={data} />}
+          ) : (
+            <IconButton
+              disableRipple
+              className={classes.btn}
+              style={{ marginBottom: "6px" }}
+            >
+              <BookmarkBorderOutlined fontSize="small" />
+            </IconButton>
+          )}
+          <IconButton disableRipple className={classes.btn} onClick={handleShareDialogOpen}>
+            <ShareOutlined fontSize="small" />
+          </IconButton>
         </Grid>
       </Grid>
-    </Link>
+      <Grid item xs={12} className={classes.description}>
+        <Typography
+          varaint="subtitle2"
+          className={clsx(classes.jobRole, classes.ellipsis2)}
+        >
+          {type === "jobs" ? data.job_role : data.description}
+        </Typography>
+      </Grid>
+      {type === "jobs" ?
+        <Grid item container className={classes.statusContainer}>
+          {statusEl(data.status)}
+        </Grid>
+        :
+        null
+      }
+      <Grid className={classes.tag} item container xs={12}>
+        {data.tags.length > 0 && status === null && <Tags data={data} />}
+      </Grid>
+      <Share open={shareDialogOpen} handleClose={handleShareDialogClose} url={type === "jobs" ? jobUrl : scholarshipUrl} />
+    </Grid>
   );
 };
 

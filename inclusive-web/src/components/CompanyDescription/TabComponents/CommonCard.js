@@ -10,12 +10,13 @@ import {
     ShareOutlined,
     LocationOn,
 } from '@material-ui/icons'
-import VideoCallIcon from '@material-ui/icons/VideoCall';
+import VideoCallIcon from '@material-ui/icons/VideoCall'
 import companyPlaceholder from '../../../assets/company_placeholder.png'
 import clsx from 'clsx'
 import { toFilter } from '../../../helpers/methods'
 import Moment from 'react-moment'
 import Tags from '../../Listing/Tags'
+import Share from '../../Share/Share'
 
 
 const useStyles = makeStyles(theme => ({
@@ -67,8 +68,22 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function CommonCard({ data, type }) {
+function CommonCard({ data, type}) {
+
     const classes = useStyles()
+    const [shareDialogOpen, setShareDialogOpen] = React.useState(false)
+
+    const jobUrl = `https://inclusivo.netlify.app/home/job/${data.id}`
+    const scholarshipUrl = `https://inclusivo.netlify.app/home/scholarship/${data.id}`
+
+    const handleShareDialogOpen = () => {
+      setShareDialogOpen(true)
+    }
+    
+    const handleShareDialogClose = () => {
+      console.log("heelo")
+      setShareDialogOpen(false)
+    }
 
     return (
         <Grid container item justify="center" className={classes.itemContainer}>
@@ -146,7 +161,7 @@ function CommonCard({ data, type }) {
                                 <IconButton disableRipple className={classes.btn} style={{ marginBottom: "6px" }}>
                                     <BookmarkBorderOutlined fontSize='small' />
                                 </IconButton>
-                                <IconButton disableRipple className={classes.btn}>
+                                <IconButton disableRipple className={classes.btn} onClick={handleShareDialogOpen}>
                                     <ShareOutlined fontSize='small' />
                                 </IconButton>
                             </>
@@ -166,6 +181,7 @@ function CommonCard({ data, type }) {
                     data.tags.length > 0 && <Tags data={data} />
                 }
             </Grid>
+            <Share open={shareDialogOpen} handleClose={handleShareDialogClose} url={type === "jobs" ? jobUrl : scholarshipUrl} />
         </Grid>
     )
 }

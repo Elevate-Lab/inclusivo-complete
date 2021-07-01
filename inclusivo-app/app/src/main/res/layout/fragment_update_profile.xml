@@ -281,6 +281,7 @@
                             android:id="@+id/job_img"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
+                            android:contentDescription="@string/candidate_image"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/looking_for_job_unselected" />
 

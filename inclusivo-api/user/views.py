@@ -279,6 +279,7 @@ def get_user(request, user_id):
         #return Response(user_id=="0")
         if user_id=="0" and user_logged:
             user_data["is_employer"] = user_logged.is_employer
+            user_data["is_update_profile"] = len(user_logged.first_name)>0 if user_logged.first_name else False
             if not user_logged.is_employer:
                 candidate = Candidate.objects.filter(user=user_logged).first()
                 user_data["candidate"] = CandidateSerializer(candidate).data
@@ -287,7 +288,8 @@ def get_user(request, user_id):
                 user_data["employer"] = EmployerSerializer(employer).data
 
         elif user_id!="0" and CustomUser.objects.filter(pk=user_id).exists():
-            user = CustomUser.objects.filter(pk=user_id).first()     
+            user = CustomUser.objects.filter(pk=user_id).first()
+            user_data["is_update_profile"] = len(user.first_name)>0 if user.first_name else False
             user_data["is_employer"] = user.is_employer
             if not user.is_employer:
                 candidate = Candidate.objects.filter(user=user).first()

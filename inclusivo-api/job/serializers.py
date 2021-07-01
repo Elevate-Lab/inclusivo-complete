@@ -36,6 +36,18 @@ class JobApplicationSerializer(serializers.ModelSerializer):
         # We pass the "upper serializer" context to the "nested one"
         self.fields['job'].context.update(self.context)
 
+class StatusUpdateEmployerSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = StatusUpdate
+        fields = '__all__'
+
+class StatusUpdateCandidateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = StatusUpdate
+        exclude = (['recruiter_notes'])
+
 class ScholarshipSerializer(serializers.ModelSerializer):
     company = CompanySerializer(read_only = True)
     accepted_degrees = DegreeSerializer(read_only= True, many=True)

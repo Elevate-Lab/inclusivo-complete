@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^application/create/(?P<job_id>\d+)/$', job_application_creation),
     url(r'^application/evaluate/(?P<job_id>\d+)/$', evaluate_profile),
     url(r'^application/get/(?P<job_application_id>\d+)/$', get_individual_job_application),
+    url(r'^application/status/(?P<job_application_id>\d+)/$', get_status_update_information),
     url(r'^application/delete/(?P<job_application_id>\d+)/$', delete_job_application),
     url(r'^application/status/update/(?P<job_application_id>\d+)/$', update_job_application_status),
     url(r'^get/by_diversity/', get_job_by_diversity),

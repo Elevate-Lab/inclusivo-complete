@@ -63,6 +63,13 @@ class JobPost(models.Model):
     max_sal=models.PositiveIntegerField(null=True, blank=True)
     display_salary=models.BooleanField(default=False)
 
+class StatusUpdate(models.Model):
+    job_application = models.ForeignKey('job.JobApplication', on_delete=models.CASCADE)
+    status = models.CharField(choices=JOB_STATUS, max_length=50)
+    message = models.CharField(max_length=500, null=True)
+    recruiter_notes = models.CharField(max_length=500, null=True)
+    removed = models.BooleanField(default=False)
+
 class JobDTO(models.Model):
     id = models.IntegerField(primary_key=True)
 

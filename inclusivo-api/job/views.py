@@ -613,6 +613,22 @@ def get_company_scholarships(request, company_id):
         return response_500("internal error",e)
 
 
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def get_status_update_information(request, job_application_id):
+    try:
+        user = request.user
+        if user.is_employer:
+            status_updates = StatusUpdate.objects.filter(removed=False, job_application_id = job_application_id)
+            return response_200("Status Updates for employers fetched successfully", StatusUpdateEmployerSerializer(status_updates, many=True).data)
+        status_updates = StatusUpdate.objects.filter(removed=False, job_application_id = job_application_id)
+        return response_200("Status Updates for candidates fetched successfully", StatusUpdateCandidateSerializer(status_updates, many=True).data)
+    
+    except Exception as e:
+        return response_500("internal error",e)
+
+
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -688,7 +704,15 @@ def update_job_application_status(request, job_application_id):
         if status in  ["Rejected","Selected"]:
             return response_400("Status update not permitted","Status update not permitted", None)
 
+        recruiter_notes = body['recruiter_notes'] if 'recruiter_notes' in body else None
+        message = body['message'] if 'message' in body else None
         job_application.status = status_update
+        status_update_obj = StatusUpdate()
+        status_update_obj.job_application = job_application
+        status_update_obj.status = status_update
+        status_update_obj.message = message
+        status_update_obj.recruiter_notes = recruiter_notes
+        status_update_obj.save()
         job_application.save()
         result = {}
         result['status'] = job_application.status
